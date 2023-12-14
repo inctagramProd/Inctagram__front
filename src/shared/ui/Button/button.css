@@ -1,30 +1,76 @@
 .storybook-button {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
-  border: 0;
-  border-radius: 3em;
+  border-radius: 2px;
+  border: none;
   cursor: pointer;
   display: inline-block;
   line-height: 1;
 }
-.storybook-button--primary {
-  color: white;
-  background-color: #1ea7fd;
+/* ------------------PRIMARY------------------ */
+.storybook-button--primary {color: white;background-color: #1ea7fd;}
+.storybook-button--primary:active {color: #EDF3FA;background-color: #2F68CC;}
+.storybook-button--primary:hover {color: #FFFFFF;background-color: #73A5FF;}
+.storybook-button--primary:focus {color: #FFFFFF;background-color: #2F68CC;}
+.storybook-button--primary:disabled {color:#8D9094;background-color:#234E99;}
+/* ------------------SECONDARY------------------ */
+.storybook-button--secondary {color: #FFFFFF;background-color:#333333;}
+.storybook-button--secondary:active {color: #EDF3FA;background-color: #212121;}
+.storybook-button--secondary:hover {color: #FFFFFF;background-color: #4C4C4C;}
+.storybook-button--secondary:focus {
+  color: #FFFFFF;
+  background-color: #333333;
+  border:1px solid  #4C8DFF  ;
 }
-.storybook-button--secondary {
-  color: #333;
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+.storybook-button--secondary:disabled {color:#8D9094;background-color:#171717;}
+/* ------------------OUTLINE------------------ */
+.storybook-button--outline {
+  color:#397DF6;
+  background:none;
+  border:1px solid  #397DF6;
 }
+.storybook-button--outline:active {
+  color: #2F68CC;
+  background: none;
+  border:1px solid #2F68CC;
+}
+.storybook-button--outline:hover {
+  color:#73A5FF;
+  background: none;
+  border:1px solid #73A5FF;
+}
+.storybook-button--outline:focus {
+  color:#2F68CC;
+  background: none;
+  border:2px solid #2F68CC;
+}
+.storybook-button--outline:disabled {
+  color:#234E99;
+  background: none;
+  border:1px solid #234E99;
+}
+/* ------------------TEXT------------------ */
+.storybook-button--text {color:#397DF6;background:none;}
+.storybook-button--text:active {color: #2F68CC;}
+.storybook-button--text:hover {color:#73A5FF;}
+.storybook-button--text:focus {color:#397DF6;border:2px solid #2F68CC;}
+.storybook-button--text:disabled {color:#234E99;}
+/* ----------------------------------------- */
 .storybook-button--small {
   font-size: 12px;
   padding: 10px 16px;
+  font-weight: 400;
+  line-height: 16px;
 }
 .storybook-button--medium {
   font-size: 14px;
   padding: 11px 20px;
+  font-weight: 500;
+  line-height: 24px;
 }
 .storybook-button--large {
-  font-size: 16px;
+  font-size: 26px;
   padding: 12px 24px;
+  font-weight: 600;
+  line-height: 36px;
 }
