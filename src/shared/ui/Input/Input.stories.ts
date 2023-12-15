@@ -1,20 +1,31 @@
-import { Input, InputProps } from './Input'
+import { Input } from './Input'
 import type { Meta, StoryObj } from '@storybook/react'
 
-export default {
+const meta = {
   title: 'Components/Input',
   parameters: {
     layout: 'centered',
   },
   component: Input,
-} as Meta
+} satisfies Meta<typeof Input>
 
-type Story = StoryObj<InputProps>
+export default meta
+
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     label: 'Email',
     state: 'default',
-    placeholder: 'example@epam.com',
+    placeholder: 'Epam@epam.com',
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    label: 'Email',
+    state: 'default',
+    placeholder: 'Epam@epam.com',
+    disabled: true,
   },
 }

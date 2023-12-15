@@ -7,9 +7,10 @@ export interface InputProps extends ComponentPropsWithoutRef<'input'> {
 }
 
 export const Input: React.FC<InputProps> = ({ label, state, error, ...inputProps }) => {
-  const baseStyle = 'border-2 p-2'
+  const baseStyle =
+    'border rounded-sm pl-3 py-1.5 w-full text-light-100 bg-transparent hover:border-light-900 focus:outline-none focus-visible:border-primary-500 focus-visible:outline-1'
   const stateStyles = {
-    default: 'border-warning-300',
+    default: 'border-dark-100',
     active: 'border-blue-500',
     error: 'border-red-500',
     hover: 'hover:border-gray-500',
@@ -20,13 +21,15 @@ export const Input: React.FC<InputProps> = ({ label, state, error, ...inputProps
   const errorTextStyle = 'text-red-500 text-sm mt-1'
 
   return (
-    <div>
-      <label>{label}</label>
-      <input
-        {...inputProps}
-        className={`${baseStyle} ${stateStyles[state]}`}
-        disabled={state === 'disabled'}
-      />
+    <div className="flex flex-col">
+      <label className="mb-1 text-light-900 text-sm">{label}</label>
+      <div>
+        <input
+          {...inputProps}
+          className={`${baseStyle} ${stateStyles[state]}`}
+          // disabled={state === 'disabled'}
+        />
+      </div>
       {state === 'error' && <span className={errorTextStyle}>{error}</span>}
     </div>
   )
