@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     label: 'Email',
+    disabled: false,
     state: 'default',
     placeholder: 'Epam@epam.com',
   },
