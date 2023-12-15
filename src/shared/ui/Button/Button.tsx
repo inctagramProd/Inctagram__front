@@ -1,26 +1,24 @@
 import React from 'react';
-import './button.css';
-
+import  './button.css'
 interface ButtonProps {
-  type:'primary'|'secondary'|'outline'|'text'
+  style:'primary'|'secondary'|'outline'|'text'
   size?: 'small' | 'medium' | 'large';
   label: string;
+  type?:'button'|'submit'
   onClick?: () => void;
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const Button = ({
-  type='primary',
+  style='primary',
   size = 'medium',
+  type='button',
   label,
   ...props
 }: ButtonProps) => {
   return (
     <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`,` storybook-button--${type}`].join(' ')}
+      type={type}
+      className={`btn ${style}`}
       {...props}
       
     >
