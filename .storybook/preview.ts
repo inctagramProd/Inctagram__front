@@ -14,6 +14,15 @@ const preview: Preview = {
     viewport: {
       viewports: INITIAL_VIEWPORTS,
     },
+    backgrounds: {
+      default: 'Dark',
+      values: [
+        {
+          name: 'Dark',
+          value: '#0D0D0D',
+        },
+      ],
+    },
   },
 }
 
