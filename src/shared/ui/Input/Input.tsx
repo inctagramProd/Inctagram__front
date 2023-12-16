@@ -1,36 +1,39 @@
-import React, { ComponentPropsWithoutRef } from 'react'
+import React, { ComponentPropsWithoutRef, useState } from 'react'
+import styles from './Input.modules.css';
+import EyeIcon from '../../assets/icons/EyeIcon';
+import EyeCloseIcon from '../../assets/icons/EyeCloseIcon';
+import SearchIcon from '../../assets/icons/SearchIcon';
 
 export interface InputProps extends ComponentPropsWithoutRef<'input'> {
   label?: string
-  state: 'default' | 'active' | 'error' | 'hover' | 'focus'
   error?: string
+  type: 'password' | 'search' | 'text'
 }
 
-export const Input: React.FC<InputProps> = ({ label, state, error, ...inputProps }) => {
-  const baseStyle =
-    'border rounded-sm pl-3 py-1.5 w-full text-light-100 placeholder-light-900 bg-transparent hover:border-light-900 focus:outline-none focus-visible:border-primary-500 focus-visible:outline-2 disabled:placeholder-dark-100 disabled:text-dark-100'
-  const stateStyles = {
-    default: 'border-dark-100',
-    active: 'border-blue-500',
-    error: 'border-red-500',
-    hover: 'hover:border-gray-500',
-    focus: 'focus:border-blue-600',
-    // disabled: 'border-gray-300 bg-gray-100',
+export const Input: React.FC<InputProps> = ({ label, error, type, ...inputProps }) => {
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  const inputType = type === 'password' ? (isPasswordShown ? 'text' : 'password') : type
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordShown(!isPasswordShown);
   }
-
-  const errorTextStyle = 'text-red-500 text-sm mt-1'
-
+  
   return (
-    <div className="flex flex-col">
-      <label className="mb-1 text-light-900 text-sm">{label}</label>
-      <div>
+    <div className={styles.wrapper}>
+      {label && <label className={styles.label}>{label}</label>}
+      <div className={styles.inputField}>
+        {type === 'search' && <SearchIcon className={styles.searchIcon} />}
         <input
           {...inputProps}
-          className={`${baseStyle} ${stateStyles[state]}`}
-          // disabled={state === 'disabled'}
+          type={inputType}
+          className={`${styles.input} ${error ? styles.error : ''} ${type === 'search' ? styles.search : '' }`}
         />
+        {type === 'password' && (<button onClick={togglePasswordVisibility} className={styles.button}>
+          {isPasswordShown ? <EyeCloseIcon className={styles.eyeIcon} /> : <EyeIcon className={styles.eyeIcon} /> }
+        </button>)}
       </div>
-      {state === 'error' && <span className={errorTextStyle}>{error}</span>}
+      {error && <span className={styles.errorMessage}>{error}</span>}
     </div>
   )
 }
