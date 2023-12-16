@@ -47,7 +47,7 @@ export const Select = ({
                 </div>
             </div>
 
-            <div className={`transition-opacity ${isVisibleDropdown ? 'opacity-1 z-10' : 'opacity-0 z-[-1]'} absolute w-full border bg-dark-500 rounded-b-sm`}>
+            <div className={`transition-opacity ${isVisibleDropdown ? 'opacity-1 z-10' : 'opacity-0 z-[-1]'} max-h-72 overflow-y-scroll  absolute w-full border bg-dark-500 rounded-b-sm`}>
                 {
                     options.map((item) => (
                         <div
