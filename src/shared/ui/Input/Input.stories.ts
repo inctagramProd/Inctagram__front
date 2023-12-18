@@ -18,7 +18,7 @@ export const Default: Story = {
     label: 'Email',
     disabled: false,
     placeholder: 'Epam@epam.com',
-    type: 'text'
+    type: 'text',
   },
 }
 
@@ -26,7 +26,7 @@ export const Password: Story = {
   args: {
     label: 'Пароль',
     disabled: false,
-    type: 'password'
+    type: 'password',
   },
 }
 
@@ -34,7 +34,7 @@ export const Search: Story = {
   args: {
     disabled: false,
     type: 'search',
-    placeholder: 'Input search'
+    placeholder: 'Input search',
   },
 }
 
@@ -43,8 +43,8 @@ export const Error: Story = {
     label: 'Email',
     disabled: false,
     error: 'Error text',
-    type: 'text'
-  }
+    type: 'text',
+  },
 }
 
 export const Disabled: Story = {
@@ -52,7 +52,6 @@ export const Disabled: Story = {
     label: 'Email',
     placeholder: 'Epam@epam.com',
     disabled: true,
-    type: 'text'
+    type: 'text',
   },
 }
-
