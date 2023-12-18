@@ -9,7 +9,6 @@ interface ISelectProps {
     options: {
         title: string;
         value: string;
-        icon?: React.ReactNode;
     }[];
     onChange?: (selectedValue: object) => void;
 }
@@ -22,10 +21,15 @@ export const Select = ({
     onChange,
     ...props
 }: ISelectProps) => {
+    const defaultOption = defaultValue
+        ? options.find(option => option.value === defaultValue)
+        : options[0];
+
     const [activeEl, setActiveEl] = useState({
-        title: defaultValue ? options.find(option => option.value === defaultValue)?.title || '' : options[0].title,
-        value: defaultValue ? options.find(option => option.value === defaultValue)?.value || '' : options[0].value,
+        title: defaultOption?.title || '',
+        value: defaultOption?.value || '',
     });
+
     const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
 
     // Close dropdown if click outside
@@ -52,20 +56,23 @@ export const Select = ({
     }
 
     const handleSetActiveEl = (e: { target: any; }): void => {
-        const activeElTemp = {
-            title: e.target.getAttribute('data-title'),
-            value: e.target.getAttribute('data-value')
-        };
+        const { title, value } = e.target.dataset;
+        const activeElFields = { title, value };
 
-        setActiveEl(activeElTemp);
+        setActiveEl(activeElFields);
 
         if (onChange) {
-            onChange(activeElTemp);
+            onChange(activeElFields);
         }
     }
 
+    // Need fix
+    const interFont = {
+        fontFamily: 'Inter, sans-serif'
+    };
+
     return (
-        <div className={`${styles.select} ${disabled ? styles.disabled : ''}`}  {...props}>
+        <div style={interFont} className={`${styles.select} ${disabled ? styles.disabled : ''}`}  {...props}>
             <span className={`${styles.select__title}`}>{title}</span>
             <div
                 ref={wrapperRef}
@@ -73,8 +80,12 @@ export const Select = ({
                 className={`${styles.select__active_el} ${isVisibleDropdown ? styles.select__active_el_selected : ''}`}
                 tabIndex={0}
             >
-                <span className={`${styles.select__dropdown_title}`}>{activeEl.title}</span>
-                <div className={`${isVisibleDropdown ? styles.select__dropdown_arrow_active : ''} ${styles.select__dropdown_arrow}`}>
+                <span className={`${styles.select__dropdown_title}`}>
+                    {activeEl.title}
+                </span>
+                <div
+                    className={`${isVisibleDropdown ? styles.select__dropdown_arrow_active : ''} ${styles.select__dropdown_arrow}`}
+                >
                     <ArrowBottom />
                 </div>
             </div>
@@ -83,6 +94,7 @@ export const Select = ({
                 {
                     options.map((item) => (
                         <li
+                            key={item.value}
                             data-value={item.value}
                             data-title={item.title}
                             aria-selected={activeEl.value == item.value}
@@ -91,7 +103,6 @@ export const Select = ({
                             className={`${styles.select__dropdown_item} ${activeEl.value == item.value ? styles.select__dropdown_item_selected : ''}`}
                             tabIndex={-1}
                         >
-                            {item.icon && <span className={styles.select__dropdown_icon}>{item.icon}</span>}
                             {item.title}
                         </li>
                     ))
