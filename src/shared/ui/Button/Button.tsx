@@ -17,9 +17,9 @@ export const Button = ({
   return (
     <button
       type={type}
-      className={s[`${style}`]}
+      className={[s[`${style}`],s[`${size}`]].join(' ')}
       {...props}
-      
+     
     >
       {label}
     </button>

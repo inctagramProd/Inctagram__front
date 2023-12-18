@@ -14,94 +14,38 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      colors:{
-        accent:{
-          100:"#73A5FF",
-          300:"#4C8DFF",
-          500:"#397DF6",
-          700:"#2F68CC",
-          900:"#234E99"
-        },
-        success:{
-          100:"#80FFBF",
-          300:"#22E584",
-          500:"#14CC70",
-          700:"#0F9954",
-          900:"#0A6638" 
-        },
-        danger:{
-          100:"#FF8099",
-          300:"#F23D61",
-          500:"#CC1439",
-          700:"#990F2B",
-          900:"#660A1D" 
-        },
-        warning:{
-          100:"#FFD073",
-          300:"#E5AC39",
-          500:"#D99000",
-          700:"#996600",
-          900:"#664400" 
-        },
-        dark:{
-          100:"#4C4C4C",
-          300:"#333333",
-          500:"#171717",
-          700:"#0D0D0D",
-          900:"#000000" 
-        },
-        light:{
-          100:"#FFFFFF",
-          300:"#F7FBFF",
-          500:"#EDF3FA",
-          700:"#D5DAE0",
-          900:"#8D9094" 
-        },                
-      },
-      backgroundColor:{
-        "accent":{
-          100:"#73A5FF",
-          300:"#4C8DFF",
-          500:"#397DF6",
-          700:"#2F68CC",
-          900:"#234E99"
-        },
-        "success":{
-          100:"#80FFBF",
-          300:"#22E584",
-          500:"#14CC70",
-          700:"#0F9954",
-          900:"#0A6638" 
-        },
-        "danger":{
-          100:"#FF8099",
-          300:"#F23D61",
-          500:"#CC1439",
-          700:"#990F2B",
-          900:"#660A1D" 
-        },
-        "warning":{
-          100:"#FFD073",
-          300:"#E5AC39",
-          500:"#D99000",
-          700:"#996600",
-          900:"#664400" 
-        },
-        "dark":{
-          100:"#4C4C4C",
-          300:"#333333",
-          500:"#171717",
-          700:"#0D0D0D",
-          900:"#000000" 
-        },
-        "light":{
-          100:"#FFFFFF",
-          300:"#F7FBFF",
-          500:"#EDF3FA",
-          700:"#D5DAE0",
-          900:"#8D9094" 
-        },                
-      }
+      colors: {
+                'primary-100': '#73A5FF',
+                'primary-300': '#4C8DFF',
+                'primary-500': '#397DF6',
+                'primary-700': '#2F68CC',
+                'primary-900': '#234E99',
+                'success-100': '#80FFBF',
+                'success-300': '#22E584',
+                'success-500': '#14CC70',
+                'success-700': '#0F9954',
+                'success-900': '#0A6638',
+                'warning-100': '#FFD073',
+                'warning-300': '#E5AC39',
+                'warning-500': '#D99000',
+                'warning-700': '#960',
+                'warning-900': '#640',
+                'danger-100': '#FF8099',
+                'danger-300': '#F23D61',
+                'danger-500': '#CC1439',
+                'danger-700': '#990F2B',
+                'danger-900': '#660A1D',
+                'dark-100': '#4C4C4C',
+                'dark-300': '#333333',
+                'dark-500': '#171717',
+                'dark-700': '#0D0D0D',
+                'dark-900': '#000000',
+                'light-100': '#FFFFFF',
+                'light-300': '#F7FBFF',
+                'light-500': '#EDF3FA',
+                'light-700': '#D5DAE0',
+                'light-900': '#8D9094',
+            }
     },
   },
   plugins: [
