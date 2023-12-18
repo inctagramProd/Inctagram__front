@@ -47,7 +47,7 @@ export const Select = ({
         }
     };
 
-    const handleDropdownActiveEl = (): void => {
+    const setDropdownActiveEl = (): void => {
         if(isVisibleDropdown) {
             setIsVisibleDropdown(false);
         } else {
@@ -76,7 +76,7 @@ export const Select = ({
             <span className={`${styles.select__title}`}>{title}</span>
             <div
                 ref={wrapperRef}
-                onClick={handleDropdownActiveEl}
+                onClick={setDropdownActiveEl}
                 className={`${styles.select__active_el} ${isVisibleDropdown ? styles.select__active_el_selected : ''}`}
                 tabIndex={0}
             >
@@ -90,7 +90,7 @@ export const Select = ({
                 </div>
             </div>
 
-            <ul className={` ${styles.select__dropdown} ${isVisibleDropdown ? 'opacity-1 z-10 transform-gpu scale-y-1' : 'opacity-0 z-[-1] transform-gpu scale-y-0'} `}>
+            <ul className={` ${styles.select__dropdown} ${isVisibleDropdown ? styles.select__dropdown_visible : ''} `}>
                 {
                     options.map((item) => (
                         <li

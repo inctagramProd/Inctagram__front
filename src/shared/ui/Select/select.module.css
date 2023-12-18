@@ -39,7 +39,11 @@
 }
 
 .select__dropdown {
-    @apply transition-all origin-top ease-in-out max-h-72 overflow-y-scroll  absolute w-full border bg-dark-500 rounded-b-sm -mt-px;
+    @apply transition-all origin-top ease-in-out max-h-72 overflow-y-scroll  absolute w-full border bg-dark-500 rounded-b-sm -mt-px opacity-0 z-[-1] transform-gpu scale-y-0;
+}
+
+.select__dropdown_visible {
+    @apply opacity-100 z-10 transform-gpu scale-y-100;
 }
 
 .select__dropdown_item {
