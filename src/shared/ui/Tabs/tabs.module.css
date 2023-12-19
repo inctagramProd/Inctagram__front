@@ -11,9 +11,13 @@
 }
 
 .tab_active {
-    @apply text-primary-500 font-semibold border-b-2 border-primary-500;
+    @apply text-primary-500 font-semibold;
 }
 
 .tabs_slider {
-    @apply h-0.5 bg-primary-500 w-10 transition-all ease-in-out -my-0.5;
+    @apply h-0.5 bg-primary-500 w-10 ease-in-out -my-0.5 opacity-0;
+}
+
+.tabs_slider__animation {
+    @apply transition-transform opacity-100;
 }
