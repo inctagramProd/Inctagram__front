@@ -6,6 +6,7 @@
     hover:bg-primary-100 hover:text-light-100
     focus:bg-primary-500 focus:border-2 focus:border-primary-700
     disabled:bg-primary-900 disabled:text-light-900
+    
   }
   .secondary{
     @apply 

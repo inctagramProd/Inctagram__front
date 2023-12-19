@@ -26,7 +26,8 @@ export const Primary: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'medium'
+    size:'medium',
+    disable:false
   },
 }
 
@@ -34,14 +35,16 @@ export const Secondary: Story = {
   args: {
     style: 'secondary',
     label: 'Button',
-    size:'medium'
+    size:'medium',
+    disable:false
   },
 }
 export const Outline: Story = {
   args: {
     style: 'outline',
     label: 'Button',
-    size:'medium'
+    size:'medium',
+    disable:false
   },
 }
 export const Text: Story = {
@@ -71,5 +74,21 @@ export const Large: Story = {
     style: 'primary',
     label: 'Button',
     size:'large'
+  },
+}
+export const Able: Story = {
+  args: {
+    style: 'primary',
+    label: 'Button',
+    size:'medium',
+    disable:false
+  },
+}
+export const Disable: Story = {
+  args: {
+    style: 'primary',
+    label: 'Button',
+    size:'medium',
+    disable:true
   },
 }

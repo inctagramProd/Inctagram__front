@@ -5,12 +5,14 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large';
   label: string;
   type?:'button'|'submit'
+  disable?:boolean
   onClick?: () => void;
 }
 export const Button = ({
   style='primary',
   size = 'medium',
   type='button',
+  disable=false,
   label,
   ...props
 }: ButtonProps) => {
@@ -18,6 +20,7 @@ export const Button = ({
     <button
       type={type}
       className={[s[`${style}`],s[`${size}`]].join(' ')}
+      disabled={disable}
       {...props}
      
     >
