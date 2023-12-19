@@ -1,0 +1,19 @@
+.alerts {
+  @apply flex justify-between items-center w-[387px] h-12 px-6 border rounded-sm;
+}
+
+.default {
+  @apply bg-success-900  border-success-500;
+}
+
+.error {
+  @apply bg-danger-900  border-danger-500;
+}
+
+.message {
+  @apply text-light-100;
+}
+
+.closeIcon {
+  @apply text-light-100 fill-current;
+}
