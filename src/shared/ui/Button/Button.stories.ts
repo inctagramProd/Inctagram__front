@@ -4,7 +4,7 @@ import { Button } from './Button'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/Button',
+  title: 'Button',
   component: Button,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -24,27 +24,52 @@ type Story = StoryObj<typeof meta>
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
+    style: 'primary',
     label: 'Button',
+    size:'medium'
   },
 }
 
 export const Secondary: Story = {
   args: {
+    style: 'secondary',
     label: 'Button',
+    size:'medium'
   },
 }
-
-export const Large: Story = {
+export const Outline: Story = {
   args: {
-    size: 'large',
+    style: 'outline',
     label: 'Button',
+    size:'medium'
+  },
+}
+export const Text: Story = {
+  args: {
+    style: 'text',
+    label: 'Button',
+    size:'medium'
   },
 }
 
 export const Small: Story = {
   args: {
-    size: 'small',
+    style: 'primary',
     label: 'Button',
+    size:'small'
+  },
+}
+export const Medium: Story = {
+  args: {
+    style: 'primary',
+    label: 'Button',
+    size:'medium'
+  },
+}
+export const Large: Story = {
+  args: {
+    style: 'primary',
+    label: 'Button',
+    size:'large'
   },
 }
