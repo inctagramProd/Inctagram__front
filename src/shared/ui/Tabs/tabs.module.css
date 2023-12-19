@@ -1,0 +1,19 @@
+.tabs {
+    @apply inline-flex flex-col w-full;
+}
+
+.tabs_wrapper {
+    @apply flex flex-row border-b-2 border-dark-100;
+}
+
+.tab {
+    @apply h-9 flex-1 px-4 text-dark-100 flex justify-center items-center border-b-transparent cursor-pointer transition-all;
+}
+
+.tab_active {
+    @apply text-primary-500 font-semibold border-b-2 border-primary-500;
+}
+
+.tabs_slider {
+    @apply h-0.5 bg-primary-500 w-10 transition-all ease-in-out -my-0.5;
+}
