@@ -6,11 +6,14 @@ const meta = {
     title: 'Tabs',
     component: Tabs,
     parameters: {
+        disabled: false,
         options: [
-            { key: 'Option_1', label: 'Week' },
-            { key: 'Option_2', label: 'Month', disabled: true }
+            { key: 'week', label: 'Week' },
+            { key: 'month', label: 'Month', disabled: true },
+            { key: 'year', label: 'Year' }
         ],
-        defaultValue: ''
+        defaultValue: '',
+        onChange: (selectedObject: object) => console.log(selectedObject)
     }
 } satisfies Meta<typeof Tabs>
 
@@ -19,6 +22,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
+        disabled: false,
         options: [
             { key: 'week', label: 'Week' },
             { key: 'month', label: 'Month', disabled: true },
@@ -27,10 +31,9 @@ export const Default: Story = {
     }
 }
 
-// export const Disabled: Story = {
-//     args: {
-//         ...Default.args,
-//         defaultValue: 'option1',
-//         disabled: true
-//     }
-// }
+export const Disabled: Story = {
+    args: {
+        ...Default.args,
+        disabled: true
+    }
+}

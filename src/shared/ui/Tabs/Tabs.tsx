@@ -31,10 +31,7 @@ export const Tabs = ({
               tabDisabled = e.target.getAttribute('data-disabled');
 
         if(tabDisabled) return;
-
-        if (onChange) {
-            onChange(activeTabKey);
-        }
+        if(onChange) onChange(activeTabKey);
 
         setActiveTab(activeTabKey);
         changeTabSliderPosition(activeTabIndex);
