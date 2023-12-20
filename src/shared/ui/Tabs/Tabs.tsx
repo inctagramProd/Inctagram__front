@@ -5,6 +5,7 @@ interface ITabProps {
     options: {
         key: string;
         label: string;
+        disabled?: boolean;
     }[];
     disabled?: boolean;
     defaultValue?: string;
@@ -18,44 +19,61 @@ export const Tabs = ({
      onChange,
      ...props
 }: ITabProps) => {
-    const [activeTab, setActiveTab] = useState(defaultValue || options[0].key);
+    const [activeTab, setActiveTab] = useState<string | undefined>(defaultValue);
     const [disabledAnimation, setDisabledAnimation] = useState(true);
+
+    const tabsBlockRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    const sliderRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
 
     const handleTabClick = (e: { target: any }): void => {
         const activeTabKey = e.target.getAttribute('data-key'),
-            activeTabOffset = e.target.offsetLeft,
-            activeTabWidth = e.target.offsetWidth;
+              activeTabIndex = e.target.getAttribute('data-index'),
+              tabDisabled = e.target.getAttribute('data-disabled');
+
+        if(tabDisabled) return;
 
         setActiveTab(activeTabKey);
-        changeTabSliderPosition(activeTabOffset, activeTabWidth);
+        changeTabSliderPosition(activeTabIndex);
     };
 
-    const sliderRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
-
-    const changeTabSliderPosition = (offsetLeft: number, width: number) => {
+    const changeTabSliderPosition = (position: string) => {
         if (!sliderRef.current) return;
-        sliderRef.current.style.transform = `translateX(${offsetLeft}px)`;
-        sliderRef.current.style.width = `${width}px`;
+        sliderRef.current.style.transform = `translateX(${100 * parseInt(position)}%)`;
     };
 
     useEffect(() => {
-        const defaultTabKey = defaultValue || options[0].key;
-        const defaultTabElement = document.querySelector(`[data-key="${defaultTabKey}"]`);
+        if(disabled) return;
+        let defaultTabKey = defaultValue;
+
+        // If default option is disabled or not provided set first options item
+        if (!defaultTabKey || options.find((option) => option.key === defaultTabKey)?.disabled) {
+            defaultTabKey = options[0].key;
+        }
+
+        const defaultTabElement = tabsBlockRef.current?.querySelector(`[data-key="${defaultTabKey}"]`);
+
+        // Set slider width based on item count
+        if (sliderRef.current) {
+            sliderRef.current.style.width = `${100 / options.length}%`;
+        }
 
         if (defaultTabElement) {
-            const activeTabOffset = defaultTabElement.offsetLeft,
-                activeTabWidth = defaultTabElement.offsetWidth;
+            const activeTabIndex = defaultTabElement.getAttribute('data-index');
+            if (!activeTabIndex) return;
 
             setActiveTab(defaultTabKey);
-            changeTabSliderPosition(activeTabOffset, activeTabWidth);
-
+            changeTabSliderPosition(activeTabIndex);
             setDisabledAnimation(false);
         }
     }, [defaultValue, options]);
 
+    // Need fix
+    const interFont = {
+        fontFamily: 'Inter, sans-serif'
+    };
 
     return (
-        <div className={`${styles.tabs}`}>
+        <div style={interFont} className={`${styles.tabs}`} ref={tabsBlockRef} {...props}>
             <div className={`${styles.tabs_wrapper}`}>
                 {
                     options.map((item, key: number) => {
@@ -66,11 +84,12 @@ export const Tabs = ({
                                 key={item.key}
                                 data-index={key}
                                 data-key={item.key}
+                                data-disabled={`${item.disabled || disabled ? styles.tab_disabled : ''}`}
                                 onClick={handleTabClick}
-                                className={`${styles.tab} ${activeTab == item.key ? styles.tab_active : ''}`}
+                                className={`${styles.tab} ${activeTab == item.key && !disabled ? styles.tab_active : ''} ${item.disabled || disabled ? styles.tab_disabled : ''}`}
                             >
                                 {item.label}
-                            </div>
+                        </div>
                     })
                 }
             </div>

@@ -7,15 +7,19 @@
 }
 
 .tab {
-    @apply h-9 flex-1 px-4 text-dark-100 flex justify-center items-center border-b-transparent cursor-pointer transition-all;
+    @apply focus:border-primary-500 hover:bg-primary-900 hover:bg-opacity-10 active:bg-primary-500 active:bg-opacity-10 relative z-10 h-9 flex-1 px-4 text-dark-100 font-semibold flex justify-center items-center border-b-transparent cursor-pointer transition-all;
 }
 
 .tab_active {
     @apply text-primary-500 font-semibold;
 }
 
+.tab_disabled {
+    @apply cursor-not-allowed;
+}
+
 .tabs_slider {
-    @apply h-0.5 bg-primary-500 w-10 ease-in-out -my-0.5 opacity-0;
+    @apply h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-0;
 }
 
 .tabs_slider__animation {
