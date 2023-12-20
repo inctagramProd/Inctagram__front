@@ -9,7 +9,7 @@ interface ITabProps {
     }[];
     disabled?: boolean;
     defaultValue?: string;
-    onChange?: (selectedValue: object) => void;
+    onChange?: (value: string) => void;
 }
 
 export const Tabs = ({
@@ -31,6 +31,10 @@ export const Tabs = ({
               tabDisabled = e.target.getAttribute('data-disabled');
 
         if(tabDisabled) return;
+
+        if (onChange) {
+            onChange(activeTabKey);
+        }
 
         setActiveTab(activeTabKey);
         changeTabSliderPosition(activeTabIndex);
@@ -73,7 +77,7 @@ export const Tabs = ({
     };
 
     return (
-        <div style={interFont} className={`${styles.tabs}`} ref={tabsBlockRef} {...props}>
+        <div style={interFont} className={`${styles.tabs} ${disabled ? styles.tabs_disabled : ''}`} ref={tabsBlockRef} {...props}>
             <div className={`${styles.tabs_wrapper}`}>
                 {
                     options.map((item, key: number) => {
