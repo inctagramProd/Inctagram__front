@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './tabs.module.css';
-import unevaluated from "ajv/lib/vocabularies/unevaluated";
 
 interface IOptionProps {
     key: string;
