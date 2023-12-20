@@ -12,7 +12,7 @@ const meta = {
             { key: 'month', label: 'Month', disabled: true },
             { key: 'year', label: 'Year' }
         ],
-        defaultValue: '',
+        defaultActiveKey: '',
         onChange: (selectedObject: object) => console.log(selectedObject)
     }
 } satisfies Meta<typeof Tabs>
@@ -31,7 +31,7 @@ export const Default: Story = {
     }
 }
 
-export const Disabled: Story = {
+export const defaultActiveKey: Story = {
     args: {
         ...Default.args,
         disabled: true

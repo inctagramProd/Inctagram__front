@@ -1,26 +1,29 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './tabs.module.css';
+import unevaluated from "ajv/lib/vocabularies/unevaluated";
+
+interface IOptionProps {
+    key: string;
+    label: string;
+    disabled?: boolean;
+}
 
 interface ITabProps {
-    options: {
-        key: string;
-        label: string;
-        disabled?: boolean;
-    }[];
+    options: IOptionProps[];
     disabled?: boolean;
-    defaultValue?: string;
+    defaultActiveKey?: string;
     onChange?: (value: string) => void;
 }
 
 export const Tabs = ({
      options,
-     defaultValue,
+     defaultActiveKey,
      disabled = false,
      onChange,
      ...props
 }: ITabProps) => {
-    const [activeTab, setActiveTab] = useState<string | undefined>(defaultValue);
-    const [disabledSliderAnimation, setdisabledSliderAnimation] = useState(true);
+    const [activeTab, setActiveTab] = useState<string | undefined>(defaultActiveKey);
+    const [disabledSliderAnimation, setDisabledSliderAnimation] = useState(true);
 
     const tabsBlockRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const sliderRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -37,22 +40,22 @@ export const Tabs = ({
         changeTabSliderPosition(activeTabIndex);
     };
 
-    const changeTabSliderPosition = (position: string) => {
+    const changeTabSliderPosition = (position: string): void => {
         if (!sliderRef.current) return;
         sliderRef.current.style.transform = `translateX(${100 * parseInt(position)}%)`;
-        setdisabledSliderAnimation(false);
+        setDisabledSliderAnimation(false);
     };
 
-    useEffect(() => {
+    useEffect((): void => {
         if(disabled) return;
-        let defaultTabKey = defaultValue;
+        let defaultTabKey: string | undefined = defaultActiveKey;
 
         // If default option is disabled or not provided set first options item
-        if (!defaultTabKey || options.find((option) => option.key === defaultTabKey)?.disabled) {
+        if (!defaultTabKey || options.find((option: IOptionProps) => option.key === defaultTabKey)?.disabled) {
             defaultTabKey = options[0].key;
         }
 
-        const defaultTabElement = tabsBlockRef.current?.querySelector(`[data-key="${defaultTabKey}"]`);
+        const defaultTabElement: Element | null | undefined = tabsBlockRef.current?.querySelector(`[data-key="${defaultTabKey}"]`);
 
         // Set slider width based on item count
         if (sliderRef.current) {
@@ -60,13 +63,13 @@ export const Tabs = ({
         }
 
         if (defaultTabElement) {
-            const activeTabIndex = defaultTabElement.getAttribute('data-index');
+            const activeTabIndex: string | undefined | null = defaultTabElement.getAttribute('data-index');
             if (!activeTabIndex) return;
 
             setActiveTab(defaultTabKey);
             changeTabSliderPosition(activeTabIndex);
         }
-    }, [defaultValue, options]);
+    }, [defaultActiveKey, options]);
 
     // Need fix
     const interFont = {
@@ -77,7 +80,7 @@ export const Tabs = ({
         <div style={interFont} className={`${styles.tabs} ${disabled ? styles.tabs_disabled : ''}`} ref={tabsBlockRef} {...props}>
             <div className={`${styles.tabs_wrapper}`}>
                 {
-                    options.map((item, key: number) => {
+                    options.map((item: IOptionProps, key: number) => {
                         return <div
                                 role={"tab"}
                                 aria-selected={"true"}
