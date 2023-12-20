@@ -31,7 +31,7 @@ export const Default: Story = {
     }
 }
 
-export const defaultActiveKey: Story = {
+export const Disabled: Story = {
     args: {
         ...Default.args,
         disabled: true
