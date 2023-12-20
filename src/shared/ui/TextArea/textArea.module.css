@@ -1,0 +1,13 @@
+.textArea{
+    @apply w-full outline-none placeholder-light-900 border rounded-sm border-dark-100 bg-dark-500 py-1.5 px-3
+    disabled:placeholder-dark-100 disabled:text-dark-100
+    focus:border-primary-700 focus:ring-1 focus:ring-primary-700
+}
+
+.error {
+    @apply border-danger-500 focus:border-danger-500 focus:ring-1 focus:ring-danger-500;
+}
+
+.errorMessage {
+    @apply text-sm font-normal text-red-500;
+}
