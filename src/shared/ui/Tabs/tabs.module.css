@@ -19,7 +19,7 @@
 }
 
 .tabs_slider {
-    @apply h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-100;
+    @apply h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-0;
 }
 
 .tabs_disabled .tabs_slider {

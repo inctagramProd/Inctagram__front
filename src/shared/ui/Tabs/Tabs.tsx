@@ -30,8 +30,8 @@ export const Tabs = ({
               activeTabIndex = e.target.getAttribute('data-index'),
               tabDisabled = e.target.getAttribute('data-disabled');
 
-        if(tabDisabled) return;
-        if(onChange) onChange(activeTabKey);
+        if (tabDisabled) return;
+        if (onChange) onChange(activeTabKey);
 
         setActiveTab(activeTabKey);
         changeTabSliderPosition(activeTabIndex);
@@ -40,6 +40,7 @@ export const Tabs = ({
     const changeTabSliderPosition = (position: string) => {
         if (!sliderRef.current) return;
         sliderRef.current.style.transform = `translateX(${100 * parseInt(position)}%)`;
+        setDisabledAnimation(false);
     };
 
     useEffect(() => {
@@ -64,7 +65,6 @@ export const Tabs = ({
 
             setActiveTab(defaultTabKey);
             changeTabSliderPosition(activeTabIndex);
-            setDisabledAnimation(false);
         }
     }, [defaultValue, options]);
 
