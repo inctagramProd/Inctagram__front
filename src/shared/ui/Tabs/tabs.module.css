@@ -15,11 +15,11 @@
 }
 
 .tab_disabled {
-    @apply cursor-not-allowed;
+    @apply cursor-not-allowed text-dark-300;
 }
 
 .tabs_slider {
-    @apply h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-0;
+    @apply h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-100;
 }
 
 .tabs_disabled .tabs_slider {
@@ -27,5 +27,5 @@
 }
 
 .tabs_slider__animation {
-    @apply transition-transform opacity-100;
+    @apply transition-transform duration-300;
 }
