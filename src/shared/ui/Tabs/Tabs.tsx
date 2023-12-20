@@ -23,7 +23,6 @@ export const Tabs = ({
      ...props
 }: ITabProps) => {
     const [activeTab, setActiveTab] = useState<string | undefined>(defaultActiveKey);
-    const [disabledSliderAnimation, setDisabledSliderAnimation] = useState(true);
 
     const tabsBlockRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
     const sliderRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
@@ -43,7 +42,6 @@ export const Tabs = ({
     const changeTabSliderPosition = (position: string): void => {
         if (!sliderRef.current) return;
         sliderRef.current.style.transform = `translateX(${100 * parseInt(position)}%)`;
-        setDisabledSliderAnimation(false);
     };
 
     useEffect((): void => {
@@ -97,7 +95,7 @@ export const Tabs = ({
                     })
                 }
             </div>
-            <div ref={sliderRef} className={`${styles.tabs_slider} ${disabledSliderAnimation ? '' : styles.tabs_slider__animation} `}></div>
+            <div ref={sliderRef} className={`${styles.tabs_slider}`}></div>
         </div>
     )
 }
