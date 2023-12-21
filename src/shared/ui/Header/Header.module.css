@@ -1,0 +1,11 @@
+.container{@apply w-[100%] h-[60px] border-b-[1px] border-dark-300 fixed top-0 left-0 right-0 }
+.subContainer{@apply grid grid-cols-6 }
+
+/* -------Left block--------- */
+.leftBlock{@apply col-start-1 col-end-3 h-[60px]}
+.logo{@apply mt-[12px] ml-[60px] leading-[36px] text-[26px]}
+
+/* -------Right block--------- */
+.rightBlock{@apply static col-end-7 col-span-4  h-[60px]}
+.LoggedIn{@apply absolute right-[64px] w-[423px] h-[36px] mt-[12px] grid grid-cols-3}
+.LoggedOut{@apply absolute right-[64px] w-[235px] h-[36px] mt-[12px] grid grid-cols-2}
