@@ -4,11 +4,11 @@
 
 2. Внедрение иконок в компоненту:
    Пример:
-   <!-- 
-   <div>
-   <Icons.Bell width={20} height={20} fillType={fill} theme={dark}>
-   </div> 
-   --> 
+    
+   < div >
+   < Icons.Bell width={20} height={20} fillType={fill} theme={dark}>
+   < /div > 
+   
 3. Типы просов:
 width (обязательный)- ширина иконки (передается числом)
 height (обязательный)- высота иконки (передается числом)
