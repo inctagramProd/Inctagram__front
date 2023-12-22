@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   title: 'Components/Input',
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
