@@ -27,9 +27,9 @@ const config: Config = {
 
             },
             lineHeight: {
-                'tight': '1.44',  // Эквивалентно 36 пикселям
-                'normal': '1.5',  // Эквивалентно 24 пикселям
-                'loose': '1.75',  // Эквивалентно 16 пикселям
+                'tight': '1.44',  // 36 px
+                'normal': '1.5',  // 24 px
+                'loose': '1.75',  // 16 px
             },
             colors: {
                 'primary-100': '#73A5FF',
