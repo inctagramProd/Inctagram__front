@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
-import s from './typography.module.scss'
+import s from './Typography.module.css'
 
 export type TypographyProps<T extends ElementType = 'p'> = {
     as?: T
@@ -31,3 +31,4 @@ export const Typography = <T extends ElementType = 'p'>(
 
     return <Component className={`${s[variant]} ${className}`} {...rest} />
 }
+
