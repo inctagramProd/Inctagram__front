@@ -43,11 +43,11 @@
 }
 
 .link_regular {
-    @apply  text-primary-500 text-sm font-semibold leading-normal underline
+    @apply  text-primary-500 text-sm font-semibold leading-normal underline cursor-pointer
 }
 
 .link_small {
-    @apply text-primary-500 text-xs font-semibold leading-loose underline
+    @apply text-primary-500 text-xs font-semibold leading-loose underline cursor-pointer
 }
 
 .error {
