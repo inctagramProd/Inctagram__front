@@ -1,18 +1,11 @@
 import * as Icons from '../../assets/icons/icons'
 
-type IconProps = {
+type IconProps = Icons.Iicon & {
   iconName: string
-  width?: number
-  height?: number
-  fillType?: 'fill' | 'outline'
-  theme?: 'light' | 'dark'
-  value?: number
 }
 
-type SvgIconComponent = React.FC<IconProps>
-
 type IconsType = {
-  [key: string]: SvgIconComponent | undefined
+  [key: string]: React.FC<IconProps> | undefined
 }
 
 const Icon = ({
