@@ -3,7 +3,7 @@
 }
 
 .select__active_el {
-    @apply border-light-900 select-none w-full cursor-pointer text-light-100 border px-2 py-1.5 rounded-sm flex justify-between hover:text-light-900;
+    @apply border-light-900 flex items-center justify-between gap-2 select-none w-full cursor-pointer text-light-100 border px-2 py-1.5 rounded-sm hover:text-light-900;
 }
 
 .select__dropdown_title {
@@ -60,4 +60,21 @@
 
 .select__dropdown_icon svg {
     @apply max-h-5;
+}
+
+
+.select_pagination .select__active_el {
+    @apply px-2 py-0.5 bg-dark-500 border-dark-300 text-light-100 text-sm;
+}
+
+.select_pagination .select__dropdown_icon {
+    @apply w-4 h-4;
+}
+
+.select_pagination .select__dropdown {
+    @apply bg-dark-500 border-dark-300;
+}
+
+.select_pagination .select__dropdown_item {
+    @apply px-2 py-0.5 text-light-100 text-sm;
 }

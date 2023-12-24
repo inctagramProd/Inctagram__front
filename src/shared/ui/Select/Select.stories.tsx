@@ -29,6 +29,14 @@ export const Default: Story = {
     }
 }
 
+export const Paginatuin: Story = {
+    args: {
+        ...Default.args,
+        defaultValue: 'option1',
+        variant: 'Pagination'
+    }
+}
+
 export const Disabled: Story = {
     args: {
         ...Default.args,

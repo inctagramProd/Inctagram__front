@@ -6,6 +6,7 @@ interface ISelectProps {
     title?: string,
     disabled?: boolean,
     defaultValue?: string
+    variant?: 'Default' | 'Pagination'
     options: {
         title: string;
         value: string;
@@ -17,6 +18,7 @@ export const Select = ({
     title,
     options,
     defaultValue,
+    variant = 'Default',
     disabled = false,
     onChange,
     ...props
@@ -72,7 +74,7 @@ export const Select = ({
     };
 
     return (
-        <div style={interFont} className={`${styles.select} ${disabled ? styles.disabled : ''}`}  {...props}>
+        <div style={interFont} className={`${styles.select} ${disabled ? styles.disabled : ''} ${variant === 'Pagination' ? styles.select_pagination : ''} `}  {...props}>
             <span className={`${styles.select__title}`}>{title}</span>
             <div
                 ref={wrapperRef}
@@ -84,7 +86,7 @@ export const Select = ({
                     {activeEl.title}
                 </span>
                 <div
-                    className={`${isVisibleDropdown ? styles.select__dropdown_arrow_active : ''} ${styles.select__dropdown_arrow}`}
+                    className={`${isVisibleDropdown ? styles.select__dropdown_arrow_active : ''} ${styles.select__dropdown_icon}`}
                 >
                     <ArrowBottom />
                 </div>
