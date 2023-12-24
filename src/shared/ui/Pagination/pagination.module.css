@@ -7,7 +7,7 @@
 }
 
 .pagination__item {
-    @apply block px-2 rounded-sm transition-opacity select-none;
+    @apply flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-sm;
 }
 
 .pagination__item:not(.pagination__items_active) {
@@ -20,4 +20,8 @@
 
 .pagination__items_per_page {
     @apply inline-flex items-center gap-2 text-sm;
+}
+
+.pagination__items_disabled {
+    opacity: 0.3;
 }

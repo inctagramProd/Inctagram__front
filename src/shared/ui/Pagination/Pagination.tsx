@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './pagination.module.css';
 import { Select } from './../Select/Select';
+import ArrowLeft from '@/src/shared/assets/icons/ArrowLeft';
+import ArrowRight from '@/src/shared/assets/icons/ArrowRight';
 
 interface IPaginationProps {
     total: number;
     itemsPerPage?: number;
     defaultCurrent?: number;
-    onChange?: (selected: number) => void;
+    onChange?: (selected: React.SetStateAction<number>) => void;
 }
 
-const numberToArray = (n) => {
-    return Array.from({length: n}, (_, i) => i + 1);
-}
+const transformToPagination = (number: number, selected: number) => {
+    // Transform number to array of numbers
+    const arr: any[] = Array.from({length: number}, (_, i) => i + 1);
 
-const transformToPagination = (arr, selected) => {
-    if (arr.length < 7) {
-        return arr;
-    }
+    if (arr.length < 7) return arr;
 
-    let index = arr.indexOf(selected);
-    let result = [];
+    let index: number | string = arr.indexOf(selected);
+    let result: any[];
 
+    // Main algorithm
     if (index <= 2) {
         result = arr.slice(0, 5).concat(['...'], arr.slice(-1));
     } else if (index >= arr.length - 3) {
@@ -40,9 +40,14 @@ export const Pagination = ({
 }: IPaginationProps) => {
     const [activePage, setActivePage] = useState(defaultCurrent);
     const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPage));
 
-    const pagesCount = Math.ceil(total / itemsPerPage);
-    const pagesArray = transformToPagination(numberToArray(pagesCount), activePage);
+    const pagesArray: any[] = transformToPagination(pagesCount, activePage);
+
+    useEffect((): void => {
+        setActivePage(defaultCurrent);
+        setPagesCount(Math.ceil(total / itemsPerPage));
+    }, [total, defaultCurrent, itemsPerPage]);
 
     // Need fix
     const interFont = {
@@ -52,25 +57,28 @@ export const Pagination = ({
     const handleSetActivePage = (page: React.SetStateAction<number>) => {
         if(page === activePage || !Number.isInteger(page)) return;
         setActivePage(page);
+        if (onChange) {
+            onChange(page);
+        }
     }
 
     const PaginationPages = () => {
         const paginationElements: any = [];
 
-        const handlePrevClick = () => {
-            const newPage = Math.max(activePage - 1, 1);
+        const handlePrevClick = (): void => {
+            const newPage: number = Math.max(activePage - 1, 1);
             handleSetActivePage(newPage);
         };
 
-        const handleNextClick = () => {
-            const newPage = Math.min(activePage + 1, pagesCount);
+        const handleNextClick = (): void => {
+            const newPage: number = Math.min(activePage + 1, pagesCount);
             handleSetActivePage(newPage);
         };
 
         pagesArray.map((page: any, i: any) => {
             return paginationElements.push(
                 <li
-                    key={page}
+                    key={i}
                     className={`${styles.pagination__item} ${activePage === page ? styles.pagination__items_active : ''}`}
                     onClick={() => handleSetActivePage(page)}
                     tabIndex={0}
@@ -83,31 +91,37 @@ export const Pagination = ({
         return (
             <ul className={styles.pagination__items}>
                 <li
-                    className={`${styles.pagination__item} ${activePage === 1 ? styles.pagination__items_disabled : ''}`}
+                    className={`
+                        ${styles.pagination__item} 
+                        ${activePage === pagesArray[0] ? styles.pagination__items_disabled : ''}
+                    `}
                     onClick={handlePrevClick}
                     tabIndex={0}
                 >
-                    {'<'}
+                    <ArrowLeft />
                 </li>
                 {paginationElements}
                 <li
-                    className={`${styles.pagination__item} ${activePage === pagesCount ? styles.pagination__items_disabled : ''}`}
+                    className={`
+                        ${styles.pagination__item} 
+                        ${activePage === pagesCount ? styles.pagination__items_disabled : ''}
+                        `}
                     onClick={handleNextClick}
                     tabIndex={0}
                 >
-                    {'>'}
+                    <ArrowRight />
                 </li>
             </ul>
         );
     };
 
     const PaginationItemsPerPage = () => {
-        const itemsPerPageList = [10, 20, 30, 50, 100];
-        const itemPerPageSelect = <Select
-            defaultValue={parseInt(itemsPerPage)}
+        const itemsPerPageList: number[] = [10, 20, 30, 50, 100];
+        const itemPerPageSelect: React.JSX.Element = <Select
+            defaultValue={itemsPerPage}
             variant={"Pagination"}
-            onChange={(selectedValue: object) => {
-                setItemsPerPage(selectedValue.value);
+            onChange={(selectedValue: object): void => {
+                setItemsPerPage(parseInt(selectedValue.value));
                 setActivePage(1);
             }}
             options={
@@ -124,7 +138,7 @@ export const Pagination = ({
     }
 
     return (
-        <div style={interFont} className={`${styles.pagination}`}>
+        <div style={interFont} className={`${styles.pagination}`} {...props}>
             <PaginationPages />
             <PaginationItemsPerPage />
         </div>
