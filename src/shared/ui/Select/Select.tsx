@@ -3,13 +3,13 @@ import styles from './select.module.css';
 import ArrowBottom from "@/src/shared/assets/icons/ArrowBottom";
 
 interface ISelectProps {
-    title?: string,
-    disabled?: boolean,
-    defaultValue?: string
-    variant?: 'Default' | 'Pagination'
+    title?: string;
+    disabled?: boolean;
+    defaultValue?: string | number;
+    variant?: 'Default' | 'Pagination';
     options: {
-        title: string;
-        value: string;
+        title: string | number;
+        value: string | number;
     }[];
     onChange?: (selectedValue: object) => void;
 }
