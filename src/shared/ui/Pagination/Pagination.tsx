@@ -6,7 +6,6 @@ import ArrowRight from '@/src/shared/assets/icons/ArrowRight';
 
 interface IPaginationProps {
     total: number;
-    itemsPerPage?: number;
     defaultCurrent?: number;
     onChange?: (selected: React.SetStateAction<number>) => void;
 }
