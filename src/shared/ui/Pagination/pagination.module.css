@@ -1,0 +1,23 @@
+.pagination {
+    @apply inline-flex items-center gap-4;
+}
+
+.pagination__items {
+    @apply inline-flex gap-5;
+}
+
+.pagination__item {
+    @apply block px-2 rounded-sm transition-opacity;
+}
+
+.pagination__item:not(.pagination__items_active) {
+    @apply bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100;
+}
+
+.pagination__items_active {
+    @apply bg-opacity-100 bg-white text-dark-900 cursor-default;
+}
+
+.pagination__items_per_page {
+    @apply inline-flex items-center gap-2;
+}
