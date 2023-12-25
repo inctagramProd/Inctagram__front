@@ -27,6 +27,3 @@ export const ReCaptcha = (props: ReCaptchaPropsType) => {
         </div>
     );
 };
-
-// !!!! you should add a .env.local file with this key:
-// NEXT_PUBLIC_RECAPTCHA_SITE_KEY=6LepKzspAAAAACORjdRAQAuzGUTmkMzIPBb_5z7f
