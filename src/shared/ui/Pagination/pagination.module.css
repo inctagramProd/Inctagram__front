@@ -1,0 +1,27 @@
+.pagination {
+    @apply inline-flex items-center gap-4;
+}
+
+.pagination__items {
+    @apply inline-flex gap-5;
+}
+
+.pagination__item {
+    @apply flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-light-100 text-sm;
+}
+
+.pagination__item:not(.pagination__items_active) {
+    @apply bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100;
+}
+
+.pagination__items_active {
+    @apply bg-opacity-100 bg-light-100 text-dark-900 cursor-default;
+}
+
+.pagination__items_per_page {
+    @apply inline-flex items-center gap-2 text-sm text-light-100;
+}
+
+.pagination__items_disabled {
+    opacity: 0.3;
+}
