@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Select } from './Select'
 
 const meta = {
-    title: 'Select',
+    title: 'Components/Select',
     component: Select,
     parameters: {
         title: 'Hello world',
