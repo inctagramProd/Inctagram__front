@@ -16,7 +16,7 @@ type CustomInputProps = {
 
 const CustomInput: React.FC<CustomInputProps> = ({value, onClick}) => (
     <input
-        className={s.customDateInput}
+        className={`${s.customDateInput}`}
         value={value}
         onClick={onClick}
         readOnly
@@ -35,6 +35,7 @@ export const UIDatePicker: React.FC<PropsType> = ({onChange, isRange}) => {
         <DatePicker
             selectsRange={isRange}
             startDate={startDate}
+
             endDate={endDate}
             selected={isRange ? null : startDate}
             onChange={(update) => {
