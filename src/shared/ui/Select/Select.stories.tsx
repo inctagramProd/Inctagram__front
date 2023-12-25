@@ -29,7 +29,7 @@ export const Default: Story = {
     }
 }
 
-export const Paginatuin: Story = {
+export const Pagination: Story = {
     args: {
         ...Default.args,
         defaultValue: 'option1',
