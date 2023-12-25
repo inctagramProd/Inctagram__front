@@ -9,10 +9,10 @@ import Link from 'next/link'
 interface HeaderProps {
   user?: boolean
   size?: 'small' | 'medium' | 'large'
-  id:number,
+  id?:number,
   fillType?: 'fill' | 'outline'
-  height: number
-  width: number
+  height?: number
+  width?: number
   theme?: 'dark' | 'light'
   value?: number
   options?: {title: string, value: string}[]
