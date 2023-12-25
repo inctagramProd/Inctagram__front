@@ -1,0 +1,8 @@
+.customDateInput {
+    background-color: brown; /* Dark background color */
+    color:blueviolet    ; /* Text color */
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}

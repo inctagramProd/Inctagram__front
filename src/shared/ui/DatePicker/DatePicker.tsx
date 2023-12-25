@@ -1,27 +1,63 @@
 import React, {useState} from 'react';
 import DatePicker from 'react-datepicker';
+import {format} from 'date-fns'; // Import the format function
 import 'react-datepicker/dist/react-datepicker.css';
-import s from './DatePicker.module.css'
+import s from './DatePicker.module.css';
 
 type PropsType = {
+    isRange?: boolean;
     onChange?: (value: string) => void;
 };
 
-export const UIDatePicker: React.FC<PropsType> = ({onChange}) => {
-    const [startDate, setStartDate] = useState<Date | null>(new Date());
+type CustomInputProps = {
+    value: string;
+    onClick: () => void;
+};
 
-    const handleDateChange = (date: Date | null) => {
-        if (date !== null) {
-            setStartDate(date);
-            if (onChange) {
-                onChange(date.toISOString());
-            }
-        }
+const CustomInput: React.FC<CustomInputProps> = ({value, onClick}) => (
+    <input
+        className={s.customDateInput}
+        value={value}
+        onClick={onClick}
+        readOnly
+    />
+);
+
+export const UIDatePicker: React.FC<PropsType> = ({onChange, isRange}) => {
+    const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
+    const [startDate, endDate] = dateRange;
+
+    const formatDate = (date: Date | null): string => {
+        return date ? format(date, 'dd/MM/yyyy') : '';
     };
 
-    return <DatePicker selected={startDate}
-                       onChange={handleDateChange}
-                       className={`custom-datepicker`}
-                       calendarStartDay={1}
-    />;
+    return (
+        <DatePicker
+            selectsRange={isRange}
+            startDate={startDate}
+            endDate={endDate}
+            selected={isRange ? null : startDate}
+            onChange={(update) => {
+                if (!Array.isArray(update)) {
+                    setDateRange([update, update]);
+                    if (onChange) {
+                        onChange(formatDate(update));
+                    }
+                } else {
+                    setDateRange(update);
+                    if (onChange) {
+                        onChange(`${formatDate(update[0])} - ${formatDate(update[1])}`);
+                    }
+                }
+            }}
+            isClearable={true}
+            customInput={
+            <CustomInput
+                onClick={() => {}}
+                value={isRange
+                    ? `${formatDate(startDate)} - ${formatDate(endDate)}`
+                    : `${formatDate(startDate)}`}
+            />}
+        />
+    );
 };
