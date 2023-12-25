@@ -7,6 +7,7 @@ import ArrowRight from '@/src/shared/assets/icons/ArrowRight';
 interface IPaginationProps {
     total: number;
     defaultCurrent?: number;
+    itemsPerPage?: 10 | 20 | 30 | 50 | 100;
     onChange?: (selected: React.SetStateAction<number>) => void;
 }
 
@@ -34,11 +35,11 @@ const transformToPagination = (number: number, selected: number) => {
 export const Pagination = ({
    total,
    defaultCurrent = 1,
+   itemsPerPage = 10,
    onChange,
    ...props
 }: IPaginationProps) => {
     const [activePage, setActivePage] = useState(defaultCurrent);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
     const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPage));
 
     const pagesArray: any[] = transformToPagination(pagesCount, activePage);
