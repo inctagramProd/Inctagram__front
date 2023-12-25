@@ -40,14 +40,20 @@ export const Pagination = ({
    ...props
 }: IPaginationProps) => {
     const [activePage, setActivePage] = useState(defaultCurrent);
-    const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPage));
+    const [itemsPerPageValue, setItemsPerPageValue] = useState(itemsPerPage);
+    const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPageValue));
 
     const pagesArray: any[] = transformToPagination(pagesCount, activePage);
 
     useEffect((): void => {
         setActivePage(defaultCurrent);
-        setPagesCount(Math.ceil(total / itemsPerPage));
-    }, [total, defaultCurrent, itemsPerPage]);
+        setPagesCount(Math.ceil(total / itemsPerPageValue));
+    }, [total, defaultCurrent, itemsPerPageValue]);
+
+    useEffect((): void => {
+        setItemsPerPageValue(itemsPerPage);
+        setActivePage(1);
+    }, [itemsPerPage]);
 
     // Need fix
     const interFont = {
@@ -118,10 +124,10 @@ export const Pagination = ({
     const PaginationItemsPerPage = () => {
         const itemsPerPageList: number[] = [10, 20, 30, 50, 100];
         const itemPerPageSelect: React.JSX.Element = <Select
-            defaultValue={itemsPerPage}
+            defaultValue={itemsPerPageValue}
             variant={"Pagination"}
             onChange={(selectedValue: object): void => {
-                setItemsPerPage(parseInt(selectedValue.value));
+                setItemsPerPageValue(parseInt(selectedValue.value));
                 setActivePage(1);
             }}
             options={
