@@ -1,3 +1,3 @@
 .card{
-    @apply bg-dark-500 border border-dark-300 rounded-sm max-w-sm w-full p-6 break-all
+    @apply bg-dark-500 border border-dark-300 rounded-sm max-w-sm w-full p-6 break-words
 }
