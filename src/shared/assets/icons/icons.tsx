@@ -67,7 +67,6 @@ export function Settings({ width, height, fillType = 'outline', value = 0 ,style
         height={height}
         viewBox="0 0 24 24"
         className={s[`${style}`]}
-        className={s[`${style}`]}
         xmlns="http://www.w3.org/2000/svg"
       >
         {fillType === 'fill'?
