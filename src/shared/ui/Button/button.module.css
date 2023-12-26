@@ -48,6 +48,6 @@
   }
   .large {
     @apply
-    text-[26px]
+    text-[36px]
     leading-[36px]
   }

@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import s from './Header.module.css'
-
-import * as Icons from './../../assets/icons/icons'
-
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { Button } from '../../ui/Button/Button';
@@ -11,7 +8,6 @@ import Icon from '../../ui/Icon/Icon';
 
 interface HeaderProps {
   user?: boolean
-  size?: 'small' | 'medium' | 'large'
   id?:number,
   fillType?: 'fill' | 'outline'
   height?: number
@@ -24,7 +20,6 @@ interface HeaderProps {
 
 export const Header:React.FC<HeaderProps> = ({
   user = false,
-  size = 'medium',
   id=0,
   height = 24,
   width = 24,
@@ -40,11 +35,12 @@ export const Header:React.FC<HeaderProps> = ({
     const handleLink=(selectedValue:object)=>{router.push(selectedValue?.value) }
     const linkOptions=[{ title: 'Log In', value: '/logIn' },{ title: 'Sign Up', value: '/signUp' },]
     const routerPath=(i:number)=>{router.push(`/${linkOptions[i].value}`)} 
+    const FontColor=theme==='dark'?'light':'dark'
     if (user) {
       return (
         <div className={s.container}>
           <div className={s.leftBlock}>
-            <Link href={'/'}><h1 className={s.logo}>Inctagram</h1></Link>
+            <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] text-${FontColor}-100`}>Inctagram</h1></Link>
           </div>
           <div className={s.rightBlock}>
             <div className={s.bell}>
@@ -69,7 +65,7 @@ export const Header:React.FC<HeaderProps> = ({
     return (
       <div className={s.container}>
         <div className={s.leftBlock}>
-        <Link href={'/'}><h1 className={s.logo}>Inctagram</h1></Link>
+        <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] text-${FontColor}-100`}>Inctagram</h1></Link>
         </div>
         <div className={s.rightBlock}>
           <div className={s.select}>
@@ -100,10 +96,10 @@ export const Header:React.FC<HeaderProps> = ({
           </div>
           <div className={s.login}>
             <div>
-              <Button size={size} label="Log In" style="text" onClick={()=>routerPath(0)} />
+              <Button  label="Log In" style="text" onClick={()=>routerPath(0)} />
             </div>
             <div>
-              <Button size={size} label="Sign Up" style="primary" onClick={()=>routerPath(1)} />
+              <Button  label="Sign Up" style="primary" onClick={()=>routerPath(1)} />
             </div>
           </div>
         </div>

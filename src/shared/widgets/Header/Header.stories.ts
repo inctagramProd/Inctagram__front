@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const LogIn: Story = {
   args: {
     user: false,
+    fillType:'outline',
     theme:'dark'
   },
 };
