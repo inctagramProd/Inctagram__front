@@ -35,12 +35,12 @@ export const Header:React.FC<HeaderProps> = ({
     const handleLink=(selectedValue:object)=>{router.push(selectedValue?.value) }
     const linkOptions=[{ title: 'Log In', value: '/logIn' },{ title: 'Sign Up', value: '/signUp' },]
     const routerPath=(i:number)=>{router.push(`/${linkOptions[i].value}`)} 
-    const FontColor=theme==='dark'?'light':'dark'
+    const FontColor=theme==='dark'?'text-light-100':'text-dark-100'
     if (user) {
       return (
         <div className={s.container}>
           <div className={s.leftBlock}>
-            <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] text-${FontColor}-100`}>Inctagram</h1></Link>
+            <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] ${FontColor}`}>Inctagram</h1></Link>
           </div>
           <div className={s.rightBlock}>
             <div className={s.bell}>
@@ -65,7 +65,7 @@ export const Header:React.FC<HeaderProps> = ({
     return (
       <div className={s.container}>
         <div className={s.leftBlock}>
-        <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] text-${FontColor}-100`}>Inctagram</h1></Link>
+        <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px]  ${FontColor}`}>Inctagram</h1></Link>
         </div>
         <div className={s.rightBlock}>
           <div className={s.select}>
