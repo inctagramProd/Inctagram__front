@@ -15,6 +15,7 @@ const Icon = ({
   fillType = 'outline',
   theme = 'dark',
   value,
+  style,
 }: IconProps) => {
   const IconComponent = (Icons as IconsType)[iconName]
   if (!IconComponent) {
@@ -29,6 +30,7 @@ const Icon = ({
       theme={theme}
       value={value}
       iconName={iconName}
+      style={style}
     />
   )
 }

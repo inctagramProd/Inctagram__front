@@ -1,0 +1,33 @@
+.primary {
+    @apply
+    bg-none  
+    fill-light-100  cursor-pointer 
+    active:fill-primary-500   
+    hover:fill-primary-100 
+    focus:fill-primary-100 
+    disabled:fill-primary-900  
+  }
+  .secondary{
+    @apply 
+    fill-dark-300 cursor-pointer 
+    active:fill-[#212121]   
+    hover:fill-dark-100 
+    focus:fill-dark-300 
+    disabled:fill-dark-500 
+  }
+  .outline{
+    @apply 
+    fill-primary-500 cursor-pointer 
+    active:fill-primary-700 
+    hover:fill-primary-100     
+    focus:fill-primary-500
+    disabled:fill-primary-900 
+  }
+
+  .text{
+    @apply 
+    fill-primary-500  cursor-pointer 
+    active:fill-primary-700
+    focus:fill-primary-500 
+    disabled:fill-primary-900
+  }
