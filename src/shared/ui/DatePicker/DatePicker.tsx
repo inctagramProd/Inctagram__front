@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import {format} from 'date-fns'; // Import the format function
 import 'react-datepicker/dist/react-datepicker.css';
 import s from './DatePicker.module.css';
-
+import './style.css'
 type PropsType = {
     isRange?: boolean;
     onChange?: (value: string) => void;
@@ -35,8 +35,9 @@ export const UIDatePicker: React.FC<PropsType> = ({onChange, isRange}) => {
         <DatePicker
             selectsRange={isRange}
             startDate={startDate}
-
+            dateFormat="dd/MM/yyyy"
             endDate={endDate}
+            calendarStartDay={1}
             selected={isRange ? null : startDate}
             onChange={(update) => {
                 if (!Array.isArray(update)) {
