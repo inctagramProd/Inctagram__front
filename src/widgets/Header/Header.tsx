@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import s from './Header.module.css'
 import { useRouter } from 'next/router';
 import Link from 'next/link'
-import { Button } from '../../ui/Button/Button';
-import { Select } from '../../ui/Select/Select';
-import Icon from '../../ui/Icon/Icon';
+import { Button } from '../../shared/ui/Button/Button';
+import { Select } from '../../shared/ui/Select/Select';
+import Icon from '../../shared/ui/Icon/Icon';
 
 interface HeaderProps {
   user?: boolean
@@ -19,7 +19,7 @@ interface HeaderProps {
 }
 
 export const Header:React.FC<HeaderProps> = ({
-  user = false,
+  user = true,
   id=0,
   height = 24,
   width = 24,
@@ -40,7 +40,7 @@ export const Header:React.FC<HeaderProps> = ({
       return (
         <div className={s.container}>
           <div className={s.leftBlock}>
-            <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] ${FontColor}`}>Inctagram</h1></Link>
+            <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] ${FontColor} flex items-start`}>Inctagram</h1></Link>
           </div>
           <div className={s.rightBlock}>
             <div className={s.bell}>
@@ -65,7 +65,7 @@ export const Header:React.FC<HeaderProps> = ({
     return (
       <div className={s.container}>
         <div className={s.leftBlock}>
-        <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px]  ${FontColor}`}>Inctagram</h1></Link>
+        <Link href={'/'}><h1 className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px]  ${FontColor} flex items-start`}>Inctagram</h1></Link>
         </div>
         <div className={s.rightBlock}>
           <div className={s.select}>

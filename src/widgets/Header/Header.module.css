@@ -11,4 +11,4 @@
 .bell,.menu button{@apply bg-none}
 .select{@apply w-fit flex items-center}
 .selectR{@apply w-fit  flex items-center mr-[40px]}
-.login{@apply w-fit mr-[64px] gap-x-[24px] items-center hidden sm:flex}
+.login{@apply w-fit mr-[15px] sm:mr-[64px] gap-x-[24px] items-center hidden sm:flex}

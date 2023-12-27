@@ -3,7 +3,7 @@ import s from  './button.module.css'
 import { Typography } from '../Typography/Typography';
 
 interface ButtonProps {
-  style:'primary'|'secondary'|'outline'|'text'
+  style:'primary'|'secondary'|'outline'|'text'|'default'
   size?: 'small' | 'medium' | 'large';
   label: string;
   type?:'button'|'submit'
@@ -34,7 +34,7 @@ export const Button = ({
       disabled={disable}
       {...props} 
     >
-    {btn}
+    <div className='mr-[10px]'>{btn}</div> 
     <Typography variant='h3'>{label}</Typography>
     </button>
   );

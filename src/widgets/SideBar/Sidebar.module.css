@@ -1,0 +1,65 @@
+.container{
+  @apply
+  border-r-[1px]
+  border-dark-300 
+  fixed 
+  bottom-0 
+  left-0  
+  z-[20]
+  h-[60px]
+  w-[100%]
+  border-t-[1px]
+  flex
+  flex-row
+  sm:h-screen sm:top-[60px]  sm:left-0 sm:w-[220px] sm:flex-col
+}
+.dark{
+  @apply
+  bg-dark-700
+}
+.light{
+  @apply
+  bg-light-700
+}
+.button{@apply  hidden sm:flex}
+.icon{@apply hidden hidden sm:flex}
+.upperBlock,.middleBlock,.bottomBlock{
+  @apply
+  flex
+  ml-[48px]
+  w-[100%]
+  flex-row
+  gap-x-[10px]
+  sm:flex-col sm:gap-y-[10px] sm:ml-[60px]  sm:w-[100%]
+}
+.upperBlock{
+  @apply
+  flex
+  justify-between
+  items-center
+  sm:mt-[72px]
+  sm:flex sm:flex-col
+  sm:justify-between 
+  sm:items-start
+  mr-[48px]
+}
+.middleBlock{
+  @apply
+  sm:mt-[60px]
+  hidden sm:flex
+}
+.bottomBlock{
+  @apply
+  sm:mt-[180px]
+  hidden sm:flex
+}
+.icon{@apply
+  w-fit
+  flex
+  
+  sm:hidden
+}
+.button{
+  @apply
+  hidden sm:flex
+}

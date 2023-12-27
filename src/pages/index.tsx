@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '../shared/ui/Button/Button'
-import Icon from '../shared/ui/Icon/Icon'
+import { Sidebar } from '../widgets/SideBar/Sidebar'
+import { Header } from '../widgets/Header/Header'
 
 
 export default function Home() {
@@ -17,6 +17,8 @@ export default function Home() {
           textAlign: 'center',
         }}
       >
+        <Header/>
+        <Sidebar />
         <Link href={`/signup`} style={{ color: 'white', fontSize: '30px', marginLeft: '25px' }}>
           Register{' '}
         </Link>
