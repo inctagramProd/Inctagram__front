@@ -1,152 +1,124 @@
-import React, {useEffect, useState} from 'react';
-import styles from './pagination.module.css';
-import { Select } from './../Select/Select';
-import ArrowLeft from '@/src/shared/assets/icons/ArrowLeft';
-import ArrowRight from '@/src/shared/assets/icons/ArrowRight';
+import React, { useEffect, useState } from 'react'
+import { Select } from './../Select/Select'
+import ArrowLeft from '@/src/shared/assets/icons/ArrowLeft'
+import ArrowRight from '@/src/shared/assets/icons/ArrowRight'
+import { transformNumberToArray } from '@/src/shared/ui/Pagination/utils/transformNumberToArray'
+import { Typography } from '@/src/shared/ui/Typography/Typography'
 
-interface IPaginationProps {
-    total: number;
-    defaultCurrent?: number;
-    itemsPerPage?: 10 | 20 | 30 | 50 | 100;
-    onChange?: (selected: React.SetStateAction<number>) => void;
+type PropsItemsPerPage = 10 | 20 | 30 | 50 | 100
+
+type PropsType = {
+  total: number
+  defaultCurrent?: number
+  itemsPerPage?: PropsItemsPerPage
+  onChange?: (selected: number) => void
 }
 
-const transformToPagination = (number: number, selected: number) => {
-    // Transform number to array of numbers
-    const arr: any[] = Array.from({length: number}, (_, i) => i + 1);
-
-    if (arr.length < 7) return arr;
-
-    let index: number | string = arr.indexOf(selected);
-    let result: any[];
-
-    // Main algorithm
-    if (index <= 2) {
-        result = arr.slice(0, 5).concat(['...'], arr.slice(-1));
-    } else if (index >= arr.length - 3) {
-        result = arr.slice(0, 1).concat(['...'], arr.slice(-6));
-    } else {
-        result = arr.slice(0, 1).concat(['...'], arr.slice(index - 1, index + 2), ['...'], arr.slice(-1));
-    }
-
-    return result;
-}
+const ITEMS_PER_PAGE_LIST: PropsItemsPerPage[] = [10, 20, 30, 50, 100]
 
 export const Pagination = ({
-   total,
-   defaultCurrent = 1,
-   itemsPerPage = 10,
-   onChange,
-   ...props
-}: IPaginationProps) => {
-    const [activePage, setActivePage] = useState(defaultCurrent);
-    const [itemsPerPageValue, setItemsPerPageValue] = useState(itemsPerPage);
-    const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPageValue));
+  total,
+  defaultCurrent = 1,
+  itemsPerPage = 10,
+  onChange,
+  ...props
+}: PropsType) => {
+  const [activePage, setActivePage] = useState(defaultCurrent)
+  const [itemsPerPageValue, setItemsPerPageValue] = useState(itemsPerPage)
+  const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPageValue))
 
-    const pagesArray: any[] = transformToPagination(pagesCount, activePage);
+  const pagesArray: any[] = transformNumberToArray(pagesCount, activePage)
 
-    useEffect((): void => {
-        setActivePage(defaultCurrent);
-        setPagesCount(Math.ceil(total / itemsPerPageValue));
-    }, [total, defaultCurrent, itemsPerPageValue]);
+  useEffect((): void => {
+    setActivePage(defaultCurrent)
+    setPagesCount(Math.ceil(total / itemsPerPageValue))
+  }, [total, defaultCurrent, itemsPerPageValue])
 
-    useEffect((): void => {
-        setItemsPerPageValue(itemsPerPage);
-        setActivePage(1);
-    }, [itemsPerPage]);
+  // useEffect((): void => {
+  //   setItemsPerPageValue(itemsPerPage)
+  //   setActivePage(1)
+  // }, [itemsPerPage])
 
-    // Need fix
-    const interFont = {
-        fontFamily: 'Inter, sans-serif'
-    };
-
-    const handleSetActivePage = (page: React.SetStateAction<number>) => {
-        if(page === activePage || !Number.isInteger(page)) return;
-        setActivePage(page);
-        if (onChange) {
-            onChange(page);
-        }
+  const handleSetActivePage = (page: number): void => {
+    if (page !== activePage) {
+      setActivePage(page)
+      if (onChange) {
+        onChange(page)
+      }
     }
+  }
 
-    const PaginationPages = () => {
-        const paginationElements: any = [];
+  const handlePrevClick = (): void => {
+    const newPage: number = Math.max(activePage - 1, 1)
+    handleSetActivePage(newPage)
+  }
 
-        const handlePrevClick = (): void => {
-            const newPage: number = Math.max(activePage - 1, 1);
-            handleSetActivePage(newPage);
-        };
+  const handleNextClick = (): void => {
+    const newPage: number = Math.min(activePage + 1, pagesCount)
+    handleSetActivePage(newPage)
+  }
 
-        const handleNextClick = (): void => {
-            const newPage: number = Math.min(activePage + 1, pagesCount);
-            handleSetActivePage(newPage);
-        };
-
-        pagesArray.map((page: any, i: any) => {
-            return paginationElements.push(
-                <li
-                    key={i}
-                    className={`${styles.pagination__item} ${activePage === page ? styles.pagination__items_active : ''}`}
-                    onClick={() => handleSetActivePage(page)}
-                    tabIndex={0}
-                >
-                    {page}
-                </li>
-            );
-        })
-
-        return (
-            <ul className={styles.pagination__items}>
-                <li
-                    className={`
-                        ${styles.pagination__item} 
-                        ${activePage === pagesArray[0] ? styles.pagination__items_disabled : ''}
-                    `}
-                    onClick={handlePrevClick}
-                    tabIndex={0}
-                >
-                    <ArrowLeft />
-                </li>
-                {paginationElements}
-                <li
-                    className={`
-                        ${styles.pagination__item} 
-                        ${activePage === pagesCount ? styles.pagination__items_disabled : ''}
-                        `}
-                    onClick={handleNextClick}
-                    tabIndex={0}
-                >
-                    <ArrowRight />
-                </li>
-            </ul>
-        );
-    };
-
-    const PaginationItemsPerPage = () => {
-        const itemsPerPageList: number[] = [10, 20, 30, 50, 100];
-        const itemPerPageSelect: React.JSX.Element = <Select
-            defaultValue={itemsPerPageValue}
-            variant={"Pagination"}
-            onChange={(selectedValue: object): void => {
-                setItemsPerPageValue(parseInt(selectedValue.value));
-                setActivePage(1);
-            }}
-            options={
-                itemsPerPageList.map(item => {
-                    return { title: item, value: item };
-                })
-            }
+  return (
+    <div className={`inline-flex items-center gap-4`} {...props}>
+      <ul className={`inline-flex gap-5`}>
+        <li
+          className={`
+            flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-light-100 bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100
+            ${activePage === pagesArray[0] ? 'opacity-30 cursor-not-allowed' : ''}
+          `}
+          onClick={handlePrevClick}
+          tabIndex={0}
+        >
+          <ArrowLeft />
+        </li>
+        {pagesArray.map((page: number | '...', i: number) => {
+          return (
+            <li
+              key={i}
+              className={`flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-light-100 bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100 
+              ${
+                activePage === page
+                  ? 'bg-opacity-100 bg-light-100 text-dark-900 cursor-default hover:bg-light-100'
+                  : ''
+              }
+              `}
+              onClick={() => {
+                if (typeof page === 'number') {
+                  handleSetActivePage(page)
+                }
+              }}
+              tabIndex={0}
+            >
+              <Typography variant={'regular_14'} children={page} />
+            </li>
+          )
+        })}
+        <li
+          className={`
+            flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-light-100 bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100
+            ${activePage === pagesCount ? 'opacity-30 cursor-not-allowed' : ''}
+          `}
+          onClick={handleNextClick}
+          tabIndex={0}
+        >
+          <ArrowRight />
+        </li>
+      </ul>
+      <div className={`inline-flex items-center gap-2 text-sm text-light-100`}>
+        <Typography variant={'regular_14'} children={'Show'} />
+        <Select
+          defaultValue={itemsPerPageValue}
+          variant={'Pagination'}
+          onChange={(selectedValue: { title: number | string; value: number | string }): void => {
+            setItemsPerPageValue(selectedValue.value as PropsItemsPerPage)
+            setActivePage(1)
+          }}
+          options={ITEMS_PER_PAGE_LIST.map((item: PropsItemsPerPage) => {
+            return { title: item, value: item }
+          })}
         />
-        return (
-            <div className={`${styles.pagination__items_per_page}`}>
-                Show {itemPerPageSelect} on page
-            </div>
-        )
-    }
-
-    return (
-        <div style={interFont} className={`${styles.pagination}`} {...props}>
-            <PaginationPages />
-            <PaginationItemsPerPage />
-        </div>
-    );
+        <Typography variant={'regular_14'} children={'on page'} />
+      </div>
+    </div>
+  )
 }
