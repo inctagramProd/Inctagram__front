@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from './../Select/Select'
-import ArrowLeft from '@/src/shared/assets/icons/ArrowLeft'
-import ArrowRight from '@/src/shared/assets/icons/ArrowRight'
 import { transformNumberToArray } from '@/src/shared/ui/Pagination/utils/transformNumberToArray'
 import { Typography } from '@/src/shared/ui/Typography/Typography'
+import Icon from '@/src/shared/ui/Icon/Icon'
 
 type PropsItemsPerPage = 10 | 20 | 30 | 50 | 100
 
@@ -64,22 +63,22 @@ export const Pagination = ({
         <li
           className={`
             flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-light-100 bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100
-            ${activePage === pagesArray[0] ? 'opacity-30 cursor-not-allowed' : ''}
           `}
           onClick={handlePrevClick}
           tabIndex={0}
         >
-          <ArrowLeft />
+          <Icon iconName={'ArrowIosBack'} width={18} height={18} />
         </li>
         {pagesArray.map((page: number | '...', i: number) => {
           return (
+            // bg-opacity-100 cursor-default bg-light-100 text-dark-900 hover:bg-light-100 hover:text-dark-900
             <li
               key={i}
-              className={`flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none text-light-100 bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100 
+              className={`flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100 
               ${
                 activePage === page
-                  ? 'bg-opacity-100 bg-light-100 text-dark-900 cursor-default hover:bg-light-100'
-                  : ''
+                  ? 'bg-opacity-100 bg-light-100 text-dark-900 hover:bg-light-100 hover:text-dark-900'
+                  : 'text-light-100'
               }
               `}
               onClick={() => {
@@ -101,7 +100,7 @@ export const Pagination = ({
           onClick={handleNextClick}
           tabIndex={0}
         >
-          <ArrowRight />
+          <Icon iconName={'ArrowIosForward'} width={18} height={18} />
         </li>
       </ul>
       <div className={`inline-flex items-center gap-2 text-sm text-light-100`}>
