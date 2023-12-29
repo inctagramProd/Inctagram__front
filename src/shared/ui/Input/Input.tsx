@@ -1,16 +1,13 @@
-import React, { ComponentPropsWithoutRef, useState } from 'react'
-import styles from './Input.modules.css'
-import EyeIcon from '../../assets/icons/EyeIcon'
-import EyeCloseIcon from '../../assets/icons/EyeCloseIcon'
-import SearchIcon from '../../assets/icons/SearchIcon'
+import { ComponentPropsWithoutRef, useState } from 'react'
+import Icon from '../Icon/Icon'
 
-interface InputProps extends ComponentPropsWithoutRef<'input'> {
+type Props = {
   label?: string
   error?: string
   type: 'password' | 'search' | 'text'
-}
+} & ComponentPropsWithoutRef<'input'>
 
-export const Input: React.FC<InputProps> = ({ label, error, type, ...inputProps }) => {
+export const Input = ({ label, error, type, ...inputProps }: Props) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
 
   const inputType = type === 'password' ? (isPasswordShown ? 'text' : 'password') : type
@@ -22,28 +19,34 @@ export const Input: React.FC<InputProps> = ({ label, error, type, ...inputProps 
   }
 
   return (
-    <div className={styles.wrapper}>
-      {label && <label className={styles.label}>{label}</label>}
-      <div className={styles.inputField}>
-        {type === 'search' && <SearchIcon className={styles.searchIcon} />}
+    <div className="flex flex-col">
+      {label && <label className="mb-1 text-light-900 text-sm">{label}</label>}
+      <div className="relative">
+        {type === 'search' && (
+          <Icon iconName="Search" className="absolute left-0 inset-y-0 ml-3 my-auto" /> // Need to fix
+        )}
         <input
           {...inputProps}
           type={inputType}
-          className={`${styles.input} ${error ? styles.error : ''} ${
-            type === 'search' ? styles.search : ''
-          }`}
+          className={`border rounded-sm py-1.5 w-full
+          text-light-100 placeholder-light-900
+          bg-transparent
+          hover:border-light-900
+          focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500
+          disabled:placeholder-dark-100 disabled:text-dark-100 ${
+            error ? 'border-danger-500' : 'border-dark-100'
+          } ${type === 'search' ? 'pl-10' : 'pl-3'}`}
         />
         {type === 'password' && (
-          <button onClick={togglePasswordVisibility} className={styles.button}>
-            {isPasswordShown ? (
-              <EyeCloseIcon className={styles.eyeIcon} />
-            ) : (
-              <EyeIcon className={styles.eyeIcon} />
-            )}
+          <button
+            onClick={togglePasswordVisibility}
+            className="absolute inset-y-0 right-0 pr-3 flex items-center"
+          >
+            {isPasswordShown ? <Icon iconName="EyeOff" /> : <Icon iconName="Eye" />}
           </button>
         )}
       </div>
-      {error && <span className={styles.errorMessage}>{error}</span>}
+      {error && <span className="text-sm font-normal text-red-500 leading-normal">{error}</span>}
     </div>
   )
 }
