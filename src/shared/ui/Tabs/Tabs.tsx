@@ -22,13 +22,14 @@ export const Tabs = ({
 }: TypeProps) => {
   const [activeTab, setActiveTab] = useState<string | undefined>(defaultActiveKey)
 
-  const tabsBlockRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
-  const sliderRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null)
+  const tabsBlockRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLInputElement>(null)
 
-  const handleTabClick = (e: KeyboardEvent): void => {
+  const handleTabClick = (e: React.MouseEvent<HTMLDivElement>): void => {
     if (!e.target) {
       return
     }
+
     const activeTabKey: string | null = (e.target as HTMLInputElement).getAttribute('data-key'),
       activeTabIndex: string | null = (e.target as HTMLInputElement).getAttribute('data-index'),
       tabDisabled: string | null = (e.target as HTMLInputElement).getAttribute('data-disabled')
@@ -36,6 +37,7 @@ export const Tabs = ({
     if (tabDisabled || !activeTabKey || !activeTabIndex) {
       return
     }
+
     if (onChange) {
       onChange(activeTabKey)
     }
@@ -45,14 +47,16 @@ export const Tabs = ({
   }
 
   const changeTabSliderPosition = (position: string): void => {
-    if (!sliderRef.current) return
-    sliderRef.current.style.transform = `translateX(${100 * parseInt(position)}%)`
+    if (sliderRef.current) {
+      sliderRef.current.style.transform = `translateX(${100 * parseInt(position)}%)`
+    }
   }
 
   useEffect((): void => {
     if (disabled) {
       return
     }
+
     let defaultTabKey: string | undefined = defaultActiveKey
 
     // If default option is disabled or not provided set first options item
@@ -74,7 +78,9 @@ export const Tabs = ({
 
     if (defaultTabElement) {
       const activeTabIndex: string | undefined | null = defaultTabElement.getAttribute('data-index')
-      if (!activeTabIndex) return
+      if (!activeTabIndex) {
+        return
+      }
 
       setActiveTab(defaultTabKey)
       changeTabSliderPosition(activeTabIndex)
@@ -83,7 +89,9 @@ export const Tabs = ({
 
   return (
     <div
-      className={`inline-flex flex-col w-full ${disabled ? styles.tabs_disabled : ''}`}
+      className={`inline-flex flex-col w-full ${
+        disabled ? ' cursor-not-allowed text-dark-300' : ''
+      }`}
       ref={tabsBlockRef}
       {...props}
     >
@@ -110,7 +118,9 @@ export const Tabs = ({
       </div>
       <div
         ref={sliderRef}
-        className={`h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-100 transition-transform duration-300`}
+        className={`h-0.5 bg-primary-500 ease-in-out -my-0.5 opacity-100 transition-transform duration-300 ${
+          disabled ? 'bg-dark-100' : ''
+        }`}
       ></div>
     </div>
   )
