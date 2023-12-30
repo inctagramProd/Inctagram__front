@@ -1,10 +1,12 @@
-import {ComponentPropsWithoutRef} from "react";
-import style from './card.module.css'
+import React, { ComponentPropsWithoutRef } from 'react'
 
-export type CardProps = {} & ComponentPropsWithoutRef<'div'>
-/**
- * Card UI component
- */
-export const Card = ({className, ...restProps}: CardProps) => {
-    return <div className={`${style.card} ${className}`} {...restProps}></div>
+type Props = ComponentPropsWithoutRef<'div'>
+
+export const Card = ({ className, ...restProps }: Props) => {
+  return (
+    <div
+      className={`bg-dark-500 border rounded border-dark-300 max-w-sm w-full p-6 break-words ${className}`}
+      {...restProps}
+    ></div>
+  )
 }
