@@ -1,5 +1,4 @@
 import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
-import React from 'react'
 
 type Props = {
   errorMessage?: string
