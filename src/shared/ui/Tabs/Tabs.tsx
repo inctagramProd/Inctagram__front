@@ -26,13 +26,15 @@ export const Tabs = ({
   const sliderRef = useRef<HTMLInputElement>(null)
 
   const handleTabClick = (e: React.MouseEvent<HTMLDivElement>): void => {
-    if (!e.target) {
+    const target = e.target as HTMLInputElement
+
+    if (!target) {
       return
     }
 
-    const activeTabKey: string | null = (e.target as HTMLInputElement).getAttribute('data-key'),
-      activeTabIndex: string | null = (e.target as HTMLInputElement).getAttribute('data-index'),
-      tabDisabled: string | null = (e.target as HTMLInputElement).getAttribute('data-disabled')
+    const activeTabKey: string | null = (target as HTMLInputElement).getAttribute('data-key'),
+      activeTabIndex: string | null = (target as HTMLInputElement).getAttribute('data-index'),
+      tabDisabled: string | null = (target as HTMLInputElement).getAttribute('data-disabled')
 
     if (tabDisabled || !activeTabKey || !activeTabIndex) {
       return
