@@ -3,6 +3,7 @@ import { Select } from './../Select/Select'
 import { transformNumberToArray } from '@/src/shared/ui/Pagination/utils/transformNumberToArray'
 import { Typography } from '@/src/shared/ui/Typography/Typography'
 import Icon from '@/src/shared/ui/Icon/Icon'
+import { SelectOptionType } from '@/src/shared/ui/Select/Select'
 
 type PropsItemsPerPage = 10 | 20 | 30 | 50 | 100
 
@@ -10,7 +11,7 @@ type PropsType = {
   total: number
   defaultCurrent?: number
   itemsPerPage?: PropsItemsPerPage
-  onChange?: (selected: number) => void
+  onChange?: (selected: number | undefined) => number | undefined
 }
 
 const ITEMS_PER_PAGE_LIST: PropsItemsPerPage[] = [10, 20, 30, 50, 100]
@@ -32,11 +33,6 @@ export const Pagination = ({
     setActivePage(defaultCurrent)
     setPagesCount(Math.ceil(total / itemsPerPageValue))
   }, [total, defaultCurrent, itemsPerPageValue])
-
-  // useEffect((): void => {
-  //   setItemsPerPageValue(itemsPerPage)
-  //   setActivePage(1)
-  // }, [itemsPerPage])
 
   const handleSetActivePage = (page: number): void => {
     if (page !== activePage) {
@@ -71,7 +67,6 @@ export const Pagination = ({
         </li>
         {pagesArray.map((page: number | '...', i: number) => {
           return (
-            // bg-opacity-100 cursor-default bg-light-100 text-dark-900 hover:bg-light-100 hover:text-dark-900
             <li
               key={i}
               className={`flex align-middle items-center px-2 py-0.5 rounded-sm transition-opacity select-none bg-opacity-0 cursor-pointer hover:bg-dark-500 hover:bg-opacity-100 
@@ -108,7 +103,7 @@ export const Pagination = ({
         <Select
           defaultValue={itemsPerPageValue}
           variant={'Pagination'}
-          onChange={(selectedValue: { title: number | string; value: number | string }): void => {
+          onChange={(selectedValue: SelectOptionType): void => {
             setItemsPerPageValue(selectedValue.value as PropsItemsPerPage)
             setActivePage(1)
           }}
