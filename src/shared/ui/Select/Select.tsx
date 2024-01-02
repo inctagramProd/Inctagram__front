@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Typography } from '@/src/shared/ui/Typography/Typography'
 import Icon from '@/src/shared/ui/Icon/Icon'
 
-type SelectOptionType = {
+export type SelectOptionType = {
   title: string | number
   value: string | number
 }
@@ -13,7 +13,7 @@ type TypeProps = {
   defaultValue?: string | number
   variant?: 'Default' | 'Pagination'
   options: SelectOptionType[]
-  onChange?: (selectedValue: SelectOptionType) => SelectOptionType
+  onChange?: (selectedValue: SelectOptionType) => any
 }
 
 export const Select = ({
