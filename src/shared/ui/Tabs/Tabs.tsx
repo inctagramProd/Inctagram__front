@@ -6,7 +6,7 @@ type TabsOptionsType = {
   disabled?: boolean
 }
 
-type TypeProps = {
+type Props = {
   options: TabsOptionsType[]
   disabled?: boolean
   defaultActiveKey?: string
@@ -19,7 +19,7 @@ export const Tabs = ({
   disabled = false,
   onChange,
   ...props
-}: TypeProps) => {
+}: Props) => {
   const [activeTab, setActiveTab] = useState<string | undefined>(defaultActiveKey)
 
   const tabsBlockRef = useRef<HTMLDivElement>(null)
