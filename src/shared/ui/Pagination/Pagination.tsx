@@ -7,7 +7,7 @@ import { SelectOptionType } from '@/src/shared/ui/Select/Select'
 
 type PropsItemsPerPage = 10 | 20 | 30 | 50 | 100
 
-type PropsType = {
+type Props = {
   total: number
   defaultCurrent?: number
   itemsPerPage?: PropsItemsPerPage
@@ -22,7 +22,7 @@ export const Pagination = ({
   itemsPerPage = 10,
   onChange,
   ...props
-}: PropsType) => {
+}: Props) => {
   const [activePage, setActivePage] = useState(defaultCurrent)
   const [itemsPerPageValue, setItemsPerPageValue] = useState(itemsPerPage)
   const [pagesCount, setPagesCount] = useState(Math.ceil(total / itemsPerPageValue))
