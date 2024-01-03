@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-type TabsOptions = {
+type TabsOptionsType = {
   key: string
   label: string
   disabled?: boolean
 }
 
 type TypeProps = {
-  options: TabsOptions[]
+  options: TabsOptionsType[]
   disabled?: boolean
   defaultActiveKey?: string
   onChange?: (value: string) => void
@@ -64,7 +64,7 @@ export const Tabs = ({
     // If default option is disabled or not provided set first options item
     if (
       !defaultTabKey ||
-      options.find((option: TabsOptions) => option.key === defaultTabKey)?.disabled
+      options.find((option: TabsOptionsType) => option.key === defaultTabKey)?.disabled
     ) {
       defaultTabKey = options[0].key
     }
@@ -98,7 +98,7 @@ export const Tabs = ({
       {...props}
     >
       <div className={`flex flex-row border-b-2 border-dark-100`}>
-        {options.map((item: TabsOptions, key: number) => {
+        {options.map((item: TabsOptionsType, key: number) => {
           return (
             <div
               role={'tab'}
