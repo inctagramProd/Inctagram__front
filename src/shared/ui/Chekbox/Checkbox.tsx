@@ -1,44 +1,23 @@
-import React, {
-    ChangeEvent,
-    DetailedHTMLProps,
-    InputHTMLAttributes,
-} from 'react'
-import style from './checkbox.module.css'
+import { ComponentPropsWithoutRef } from 'react'
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement>
+type Props = Omit<ComponentPropsWithoutRef<'input'>, 'type'>
 
-type CheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
-    className?: string
-}
-/**
- * Check-box UI component
- */
-export const Checkbox: React.FC<CheckboxPropsType> = ({
-                                                          id,
-                                                          children,
-                                                          onChange,
-                                                          className,
-                                                          ...restProps
-                                                      }) => {
-
-    const onChangeCallback = (changeEvent: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(changeEvent)
-    }
-
-    return (
-        <label className={`${style.label} ${className}`}>
-            <input
-                id={id}
-                type={'checkbox'}
-                onChange={onChangeCallback}
-                {...restProps}
-            />
-            {children && (
-                <span className={style.textLabel}>
-                    {children}
-                </span>
-            )}
-        </label>
-    )
+export const Checkbox = ({ children, className, ...restProps }: Props) => {
+  return (
+    <label>
+      <input
+        className={`appearance-none w-8 h-8 mr-0.5 rounded-full
+        bg-no-repeat bg-center bg-[length:70%_70%] align-middle
+        bg-[url('../../shared/assets/icon-svg/unchecked.svg')] 
+        checked:bg-[url('../../shared/assets/icon-svg/checked.svg')]  
+        disabled:bg-[url('../../shared/assets/icon-svg/disabled-unchecked.svg')]
+        disabled:checked:bg-[url('../../shared/assets/icon-svg/disabled-checked.svg')]
+        [&:not(:disabled)]:hover:bg-dark-300 [&:not(:disabled)]:active:bg-dark-100 
+        [&:not(:disabled)]:cursor-pointer`}
+        type={'checkbox'}
+        {...restProps}
+      />
+      {children && <span className={`text-light-900 ${className}`}>{children}</span>}
+    </label>
+  )
 }
