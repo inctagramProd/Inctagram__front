@@ -7,7 +7,7 @@ export type SelectOptionType = {
   value: string | number
 }
 
-type Type = {
+type Props = {
   title?: string
   disabled?: boolean
   defaultValue?: string | number
@@ -24,7 +24,7 @@ export const Select = ({
   disabled = false,
   onChange,
   ...props
-}: Type) => {
+}: Props) => {
   const defaultOption: SelectOptionType | undefined = defaultValue
     ? options.find((option: SelectOptionType) => option.value === defaultValue)
     : options[0]
