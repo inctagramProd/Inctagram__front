@@ -1,0 +1,14 @@
+
+.container{@apply w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 fixed top-0 left-0 right-0 z-[20] flex}
+
+/* -------Left block--------- */
+.leftBlock{@apply h-[60px] w-[50%] items-center sm:w-[35%]}
+.logo{@apply mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px]}
+/* -------Right block--------- */
+.rightBlock{@apply flex flex-row justify-end  h-[60px] w-[50%] gap-x-[36px] sm:w-[65%] md:gap-x-[24px]} 
+.menu{@apply sm:hidden h-[60px]  flex items-center mr-[15px]}
+.bell{@apply  h-[60px]  flex items-center }
+.bell,.menu button{@apply bg-none}
+.select{@apply w-fit flex items-center}
+.selectR{@apply w-fit  flex items-center mr-[40px]}
+.login{@apply w-fit mr-[64px] gap-x-[24px] items-center hidden sm:flex}

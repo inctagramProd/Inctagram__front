@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {ReactNode } from 'react';
 import s from  './button.module.css'
+import { Typography } from '../Typography/Typography';
+
 interface ButtonProps {
   style:'primary'|'secondary'|'outline'|'text'
   size?: 'small' | 'medium' | 'large';
@@ -7,6 +9,11 @@ interface ButtonProps {
   type?:'button'|'submit'
   disable?:boolean
   onClick?: () => void;
+  img?:string,
+  btn?:ReactNode,
+  height?:number;
+  width?:number
+  color?:string
 }
 export const Button = ({
   style='primary',
@@ -14,6 +21,10 @@ export const Button = ({
   type='button',
   disable=false,
   label,
+  width=24,
+  height=24,
+  color='primary',
+  btn,
   ...props
 }: ButtonProps) => {
   return (
@@ -21,10 +32,10 @@ export const Button = ({
       type={type}
       className={[s[`${style}`],s[`${size}`]].join(' ')}
       disabled={disable}
-      {...props}
-     
+      {...props} 
     >
-      {label}
+    {btn}
+    <Typography variant='h3'>{label}</Typography>
     </button>
   );
 };
