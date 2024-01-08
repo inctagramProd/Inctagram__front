@@ -1,4 +1,4 @@
-export type Iicon = {
+export type IconProps = {
   width?: number
   height?: number
   fillType?: 'fill' | 'outline'
@@ -9,7 +9,7 @@ export type Iicon = {
 }
 
 // --------------Bell--------------------
-export const Bell = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Bell = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
     <svg
       width={width}
@@ -72,7 +72,13 @@ export const Bell = ({ width, height, fillType = 'outline', value = 0, iconStyle
   )
 }
 // --------------Settings--------------------
-export const Settings = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Settings = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -104,7 +110,7 @@ export const Settings = ({ width, height, fillType = 'outline', value = 0, iconS
   )
 }
 // --------------Menu--------------------
-export const Menu = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Menu = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
     //outline
     <svg
@@ -128,7 +134,7 @@ export const Menu = ({ width, height, fillType = 'outline', value = 0, iconStyle
   )
 }
 // --------------Block--------------------
-export const Block = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Block = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
     <svg
       width={width}
@@ -158,7 +164,13 @@ export const Block = ({ width, height, fillType = 'outline', value = 0, iconStyl
   )
 }
 // --------------Search--------------------
-export const Search = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Search = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -180,7 +192,13 @@ export const Search = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Image--------------------
-export const Picture = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Picture = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -225,7 +243,7 @@ export const PlusCircle = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -263,7 +281,7 @@ export const PlusCircle = ({
   )
 }
 // --------------Close--------------------
-export const Close = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Close = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
     //outline
     <svg
@@ -285,7 +303,13 @@ export const Close = ({ width, height, fillType = 'outline', value = 0, iconStyl
   )
 }
 // --------------Expand--------------------
-export const Expand = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Expand = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -314,7 +338,7 @@ export const ArrowIosForward = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -342,7 +366,7 @@ export const ArrowIosBack = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -370,7 +394,7 @@ export const PlayCircle = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -415,7 +439,7 @@ export const PauseCircle = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -460,7 +484,7 @@ export const RadioBtnChkPauseCircle = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -503,7 +527,7 @@ export const ArrowIosUp = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -532,7 +556,7 @@ export const ArrowIosDown = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -554,7 +578,13 @@ export const ArrowIosDown = ({
   )
 }
 // --------------Calendar--------------------
-export const Calendar = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Calendar = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -593,7 +623,13 @@ export const Calendar = ({ width, height, fillType = 'outline', value = 0, iconS
   )
 }
 // --------------Log out--------------------
-export const LogOut = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const LogOut = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -616,7 +652,13 @@ export const LogOut = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Bookmark--------------------
-export const Bookmark = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Bookmark = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -666,7 +708,7 @@ export const TrendingUp = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -688,7 +730,13 @@ export const TrendingUp = ({
   )
 }
 // --------------Person--------------------
-export const Person = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Person = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -740,7 +788,7 @@ export const PlusSquare = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -792,7 +840,7 @@ export const HomeIcon = ({
   value = 0,
   iconStyle,
   handleFocus,
-}: Iicon) => {
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -838,7 +886,13 @@ export const HomeIcon = ({
   }
 }
 // --------------Arrow-back--------------------
-export const ArrowBack = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const ArrowBack = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -866,7 +920,7 @@ export const ArrowForward = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -888,7 +942,13 @@ export const ArrowForward = ({
   )
 }
 // --------------color-palette-outline--------------------
-export const Palette = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Palette = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -914,7 +974,13 @@ export const Palette = ({ width, height, fillType = 'outline', value = 0, iconSt
   )
 }
 // --------------Layers--------------------
-export const Layers = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Layers = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -960,7 +1026,13 @@ export const Layers = ({ width, height, fillType = 'outline', value = 0, iconSty
   }
 }
 // --------------Eye off--------------------
-export const EyeOff = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const EyeOff = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1012,7 +1084,7 @@ export const EyeOff = ({ width, height, fillType = 'outline', value = 0, iconSty
   }
 }
 // --------------Eye--------------------
-export const Eye = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Eye = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1064,7 +1136,7 @@ export const PaperPlane = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1092,7 +1164,7 @@ export const MoreHorizontal = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1122,7 +1194,7 @@ export const MessageCircle = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1175,7 +1247,7 @@ export const PersonRemove = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1223,7 +1295,13 @@ export const PersonRemove = ({
   }
 }
 // --------------Person add--------------------
-export const PersonAdd = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const PersonAdd = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1271,7 +1349,7 @@ export const PersonAdd = ({ width, height, fillType = 'outline', value = 0, icon
   }
 }
 // --------------Mic--------------------
-export const Mic = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Mic = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1317,7 +1395,7 @@ export const Mic = ({ width, height, fillType = 'outline', value = 0, iconStyle 
   }
 }
 // --------------Copy--------------------
-export const Copy = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Copy = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1362,7 +1440,7 @@ export const Copy = ({ width, height, fillType = 'outline', value = 0, iconStyle
   }
 }
 // --------------Pin--------------------
-export const Pin = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Pin = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1408,7 +1486,7 @@ export const Pin = ({ width, height, fillType = 'outline', value = 0, iconStyle 
   }
 }
 // --------------Heart--------------------
-export const Heart = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Heart = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1452,7 +1530,7 @@ export const Heart = ({ width, height, fillType = 'outline', value = 0, iconStyl
   }
 }
 // --------------Email--------------------
-export const Email = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Email = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1496,7 +1574,7 @@ export const Email = ({ width, height, fillType = 'outline', value = 0, iconStyl
   }
 }
 // --------------Trash--------------------
-export const Trash = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Trash = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1540,7 +1618,7 @@ export const Trash = ({ width, height, fillType = 'outline', value = 0, iconStyl
   }
 }
 // --------------Edit--------------------
-export const Edit = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Edit = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1586,7 +1664,13 @@ export const Edit = ({ width, height, fillType = 'outline', value = 0, iconStyle
   }
 }
 // --------------Maximize--------------------
-export const Maximize = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Maximize = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1637,7 +1721,7 @@ export const CreditCard = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1689,7 +1773,7 @@ export const GithubLogo = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1711,7 +1795,13 @@ export const GithubLogo = ({
   )
 }
 // --------------Recaptcha--------------------
-export const Recaptcha = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Recaptcha = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1747,7 +1837,7 @@ export const FaceBookLogo = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1779,7 +1869,7 @@ export const GoogleLogo = ({
   fillType = 'outline',
   value = 0,
   iconStyle,
-}: Iicon) => {
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1816,7 +1906,7 @@ export const GoogleLogo = ({
   )
 }
 // --------------Flag Russia--------------------
-export const RussiaFlag = ({ width, height }: Iicon) => {
+export const RussiaFlag = ({ width, height }: IconProps) => {
   return (
     //fill
     <svg
@@ -1837,7 +1927,7 @@ export const RussiaFlag = ({ width, height }: Iicon) => {
   )
 }
 // --------------Flag Engkish--------------------
-export const EnglishFlag = ({ width, height }: Iicon) => {
+export const EnglishFlag = ({ width, height }: IconProps) => {
   return (
     <svg
       width={width}
@@ -1868,7 +1958,13 @@ export const EnglishFlag = ({ width, height }: Iicon) => {
 }
 
 // --------------PayPal--------------------
-export const PayPal = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const PayPal = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1954,7 +2050,13 @@ export const PayPal = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Stripe--------------------
-export const Stripe = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Stripe = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1986,7 +2088,7 @@ export const Stripe = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Paid--------------------
-export const Paid = ({ width, height, fillType = 'outline', value = 0, iconStyle }: Iicon) => {
+export const Paid = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
     //fill
     <svg

@@ -2,7 +2,7 @@ import React from 'react'
 import { Typography } from '../Typography/Typography'
 import Icon from '../Icon/Icon'
 
-type Button = {
+type Props = {
   //Button properties
   style: 'primary' | 'secondary' | 'outline' | 'text' | 'default'
   size?: 'small' | 'medium' | 'large'
@@ -51,7 +51,7 @@ export const Button = ({
   className,
   handleFocus,
   ...props
-}: Button) => {
+}: Props) => {
   let nameOfClass
   switch (style) {
     case 'primary':
