@@ -6,7 +6,7 @@ import { Select } from '../../shared/ui/Select/Select'
 import Icon from '../../shared/ui/Icon/Icon'
 import { Typography } from '@/src/shared/ui/Typography/Typography'
 
-type Header = {
+type Props = {
   user?: boolean
   id?: number
   fillType?: 'fill' | 'outline'
@@ -16,9 +16,9 @@ type Header = {
   value?: number
   options?: { title: string; value: string }[]
   style?: 'primary' | 'secondary' | 'outline' | 'text'
-  position: string
+  className: string
 }
-export const Header = (props: Header) => {
+export const Header = (props: Props) => {
   const {
     user = false,
     id = 0,
@@ -32,7 +32,7 @@ export const Header = (props: Header) => {
       { title: 'English', value: '/option1' },
       { title: 'Russian', value: '/option2' },
     ],
-    position = 'fixed top-0 left-0 right-0',
+    className = 'fixed top-0 left-0 right-0  z-[20] flex',
   } = props
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
@@ -59,9 +59,7 @@ export const Header = (props: Header) => {
   }
   if (user) {
     return (
-      <div
-        className={`w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 ${position} z-[20] flex`}
-      >
+      <div className={`w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 ${className}`}>
         <div className={`h-[60px] w-[50%] items-center sm:w-[35%]`}>
           <Link href={'/'}>
             <Typography
@@ -96,9 +94,7 @@ export const Header = (props: Header) => {
     )
   }
   return (
-    <div
-      className={`w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 ${position} z-[20] flex`}
-    >
+    <div className={`w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 ${className}`}>
       <div className={`h-[60px] w-[50%] items-center sm:w-[35%]`}>
         <Link href={'/'}>
           <Typography

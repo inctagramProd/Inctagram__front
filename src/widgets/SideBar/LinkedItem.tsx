@@ -3,7 +3,7 @@ import Icon from '@/src/shared/ui/Icon/Icon'
 import Link from 'next/link'
 import { useState } from 'react'
 
-type LinkItem = {
+type Props = {
   link: string
   iconName: string
   label: string
@@ -16,7 +16,7 @@ type LinkItem = {
   handleFocus?: () => void
   isActive?: boolean
 }
-export const LinkItem = (props: LinkItem) => {
+export const LinkItem = (props: Props) => {
   const { link, style, iconName, label } = props
   const [focus, setFocus] = useState(false)
   const handleFocus = () => {
