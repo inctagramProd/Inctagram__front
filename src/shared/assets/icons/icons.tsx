@@ -4,7 +4,7 @@ export type IconProps = {
   fillType?: 'fill' | 'outline'
   theme?: 'light' | 'dark'
   value?: number
-  iconStyle: string
+  iconStyle?: string
   handleFocus?: () => void
 }
 
@@ -72,7 +72,13 @@ export const Bell = ({ width, height, fillType = 'outline', value = 0, iconStyle
   )
 }
 // --------------Settings--------------------
-export const Settings = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Settings = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -158,7 +164,13 @@ export const Block = ({ width, height, fillType = 'outline', value = 0, iconStyl
   )
 }
 // --------------Search--------------------
-export const Search = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Search = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -180,7 +192,13 @@ export const Search = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Image--------------------
-export const Picture = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Picture = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -285,7 +303,13 @@ export const Close = ({ width, height, fillType = 'outline', value = 0, iconStyl
   )
 }
 // --------------Expand--------------------
-export const Expand = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Expand = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -554,7 +578,13 @@ export const ArrowIosDown = ({
   )
 }
 // --------------Calendar--------------------
-export const Calendar = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Calendar = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -593,7 +623,13 @@ export const Calendar = ({ width, height, fillType = 'outline', value = 0, iconS
   )
 }
 // --------------Log out--------------------
-export const LogOut = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const LogOut = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //outline
     <svg
@@ -616,7 +652,13 @@ export const LogOut = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Bookmark--------------------
-export const Bookmark = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Bookmark = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -688,7 +730,13 @@ export const TrendingUp = ({
   )
 }
 // --------------Person--------------------
-export const Person = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Person = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -838,7 +886,13 @@ export const HomeIcon = ({
   }
 }
 // --------------Arrow-back--------------------
-export const ArrowBack = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const ArrowBack = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -888,7 +942,13 @@ export const ArrowForward = ({
   )
 }
 // --------------color-palette-outline--------------------
-export const Palette = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Palette = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -914,7 +974,13 @@ export const Palette = ({ width, height, fillType = 'outline', value = 0, iconSt
   )
 }
 // --------------Layers--------------------
-export const Layers = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Layers = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -960,7 +1026,13 @@ export const Layers = ({ width, height, fillType = 'outline', value = 0, iconSty
   }
 }
 // --------------Eye off--------------------
-export const EyeOff = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const EyeOff = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1223,7 +1295,13 @@ export const PersonRemove = ({
   }
 }
 // --------------Person add--------------------
-export const PersonAdd = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const PersonAdd = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1586,7 +1664,13 @@ export const Edit = ({ width, height, fillType = 'outline', value = 0, iconStyle
   }
 }
 // --------------Maximize--------------------
-export const Maximize = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Maximize = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   if (fillType === 'fill') {
     return (
       //fill
@@ -1711,7 +1795,13 @@ export const GithubLogo = ({
   )
 }
 // --------------Recaptcha--------------------
-export const Recaptcha = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Recaptcha = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1868,7 +1958,13 @@ export const EnglishFlag = ({ width, height }: IconProps) => {
 }
 
 // --------------PayPal--------------------
-export const PayPal = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const PayPal = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
@@ -1954,7 +2050,13 @@ export const PayPal = ({ width, height, fillType = 'outline', value = 0, iconSty
   )
 }
 // --------------Stripe--------------------
-export const Stripe = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
+export const Stripe = ({
+  width,
+  height,
+  fillType = 'outline',
+  value = 0,
+  iconStyle,
+}: IconProps) => {
   return (
     //fill
     <svg
