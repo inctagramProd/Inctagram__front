@@ -23,7 +23,10 @@ export const Input = ({ label, error, type, ...inputProps }: Props) => {
       {label && <label className="mb-1 text-light-900 text-sm">{label}</label>}
       <div className="relative">
         {type === 'search' && (
-          <Icon iconName="Search" className="absolute left-0 inset-y-0 ml-3 my-auto" /> // Need to fix
+          <Icon
+            iconName="Search"
+            iconStyle="fill-dark-100 absolute left-0 inset-y-0 ml-3 my-auto"
+          />
         )}
         <input
           {...inputProps}
