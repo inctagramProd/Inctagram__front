@@ -1,11 +1,12 @@
 import * as Icons from '../../assets/icons/icons'
 
-type IconProps = Icons.Iicon & {
+type Props = Icons.IconProps & {
   iconName: string
+  iconStyle?: string
 }
 
-type IconsType = {
-  [key: string]: React.FC<IconProps> | undefined
+type IconComponent = {
+  [key: string]: React.FC<Props> | undefined
 }
 
 const Icon = ({
@@ -15,8 +16,10 @@ const Icon = ({
   fillType = 'outline',
   theme = 'dark',
   value,
-}: IconProps) => {
-  const IconComponent = (Icons as IconsType)[iconName]
+  iconStyle = 'fill-light-100',
+  handleFocus,
+}: Props) => {
+  const IconComponent = (Icons as IconComponent)[iconName]
   if (!IconComponent) {
     return null
   }
@@ -29,6 +32,8 @@ const Icon = ({
       theme={theme}
       value={value}
       iconName={iconName}
+      iconStyle={iconStyle}
+      handleFocus={handleFocus}
     />
   )
 }
