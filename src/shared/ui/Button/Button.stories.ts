@@ -54,7 +54,13 @@ export const Text: Story = {
     size:'medium'
   },
 }
-
+export const Default: Story = {
+  args: {
+    style: 'default',
+    label: 'Button',
+    size:'medium'
+  },
+}
 export const Small: Story = {
   args: {
     style: 'primary',
