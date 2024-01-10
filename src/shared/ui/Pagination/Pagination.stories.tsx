@@ -5,6 +5,14 @@ import { Pagination } from './Pagination'
 const meta = {
   title: 'Components/Pagination',
   component: Pagination,
+  argTypes: {
+    // foo is the property we want to remove from the UI
+    itemsPerPage: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof Pagination>
 
 export default meta
