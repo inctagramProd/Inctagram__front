@@ -1,16 +1,28 @@
 import '@/src/app/styles/globals.css'
 import type { AppProps } from 'next/app'
-import {Inter} from "next/font/google";
+import { Inter } from 'next/font/google'
+import { NextPage } from 'next'
+import { ReactElement, ReactNode } from 'react'
 
 const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-inter'
+  subsets: ['latin'],
+  variable: '--font-inter',
 })
 
-export default function App({ Component, pageProps }: AppProps) {
-  return (
-      <main className={`${inter.variable} font-sans`}>
-          <Component {...pageProps} />
-      </main>
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? (page => page)
+
+  return getLayout(
+    <main className={`${inter.variable} font-sans`}>
+      <Component {...pageProps} />
+    </main>
   )
 }
