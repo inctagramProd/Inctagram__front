@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Link from 'next/link'
-import { getLayout } from '@/src/widgets/Layout/BaseLayout/BaseLayout'
+import { getBaseLayoutWithSidebar } from '@/src/widgets/Layout/BaseLayoutWithSidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +20,6 @@ const SignUp = () => {
   )
 }
 
-SignUp.getLayout = getLayout
+SignUp.getLayout = getBaseLayoutWithSidebar
 
 export default SignUp
