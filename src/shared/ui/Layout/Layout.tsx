@@ -13,7 +13,7 @@ export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
             'sticky sm:top-[60px] bg-dark-700 h-[calc(100vh-60px)] px-4 flex-1 max-w-[230px] z-[990] border-t-[0px] max-sm:fixed '
           }
         />
-        <div className={'sm:flex-1 overflow-hidden'}>{children}</div>
+        <div className={'sm:flex-1 max-sm:mt-[60px] overflow-hidden'}>{children}</div>
       </div>
     </div>
   )
