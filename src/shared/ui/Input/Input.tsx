@@ -3,7 +3,7 @@ import Icon from '../Icon/Icon'
 
 type Props = {
   label?: string
-  error?: string
+  error?: string | boolean
   type: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
