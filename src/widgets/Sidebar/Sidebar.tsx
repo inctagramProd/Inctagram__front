@@ -14,7 +14,7 @@ export const Sidebar = (props: Props) => {
   } = props
   const container = `border-r-[1px] border-dark-300 h-[60px]
                 w-[100%] bg-dark-700 flex flex-col gap-y-[56px] py-20
-                max-sm:flex max-sm:flex-row max-sm:items-center max-sm:top-unset max-sm:py-0 max-sm:px-0 max-sm:bottom-0 max-sm:max-w-none max-sm:h-[60px] max-sm:bg-dark-700 max-sm:border-dark-300 max-sm:border-r-0 max-sm:border-b-0 max-sm:border-t-[1px] max-sm:border-y max-sm:pt-0
+                max-sm:flex max-sm:flex-row max-sm:items-center max-sm:top-unset max-sm:py-0 max-sm:px-0 max-sm:bottom-0 max-sm:max-w-none max-sm:h-[60px] max-sm:bg-dark-700 max-sm:border-dark-300 max-sm:border-r-0 max-sm:border-b-0 max-sm:border-y  max-sm:border-t-[1px] max-sm:pt-0
                 ${className}`,
     upperBlock = `flex w-[100%] flex-col justify-around gap-y-[24px] items-start max-sm:items-center max-sm:flex-row`,
     bodyBlock = ` flex w-[196px] flex-row gap-y-[24px] gap-y-[256px]
