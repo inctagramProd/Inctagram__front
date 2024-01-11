@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react'
 import { Header } from '@/src/widgets/Header/Header'
 import { Sidebar } from '@/src/widgets/Sidebar/Sidebar'
 
-export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
+export const BaseLayout: NextPage<PropsWithChildren> = ({ children }) => {
   return (
     <div>
       <Header className={'sticky top-0 w-full z-[991] max-sm:fixed'} />
