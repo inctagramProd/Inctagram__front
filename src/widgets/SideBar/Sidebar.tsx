@@ -12,12 +12,12 @@ export const Sidebar = (props: Props) => {
   gap-y-[60px]  z-[20]`,
   } = props
   let container = `border-r-[1px] border-dark-300 h-[60px]
-                w-[100%] border-t-[1px] bg-dark-700 ${className}`,
-    upperBlock = `flex w-[100%] justify-around  items-center sm:mt-[72px]
-                sm:flex sm:flex-col sm:justify-between sm:items-start
-                sm:ml-[24px] sm:flex-col sm:gap-y-[24px] sm:w-[196px]`,
-    bodyBlock = ` flex w-[196px] flex-row gap-x-[10px]  
-                items-start gap-y-[180px] sm:flex-col sm:ml-[24px]  sm:flex hidden sm:block`
+                w-[100%] border-t-[1px] bg-dark-700 flex flex-col gap-y-[56px] py-20
+                max-sm:flex max-sm:flex-row max-sm:items-center max-sm:top-unset max-sm:py-0 max-sm:px-0 max-sm:bottom-0 max-sm:max-w-none max-sm:h-[60px] max-sm:bg-dark-700 max-sm:border-dark-300 max-sm:border-r-0 max-sm:border-b-0 max-sm:border-y max-sm:pt-0
+                ${className}`,
+    upperBlock = `flex w-[100%] flex-col justify-around gap-y-[24px] items-start max-sm:items-center max-sm:flex-row`,
+    bodyBlock = ` flex w-[196px] flex-row gap-y-[24px] gap-y-[256px]
+                items-start gap-y-[180px] sm:flex-col sm:flex hidden sm:block`
   return (
     <div className={container}>
       <div className={upperBlock}>
@@ -32,6 +32,8 @@ export const Sidebar = (props: Props) => {
           <LinkItem link="/statistics" style="default" iconName="TrendingUp" label="Statistics" />
           <LinkItem link="/faivorites" style="default" iconName="Bookmark" label="Faivorites" />
         </div>
+      </div>
+      <div className={`flex flex-1 items-end`}>
         <div className={`hidden sm:flex`}>
           <LinkItem link="/logout" style="default" iconName="LogOut" label="Log Out" />
         </div>

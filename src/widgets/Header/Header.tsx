@@ -64,7 +64,7 @@ export const Header = (props: Props) => {
     >
       <div
         className={
-          'max-w-screen-xl w-full flex flex-row justify-between items-center px-12 sm:px-4'
+          'max-w-screen-xl w-full flex flex-row justify-between items-center px-12 max-sm:px-4'
         }
       >
         <div>
