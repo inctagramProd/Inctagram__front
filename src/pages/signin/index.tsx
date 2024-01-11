@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Link from 'next/link'
-import { getLayout } from '@/src/shared/ui/Layout/BaseLayout/BaseLayout'
+import { getLayout } from '@/src/widgets/Layout/BaseLayout/BaseLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 

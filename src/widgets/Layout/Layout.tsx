@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import { PropsWithChildren } from 'react'
 import { Header } from '@/src/widgets/Header/Header'
-import { Sidebar } from '@/src/widgets/SideBar/Sidebar'
+import { Sidebar } from '@/src/widgets/Sidebar/Sidebar'
 
 export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
   return (
