@@ -13,9 +13,7 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  argTypes: {},
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -26,8 +24,8 @@ export const Primary: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'medium',
-    disable:false
+    size: 'medium',
+    disable: false,
   },
 }
 
@@ -35,66 +33,66 @@ export const Secondary: Story = {
   args: {
     style: 'secondary',
     label: 'Button',
-    size:'medium',
-    disable:false
+    size: 'medium',
+    disable: false,
   },
 }
 export const Outline: Story = {
   args: {
     style: 'outline',
     label: 'Button',
-    size:'medium',
-    disable:false
+    size: 'medium',
+    disable: false,
   },
 }
 export const Text: Story = {
   args: {
     style: 'text',
     label: 'Button',
-    size:'medium'
+    size: 'medium',
   },
 }
 export const Default: Story = {
   args: {
     style: 'default',
     label: 'Button',
-    size:'medium'
+    size: 'medium',
   },
 }
 export const Small: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'small'
+    size: 'small',
   },
 }
 export const Medium: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'medium'
+    size: 'medium',
   },
 }
 export const Large: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'large'
+    size: 'large',
   },
 }
 export const Able: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'medium',
-    disable:false
+    size: 'medium',
+    disable: false,
   },
 }
 export const Disable: Story = {
   args: {
     style: 'primary',
     label: 'Button',
-    size:'medium',
-    disable:true
+    size: 'medium',
+    disable: true,
   },
 }
