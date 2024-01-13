@@ -1,3 +1,5 @@
+import { FC, SVGProps } from 'react'
+
 export type IconProps = {
   width?: number
   height?: number
@@ -7,7 +9,6 @@ export type IconProps = {
   iconStyle?: string
   handleFocus?: () => void
 }
-
 // --------------Bell--------------------
 export const Bell = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
@@ -1914,7 +1915,6 @@ export const RussiaFlag = ({ width, height }: IconProps) => {
       height={height}
       viewBox="0 0 36 36"
       xmlns="http://www.w3.org/2000/svg"
-      xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
       class="iconify iconify--twemoji"
@@ -1934,7 +1934,6 @@ export const EnglishFlag = ({ width, height }: IconProps) => {
       height={height}
       viewBox="0 0 36 36"
       xmlns="http://www.w3.org/2000/svg"
-      xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
       class="iconify iconify--twemoji"
