@@ -1917,7 +1917,7 @@ export const RussiaFlag = ({ width, height }: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       role="img"
-      class="iconify iconify--twemoji"
+      className="iconify iconify--twemoji"
       preserveAspectRatio="xMidYMid meet"
     >
       <path fill="#CE2028" d="M36 27a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4v-4h36v4z"></path>
@@ -1936,7 +1936,7 @@ export const EnglishFlag = ({ width, height }: IconProps) => {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
       role="img"
-      class="iconify iconify--twemoji"
+      className="iconify iconify--twemoji"
       preserveAspectRatio="xMidYMid meet"
     >
       <path
