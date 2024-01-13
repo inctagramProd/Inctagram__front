@@ -3,12 +3,8 @@ import { signUpSchema } from '@/src/shared/schemas'
 import { FormikHelpers, useFormik } from 'formik'
 import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
-import { Card } from '@/src/shared/ui/Card/Card'
-import { Typography } from '@/src/shared/ui/Typography/Typography'
-import { Checkbox } from '@/src/shared/ui/Chekbox/Checkbox'
-import { Input } from '@/src/shared/ui/Input/Input'
-import { Button } from '@/src/shared/ui/Button/Button'
 import { default as GithubLogo, default as GoogleLogo } from '../../../../shared/ui/Icon/Icon'
+import { Card, Checkbox, Typography, Input, Button } from '@/src/shared/ui'
 
 type FormValues = {
   username: string
@@ -82,7 +78,7 @@ export const SignUp = () => {
           </div>
           <div className="mb-[18px]">
             <Checkbox {...formik.getFieldProps('terms')} />
-            <Typography variant="small" className="inline-block">
+            <Typography variant="small" className="inline">
               <Trans
                 text={locale.auth.signUpTerms.description}
                 tags={{
@@ -109,12 +105,15 @@ export const SignUp = () => {
               {formik.touched.terms ? formik.errors.terms : ''}
             </Typography>
           </div>
-          <Button
-            style="primary"
-            type="submit"
-            label={locale.auth.signUp}
-            disable={!(formik.isValid && formik.dirty)}
-          />
+          <div className="[&>button]:w-full">
+            <Button
+              style="primary"
+              type="submit"
+              label={locale.auth.signUp}
+              disable={!(formik.isValid && formik.dirty)}
+              className="w-full"
+            />
+          </div>
         </form>
       </div>
       <Typography variant="regular_16" className="block text-center mb-[18px]">

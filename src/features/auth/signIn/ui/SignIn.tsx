@@ -2,10 +2,7 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { signInSchema } from '@/src/shared/schemas'
 import { FormikHelpers, useFormik } from 'formik'
 import Link from 'next/link'
-import { Typography } from '@/src/shared/ui/Typography/Typography'
-import { Input } from '@/src/shared/ui/Input/Input'
-import { Button } from '@/src/shared/ui/Button/Button'
-import { Card } from '@/src/shared/ui/Card/Card'
+import { Card, Typography, Button, Input } from '@/src/shared/ui'
 import { default as GithubLogo, default as GoogleLogo } from '../../../../shared/ui/Icon/Icon'
 
 type FormValues = {
@@ -66,12 +63,15 @@ export const SignIn = () => {
               </Typography>
             </Link>
           </div>
-          <Button
-            style="primary"
-            type="submit"
-            label={locale.auth.signIn}
-            disable={!(formik.isValid && formik.dirty)}
-          />
+          <div className="[&>button]:w-full">
+            <Button
+              style="primary"
+              type="submit"
+              label={locale.auth.signIn}
+              disable={!(formik.isValid && formik.dirty)}
+              className="w-full"
+            />
+          </div>
         </form>
       </div>
       <Typography variant="regular_16" className="text-center mb-[18px]">
