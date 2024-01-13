@@ -50,11 +50,11 @@ export const Header = (props: Props) => {
     router.push(`/${linkOptions[i].value}`)
   }
 
-  const handleLanguage = (selectedValue: object) => {
+  const handleLanguage = (selectedValue: any) => {
     alert(selectedValue?.title)
     t(selectedValue?.title)
   }
-  const handleLink = (selectedValue: object) => {
+  const handleLink = (selectedValue: any) => {
     router.push(selectedValue?.value)
   }
   if (user) {
@@ -133,10 +133,10 @@ export const Header = (props: Props) => {
         </div>
         <div className={`w-fit mr-[15px] sm:mr-[64px] gap-x-[24px] items-center hidden sm:flex`}>
           <div>
-            <Button label="Log In" style="text" onClick={() => routerPath(0)} />
+            <Button iconName="" label="Log In" style="text" onClick={() => routerPath(0)} />
           </div>
           <div>
-            <Button label="Sign Up" style="primary" onClick={() => routerPath(1)} />
+            <Button iconName="" label="Sign Up" style="primary" onClick={() => routerPath(1)} />
           </div>
         </div>
       </div>
