@@ -2080,7 +2080,7 @@ export const Stripe = ({
       </g>
       <defs>
         <clipPath id="clip0_3663_10330">
-          <rect width={width} height={height * 0.75} fill="white" />
+          <rect width={width} height={height === undefined ? height : height * 0.75} fill="white" />
         </clipPath>
       </defs>
     </svg>
@@ -2118,8 +2118,8 @@ export const Paid = ({ width, height, fillType = 'outline', value = 0, iconStyle
       <defs>
         <clipPath id="clip0_4700_12135">
           <rect
-            width={width * 0.75}
-            height={width * 0.75}
+            width={width === undefined ? width : width * 0.75}
+            height={width === undefined ? width : width * 0.75}
             fill="white"
             transform="translate(4 4)"
           />
