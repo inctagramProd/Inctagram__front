@@ -26,6 +26,7 @@ export const Primary: Story = {
     label: 'Button',
     size: 'medium',
     disable: false,
+    iconName: '',
   },
 }
 
@@ -35,6 +36,7 @@ export const Secondary: Story = {
     label: 'Button',
     size: 'medium',
     disable: false,
+    iconName: '',
   },
 }
 export const Outline: Story = {
@@ -43,6 +45,7 @@ export const Outline: Story = {
     label: 'Button',
     size: 'medium',
     disable: false,
+    iconName: '',
   },
 }
 export const Text: Story = {
@@ -50,6 +53,7 @@ export const Text: Story = {
     style: 'text',
     label: 'Button',
     size: 'medium',
+    iconName: '',
   },
 }
 export const Default: Story = {
@@ -57,6 +61,7 @@ export const Default: Story = {
     style: 'default',
     label: 'Button',
     size: 'medium',
+    iconName: '',
   },
 }
 export const Small: Story = {
@@ -64,6 +69,7 @@ export const Small: Story = {
     style: 'primary',
     label: 'Button',
     size: 'small',
+    iconName: '',
   },
 }
 export const Medium: Story = {
@@ -71,6 +77,7 @@ export const Medium: Story = {
     style: 'primary',
     label: 'Button',
     size: 'medium',
+    iconName: '',
   },
 }
 export const Large: Story = {
@@ -78,6 +85,7 @@ export const Large: Story = {
     style: 'primary',
     label: 'Button',
     size: 'large',
+    iconName: '',
   },
 }
 export const Able: Story = {
@@ -86,6 +94,7 @@ export const Able: Story = {
     label: 'Button',
     size: 'medium',
     disable: false,
+    iconName: '',
   },
 }
 export const Disable: Story = {
@@ -94,5 +103,6 @@ export const Disable: Story = {
     label: 'Button',
     size: 'medium',
     disable: true,
+    iconName: '',
   },
 }
