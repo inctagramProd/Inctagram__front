@@ -100,7 +100,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      className={`group flex  py-[6px] px-[24px] content-center gap-x-[10px] ${nameOfClass}`}
+      className={`group flex  py-[6px] px-[24px] content-center gap-x-[10px] ${nameOfClass} ${className}`}
       disabled={disable}
       {...props}
     >
