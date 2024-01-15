@@ -1,5 +1,4 @@
-import { Button } from '@/src/shared/ui/Button/Button'
-import Icon from '@/src/shared/ui/Icon/Icon'
+import { Icon, Button } from '@/src/shared/ui'
 import Link from 'next/link'
 import { useState } from 'react'
 

@@ -1,6 +1,4 @@
-import React from 'react'
-import { Typography } from '../Typography/Typography'
-import Icon from '../Icon/Icon'
+import { Icon, Typography } from '@/src/shared/ui'
 
 type Props = {
   //Button properties

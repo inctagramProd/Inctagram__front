@@ -1,5 +1,4 @@
-import { Typography } from '../../ui/Typography/Typography'
-import Icon from '../../ui/Icon/Icon'
+import { Typography, Icon } from '@/src/shared/ui'
 import Link from 'next/link'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 
@@ -24,7 +23,7 @@ export const PolicySwitcher = ({ privacyPolicy }: Props) => {
             ? locale.auth.privacyAndTermsPages.titleOfPrivacyPolicy
             : locale.auth.privacyAndTermsPages.titleOfTermsOfService}
         </Typography>
-        <div className="text-justify px-8">
+        <div className="text-justify px-9">
           <Typography variant="regular_14">
             {privacyPolicy
               ? locale.auth.privacyAndTermsPages.textOfPrivacy
