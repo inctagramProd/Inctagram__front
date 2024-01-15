@@ -5,5 +5,5 @@ import { useRouter } from 'next/router'
 export const useTranslate = () => {
   const router = useRouter()
   const locale = router.locale === 'en' ? en : ru
-  return locale
+  return { locale }
 }
