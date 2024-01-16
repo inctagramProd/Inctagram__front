@@ -18,13 +18,13 @@ export const PolicySwitcher = ({ privacyPolicy }: Props) => {
         </div>
       </Link>
       <div className="flex flex-col gap-5 items-center">
-        <Typography variant="h1">
+        <Typography variant="h1" >
           {privacyPolicy
             ? locale.auth.privacyAndTermsPages.titleOfPrivacyPolicy
             : locale.auth.privacyAndTermsPages.titleOfTermsOfService}
         </Typography>
         <div className="text-justify px-9">
-          <Typography variant="regular_14">
+          <Typography variant="regular_14" className='whitespace-break-spaces'>
             {privacyPolicy
               ? locale.auth.privacyAndTermsPages.textOfPrivacy
               : locale.auth.privacyAndTermsPages.textOfTerms}
