@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Typography } from '@/src/shared/ui/Typography/Typography'
-import Icon from '@/src/shared/ui/Icon/Icon'
+import { Typography, Icon } from '@/src/shared/ui'
 
 export type SelectOptionType = {
   title: string | number
