@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Button } from '../../shared/ui/Button/Button'
-import { Select } from '../../shared/ui/Select/Select'
-import Icon from '../../shared/ui/Icon/Icon'
-import { Typography } from '@/src/shared/ui/Typography/Typography'
-import { SelectOptionType } from '../../shared/ui/Select/Select'
+import { Typography, Icon, Button, Select, SelectOptionType } from '@/src/shared/ui'
 
 type Props = {
   user?: boolean
