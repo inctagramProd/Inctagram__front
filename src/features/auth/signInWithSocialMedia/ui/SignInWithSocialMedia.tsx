@@ -1,34 +1,54 @@
-import { api } from '@/src/features/api'
+import { api } from '@/src/shared/api/api'
 import Icon from '@/src/shared/ui/Icon/Icon'
-import jwt from 'jsonwebtoken'
 import { useEffect } from 'react'
 
 type Props = {
   iconName: 'GoogleLogo' | 'GitHubLogo'
 }
+
 const SignInWithSocialMedia = ({ iconName }: Props) => {
-  /* useEffect(() => {
+  function LoginWithApi() {
+    window.location.assign(api.gitAuth + api.clientGitId)
+  }
+
+  useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const code = urlParams.get('code')
-
     if (code && localStorage.getItem('accessToken') === null) {
       const getAccessToken = async () => {
-        console.log('Code is start')
-        console.log(localStorage.getItem('accessToken'))
-        //await fetch('')
+        await fetch(`${api.serverURL}/getAccessToken?code=${code}`, { method: 'GET' })
+          .then(response => {
+            return response.json()
+          })
+          .then(data => {
+            console.log(data)
+            if (data.access_token) {
+              localStorage.setItem('accessToken', data.access_token)
+            }
+          })
       }
+      getAccessToken()
+    } else {
+      getUserData()
     }
-  }) */
-  function ApiAuth() {
-    /*  window.location.assign(
-      'https://github.com/login/oauth/authorize?client_id=ffe4468450558d55d4e0'
-    ) */
-    let url = iconName === 'GitHubLogo' ? api.gitLoginURL : api.googleLoginURL
-    window.location.assign(url)
+  }, [])
+  async function getUserData() {
+    await fetch(`${api.serverURL}/getUserData`, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        console.log(data)
+      })
   }
   return (
-    <div onClick={ApiAuth}>
+    <div onClick={LoginWithApi}>
       <Icon iconName={iconName} />
     </div>
   )
