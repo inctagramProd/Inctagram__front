@@ -1,3 +1,7 @@
 .customDateInput {
-    @apply text-light-500 cursor-pointer bg-dark-300 p-2 rounded-md w-auto;
+  @apply text-light-500 cursor-pointer bg-dark-300 p-2 rounded-md w-auto;
+}
+
+.error {
+  @apply text-red-600 border border-red-500;
 }
