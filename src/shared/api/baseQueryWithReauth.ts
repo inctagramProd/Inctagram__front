@@ -10,7 +10,6 @@ const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    
     const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
