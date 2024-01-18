@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
+import { StoreProvider } from '../app/providers'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +23,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <main className={`${inter.variable} font-sans`}>
-      <Component {...pageProps} />
+      <StoreProvider>
+        <Component {...pageProps} />
+      </StoreProvider>
     </main>
   )
 }
