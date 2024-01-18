@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
-import Icon from '../Icon/Icon'
+import { Icon } from '../Icon/Icon'
 
 type Props = {
   label?: string

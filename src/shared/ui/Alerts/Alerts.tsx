@@ -1,4 +1,4 @@
-import Icon from '../Icon/Icon'
+import { Icon } from '@/src/shared/ui'
 
 type Props = {
   error?: boolean

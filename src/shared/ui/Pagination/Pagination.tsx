@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Select } from './../Select/Select'
+import { useEffect, useState } from 'react'
 import { transformNumberToArray } from '@/src/shared/ui/Pagination/utils/transformNumberToArray'
-import { Typography } from '@/src/shared/ui/Typography/Typography'
-import Icon from '@/src/shared/ui/Icon/Icon'
-import { SelectOptionType } from '@/src/shared/ui/Select/Select'
+import { Typography, Icon, Select, SelectOptionType } from '@/src/shared/ui'
 
 type PropsItemsPerPage = 10 | 20 | 30 | 50 | 100
 

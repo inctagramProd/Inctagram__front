@@ -9,7 +9,7 @@ type IconComponent = {
   [key: string]: React.FC<Props> | undefined
 }
 
-const Icon = ({
+export const Icon = ({
   iconName,
   width = 24,
   height = 24,
@@ -37,5 +37,3 @@ const Icon = ({
     />
   )
 }
-
-export default Icon
