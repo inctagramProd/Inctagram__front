@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "async-mutex": "^0.4.1",
     "formik": "^2.4.5",
     "init": "^0.1.2",
     "install": "^0.13.0",
