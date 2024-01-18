@@ -1,9 +1,8 @@
-import { Button } from '@/src/shared/ui/Button/Button'
-import Icon from '@/src/shared/ui/Icon/Icon'
+import { Icon, Button } from '@/src/shared/ui'
 import Link from 'next/link'
 import { useState } from 'react'
 
-type LinkItem = {
+type Props = {
   link: string
   iconName: string
   label: string
@@ -16,7 +15,7 @@ type LinkItem = {
   handleFocus?: () => void
   isActive?: boolean
 }
-export const LinkItem = (props: LinkItem) => {
+export const LinkItem = (props: Props) => {
   const { link, style, iconName, label } = props
   const [focus, setFocus] = useState(false)
   const handleFocus = () => {
@@ -37,7 +36,7 @@ export const LinkItem = (props: LinkItem) => {
           iconName={iconName}
           iconStyle={`fill-light-100 group-hover:fill-primary-100 focus:fill-primary-100 group-disable:fill-dark-100`}
           variant="medium_14"
-          className="flex justify-content h-[100%] group-active:text-sm group-active:font-bold group-active:leading-normal" /* group-focus:text-light-100 */
+          className="flex justify-content h-[100%] py-0 px-0 group-active:text-sm group-active:font-bold group-active:leading-normal" /* group-focus:text-light-100 */
           disable={false}
           handleFocus={handleFocus}
         />

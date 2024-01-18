@@ -3,12 +3,12 @@ import { action } from '@storybook/addon-actions'
 import { ReCaptcha } from './ReCaptcha'
 
 const meta: Meta<typeof ReCaptcha> = {
-    title: 'Components/ReCAPTCHA',
-    component: ReCaptcha,
-    tags: ['autodocs'],
-    parameters: {
-        layout: 'centered',
-    },
+  title: 'Components/ReCAPTCHA',
+  component: ReCaptcha,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 }
 
 export default meta
@@ -16,25 +16,25 @@ export default meta
 type Story = StoryObj<typeof ReCaptcha>
 
 export const Default: Story = {
-    args: {
-        onChange: action('click event')
+  args: {
+    onChange: action('click event'),
+  },
+  argTypes: {
+    theme: {
+      control: { type: 'inline-radio' },
+      options: ['dark', 'light'],
     },
-    argTypes:{
-      theme:{
-          control: {type: 'inline-radio'},
-          options: ['dark', 'light']
-      }
-    }
+  },
 }
 
 export const Error: Story = {
-    args:{
-      errorMessage: 'Please verify that you are not a robot'
+  args: {
+    errorMessage: 'Please verify that you are not a robot',
+  },
+  argTypes: {
+    errorMessage: {
+      control: { type: 'inline-radio' },
+      options: ['Error message', null],
     },
-    argTypes: {
-        errorMessage: {
-            control: { type: 'inline-radio' },
-            options: ['Error message', null],
-        }
-    }
+  },
 }
