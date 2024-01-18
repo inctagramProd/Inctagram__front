@@ -3,6 +3,7 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Formik, Form, Field } from 'formik'
 import { useRouter } from 'next/router'
 import * as Yup from 'yup'
+import { useSendUserEmailMutation } from '@/src/shared/api/base-api'
 
 type FormValues = {
   email: string
@@ -14,14 +15,20 @@ export const ForgotPassword = () => {
 
   const initialValues: FormValues = { email: '' }
 
+  const [sendUserEmail] = useSendUserEmailMutation()
+
   const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string()
       .email(locale.auth.authErrors.emailField.email)
       .required(locale.auth.authErrors.emailField.nonEmpty),
   })
 
-  const handleSubmit = (values: FormValues) => {
-    console.log(values)
+  const handleSubmit = async (values: FormValues) => {
+    try {
+      await sendUserEmail(values.email).unwrap()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleToGoBack = () => {
@@ -38,7 +45,7 @@ export const ForgotPassword = () => {
         initialValues={initialValues}
         validationSchema={forgotPasswordSchema}
       >
-        {({ isSubmitting, isValid, errors, touched }) => (
+        {({ isSubmitting, isValid, errors, touched, values }) => (
           <Form>
             <Field
               name="email"
@@ -55,7 +62,8 @@ export const ForgotPassword = () => {
               className="w-full"
               style="primary"
               label={locale.auth.sendLink}
-              disable={isSubmitting || !isValid}
+              type="submit"
+              disable={isSubmitting || !isValid || values.email === ''}
             />
             <Button
               style="text"
