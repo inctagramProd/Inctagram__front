@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
-import { format } from 'date-fns' // Import the format function
+import { format } from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
 import s from './DatePicker.module.css'
 import './style.css'
