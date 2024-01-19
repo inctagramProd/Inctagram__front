@@ -1,36 +1,26 @@
-import React, {ChangeEvent, ComponentPropsWithoutRef,} from 'react'
-import styles from './textArea.module.css'
+import { ComponentPropsWithoutRef } from 'react'
 
-
-type TextAreaPropsType = {
-    error?: string
+type Props = {
+  errorMessage?: string
 } & ComponentPropsWithoutRef<'textarea'>
-/**
- * Text Area UI component
- */
-export const TextArea: React.FC<TextAreaPropsType> = ({
-                                                          id,
-                                                          onChange,
-                                                          className,
-                                                          error,
-                                                          ...restProps
-                                                      }) => {
 
-    const onChangeCallback = (changeEvent: ChangeEvent<HTMLTextAreaElement>) => {
-        onChange?.(changeEvent)
-    }
-
-    return (
-        <div>
-           <textarea
-               className={`${styles.textArea} ${error ? styles.error : ''} ${className}`}
-               autoFocus
-               id={id}
-               onChange={onChangeCallback}
-               {...restProps}
-           />
-            {error && <span className={styles.errorMessage}>{error}</span>}
-        </div>
-
-    )
+export const TextArea = ({ errorMessage, ...restProps }: Props) => {
+  return (
+    <div>
+      <textarea
+        className={` 
+        w-full outline-none placeholder-light-900 border 
+        rounded-sm py-1.5 px-3 bg-dark-500
+        disabled:placeholder-dark-100 disabled:text-dark-100
+        focus:ring-1 
+        ${
+          errorMessage
+            ? 'border-danger-500 focus:border-danger-500 focus:ring-danger-500'
+            : 'border-dark-100 focus:border-primary-700 focus:ring-primary-700'
+        }`}
+        {...restProps}
+      />
+      {errorMessage && <span className="text-danger-500">{errorMessage}</span>}
+    </div>
+  )
 }

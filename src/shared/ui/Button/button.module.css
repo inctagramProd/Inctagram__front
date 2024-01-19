@@ -6,7 +6,7 @@
     hover:bg-primary-100 hover:text-light-100
     focus:bg-primary-500 focus:border-2 focus:border-primary-700
     disabled:bg-primary-900 disabled:text-light-900
-    
+    sm:hidden
   }
   .secondary{
     @apply 
@@ -25,6 +25,7 @@
     hover:text-primary-100 hover:border-primary-100
     focus:border-[2px] focus:border-primary-700 focus:text-primary-700
     disabled:bg-primary-900 disabled:text-primary-900
+    sm:hidden
   }
 
   .text{
@@ -34,12 +35,23 @@
     active:text-primary-700 hover:text-primary-100
     focus:border-[2px] focus:border-primary-700 focus:text-primary-500 focus:rounded-[2px]
     disabled:text-primary-900
+    sm:hidden
+  }
+  .default{
+    @apply 
+    flex content-center 
+    gap-y-[10px]
+    bg-none text-light-100  cursor-pointer 
+    active:text-primary-700 hover:text-primary-100
+    focus:text-primary-700 focus:border-[2px] focus:rounded-[2px] focus:border-primary-700 
+    disabled:text-dark-100
   }
 
   .small {
     @apply
     text-[12px]
     leading-[16px]
+    
   }
   .medium {
     @apply
@@ -48,6 +60,6 @@
   }
   .large {
     @apply
-    text-[26px]
+    text-[36px]
     leading-[36px]
   }

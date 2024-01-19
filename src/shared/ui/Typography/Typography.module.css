@@ -1,0 +1,57 @@
+
+.large {
+    @apply text-xxl font-semibold leading-tight
+}
+.h1 {
+    @apply text-xl font-bold leading-tight
+}
+
+.h2 {
+    @apply text-lg font-bold leading-normal
+}
+
+.h3 {
+    @apply text-base font-semibold leading-normal
+}
+
+.regular_16 {
+    @apply text-base font-normal leading-normal
+}
+
+.bold_16 {
+    @apply text-base font-bold leading-normal
+}
+
+.regular_14 {
+    @apply text-sm font-normal leading-normal
+}
+
+.medium_14 {
+    @apply text-sm font-medium leading-normal
+}
+
+.bold_14 {
+    @apply text-sm font-bold leading-normal
+}
+
+.small {
+    @apply text-xs font-normal leading-loose
+}
+
+.small_semi-bold {
+    @apply text-xs font-semibold leading-loose
+}
+
+.link_regular {
+    @apply  text-primary-500 text-sm font-semibold leading-normal underline cursor-pointer
+}
+
+.link_small {
+    @apply text-primary-500 text-xs font-semibold leading-loose underline cursor-pointer
+}
+
+.error {
+    @apply text-danger-500;
+}
+
+
