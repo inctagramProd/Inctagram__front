@@ -1,15 +1,19 @@
-import { Card, Typography, Input, Button } from '@/src/shared/ui'
+import { Card, Typography, Input, Button, Modal } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Formik, Form, Field } from 'formik'
 import { useRouter } from 'next/router'
 import * as Yup from 'yup'
-import { useSendUserEmailMutation } from '@/src/shared/api/base-api'
+import { useSendUserEmailMutation } from '@/src/shared/api/authApi'
+import { useState } from 'react'
 
 type FormValues = {
   email: string
 }
 
 export const ForgotPassword = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [email, setEmail] = useState('')
+
   const { locale } = useTranslate()
   const router = useRouter()
 
@@ -26,8 +30,11 @@ export const ForgotPassword = () => {
   const handleSubmit = async (values: FormValues) => {
     try {
       await sendUserEmail(values.email).unwrap()
+      setIsModalOpen(true)
     } catch (error) {
       console.log(error)
+      setEmail(values.email)
+      setIsModalOpen(true)
     }
   }
 
@@ -75,6 +82,7 @@ export const ForgotPassword = () => {
           </Form>
         )}
       </Formik>
+      <Modal isOpen={isModalOpen} onOpenChange={setIsModalOpen} email={email} />
     </Card>
   )
 }
