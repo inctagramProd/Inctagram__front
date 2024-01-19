@@ -4,4 +4,10 @@
 
 .error {
   @apply text-red-600 border border-red-500;
+
+  width: 130px;
+}
+
+.range {
+  width: auto;
 }

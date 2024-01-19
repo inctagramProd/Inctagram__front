@@ -15,10 +15,10 @@ type InputProps = {
   value: string
   onClick: () => void
   error?: boolean
-}
+} & Pick<Props, 'isRange'>
 
-const CustomInput = ({ value, onClick, error }: InputProps) => {
-  const inputClassname = `${s.customDateInput} ${error ? s.error : ''}`
+const CustomInput = ({ value, onClick, error, isRange }: InputProps) => {
+  const inputClassname = `${s.customDateInput} ${error ? s.error : ''} ${isRange ? s.range : ''}`
   return <input className={inputClassname} value={value} onClick={onClick} readOnly />
 }
 
@@ -54,6 +54,7 @@ export const UIDatePicker = ({ onChange, isRange }: Props) => {
       }}
       customInput={
         <CustomInput
+          isRange={isRange}
           error={true}
           onClick={() => {}}
           value={

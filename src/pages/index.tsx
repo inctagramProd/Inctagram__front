@@ -1,13 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import {UIDatePicker} from "@/src/shared/ui/DatePicker/DatePicker";
-
+import { UIDatePicker } from '@/src/shared/ui/DatePicker/DatePicker'
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
+    <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
       <div
         style={{
           display: 'flex',
@@ -44,11 +41,10 @@ export default function Home() {
         />
       </div>
       <div className="m-3">
-        <UIDatePicker/>
+        <UIDatePicker />
       </div>
 
-
-      <UIDatePicker isRange={true}/>
+      <UIDatePicker isRange={true} />
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
