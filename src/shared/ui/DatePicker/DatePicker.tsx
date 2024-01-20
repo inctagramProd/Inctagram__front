@@ -9,20 +9,21 @@ import * as Icons from '../../assets/icons/icons'
 type Props = {
   isRange?: boolean
   onChange?: (value: string) => void
+  hasError?: boolean
+  errorMsg?: string
 }
 
 type InputProps = {
   value: string
   onClick: () => void
-  error?: boolean
-} & Pick<Props, 'isRange'>
+} & Pick<Props, 'isRange' | 'hasError'>
 
-const CustomInput = ({ value, onClick, error, isRange }: InputProps) => {
-  const inputClassname = `${s.customDateInput} ${error ? s.error : ''} ${isRange ? s.range : ''}`
+const CustomInput = ({ value, onClick, hasError, isRange }: InputProps) => {
+  const inputClassname = `${s.customDateInput} ${hasError ? s.error : ''} ${isRange ? s.range : ''}`
   return <input className={inputClassname} value={value} onClick={onClick} readOnly />
 }
 
-export const UIDatePicker = ({ onChange, isRange }: Props) => {
+export const UIDatePicker = ({ onChange, isRange, hasError }: Props) => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const [startDate, endDate] = dateRange
 
@@ -35,7 +36,6 @@ export const UIDatePicker = ({ onChange, isRange }: Props) => {
       selectsRange={isRange}
       startDate={startDate}
       dateFormat="dd/MM/yyyy"
-      className="red-border"
       endDate={endDate}
       calendarStartDay={1}
       selected={isRange ? null : startDate}
@@ -55,7 +55,7 @@ export const UIDatePicker = ({ onChange, isRange }: Props) => {
       customInput={
         <CustomInput
           isRange={isRange}
-          error={true}
+          hasError={hasError}
           onClick={() => {}}
           value={
             isRange
@@ -65,7 +65,16 @@ export const UIDatePicker = ({ onChange, isRange }: Props) => {
         />
       }
       showIcon={true}
-      icon={<Icons.Calendar width={20} height={20} theme={'dark'} />}
+      icon={
+        <Icons.Calendar
+          width={24}
+          height={24}
+          theme={'light'}
+          iconStyle={`${
+            hasError ? 'fill-red-500' : 'fill-light-500'
+          }  absolute right-2.5 top-1.5 z-10`}
+        />
+      }
     />
   )
 }

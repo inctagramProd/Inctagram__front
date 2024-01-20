@@ -1,13 +1,20 @@
 .customDateInput {
   @apply text-light-500 cursor-pointer bg-dark-300 p-2 rounded-md w-auto;
+
+  position: relative;
+  width: 150px;
+  border: 1px solid #aeaeae;
+}
+
+.customDateInput:focus {
+  box-sizing: border-box;
+  border: 3px solid #2f68cc;
 }
 
 .error {
   @apply text-red-600 border border-red-500;
-
-  width: 130px;
 }
 
 .range {
-  width: auto;
+  width: 258px;
 }
