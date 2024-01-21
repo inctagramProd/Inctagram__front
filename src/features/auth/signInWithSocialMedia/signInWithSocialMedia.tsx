@@ -18,8 +18,7 @@ class api {
 }
 
 const SignInWithSocialMedia = ({ iconName }: Props) => {
-  // const { data, isLoading, error } = useGetUserQuery(0)
-  // console.log(data)
+  const [gitAuth, { isError }] = useAddUserMutation()
   function LoginWithApi() {
     window.location.assign(api.gitAuth + api.clientGitId + `&scope=read:user,user:email`)
   }
@@ -32,57 +31,11 @@ const SignInWithSocialMedia = ({ iconName }: Props) => {
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
     const URL = `https://deepwaterhorizon.ru/api/v1/auth/github-auth`
-    const githubAuth = async () => {
-      let data = { code: Code }
-      await fetch(URL, {
-        method: 'POST',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error))
-    }
-    console.log(Code)
     if (Code) {
-      githubAuth()
+      console.log(Code)
+      gitAuth({ code: Code }).unwrap()
     }
-    /* if (code && localStorage.getItem('accessToken') === null) {
-      const getAccessToken = async () => {
-        await fetch(`${api.serverURL}/getAccessToken?code=${code}`, { method: 'GET' })
-          .then(response => {
-            return response.json()
-          })
-          .then(data => {
-            console.log(data)
-            if (data.access_token) {
-              localStorage.setItem('accessToken', data.access_token)
-            }
-          })
-      }
-      getAccessToken()
-      getUserData()
-    } else {
-      getUserData()
-    } */
   }, [])
-  async function getUserData() {
-    await fetch(`${api.serverURL}/getUserData`, {
-      method: 'GET',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        console.log(data)
-      })
-  }
   return (
     <div onClick={LoginWithApi}>
       <Icon iconName={iconName} />

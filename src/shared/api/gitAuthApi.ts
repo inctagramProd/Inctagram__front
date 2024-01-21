@@ -7,7 +7,7 @@ export const gitAuthApi = createApi({
 
   endpoints: build => ({
     getUser: build.query({
-      query: () => 'user', // baseUrl/user
+      query: () => '/auth/github-auth', // baseUrl/user
     }),
     addUser: build.mutation({
       query: (body: any) => ({
