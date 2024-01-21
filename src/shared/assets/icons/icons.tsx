@@ -1771,7 +1771,7 @@ export const CreditCard = ({
 export const GithubLogo = ({
   width,
   height,
-  fillType = 'outline',
+  fillType = 'fill',
   value = 0,
   iconStyle,
 }: IconProps) => {
