@@ -18,22 +18,19 @@ class api {
 }
 
 const SignInWithSocialMedia = ({ iconName }: Props) => {
-  const [gitAuth, { isError }] = useAddUserMutation()
+  const [gitAuth, { data, isError }] = useAddUserMutation()
   function LoginWithApi() {
     window.location.assign(api.gitAuth + api.clientGitId + `&scope=read:user,user:email`)
   }
-  const [addUser, {}] = useAddUserMutation()
-  function handleAddUser() {
-    addUser({ name: 'Alina', id: 4 })
-  }
+
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
-    const URL = `https://deepwaterhorizon.ru/api/v1/auth/github-auth`
     if (Code) {
       console.log(Code)
       gitAuth({ code: Code }).unwrap()
+      console.log(data)
     }
   }, [])
   return (
