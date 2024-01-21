@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 import { Icon } from '@/src/shared/ui'
-import { useAddUserMutation, useGetUserQuery } from '@/src/shared/api/gitAuthApi'
+import { useGitAuthMutation, useGoogleAuthMutation } from '@/src/shared/api/AuthApi'
 
 type Props = {
   iconName: 'GoogleLogo' | 'GitHubLogo'
+  name: 'Git' | 'Google'
 }
 class api {
   static serverURL: string = 'https://deepwaterhorizon.ru/api/v1' /* 'http://localhost:3001' */ //backend
@@ -17,18 +18,23 @@ class api {
   //GOOGLE CONFIGS
 }
 
-const SignInWithSocialMedia = ({ iconName }: Props) => {
-  const [gitAuth, { data, isLoading, isError }] = useAddUserMutation()
-  function LoginWithApi() {
-    window.location.assign(api.gitAuth + api.clientGitId + `&scope=read:user,user:email`)
-  }
+const SignInWithSocialMedia = ({ iconName, name }: Props) => {
+  iconName = 'GoogleLogo'
 
+  const [Auth, { data, isLoading, isError }] =
+    name === 'Git' ? useGitAuthMutation() : useGoogleAuthMutation()
+  function LoginWithApi() {
+    const gitPath = api.gitAuth + api.clientGitId + `&scope=read:user,user:email`
+    const googlePath = api.gitAuth + api.clientGitId + `&scope=read:user,user:email`
+    const targetPath = name === 'Git' ? gitPath : googlePath
+    window.location.assign(targetPath)
+  }
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
     if (Code) {
-      gitAuth({ code: Code }).unwrap()
+      Auth({ code: Code }).unwrap()
     }
   }, [])
   console.log(data)
@@ -36,6 +42,12 @@ const SignInWithSocialMedia = ({ iconName }: Props) => {
     return (
       <div>
         <h1>Is Loading....</h1>
+      </div>
+    )
+  } else if (isError) {
+    return (
+      <div>
+        <h1>{isError}</h1>
       </div>
     )
   }

@@ -1,15 +1,19 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from './baseQueryWithReauth'
 
-export const gitAuthApi = createApi({
+export const AuthApi = createApi({
   reducerPath: 'gitAuthApi',
   baseQuery: baseQueryWithReauth,
 
   endpoints: build => ({
-    getUser: build.query({
-      query: () => '/auth/github-auth', // baseUrl/user
+    gitAuth: build.mutation({
+      query: (body: any) => ({
+        url: '/auth/github-auth',
+        method: 'POST',
+        body,
+      }),
     }),
-    addUser: build.mutation({
+    GoogleAuth: build.mutation({
       query: (body: any) => ({
         url: '/auth/github-auth',
         method: 'POST',
@@ -20,6 +24,4 @@ export const gitAuthApi = createApi({
   tagTypes: [],
 })
 
-export const { useGetUserQuery, useAddUserMutation } = gitAuthApi
-
-//
+export const { useGitAuthMutation, useGoogleAuthMutation } = AuthApi
