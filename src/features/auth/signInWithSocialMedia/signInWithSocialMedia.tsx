@@ -12,7 +12,7 @@ class api {
 
   //GITHUB CONFIGS
   static gitHubURL: string = `https://github.com`
-  static clientGitId: string = 'ffe4468450558d55d4e0' /* 'b4ff3618c27e31dfa252' */
+  static clientGitId: string = '52f747905128092efbce' /* 'b4ff3618c27e31dfa252' */
   static gitAuth: string = this.gitHubURL + '/login/oauth/authorize?client_id='
   //GOOGLE CONFIGS
 }
