@@ -28,12 +28,10 @@ const SignInWithSocialMedia = ({ iconName }: Props) => {
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
     if (Code) {
-      console.log(Code)
       gitAuth({ code: Code }).unwrap()
-
-      console.log(data)
     }
   }, [])
+  console.log(data)
   return (
     <div onClick={LoginWithApi}>
       <Icon iconName={iconName} />
