@@ -18,7 +18,7 @@ class api {
 }
 
 const SignInWithSocialMedia = ({ iconName }: Props) => {
-  const [gitAuth, { data, isError }] = useAddUserMutation()
+  const [gitAuth, { data, isLoading, isError }] = useAddUserMutation()
   function LoginWithApi() {
     window.location.assign(api.gitAuth + api.clientGitId + `&scope=read:user,user:email`)
   }
@@ -32,6 +32,13 @@ const SignInWithSocialMedia = ({ iconName }: Props) => {
     }
   }, [])
   console.log(data)
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Is Loading....</h1>
+      </div>
+    )
+  }
   return (
     <div onClick={LoginWithApi}>
       <Icon iconName={iconName} />
