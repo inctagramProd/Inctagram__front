@@ -11,7 +11,7 @@ export const gitAuthApi = createApi({
     }),
     addUser: build.mutation({
       query: (body: any) => ({
-        url: 'user',
+        url: '/auth/github-auth',
         method: 'POST',
         body,
       }),
