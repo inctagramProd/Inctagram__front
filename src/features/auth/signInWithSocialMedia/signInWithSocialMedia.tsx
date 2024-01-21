@@ -30,6 +30,7 @@ const SignInWithSocialMedia = ({ iconName }: Props) => {
     if (Code) {
       console.log(Code)
       gitAuth({ code: Code }).unwrap()
+
       console.log(data)
     }
   }, [])
