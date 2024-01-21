@@ -35,12 +35,7 @@ const SignInWithSocialMedia = ({ iconName }: Props) => {
   return (
     <div onClick={LoginWithApi}>
       <Icon iconName={iconName} />
-      <ul>
-        {/* {data?.map((e: any) => (
-          <li> {e?.name}</li>
-        ))} */}
-      </ul>
-      {/* <button onClick={handleAddUser}>add user</button> */}
+      <h1>{data?.username}</h1>
     </div>
   )
 }
