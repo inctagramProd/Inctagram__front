@@ -24,9 +24,9 @@ const SignInWithSocialMedia = ({ iconName, name }: Props) => {
     const Code = urlParams.get('code')
     if (Code) {
       Auth({ code: Code }).unwrap()
-      localStorage.setItem('data', JSON.stringify(data))
     }
   }, [])
+  console.log(data)
 
   if (isLoading) {
     return <Loader />
