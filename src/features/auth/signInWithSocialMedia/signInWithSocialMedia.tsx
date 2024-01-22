@@ -26,7 +26,6 @@ const SignInWithSocialMedia = ({ iconName, name }: Props) => {
       Auth({ code: Code }).unwrap()
     }
   }, [])
-  console.log(data)
   if (isLoading) {
     return <Loader />
   } else if (isError) {
