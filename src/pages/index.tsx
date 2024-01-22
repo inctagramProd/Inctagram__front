@@ -1,14 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import SignInWithSocialMedia from '../features/auth/signInWithSocialMedia/signInWithSocialMedia'
-import { Icon } from '../shared/ui'
 
 export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
-      <SignInWithSocialMedia iconName="GoogleLogo" name="Google" />
-
-      {/* <div
+      <div
         style={{
           display: 'flex',
           justifyContent: 'spaceBetween',
@@ -112,7 +108,7 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
-      </div> */}
+      </div>
     </main>
   )
 }
