@@ -1,12 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
+    <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
       <div
         style={{
           display: 'flex',
@@ -22,7 +19,7 @@ export default function Home() {
           Sign In{' '}
         </Link>
         <Link
-          href={`/forgotpassword`}
+          href={`/forgot-password`}
           style={{ color: 'white', fontSize: '30px', marginLeft: '25px' }}
         >
           Forgot Password{' '}

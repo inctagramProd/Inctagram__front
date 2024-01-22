@@ -3,14 +3,13 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 // Mutex. Preventing multiple unauthorized errors
 import { Mutex } from 'async-mutex'
 
-const BASE_URL = 'https://deepwaterhorizon.ru/api/v1'
+const BASE_URL = 'https://deepwaterhorizon.ru'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    
     const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {

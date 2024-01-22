@@ -1,10 +1,9 @@
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Link from 'next/link'
+import { ForgotPassword } from '@/src/widgets/ForgotPassword/ForgotPassword'
+import { getLayout } from '@/src/widgets/Layout/Layout'
 
-const inter = Inter({ subsets: ['latin'] })
-
-const SignUp = () => {
+const ForgotPasswordPage = () => {
   return (
     <>
       <Head>
@@ -14,11 +13,11 @@ const SignUp = () => {
         <link href={'/favicon.ico'} rel={'icon'} />
         <Link href={`/signup`} />
       </Head>
-      <h1 style={{ marginTop: '150px', textAlign: 'center' }}>
-        Type in your email and we will help
-      </h1>
+      <ForgotPassword />
     </>
   )
 }
 
-export default SignUp
+ForgotPasswordPage.getLayout = getLayout
+
+export default ForgotPasswordPage
