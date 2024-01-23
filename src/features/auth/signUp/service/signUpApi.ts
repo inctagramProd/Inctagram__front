@@ -9,14 +9,6 @@ export const signUp = baseApi.injectEndpoints({
         url: 'auth/register',
         body: data,
       }),
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          const {data} = await queryFulfilled
-          console.log(data)
-        } catch (e) {
-          console.error(e)
-        }
-      },
     }),
   }),
 })

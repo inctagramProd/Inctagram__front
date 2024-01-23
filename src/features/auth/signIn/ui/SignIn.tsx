@@ -1,9 +1,11 @@
-import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { signInSchema } from '@/src/shared/schemas'
 import { FormikHelpers, useFormik } from 'formik'
 import Link from 'next/link'
-import { Card, Typography, Button, Input } from '@/src/shared/ui'
-import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
+import { useSignInMutation } from '../service/signInApi'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
+import { Card, Typography, Input, Button } from '@/src/shared/ui'
 
 type FormValues = {
   email: string
@@ -12,10 +14,24 @@ type FormValues = {
 
 export const SignIn = () => {
   const { locale } = useTranslate()
+  const router = useRouter()
+  const [loginUser, { data: loginData, isLoading, isSuccess }] = useSignInMutation()
+
+  useEffect(() => {
+    if (isSuccess && loginData) {
+      router.push('#')
+    }
+  }, [isSuccess, loginData, router])
+
   const onSubmitHandler = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    alert(JSON.stringify(values, null, 2))
+    actions.setStatus('')
+    loginUser(values)
+      .unwrap()
+      .catch(e => {
+        const error = e as { data: { message: string } }
+        actions.setStatus(error.data.message)
+      })
     actions.resetForm()
-    actions.setSubmitting(false)
   }
 
   const formik = useFormik({
@@ -30,17 +46,9 @@ export const SignIn = () => {
   return (
     <div className="flex items-center justify-center h-[90vh]">
       <Card className="w-[378px]">
-        <Typography variant="h1" className="text-center mb-[13px] cursor-default">
+        <Typography variant="h1" className="text-center mb-[13px]">
           {locale.auth.signIn}
         </Typography>
-        <div className={`flex justify-center gap-x-[60px] mb-6`}>
-          <Link href="#">
-            <GoogleLogo width={36} height={36} />
-          </Link>
-          <Link href="#">
-            <GithubLogo width={36} height={36} />
-          </Link>
-        </div>
         <div className="mb-[18px]">
           <form onSubmit={formik.handleSubmit}>
             <div className="flex flex-col gap-y-6 mb-9">
@@ -54,7 +62,7 @@ export const SignIn = () => {
                 label={locale.auth.password}
                 type="password"
                 {...formik.getFieldProps('password')}
-                error={formik.touched.password && formik.errors.password}
+                error={(formik.touched.password && formik.errors.password) || formik.status}
               />
             </div>
             <div className="text-end mb-6">
@@ -66,8 +74,8 @@ export const SignIn = () => {
             </div>
             <div className="[&>button]:w-full">
               <Button
-                style="primary"
                 type="submit"
+                style="primary"
                 label={locale.auth.signIn}
                 disable={!(formik.isValid && formik.dirty)}
                 className="w-full"

@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
 import { Card, Checkbox, Typography, Input, Button } from '@/src/shared/ui'
 import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
-import { FormValues, SignUpParams } from '../../service/types/signUpTypes'
+import { FormValues, SignUpParams } from '@/src/features/auth/signUp/service/types/signUpTypes'
 
 type Props = {
-  onSubmit: (values: SignUpParams) => void
+  onSubmit: (values: SignUpParams) => Promise<void>
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
@@ -16,8 +16,9 @@ export const SignUpForm = ({ onSubmit }: Props) => {
 
   const onSubmitHandler = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     const { username, email, password } = values
-    onSubmit({ username, email, password })
-    actions.resetForm()
+    await onSubmit({ username, email, password }).then(() => {
+      actions.resetForm()
+    })
   }
 
   const formik = useFormik({
