@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import s from './DatePicker.module.css'
 import './style.css'
 import * as Icons from '../../assets/icons/icons'
+import { Typography } from '@/src/shared/ui'
 
 type Props = {
   isRange?: boolean
@@ -20,10 +21,11 @@ type InputProps = {
 
 const CustomInput = ({ value, onClick, hasError, isRange }: InputProps) => {
   const inputClassname = `${s.customDateInput} ${hasError ? s.error : ''} ${isRange ? s.range : ''}`
+
   return <input className={inputClassname} value={value} onClick={onClick} readOnly />
 }
 
-export const UIDatePicker = ({ onChange, isRange, hasError }: Props) => {
+export const UIDatePicker = ({ onChange, isRange, hasError, errorMsg }: Props) => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const [startDate, endDate] = dateRange
 
@@ -32,49 +34,52 @@ export const UIDatePicker = ({ onChange, isRange, hasError }: Props) => {
   }
 
   return (
-    <DatePicker
-      selectsRange={isRange}
-      startDate={startDate}
-      dateFormat="dd/MM/yyyy"
-      endDate={endDate}
-      calendarStartDay={1}
-      selected={isRange ? null : startDate}
-      onChange={update => {
-        if (!Array.isArray(update)) {
-          setDateRange([update, update])
-          if (onChange) {
-            onChange(formatDate(update))
+    <>
+      <DatePicker
+        selectsRange={isRange}
+        startDate={startDate}
+        dateFormat="dd/MM/yyyy"
+        endDate={endDate}
+        calendarStartDay={1}
+        selected={isRange ? null : startDate}
+        onChange={update => {
+          if (!Array.isArray(update)) {
+            setDateRange([update, update])
+            if (onChange) {
+              onChange(formatDate(update))
+            }
+          } else {
+            setDateRange(update)
+            if (onChange) {
+              onChange(`${formatDate(update[0])} - ${formatDate(update[1])}`)
+            }
           }
-        } else {
-          setDateRange(update)
-          if (onChange) {
-            onChange(`${formatDate(update[0])} - ${formatDate(update[1])}`)
-          }
+        }}
+        customInput={
+          <CustomInput
+            isRange={isRange}
+            hasError={hasError}
+            onClick={() => {}}
+            value={
+              isRange
+                ? `${formatDate(startDate)} - ${formatDate(endDate)}`
+                : `${formatDate(startDate)}`
+            }
+          />
         }
-      }}
-      customInput={
-        <CustomInput
-          isRange={isRange}
-          hasError={hasError}
-          onClick={() => {}}
-          value={
-            isRange
-              ? `${formatDate(startDate)} - ${formatDate(endDate)}`
-              : `${formatDate(startDate)}`
-          }
-        />
-      }
-      showIcon={true}
-      icon={
-        <Icons.Calendar
-          width={24}
-          height={24}
-          theme={'light'}
-          iconStyle={`${
-            hasError ? 'fill-red-500' : 'fill-light-500'
-          }  absolute right-2.5 top-1.5 z-10`}
-        />
-      }
-    />
+        showIcon={true}
+        icon={
+          <Icons.Calendar
+            width={24}
+            height={24}
+            theme={'light'}
+            iconStyle={`${
+              hasError ? 'fill-red-500' : 'fill-light-500'
+            }  absolute right-2.5 top-1.5 z-10`}
+          />
+        }
+      />
+      {errorMsg && <Typography variant={'error'}>{errorMsg}</Typography>}
+    </>
   )
 }

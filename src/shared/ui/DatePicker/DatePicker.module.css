@@ -1,14 +1,19 @@
 .customDateInput {
-  @apply text-light-500 cursor-pointer bg-dark-300 p-2 rounded-md w-auto;
+  @apply text-light-500 cursor-pointer bg-dark-300 p-2 rounded-md;
 
   position: relative;
+  box-sizing: border-box;
   width: 150px;
-  border: 1px solid #aeaeae;
+  border: 1px solid rgb(174 174 174 / 45%);
+}
+
+.customDateInput:hover {
+  border: 1px solid rgb(174 174 174 / 44%);
 }
 
 .customDateInput:focus {
   box-sizing: border-box;
-  border: 3px solid #2f68cc;
+  border: 1px solid #397df6;
 }
 
 .error {
@@ -16,5 +21,5 @@
 }
 
 .range {
-  width: 258px;
+  width: 258px !important;
 }
