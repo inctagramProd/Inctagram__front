@@ -5,20 +5,21 @@ import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
 import { Card, Checkbox, Typography, Input, Button } from '@/src/shared/ui'
 import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
-import { FormValues, SignUpParams } from '@/src/features/auth/signUp/service/types/signUpTypes'
+import {
+  SignUpFormValues,
+  SignUpParams,
+} from '@/src/features/auth/signUp/service/types/signUpTypes'
 
 type Props = {
-  onSubmit: (values: SignUpParams) => Promise<void>
+  onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
   const { locale } = useTranslate()
 
-  const onSubmitHandler = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+  const onSubmitHandler = (values: SignUpFormValues, actions: FormikHelpers<SignUpFormValues>) => {
     const { username, email, password } = values
-    await onSubmit({ username, email, password }).then(() => {
-      actions.resetForm()
-    })
+    onSubmit({ username, email, password }, actions)
   }
 
   const formik = useFormik({
@@ -28,7 +29,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
       password: '',
       confirmPassword: '',
       terms: false,
-    } as FormValues,
+    } as SignUpFormValues,
     validationSchema: signUpSchema(locale),
     onSubmit: onSubmitHandler,
   })

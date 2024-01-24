@@ -4,7 +4,7 @@ export type SignUpParams = {
   password: string
 }
 
-export type FormValues = {
+export type SignUpFormValues = {
   username: string
   email: string
   password: string
