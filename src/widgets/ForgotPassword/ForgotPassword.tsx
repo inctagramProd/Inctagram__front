@@ -1,4 +1,4 @@
-import { Card, Typography, Input, Button, Modal } from '@/src/shared/ui'
+import { Card, Typography, Input, Button, Modal, ReCaptcha } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Formik, Form, Field } from 'formik'
 import { useRouter } from 'next/router'
@@ -12,6 +12,7 @@ type FormValues = {
 
 export const ForgotPassword = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isCaptchaValid, setIsCaptchaValid] = useState(false)
   const [email, setEmail] = useState('')
 
   const { locale } = useTranslate()
@@ -19,13 +20,17 @@ export const ForgotPassword = () => {
 
   const initialValues: FormValues = { email: '' }
 
-  const [sendUserEmail] = useSendUserEmailMutation()
+  const [sendUserEmail, { isSuccess }] = useSendUserEmailMutation()
 
   const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string()
       .email(locale.auth.authErrors.emailField.email)
       .required(locale.auth.authErrors.emailField.nonEmpty),
   })
+
+  const handleCaptchaChange = (value: string | null) => {
+    setIsCaptchaValid(value !== null)
+  }
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -65,12 +70,17 @@ export const ForgotPassword = () => {
             <Typography className="mt-2 mb-5 text-light-900" variant="regular_14">
               {locale.auth.instructions}
             </Typography>
+            {isSuccess && (
+              <Typography className="mt-2 mb-5 text-light-900" variant="regular_14">
+                {locale.auth.linkHasBeenSent}
+              </Typography>
+            )}
             <Button
               className="w-full"
               style="primary"
-              label={locale.auth.sendLink}
+              label={isSuccess ? locale.auth.sendLinkAgain : locale.auth.sendLink}
               type="submit"
-              disable={isSubmitting || !isValid || values.email === ''}
+              disable={isSubmitting || !isValid || !isCaptchaValid || values.email === ''}
             />
             <Button
               style="text"
@@ -83,6 +93,11 @@ export const ForgotPassword = () => {
         )}
       </Formik>
       <Modal isOpen={isModalOpen} onOpenChange={setIsModalOpen} email={email} />
+      {!isSuccess && (
+        <div className="flex justify-center">
+          <ReCaptcha onChange={handleCaptchaChange} />
+        </div>
+      )}
     </Card>
   )
 }

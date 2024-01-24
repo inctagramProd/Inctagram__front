@@ -9,7 +9,7 @@ export const ReCaptcha = ({ theme = 'dark', errorMessage, ...restProps }: Props)
   return (
     <div className={`mx-auto pt-2 px-1.5 pb-3 ${errorMessage && 'border border-danger-500'}`}>
       <ReCAPTCHA
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        sitekey={'6LfIGjwpAAAAAEtaXp-3MCavYaGC-MJ6UfLQL9DZ'}
         {...restProps}
         theme={theme}
         hl={'en-GB'}

@@ -9,7 +9,14 @@ export const authApi = baseApi.injectEndpoints({
         body: { email },
       }),
     }),
+    validateEmailToken: builder.mutation({
+      query: token => ({
+        url: '/api/v1/auth/check-password-recovery-code',
+        method: 'POST',
+        body: { token },
+      }),
+    }),
   }),
 })
 
-export const { useSendUserEmailMutation } = authApi
+export const { useSendUserEmailMutation, useValidateEmailTokenMutation } = authApi

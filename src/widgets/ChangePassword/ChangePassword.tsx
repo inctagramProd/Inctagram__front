@@ -2,6 +2,9 @@ import { Card, Typography, Input, Button } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
+import { useRouter } from 'next/router'
+import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
+import { useEffect } from 'react'
 
 type FormValues = {
   password: string
@@ -9,6 +12,21 @@ type FormValues = {
 }
 
 export const ChangePassword = () => {
+  const [validateEmailToken, { isLoading }] = useValidateEmailTokenMutation()
+  const router = useRouter()
+  const token = router.query.code
+
+  useEffect(() => {
+    validateEmailToken(token)
+      .unwrap()
+      .then()
+      .catch(() => router.push('/resend-link'))
+  }, [token, validateEmailToken])
+
+  if (isLoading) {
+    return <div>Загрузка ..</div>
+  }
+
   const { locale } = useTranslate()
 
   const initialValues: FormValues = {
