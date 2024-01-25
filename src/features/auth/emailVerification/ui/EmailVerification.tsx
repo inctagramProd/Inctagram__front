@@ -11,15 +11,15 @@ export const EmailVerification = () => {
   }
 
   return (
-    <div className="flex flex-col items-center ">
-      <div className="mt-[35px] mb-[72px]  text-center">
+    <div className="flex flex-col items-center">
+      <div className="mt-[35px] mb-[54px] text-center">
         <Typography variant="h1" className="mb-[19px]">
           {locale.auth.emailConfirmTitle}
         </Typography>
-        <Typography variant="regular_16" className="mb-[54px]">
-          {locale.auth.emailConfirmText}
-        </Typography>
-        <Button style="primary" label={locale.auth.signIn} className="" onClick={onClickHandler} />
+        <Typography variant="regular_16">{locale.auth.emailConfirmText}</Typography>
+      </div>
+      <div className="mb-[72px]">
+        <Button style="primary" label={locale.auth.signIn} onClick={onClickHandler} />
       </div>
       <div>
         <EmailConfirmedIcon />

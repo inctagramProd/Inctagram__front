@@ -36,8 +36,8 @@ export const Header = (props: Props) => {
 
   const fontColor = theme === 'dark' ? 'text-light-100' : 'text-dark-100'
   const linkOptions = [
-    { title: 'Log In', value: '/logIn' },
-    { title: 'Sign Up', value: '/signUp' },
+    { title: 'Log In', value: 'auth/sign-in' },
+    { title: 'Sign Up', value: 'auth/sign-up' },
   ]
 
   const t = (value: any) => {
