@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { ForgotPassword } from '@/src/widgets/ForgotPassword/ForgotPassword'
+import { ForgotPasswordForm } from '@/src/widgets/ForgotPasswordForm/ForgotPasswordForm'
 import { getLayout } from '@/src/widgets/Layout/Layout'
 
 const ForgotPasswordPage = () => {
@@ -13,7 +13,7 @@ const ForgotPasswordPage = () => {
         <link href={'/favicon.ico'} rel={'icon'} />
         <Link href={`/signup`} />
       </Head>
-      <ForgotPassword />
+      <ForgotPasswordForm />
     </>
   )
 }

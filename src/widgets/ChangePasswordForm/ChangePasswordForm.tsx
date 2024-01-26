@@ -5,27 +5,28 @@ import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
 import { useEffect } from 'react'
+import { createNewPasswordSchema } from './service/createNewPasswordSchema'
 
 type FormValues = {
   password: string
   passwordConfirmation: string
 }
 
-export const ChangePassword = () => {
-  const [validateEmailToken, { isLoading }] = useValidateEmailTokenMutation()
-  const router = useRouter()
-  const token = router.query.code
+export const ChangePasswordForm = () => {
+  // const [validateEmailToken, { isLoading }] = useValidateEmailTokenMutation()
+  // const router = useRouter()
+  // const token = router.query.code
 
-  useEffect(() => {
-    validateEmailToken(token)
-      .unwrap()
-      .then()
-      .catch(() => router.push('/resend-link'))
-  }, [token, validateEmailToken])
+  // useEffect(() => {
+  //   validateEmailToken(token)
+  //     .unwrap()
+  //     .then()
+  //     .catch(() => router.push('/resend-link'))
+  // }, [token, validateEmailToken])
 
-  if (isLoading) {
-    return <div>Загрузка ..</div>
-  }
+  // if (isLoading) {
+  //   return <div>Загрузка ..</div>
+  // }
 
   const { locale } = useTranslate()
 
@@ -34,19 +35,19 @@ export const ChangePassword = () => {
     passwordConfirmation: '',
   }
 
-  const createNewPasswordSchema = Yup.object().shape({
-    password: Yup.string()
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
-        locale.auth.authErrors.password.regex
-      )
-      .min(6, locale.auth.authErrors.password.min)
-      .max(20, locale.auth.authErrors.password.max)
-      .required(locale.auth.authErrors.password.nonEmpty),
-    passwordConfirmation: Yup.string()
-      .oneOf([Yup.ref('password')], locale.auth.authErrors.refine)
-      .required(locale.auth.authErrors.passwordConfirm),
-  })
+  // const createNewPasswordSchema = Yup.object().shape({
+  //   password: Yup.string()
+  //     .matches(
+  //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
+  //       locale.auth.authErrors.password.regex
+  //     )
+  //     .min(6, locale.auth.authErrors.password.min)
+  //     .max(20, locale.auth.authErrors.password.max)
+  //     .required(locale.auth.authErrors.password.nonEmpty),
+  //   passwordConfirmation: Yup.string()
+  //     .oneOf([Yup.ref('password')], locale.auth.authErrors.refine)
+  //     .required(locale.auth.authErrors.passwordConfirm),
+  // })
 
   const handleSubmit = (values: FormValues) => {
     const payload = {

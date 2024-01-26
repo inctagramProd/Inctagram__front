@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { getLayout } from '@/src/widgets/Layout/Layout'
-import { ChangePassword } from '@/src/widgets/ChangePassword/ChangePassword'
+import { PasswordResetController } from '@/src/widgets/PasswordResetController/PasswordResetController'
 
 const ChangePasswordPage = () => {
   return (
@@ -13,7 +13,7 @@ const ChangePasswordPage = () => {
         <link href={'/favicon.ico'} rel={'icon'} />
         <Link href={`/signup`} />
       </Head>
-      <ChangePassword />
+      <PasswordResetController />
     </>
   )
 }

@@ -1,42 +1,42 @@
 import { Card, Typography, Input, Button, Modal, ReCaptcha } from '@/src/shared/ui'
-import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
-import * as Yup from 'yup'
 import { useSendUserEmailMutation } from '@/src/shared/api/authApi'
 import { useState } from 'react'
+import { useForgotPasswordForm } from './service/forgotPasswordSchema'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 type FormValues = {
   email: string
 }
 
-export const ForgotPassword = () => {
+export const ForgotPasswordForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isCaptchaValid, setIsCaptchaValid] = useState(false)
+  const [reCaptcha, setReCaptcha] = useState<null | string>(null)
   const [email, setEmail] = useState('')
 
-  const { locale } = useTranslate()
   const router = useRouter()
 
   const initialValues: FormValues = { email: '' }
 
   const [sendUserEmail, { isSuccess }] = useSendUserEmailMutation()
+  const { forgotPasswordSchema, locale } = useForgotPasswordForm()
 
-  const forgotPasswordSchema = Yup.object().shape({
-    email: Yup.string()
-      .email(locale.auth.authErrors.emailField.email)
-      .required(locale.auth.authErrors.emailField.nonEmpty),
-  })
-
-  const handleCaptchaChange = (value: string | null) => {
-    setIsCaptchaValid(value !== null)
-  }
-
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values: FormValues, { setFieldError }: FormikHelpers<FormValues>) => {
     try {
-      await sendUserEmail(values.email).unwrap()
+      const payload = {
+        email: values.email,
+        ...(isSuccess ? {} : { recaptchaToken: reCaptcha }),
+      }
+      console.log(payload.email)
+      await sendUserEmail(payload).unwrap()
       setIsModalOpen(true)
     } catch (error) {
+      const err = error as FetchBaseQueryError
+
+      if (err.status === 404) {
+        setFieldError('email', 'test')
+      }
       console.log(error)
       setEmail(values.email)
       setIsModalOpen(true)
@@ -50,7 +50,7 @@ export const ForgotPassword = () => {
   return (
     <Card className="my-20 mx-auto">
       <Typography className="text-center mb-9" variant="h1">
-        {locale.auth.forgotPasswordTitle}
+        {locale.forgotPasswordTitle}
       </Typography>
       <Formik
         onSubmit={handleSubmit}
@@ -65,26 +65,28 @@ export const ForgotPassword = () => {
               as={Input}
               placeholder="Epam@epam.com"
               label="Email"
-              error={touched.email && errors.email ? errors.email : null}
+              error={touched.email && errors.email}
             />
             <Typography className="mt-2 mb-5 text-light-900" variant="regular_14">
-              {locale.auth.instructions}
+              {locale.instructions}
             </Typography>
             {isSuccess && (
               <Typography className="mt-2 mb-5 text-light-900" variant="regular_14">
-                {locale.auth.linkHasBeenSent}
+                {locale.linkHasBeenSent}
               </Typography>
             )}
             <Button
               className="w-full"
               style="primary"
-              label={isSuccess ? locale.auth.sendLinkAgain : locale.auth.sendLink}
+              label={isSuccess ? locale.sendLinkAgain : locale.sendLink}
               type="submit"
-              disable={isSubmitting || !isValid || !isCaptchaValid || values.email === ''}
+              disable={
+                isSubmitting || !isValid || (!isSuccess && !reCaptcha) || values.email === ''
+              }
             />
             <Button
               style="text"
-              label={locale.auth.backToSignIn}
+              label={locale.backToSignIn}
               className="w-full my-3"
               type="button"
               onClick={handleToGoBack}
@@ -95,7 +97,7 @@ export const ForgotPassword = () => {
       <Modal isOpen={isModalOpen} onOpenChange={setIsModalOpen} email={email} />
       {!isSuccess && (
         <div className="flex justify-center">
-          <ReCaptcha onChange={handleCaptchaChange} />
+          <ReCaptcha onChange={value => setReCaptcha(value)} />
         </div>
       )}
     </Card>
