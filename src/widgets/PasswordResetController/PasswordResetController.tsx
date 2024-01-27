@@ -1,4 +1,4 @@
-import { ChangePasswordForm } from '../ChangePasswordForm/ChangePasswordForm'
+import { ChangePasswordForm } from '../ChangePasswordForm/ui/ChangePasswordForm'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'

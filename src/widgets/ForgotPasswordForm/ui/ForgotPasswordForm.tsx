@@ -3,7 +3,7 @@ import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
 import { useSendUserEmailMutation } from '@/src/shared/api/authApi'
 import { useState } from 'react'
-import { useForgotPasswordForm } from './service/forgotPasswordSchema'
+import { useForgotPasswordForm } from '../service/useForgotPasswordForm'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 type FormValues = {

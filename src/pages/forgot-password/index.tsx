@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { ForgotPasswordForm } from '@/src/widgets/ForgotPasswordForm/ForgotPasswordForm'
+import { ForgotPasswordForm } from '@/src/widgets/ForgotPasswordForm/ui/ForgotPasswordForm'
 import { getLayout } from '@/src/widgets/Layout/Layout'
 
 const ForgotPasswordPage = () => {

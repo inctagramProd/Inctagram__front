@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
 import { useEffect } from 'react'
-import { createNewPasswordSchema } from './service/createNewPasswordSchema'
+import { createNewPasswordSchema } from '../service/createNewPasswordSchema'
 
 type FormValues = {
   password: string
