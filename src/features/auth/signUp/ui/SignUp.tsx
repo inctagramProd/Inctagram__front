@@ -34,7 +34,7 @@ export const SignUp = () => {
   }, [isError])
 
   return (
-    <div className="flex items-center justify-center h-[90vh]">
+    <div className="flex items-center justify-center h-[calc(100vh-60px)]">
       <Modal
         email={email}
         isOpen={emailSentModal}

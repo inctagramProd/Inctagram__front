@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef, FormEvent, useState } from 'react'
 import { Icon } from '../Icon/Icon'
 
 type Props = {
@@ -12,7 +12,8 @@ export const Input = ({ label, error, type, ...inputProps }: Props) => {
 
   const inputType = type === 'password' ? (isPasswordShown ? 'text' : 'password') : type
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     if (!inputProps.disabled) {
       setIsPasswordShown(!isPasswordShown)
     }
