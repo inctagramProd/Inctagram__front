@@ -6,8 +6,8 @@ import EmailConfirmedIcon from '@/src/shared/assets/icons/EmailConfirmedIcon'
 export const EmailVerification = () => {
   const { locale } = useTranslate()
   const route = useRouter()
-  const onClickHandler = () => {
-    route.push('auth/sign-in')
+  const signInHandler = () => {
+    route.push('sign-in')
   }
 
   return (
@@ -19,7 +19,7 @@ export const EmailVerification = () => {
         <Typography variant="regular_16">{locale.auth.emailConfirmText}</Typography>
       </div>
       <div className="mb-[72px]">
-        <Button style="primary" label={locale.auth.signIn} onClick={onClickHandler} />
+        <Button style="primary" label={locale.auth.signIn} onClick={signInHandler} />
       </div>
       <div>
         <EmailConfirmedIcon />

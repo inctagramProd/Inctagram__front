@@ -9,6 +9,12 @@ export const SignIn = () => {
   const router = useRouter()
   const [loginUser, { data, isLoading, isSuccess }] = useSignInMutation()
 
+  useEffect(() => {
+    if (isSuccess) {
+      router.push('/home')
+    }
+  }, [isSuccess])
+
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     loginUser(values)
@@ -21,12 +27,6 @@ export const SignIn = () => {
         actions.setStatus(error.data.message)
       })
   }
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push('/home')
-    }
-  }, [isSuccess, router])
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">

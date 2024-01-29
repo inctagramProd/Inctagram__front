@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SignUpForm } from '@/src/features/auth/signUp/ui/SignUpForm/SignUpForm'
 import { Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'
@@ -15,6 +15,7 @@ export const SignUp = () => {
     userRegistration(value)
       .unwrap()
       .then(() => {
+        setEmailSentModal(true)
         console.log('registration have done!: ', data)
         actions.resetForm()
       })
@@ -28,10 +29,6 @@ export const SignUp = () => {
         // }
       })
   }
-
-  useEffect(() => {
-    // if (isError) setEmailSentModal(true)
-  }, [isError])
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
