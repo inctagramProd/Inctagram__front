@@ -1,10 +1,37 @@
-import React from 'react'
-
 import { LinkItem } from './LinkedItem'
+import { LogOut } from '@/src/features/auth/logOut'
+import { StoreProvider } from '@/src/app/providers'
 
 type Props = { className?: string; theme?: 'dark' | 'light' }
 
 export const Sidebar = (props: Props) => {
+  // const handleLogOut = async () => {
+  //   try {
+  //     await logOut_old({ accessToken: 'your-access-token' }).unwrap()
+  //     // Handle successful logout
+  //   } catch (error) {
+  //     // Handle error during logout
+  //   }
+  // }
+
+  // const handleLogOut = async () => {
+  //   userRegistration(value)
+  //     .unwrap()
+  //     .then(() => {
+  //       console.log('registration have done!: ', data)
+  //       actions.resetForm()
+  //     })
+  //     .catch(e => {
+  //       console.log('registration error: ', e)
+  //       const regex = /\s(\S+)$/ // Регулярное выражение для поиска последнего слова после пробела
+  //       const match = e.data.match(regex)
+  //       if (match) {
+  //         const lastWord = match[1]
+  //         setEmail(lastWord)
+  //       }
+  //     })
+  // }
+
   const {
     className = `fixed bottom-0 left-0 sm:h-screen 
   sm:top-[60px]  sm:left-0 sm:w-[220px] 
@@ -21,40 +48,42 @@ export const Sidebar = (props: Props) => {
                 items-start gap-y-[180px] sm:flex-col sm:flex hidden sm:block`
 
   return (
-    <div className={container}>
-      <div className={upperBlock}>
-        <LinkItem iconName={'HomeIcon'} label={'Home'} link={'/home'} style={'default'} />
-        <LinkItem iconName={'PlusSquare'} label={'Create'} link={'/create'} style={'default'} />
-        <LinkItem iconName={'Person'} label={'My Profile'} link={'/profile'} style={'default'} />
-        <LinkItem
-          iconName={'MessageCircle'}
-          label={'Messanger'}
-          link={'/message'}
-          style={'default'}
-        />
-        <LinkItem iconName={'Search'} label={'Search'} link={'/search'} style={'default'} />
-      </div>
-      <div className={bodyBlock}>
-        <div className={`flex sm:flex-col sm:gap-y-[24px]`}>
+    <StoreProvider>
+      <div className={container}>
+        <div className={upperBlock}>
+          <LinkItem iconName={'HomeIcon'} label={'Home'} link={'/home'} style={'default'} />
+          <LinkItem iconName={'PlusSquare'} label={'Create'} link={'/create'} style={'default'} />
+          <LinkItem iconName={'Person'} label={'My Profile'} link={'/profile'} style={'default'} />
           <LinkItem
-            iconName={'TrendingUp'}
-            label={'Statistics'}
-            link={'/statistics'}
+            iconName={'MessageCircle'}
+            label={'Messanger'}
+            link={'/message'}
             style={'default'}
           />
-          <LinkItem
-            iconName={'Bookmark'}
-            label={'Faivorites'}
-            link={'/faivorites'}
-            style={'default'}
-          />
+          <LinkItem iconName={'Search'} label={'Search'} link={'/search'} style={'default'} />
+        </div>
+        <div className={bodyBlock}>
+          <div className={`flex sm:flex-col sm:gap-y-[24px]`}>
+            <LinkItem
+              iconName={'TrendingUp'}
+              label={'Statistics'}
+              link={'/statistics'}
+              style={'default'}
+            />
+            <LinkItem
+              iconName={'Bookmark'}
+              label={'Faivorites'}
+              link={'/faivorites'}
+              style={'default'}
+            />
+          </div>
+        </div>
+        <div className={`flex flex-1 items-end`}>
+          <div className={`hidden sm:flex`}>
+            <LogOut />
+          </div>
         </div>
       </div>
-      <div className={`flex flex-1 items-end`}>
-        <div className={`hidden sm:flex`}>
-          <LinkItem iconName={'LogOut'} label={'Log Out'} link={'/logout'} style={'default'} />
-        </div>
-      </div>
-    </div>
+    </StoreProvider>
   )
 }
