@@ -3,8 +3,9 @@ import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
 import { useSendUserEmailMutation } from '@/src/shared/api/authApi'
 import { useState } from 'react'
-import { useForgotPasswordForm } from '../service/useForgotPasswordForm'
+import { forgotPasswordSchema } from '../service/forgotPasswordSchema'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type FormValues = {
   email: string
@@ -13,33 +14,26 @@ type FormValues = {
 export const ForgotPasswordForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [reCaptcha, setReCaptcha] = useState<null | string>(null)
-  const [email, setEmail] = useState('')
 
   const router = useRouter()
+  const { locale } = useTranslate()
 
   const initialValues: FormValues = { email: '' }
 
   const [sendUserEmail, { isSuccess }] = useSendUserEmailMutation()
-  const { forgotPasswordSchema, locale } = useForgotPasswordForm()
 
-  const handleSubmit = async (values: FormValues, { setFieldError }: FormikHelpers<FormValues>) => {
+  const handleSubmit = async (values: FormValues, { setStatus }: FormikHelpers<FormValues>) => {
     try {
       const payload = {
         email: values.email,
-        ...(isSuccess ? {} : { recaptchaToken: reCaptcha }),
+        recaptchaToken: reCaptcha,
       }
-      console.log(payload.email)
       await sendUserEmail(payload).unwrap()
       setIsModalOpen(true)
     } catch (error) {
-      const err = error as FetchBaseQueryError
+      const err = error as { data: { message: string } } // error as FetchBaseQueryError
 
-      if (err.status === 404) {
-        setFieldError('email', 'test')
-      }
-      console.log(error)
-      setEmail(values.email)
-      setIsModalOpen(true)
+      setStatus(err.data.message)
     }
   }
 
@@ -50,14 +44,14 @@ export const ForgotPasswordForm = () => {
   return (
     <Card className="my-20 mx-auto">
       <Typography className="text-center mb-9" variant="h1">
-        {locale.forgotPasswordTitle}
+        {locale.auth.forgotPasswordTitle}
       </Typography>
       <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}
-        validationSchema={forgotPasswordSchema}
+        validationSchema={forgotPasswordSchema(locale)}
       >
-        {({ isSubmitting, isValid, errors, touched, values }) => (
+        {({ isSubmitting, isValid, errors, touched, values, status, dirty }) => (
           <Form>
             <Field
               name="email"
@@ -65,41 +59,38 @@ export const ForgotPasswordForm = () => {
               as={Input}
               placeholder="Epam@epam.com"
               label="Email"
-              error={touched.email && errors.email}
+              error={(touched.email && errors.email) || status}
             />
             <Typography className="mt-2 mb-5 text-light-900" variant="regular_14">
-              {locale.instructions}
+              {locale.auth.instructions}
             </Typography>
             {isSuccess && (
               <Typography className="mt-2 mb-5 text-light-900" variant="regular_14">
-                {locale.linkHasBeenSent}
+                {locale.auth.linkHasBeenSent}
               </Typography>
             )}
             <Button
               className="w-full"
               style="primary"
-              label={isSuccess ? locale.sendLinkAgain : locale.sendLink}
+              label={isSuccess ? locale.auth.sendLinkAgain : locale.auth.sendLink}
               type="submit"
-              disable={
-                isSubmitting || !isValid || (!isSuccess && !reCaptcha) || values.email === ''
-              }
+              disable={isSubmitting || !isValid || !reCaptcha || !dirty}
             />
             <Button
               style="text"
-              label={locale.backToSignIn}
+              label={locale.auth.backToSignIn}
               className="w-full my-3"
               type="button"
               onClick={handleToGoBack}
             ></Button>
+            <Modal isOpen={isModalOpen} onOpenChange={setIsModalOpen} email={values.email} />
           </Form>
         )}
       </Formik>
-      <Modal isOpen={isModalOpen} onOpenChange={setIsModalOpen} email={email} />
-      {!isSuccess && (
-        <div className="flex justify-center">
-          <ReCaptcha onChange={value => setReCaptcha(value)} />
-        </div>
-      )}
+
+      <div className="flex justify-center">
+        <ReCaptcha onChange={value => setReCaptcha(value)} />
+      </div>
     </Card>
   )
 }

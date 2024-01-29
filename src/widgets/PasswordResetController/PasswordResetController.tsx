@@ -1,9 +1,9 @@
-import { ChangePasswordForm } from '../ChangePasswordForm/ui/ChangePasswordForm'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
 import { InvalidLinkVerification } from '../InvalidLinkVerification/InvalidLinkVerification'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { ChangePasswordForm } from '../ChangePasswordForm'
 
 type ErrorResponse = {
   email: string

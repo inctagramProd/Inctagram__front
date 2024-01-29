@@ -1,7 +1,6 @@
 import { Card, Typography, Input, Button } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Formik, Form, Field } from 'formik'
-import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
 import { useEffect } from 'react'
@@ -65,7 +64,7 @@ export const ChangePasswordForm = () => {
       <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}
-        validationSchema={createNewPasswordSchema}
+        validationSchema={createNewPasswordSchema(locale)}
       >
         {({ isSubmitting, errors, touched }) => (
           <Form className="flex flex-col gap-6">
