@@ -21,11 +21,11 @@ export const SignUp = () => {
       .catch(e => {
         console.log('registration error: ', e)
         const regex = /\s(\S+)$/ // Регулярное выражение для поиска последнего слова после пробела
-        const match = e.data.match(regex)
-        if (match) {
-          const lastWord = match[1]
-          setEmail(lastWord)
-        }
+        // const match = e.data.match(regex)
+        // if (match) {
+        //   const lastWord = match[1]
+        //   setEmail(lastWord)
+        // }
       })
   }
 

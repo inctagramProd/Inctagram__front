@@ -7,8 +7,8 @@ export const InvalidLinkVerification = () => {
   const onClickHandler = () => {}
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="mt-[35px] mb-[31px] text-center max-w-[300px]">
+    <div className="flex flex-col items-center mt-[35px]">
+      <div className="mb-[31px] text-center max-w-[300px]">
         <Typography variant="h1" className="mb-[19px]">
           {locale.auth.emailVerificationTitle}
         </Typography>

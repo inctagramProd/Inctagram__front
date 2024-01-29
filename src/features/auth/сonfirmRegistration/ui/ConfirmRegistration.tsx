@@ -18,7 +18,7 @@ export const ConfirmRegistration = () => {
   }, [code])
   if (isLoading) {
     return (
-      <Typography variant="h2" className="flex justify-center items-center h-[90vh]">
+      <Typography variant="h2" className="flex justify-center items-center h-[calc(100vh - 60px)]">
         Loading...
       </Typography>
     )

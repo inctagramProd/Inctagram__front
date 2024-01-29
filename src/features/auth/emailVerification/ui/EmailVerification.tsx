@@ -11,8 +11,8 @@ export const EmailVerification = () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="mt-[35px] mb-[54px] text-center">
+    <div className="flex flex-col items-center mt-[35px]">
+      <div className="mb-[54px] text-center">
         <Typography variant="h1" className="mb-[19px]">
           {locale.auth.emailConfirmTitle}
         </Typography>
