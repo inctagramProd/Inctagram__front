@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
       <SignInWithSocialMedia iconName="GithubLogo" name="Git" />
+      <SignInWithSocialMedia iconName="GoogleLogo" name="Google" />
       <div
         style={{
           display: 'flex',

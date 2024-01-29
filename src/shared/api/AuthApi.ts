@@ -15,7 +15,7 @@ export const AuthApi = createApi({
     }),
     GoogleAuth: build.mutation({
       query: (body: any) => ({
-        url: '/auth/github-auth',
+        url: '/auth/google-auth',
         method: 'POST',
         body,
       }),
