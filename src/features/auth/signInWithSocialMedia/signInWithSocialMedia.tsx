@@ -18,6 +18,7 @@ const SignInWithSocialMedia = ({ iconName, name }: Props) => {
     const targetPath = name === 'Git' ? gitPath : googlePath
     window.location.assign(targetPath)
   }
+
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
