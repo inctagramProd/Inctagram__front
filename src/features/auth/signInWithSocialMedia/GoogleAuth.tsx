@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Icon } from '@/src/shared/ui'
 import { useGoogleAuthMutation } from '@/src/shared/api/AuthApi'
 import { api } from '@/src/shared/api/ThirdPartyApi'
@@ -10,7 +10,9 @@ type Props = {
 
 const GoogleAuth = ({ iconName }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGoogleAuthMutation()
+  const [statusGoogle, setStatusGoogle] = useState<boolean>(false)
   function LoginWithApi() {
+    setStatusGoogle(true)
     const googlePath =
       api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
     window.location.assign(googlePath)
@@ -21,7 +23,10 @@ const GoogleAuth = ({ iconName }: Props) => {
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
     if (Code) {
-      Auth({ code: Code }).unwrap()
+      if (statusGoogle) {
+        Auth({ code: Code }).unwrap()
+        console.log(statusGoogle)
+      }
     }
   }, [])
   console.log(data)
