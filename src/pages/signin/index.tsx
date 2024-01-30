@@ -1,4 +1,6 @@
+import GitAuth from '@/src/features/auth/signInWithSocialMedia/GitAuth'
 import SignInWithSocialMedia from '@/src/features/auth/signInWithSocialMedia/GitAuth'
+import GoogleAuth from '@/src/features/auth/signInWithSocialMedia/GoogleAuth'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -17,7 +19,8 @@ const SignUp = () => {
       </Head>
       <h1 style={{ marginTop: '150px', textAlign: 'center' }}>Get logged id</h1>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <SignInWithSocialMedia iconName="GithubLogo" name="Git" />
+        <GitAuth iconName="GithubLogo" />
+        <GoogleAuth iconName="GoogleLogo" />
       </div>
     </>
   )
