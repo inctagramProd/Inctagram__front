@@ -13,8 +13,9 @@ const SignInWithSocialMedia = ({ iconName, name }: Props) => {
   const [Auth, { data, isLoading, isError }] =
     name === 'Git' ? useGitAuthMutation() : useGoogleAuthMutation()
   function LoginWithApi() {
-    const gitPath = api.gitAuth + api.clientGitId + `&scope=read:user`
-    const googlePath = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=621596965505-n57cqu1ifnmd34rqls715cao17t8r8n5.apps.googleusercontent.com&redirect_uri=https://inctagram-front.vercel.app/&scope=email profile`
+    const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
+    const googlePath =
+      api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope //`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=621596965505-n57cqu1ifnmd34rqls715cao17t8r8n5.apps.googleusercontent.com&redirect_uri=https://inctagram-front.vercel.app/&scope=email profile`
     const targetPath = name === 'Git' ? gitPath : googlePath
     window.location.assign(targetPath)
   }
@@ -28,7 +29,7 @@ const SignInWithSocialMedia = ({ iconName, name }: Props) => {
     }
   }, [])
   console.log(data)
-
+  console.log(api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope)
   if (isLoading) {
     return <LoaderProgressBar />
   } else if (isError) {
