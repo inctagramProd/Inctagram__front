@@ -13,6 +13,8 @@ const GitAuth = ({ iconName }: Props) => {
   const [statusGit, setStatusGit] = useState<boolean>(false)
   function LoginWithApi() {
     setStatusGit(true)
+    localStorage.setItem('Git', 'true')
+    localStorage.removeItem('Google')
     const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
     window.location.assign(gitPath)
   }
@@ -21,11 +23,10 @@ const GitAuth = ({ iconName }: Props) => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
-
+    console.log(localStorage.getItem('Google'))
     if (Code) {
-      if (statusGit===true) {
+      if (localStorage.getItem('Git') === 'true') {
         Auth({ code: Code }).unwrap()
-        console.log(statusGit)
       }
     }
   }, [])

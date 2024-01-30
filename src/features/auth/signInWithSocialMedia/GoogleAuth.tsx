@@ -14,6 +14,7 @@ const GoogleAuth = ({ iconName }: Props) => {
   function LoginWithApi() {
     setStatusGoogle(true)
     localStorage.setItem('Google', 'true')
+    localStorage.removeItem('Git')
     const googlePath =
       api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
     window.location.assign(googlePath)
@@ -23,10 +24,10 @@ const GoogleAuth = ({ iconName }: Props) => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
+    console.log(localStorage.getItem('Google'))
     if (Code) {
-      if (statusGoogle === true) {
+      if (localStorage.getItem('Google') === 'true') {
         Auth({ code: Code }).unwrap()
-        console.log(localStorage.getItem('Google'))
       }
     }
   }, [])
