@@ -6,8 +6,8 @@ import GoogleAuth from '../features/auth/signInWithSocialMedia/GoogleAuth'
 export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
-      <GitAuth iconName="GithubLogo" />
-      <GoogleAuth iconName="GoogleLogo" />
+      <GitAuth name="Git" />
+      <GoogleAuth name="Google" />
       <div
         style={{
           display: 'flex',
