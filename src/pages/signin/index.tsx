@@ -19,8 +19,8 @@ const SignUp = () => {
       </Head>
       <h1 style={{ marginTop: '150px', textAlign: 'center' }}>Get logged id</h1>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-        <GitAuth iconName="GithubLogo" />
-        <GoogleAuth iconName="GoogleLogo" />
+        <GitAuth name="Git" />
+        <GoogleAuth name="Google" />
       </div>
     </>
   )
