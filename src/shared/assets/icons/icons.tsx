@@ -1768,13 +1768,7 @@ export const CreditCard = ({
   }
 }
 // --------------Github--------------------
-export const GithubLogo = ({
-  width,
-  height,
-  fillType = 'fill',
-  value = 0,
-  iconStyle,
-}: IconProps) => {
+export const GitLogo = ({ width, height, fillType = 'fill', value = 0, iconStyle }: IconProps) => {
   return (
     //fill
     <svg

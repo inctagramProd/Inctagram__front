@@ -1,24 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Icon } from '@/src/shared/ui'
 import { useGoogleAuthMutation } from '@/src/shared/api/AuthApi'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 
 type Props = {
-  iconName: 'GoogleLogo' | 'GithubLogo'
+  name: 'Google' | 'Git'
 }
 
-const GoogleAuth = ({ iconName }: Props) => {
+const GoogleAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGoogleAuthMutation()
-  const [statusGoogle, setStatusGoogle] = useState<boolean>(false)
-  function LoginWithApi() {
-    setStatusGoogle(true)
-    localStorage.setItem('Google', 'true')
-    localStorage.removeItem('Git')
-    const googlePath =
-      api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
-    window.location.assign(googlePath)
-  }
 
   useEffect(() => {
     const queryString = window.location.search
@@ -31,6 +22,13 @@ const GoogleAuth = ({ iconName }: Props) => {
       }
     }
   }, [])
+  function LoginWithApi() {
+    localStorage.setItem('Google', 'true')
+    localStorage.removeItem('Git')
+    const googlePath =
+      api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
+    window.location.assign(googlePath)
+  }
   console.log(data)
   if (isLoading) {
     return <LoaderSpin />
@@ -43,7 +41,7 @@ const GoogleAuth = ({ iconName }: Props) => {
   }
   return (
     <div onClick={LoginWithApi}>
-      <Icon iconName={iconName} />
+      <Icon iconName={`${name}Logo`} />
     </div>
   )
 }

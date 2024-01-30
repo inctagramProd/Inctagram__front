@@ -1,36 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Icon } from '@/src/shared/ui'
 import { useGitAuthMutation } from '@/src/shared/api/AuthApi'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 
 type Props = {
-  iconName: 'GoogleLogo' | 'GithubLogo'
+  name: 'Google' | 'Git'
 }
 
-const GitAuth = ({ iconName }: Props) => {
+const GitAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
-  const [statusGit, setStatusGit] = useState<boolean>(false)
-  function LoginWithApi() {
-    setStatusGit(true)
-    localStorage.setItem('Git', 'true')
-    localStorage.removeItem('Google')
-    const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
-    window.location.assign(gitPath)
-  }
 
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
-    console.log(localStorage.getItem('Google'))
     if (Code) {
       if (localStorage.getItem('Git') === 'true') {
         Auth({ code: Code }).unwrap()
       }
     }
   }, [])
-  console.log(statusGit)
+  function LoginWithApi() {
+    localStorage.setItem('Git', 'true')
+    localStorage.removeItem('Google')
+    const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
+    window.location.assign(gitPath)
+  }
   console.log(data)
   if (isLoading) {
     return <LoaderSpin />
@@ -43,7 +39,7 @@ const GitAuth = ({ iconName }: Props) => {
   }
   return (
     <div onClick={LoginWithApi}>
-      <Icon iconName={iconName} />
+      <Icon iconName={`${name}Logo`} />
     </div>
   )
 }
