@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SignUpForm } from '@/src/features/auth/signUp/ui/SignUpForm/SignUpForm'
 import { Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'
 import { SignUpFormValues, SignUpParams } from '../service/types/signUpTypes'
 import { FormikHelpers } from 'formik'
+import  Head  from 'next/head'
 
 export const SignUp = () => {
   const [emailSentModal, setEmailSentModal] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>('')
+  const [userEmail, setEmail] = useState<string>('')
 
   const [userRegistration, { data, isSuccess, isError }] = useSignUpMutation()
 
@@ -16,7 +17,7 @@ export const SignUp = () => {
       .unwrap()
       .then(() => {
         setEmailSentModal(true)
-        console.log('registration have done!: ', data)
+        console.log('registration has been completed!: ', data)
         actions.resetForm()
       })
       .catch(e => {
@@ -32,8 +33,11 @@ export const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
+      <Head>
+        <title>My page title</title>
+      </Head>
       <Modal
-        email={email}
+        email={userEmail}
         isOpen={emailSentModal}
         onOpenChange={() => {
           setEmailSentModal(false)

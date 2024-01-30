@@ -19,6 +19,9 @@ export const InvalidLinkVerification = ({ userEmail }: Props) => {
         .then(() => {
           setEmailSentModal(true)
         })
+        .catch(e => {
+          console.log(e)
+        })
   }
 
   return (

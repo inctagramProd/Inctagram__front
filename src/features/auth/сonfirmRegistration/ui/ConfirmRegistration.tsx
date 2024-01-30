@@ -16,11 +16,10 @@ export const ConfirmRegistration = () => {
         .unwrap()
         .then(() => {})
         .catch(e => {
-          const error = e as ErrorResponseType
-          console.log(error.data.statusCode)
-          if (error.data.statusCode === 410) {
-            const res = e.data as { userEmail: string; message: string }
-            setUserEmail(res.userEmail)
+          const error = e as ErrorResponseType<CodeExpired>
+          console.log(error)
+          if (error.status === 410) {
+            setUserEmail(error.data.userEmail)
           }
         })
     }
@@ -46,12 +45,16 @@ export const ConfirmRegistration = () => {
 }
 
 // types
-export type ErrorResponseType = {
+export type ErrorResponseType<T = {}> = {
   status: number
-  data: ApiResponse
+  data: T
 }
 export type ApiResponse = {
   message: string[]
   error: string
   statusCode: number
+}
+type CodeExpired = {
+  userEmail: string
+  message: string
 }
