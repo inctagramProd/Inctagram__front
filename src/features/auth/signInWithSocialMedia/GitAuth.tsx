@@ -23,7 +23,7 @@ const GitAuth = ({ iconName }: Props) => {
     const Code = urlParams.get('code')
 
     if (Code) {
-      if (statusGit) {
+      if (statusGit===true) {
         Auth({ code: Code }).unwrap()
         console.log(statusGit)
       }
