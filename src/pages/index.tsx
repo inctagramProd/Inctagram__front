@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import SignInWithSocialMedia from '../features/auth/signInWithSocialMedia/GitAuth'
 import GitAuth from '../features/auth/signInWithSocialMedia/GitAuth'
 import GoogleAuth from '../features/auth/signInWithSocialMedia/GoogleAuth'
 
