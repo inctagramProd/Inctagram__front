@@ -11,7 +11,7 @@ type FormValues = {
   passwordConfirmation: string
 }
 
-export const ChangePasswordForm = () => {
+export const ChangePassword = () => {
   // const [validateEmailToken, { isLoading }] = useValidateEmailTokenMutation()
   // const router = useRouter()
   // const token = router.query.code

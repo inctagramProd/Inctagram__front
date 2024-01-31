@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
-import { InvalidLinkVerification } from '../InvalidLinkVerification/InvalidLinkVerification'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import { ChangePasswordForm } from '../ChangePasswordForm'
+import { InvalidLinkVerification } from '@/src/shared/ui/InvalidLinkVerification/ui/InvalidLinkVerification'
+import { ChangePassword } from '../ChangePassword'
 
 type ErrorResponse = {
   email: string
@@ -28,5 +28,5 @@ export const PasswordResetController = () => {
 
   const userEmail = (error as FetchBaseQueryError)?.data as ErrorResponse
 
-  return isSuccess ? <ChangePasswordForm /> : <InvalidLinkVerification email={userEmail?.email} />
+  return isSuccess ? <ChangePassword /> : <InvalidLinkVerification email={userEmail?.email} />
 }

@@ -1,24 +1,22 @@
 import { Card, Typography, Input, Button, Modal, ReCaptcha } from '@/src/shared/ui'
 import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
-import { useSendUserEmailMutation } from '@/src/shared/api/authApi'
 import { useState } from 'react'
 import { forgotPasswordSchema } from '../service/forgotPasswordSchema'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import { useSendUserEmailMutation } from '../service/forgotPasswordApi'
 
 type FormValues = {
   email: string
 }
 
-export const ForgotPasswordForm = () => {
+export const ForgotPassword = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [reCaptcha, setReCaptcha] = useState<null | string>(null)
 
   const router = useRouter()
   const { locale } = useTranslate()
-
-  const initialValues: FormValues = { email: '' }
 
   const [sendUserEmail, { isSuccess }] = useSendUserEmailMutation()
 
@@ -48,7 +46,7 @@ export const ForgotPasswordForm = () => {
       </Typography>
       <Formik
         onSubmit={handleSubmit}
-        initialValues={initialValues}
+        initialValues={{ email: '' }}
         validationSchema={forgotPasswordSchema(locale)}
       >
         {({ isSubmitting, isValid, errors, touched, values, status, dirty }) => (
