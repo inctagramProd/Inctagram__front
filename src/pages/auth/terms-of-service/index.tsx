@@ -5,8 +5,8 @@ import { HeadMeta } from '@/src/widgets/HeadMeta/HeadMeta'
 const TermsOfService = () => {
   return (
     <>
-      <PolicySwitcher variant="terms" />
       <HeadMeta title="Terms of Service" />
+      <PolicySwitcher variant="terms" />
     </>
   )
 }
