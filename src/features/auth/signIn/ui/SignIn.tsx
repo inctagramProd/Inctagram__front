@@ -2,7 +2,7 @@ import { FormikHelpers } from 'formik'
 import { useSignInMutation } from '../service/signInApi'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { SignInForm } from './signInForm/signInForm'
+import { SignInForm } from './signInForm/SignInForm'
 import { SingInParams } from '../service/types/signInTypes'
 
 export const SignIn = () => {
@@ -17,14 +17,16 @@ export const SignIn = () => {
 
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
-    loginUser(values)
+    await loginUser(values)
       .unwrap()
       .then(() => {
         actions.resetForm()
       })
       .catch(e => {
-        const error = e as { data: { message: string } }
-        actions.setStatus(error.data.message)
+        const error = e as { data: { message: [string] } }
+        if (error.data.message.length) {
+          actions.setStatus(error.data.message)
+        }
       })
   }
 

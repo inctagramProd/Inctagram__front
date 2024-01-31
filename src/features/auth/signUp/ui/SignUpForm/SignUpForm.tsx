@@ -1,9 +1,9 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { signUpSchema } from '@/src/shared/schemas'
-import { Field, Form, Formik, FormikHelpers, FormikProps, useFormik } from 'formik'
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
-import { Card, Checkbox, Typography, Input, Button } from '@/src/shared/ui'
+import { Button, Card, Checkbox, Input, Typography } from '@/src/shared/ui'
 import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
 import {
   SignUpFormValues,
@@ -11,7 +11,7 @@ import {
 } from '@/src/features/auth/signUp/service/types/signUpTypes'
 
 type Props = {
-  onSubmit: (values: SignUpParams) => Promise<void>
+  onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
@@ -19,9 +19,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
 
   const onSubmitHandler = (values: SignUpFormValues, actions: FormikHelpers<SignUpFormValues>) => {
     const { username, email, password } = values
-    onSubmit({ username, email, password }).then(() => {
-      actions.resetForm()
-    })
+    onSubmit({ username, email, password }, actions)
   }
   const initialValues: SignUpFormValues = {
     username: '',
@@ -50,14 +48,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           validationSchema={signUpSchema(locale)}
           onSubmit={onSubmitHandler}
         >
-          {({
-            errors,
-            touched,
-            getFieldProps,
-            isValid,
-            dirty,
-            isSubmitting,
-          }: FormikProps<SignUpFormValues>) => (
+          {({ errors, touched, isValid, dirty, isSubmitting }: FormikProps<SignUpFormValues>) => (
             <Form>
               <div className="flex flex-col gap-y-6 mb-6">
                 <Field
@@ -90,7 +81,9 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                 />
               </div>
               <div className="mb-[18px]">
-                <Checkbox {...getFieldProps('terms')} />
+                <Field name="terms" type="checkbox" as={Checkbox} className="text-xs">
+                  {locale.auth.agree}
+                </Field>
                 <Typography variant="small" className="inline">
                   <Trans
                     text={locale.auth.signUpTerms.description}

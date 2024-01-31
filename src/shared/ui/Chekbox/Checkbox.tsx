@@ -17,7 +17,7 @@ export const Checkbox = ({ children, className, ...restProps }: Props) => {
         type={'checkbox'}
         {...restProps}
       />
-      {children && <span className={`text-light-900 ${className}`}>{children}</span>}
+      {children && <span className={`${className}`}>{children}</span>}
     </label>
   )
 }

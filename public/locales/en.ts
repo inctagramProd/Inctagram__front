@@ -136,6 +136,7 @@ export const en: LocaleType = {
       },
       passwordConfirm: 'Confirm your password',
       refine: 'The passwords must match',
+      incorrectEmailOrPassword: 'The email or password are incorrect. Try again please'
     },
     // ========================= error fields block end =========================
   },

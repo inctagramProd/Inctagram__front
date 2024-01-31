@@ -10,17 +10,17 @@ export const SignUp = () => {
   const [userEmail, setEmail] = useState<string>('')
   const [userRegistration] = useSignUpMutation()
 
-  const onSubmitHandler = async (value: SignUpParams) => {
+  const onSubmitHandler = async (value: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => {
     await userRegistration(value)
       .unwrap()
-      .then((data) => {
+      .then(data => {
         console.log('registration has been completed!: ', data)
       })
       .catch(e => {
+        console.log(e)
         setEmail(value.email)
         setEmailSentModal(true)
-        // actions.resetForm()
-        return e.data
+        actions.resetForm()
       })
   }
 
