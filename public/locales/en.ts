@@ -132,11 +132,12 @@ export const en: LocaleType = {
       recaptcha: {
         notARobot: 'I’m not a robot',
         verifyPlease: 'Please verify that you are not a robot',
-        expired: 'Verification expired. Check the checkbox\n' + 'again.',
+        expired: 'Verification expired. Check the checkbox\n' + 'again',
       },
       passwordConfirm: 'Confirm your password',
       refine: 'The passwords must match',
-      incorrectEmailOrPassword: 'The email or password are incorrect. Try again please'
+      incorrectEmailOrPassword: 'The email or password are incorrect. Try again please',
+      alreadyInUse: 'The username or email is already in use',
     },
     // ========================= error fields block end =========================
   },

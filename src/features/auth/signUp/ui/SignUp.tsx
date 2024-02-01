@@ -13,14 +13,20 @@ export const SignUp = () => {
   const onSubmitHandler = async (value: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => {
     await userRegistration(value)
       .unwrap()
-      .then(data => {
-        console.log('registration has been completed!: ', data)
-      })
-      .catch(e => {
-        console.log(e)
+      .then(() => {
         setEmail(value.email)
         setEmailSentModal(true)
         actions.resetForm()
+      })
+      .catch(e => {
+        const error = e as { data: { message: string }; status: number }
+        console.log(error)
+        if (error.status === 400) {
+          actions.setStatus(error.data.message)
+        }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
       })
   }
 

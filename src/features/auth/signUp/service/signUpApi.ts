@@ -3,7 +3,7 @@ import { SignUpParams } from './types/signUpTypes'
 
 export const signUp = baseApi.injectEndpoints({
   endpoints: build => ({
-    signUp: build.mutation<string, SignUpParams>({
+    signUp: build.mutation<void, SignUpParams>({
       query: data => ({
         method: 'POST',
         url: 'auth/register',
