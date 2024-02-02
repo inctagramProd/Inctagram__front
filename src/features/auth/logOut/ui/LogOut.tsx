@@ -1,24 +1,29 @@
 import { useLogOutMutation } from '../service/logOutApi'
 import React, { useState } from 'react'
+import { LinkItem } from '@/src/widgets/Sidebar/LinkedItem'
+import { Modal } from '@/src/shared/ui'
+import { useRouter } from 'next/router'
 
 export const LogOut = () => {
   const [logOut] = useLogOutMutation()
-  const [openModal, setOpenModal] = useState(false)
+  const router = useRouter()
 
   const handleLogout = async () => {
     logOut()
       .unwrap()
       .then(() => {
-        console.log('Logout successful')
+        router.push('/auth/sign-in')
       })
       .catch(e => {
-        console.log('Logout failed')
+        console.log('Logout failed', e)
       })
   }
 
   return (
     <>
-      <div onClick={handleLogout}>Logout</div>
+      <div onClick={handleLogout}>
+        <LinkItem iconName={'LogOut'} label={'Log Out'} link={'#'} style={'default'} />
+      </div>
     </>
   )
 }
