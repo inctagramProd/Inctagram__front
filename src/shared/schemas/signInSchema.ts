@@ -9,7 +9,7 @@ export const signInSchema = (locale: LocaleType) => {
     password: Yup.string()
       .min(6, locale.auth.authErrors.password.min)
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%*+-?^_]).*$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
         locale.auth.authErrors.password.regex
       )
       .required(locale.auth.authErrors.password.nonEmpty),

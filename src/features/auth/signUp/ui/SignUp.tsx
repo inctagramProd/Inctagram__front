@@ -4,11 +4,13 @@ import { Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'
 import { SignUpFormValues, SignUpParams } from '../service/types/signUpTypes'
 import { FormikHelpers } from 'formik'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 export const SignUp = () => {
   const [emailSentModal, setEmailSentModal] = useState<boolean>(false)
   const [userEmail, setEmail] = useState<string>('')
   const [userRegistration] = useSignUpMutation()
+  const { locale } = useTranslate()
 
   const onSubmitHandler = async (value: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => {
     await userRegistration(value)
@@ -22,7 +24,7 @@ export const SignUp = () => {
         const error = e as { data: { message: string }; status: number }
         console.log(error)
         if (error.status === 400) {
-          actions.setStatus(error.data.message)
+          actions.setFieldError('confirmPassword', locale.auth.authErrors.alreadyInUse)
         }
       })
       .finally(() => {

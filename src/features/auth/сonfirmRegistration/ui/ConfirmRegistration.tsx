@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useEmailConfirmedMutation } from '@/src/features/auth/сonfirmRegistration/service/confirmRegistrationApi'
-import { InvalidLinkVerification } from '@/src/features/auth/invalidLinkVerification'
+import { InvalidEmailVerification } from '@/src/features/auth/invalidLinkVerification'
 import { EmailVerification } from '@/src/features/auth/emailVerification'
 import { Typography } from '@/src/shared/ui'
 
@@ -14,10 +14,9 @@ export const ConfirmRegistration = () => {
     if (queryCode.code) {
       regConfirm(queryCode)
         .unwrap()
-        .then(() => {})
         .catch(e => {
-          const error = e as ErrorResponseType<CodeExpired>
-          console.log(error)
+          console.log(e)
+          const error = e as {data: { userEmail: string, message: string }, status: number}
           if (error.status === 410) {
             setUserEmail(error.data.userEmail)
           }
@@ -38,23 +37,8 @@ export const ConfirmRegistration = () => {
       {isSuccess && data ? (
         <EmailVerification />
       ) : (
-        <InvalidLinkVerification userEmail={userEmail} />
+        <InvalidEmailVerification userEmail={userEmail} />
       )}
     </>
   )
-}
-
-// types
-export type ErrorResponseType<T = {}> = {
-  status: number
-  data: T
-}
-export type ApiResponse = {
-  message: string[]
-  error: string
-  statusCode: number
-}
-type CodeExpired = {
-  userEmail: string
-  message: string
 }

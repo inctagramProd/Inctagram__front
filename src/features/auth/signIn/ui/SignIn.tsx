@@ -4,10 +4,12 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { SignInForm } from './signInForm/SignInForm'
 import { SingInParams } from '../service/types/signInTypes'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 export const SignIn = () => {
+  const { locale } = useTranslate()
   const router = useRouter()
-  const [loginUser, { data, isLoading, isSuccess }] = useSignInMutation()
+  const [loginUser, { isSuccess }] = useSignInMutation()
 
   useEffect(() => {
     if (isSuccess) {
@@ -25,8 +27,11 @@ export const SignIn = () => {
       .catch(e => {
         const error = e as { data: { message: [string] } }
         if (error.data.message.length) {
-          actions.setStatus(error.data.message)
+          actions.setFieldError('password', locale.auth.authErrors.incorrectEmailOrPassword)
         }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
       })
   }
 

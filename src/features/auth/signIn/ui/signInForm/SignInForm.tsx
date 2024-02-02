@@ -40,14 +40,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
           validationSchema={signInSchema(locale)}
           onSubmit={onSubmitHandler}
         >
-          {({
-            touched,
-            errors,
-            status,
-            isValid,
-            dirty,
-            isSubmitting,
-          }: FormikProps<SingInParams>) => (
+          {({ touched, errors, isValid, dirty, isSubmitting }: FormikProps<SingInParams>) => (
             <Form>
               <div className="flex flex-col gap-y-6 mb-9">
                 <Field
@@ -62,10 +55,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
                   type="password"
                   as={Input}
                   label={locale.auth.password}
-                  error={
-                    (touched.password && errors.password) ||
-                    (status && locale.auth.authErrors.incorrectEmailOrPassword)
-                  }
+                  error={touched.password && errors.password}
                 />
               </div>
               <div className="text-end mb-6">
@@ -80,7 +70,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
                   type="submit"
                   style="primary"
                   label={locale.auth.signIn}
-                  disable={!((isValid && dirty) || isSubmitting)}
+                  disable={!(isValid && dirty) || isSubmitting}
                   className="w-full"
                 />
               </div>

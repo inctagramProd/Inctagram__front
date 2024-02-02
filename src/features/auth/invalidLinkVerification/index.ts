@@ -1,1 +1,1 @@
-export { InvalidLinkVerification } from './ui/InvalidLinkVerification'
+export { InvalidEmailVerification } from './ui/InvalidEmailVerification'
