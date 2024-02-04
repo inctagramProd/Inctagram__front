@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
       <GitAuth name="Git" />
-      {/* <GoogleAuth name="Google" /> */}
+      <GoogleAuth name="Google" />
       <div
         style={{
           display: 'flex',
