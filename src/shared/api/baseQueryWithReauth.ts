@@ -4,11 +4,12 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { Mutex } from 'async-mutex'
 import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
 
-const BASE_URL = 'https://deepwaterhorizon.ru/api/v1/'
+const BASE_URL = 'https://inctagram-back.vercel.app/api/v1/'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
+  referrerPolicy: 'no-referrer',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const accessToken = localStorage.getItem('accessToken')

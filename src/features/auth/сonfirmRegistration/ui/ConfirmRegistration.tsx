@@ -33,12 +33,6 @@ export const ConfirmRegistration = () => {
   }
 
   return (
-    <>
-      {isSuccess && data ? (
-        <EmailVerification />
-      ) : (
-        <InvalidLinkVerification userEmail={userEmail} />
-      )}
-    </>
+    <>{isSuccess ? <EmailVerification /> : <InvalidLinkVerification userEmail={userEmail} />}</>
   )
 }
