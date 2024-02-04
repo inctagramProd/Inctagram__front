@@ -14,6 +14,7 @@ const baseQuery = fetchBaseQuery({
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`),
         headers.set('Access-Control-Allow-Origin', '*'),
+        headers.set('Content-Type', 'application/json'),
         headers.set('Access-Control-Allow-Methods', 'GET,DELETE,PATCH,POST,PUT'),
         headers.set(
           'Access-Control-Allow-Headers',
