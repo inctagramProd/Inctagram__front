@@ -11,7 +11,7 @@ type Props = {
 const GitAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
@@ -20,7 +20,7 @@ const GitAuth = ({ name }: Props) => {
         Auth({ code: Code }).unwrap()
       }
     }
-  }, [])
+  }, []) */
   function LoginWithApi() {
     localStorage.setItem('Git', 'true')
     localStorage.removeItem('Google')
