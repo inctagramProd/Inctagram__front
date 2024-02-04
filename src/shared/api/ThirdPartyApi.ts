@@ -1,6 +1,6 @@
 export class api {
   static serverURL: string =
-    /* 'https://inctagram-back.vercel.app/api/v1' */ 'https://deepwaterhorizon.ru/api/v1'
+    'https://inctagram-back.vercel.app/api/v1' /* 'https://deepwaterhorizon.ru/api/v1' */
   static clientUrl = 'https://inctagram-front.vercel.app/'
 
   //GITHUB CONFIGS
