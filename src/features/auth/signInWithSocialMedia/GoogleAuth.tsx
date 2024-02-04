@@ -10,7 +10,6 @@ type Props = {
 
 const GoogleAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGoogleAuthMutation()
-
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
