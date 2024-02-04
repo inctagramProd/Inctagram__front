@@ -5,7 +5,7 @@ import { LinkHasExpired } from '../../LinkHasExpired'
 type Props = {
   userEmail: string
 }
-export const InvalidEmailVerification = ({ userEmail }: Props) => {
+export const InvalidLinkVerification = ({ userEmail }: Props) => {
   const [emailSentModal, setEmailSentModal] = useState<boolean>(false)
 
   const [resendLink] = useResendLinkMutation()

@@ -1,9 +1,9 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { signUpSchema } from '@/src/shared/schemas'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
 import { Button, Card, Checkbox, Input, Typography } from '@/src/shared/ui'
+import { signUpSchema } from '@/src/features/auth/signUp/service/schema/signUpSchema'
 import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
 import {
   SignUpFormValues,

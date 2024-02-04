@@ -1,10 +1,10 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { Card, Typography, Input, Button } from '@/src/shared/ui'
-import { Field, Form, Formik, FormikHelpers, FormikProps, useFormik } from 'formik'
-import { signInSchema } from '@/src/shared/schemas'
+import { Button, Card, Input, Typography } from '@/src/shared/ui'
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
-import { SingInParams } from '../../service/types/signInTypes'
 import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
+import { signInSchema } from '@/src/features/auth/signIn/service/schema/signInSchema'
+import { SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
 
 type Props = {
   onSubmit: (values: SingInParams, actions: FormikHelpers<SingInParams>) => void

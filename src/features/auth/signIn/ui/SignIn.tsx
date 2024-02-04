@@ -25,8 +25,8 @@ export const SignIn = () => {
         actions.resetForm()
       })
       .catch(e => {
-        const error = e as { data: { message: [string] } }
-        if (error.data.message.length) {
+        const error = e as { data: { message: [string]; statusCode: number } }
+        if (error.data.statusCode === 400 || 401) {
           actions.setFieldError('password', locale.auth.authErrors.incorrectEmailOrPassword)
         }
       })
