@@ -30,16 +30,11 @@ const GoogleAuth = ({ name }: Props) => {
     window.location.assign(googlePath)
   }
   console.log(data)
-  if (isLoading) {
-    return <LoaderSpin />
-  } else if (isError) {
-    return (
-      <div>
-        <h1>{isError}</h1>
-      </div>
-    )
-  }
-  return (
+  return isLoading ? (
+    <LoaderSpin />
+  ) : isError ? (
+    <h1>isError</h1>
+  ) : (
     <div onClick={LoginWithApi}>
       <Icon iconName={`${name}Logo`} />
     </div>

@@ -27,17 +27,13 @@ const GitAuth = ({ name }: Props) => {
     const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
     window.location.assign(gitPath)
   }
+
   console.log(data)
-  if (isLoading) {
-    return <LoaderSpin />
-  } else if (isError) {
-    return (
-      <div>
-        <h1>{isError}</h1>
-      </div>
-    )
-  }
-  return (
+  return isLoading ? (
+    <LoaderSpin />
+  ) : isError ? (
+    <h1>isError</h1>
+  ) : (
     <div onClick={LoginWithApi}>
       <Icon iconName={`${name}Logo`} />
     </div>
