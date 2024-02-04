@@ -13,7 +13,12 @@ const baseQuery = fetchBaseQuery({
 
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`),
-        headers.set('Access-Control-Allow-Origin', '*')
+        headers.set('Access-Control-Allow-Origin', '*'),
+        headers.set('Access-Control-Allow-Methods', 'GET,DELETE,PATCH,POST,PUT'),
+        headers.set(
+          'Access-Control-Allow-Headers',
+          'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+        )
     }
     return headers
   },
