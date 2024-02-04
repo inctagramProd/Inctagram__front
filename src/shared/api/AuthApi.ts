@@ -8,14 +8,14 @@ export const AuthApi = createApi({
   endpoints: build => ({
     gitAuth: build.mutation({
       query: (body: any) => ({
-        url: 'getAccessToken' /* '/auth/github-auth', */,
+        url: '/auth/github-auth',
         method: 'POST',
         body,
       }),
     }),
     GoogleAuth: build.mutation({
       query: (body: any) => ({
-        url: 'getAccessToken', //'/auth/google-auth',
+        url: '/auth/google-auth',
         method: 'POST',
         body,
       }),
