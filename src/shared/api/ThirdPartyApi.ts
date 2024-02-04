@@ -6,7 +6,7 @@ export class api {
   static gitHubURL: string = `https://github.com`
   static clientGitId: string = '52f747905128092efbce'
   static gitAuth: string = this.gitHubURL + '/login/oauth/authorize?client_id='
-  static gitHubScope: string = `&scope=read:user`
+  static gitHubScope: string = `&scope=read:user,user:email`
   //GOOGLE CONFIGS
   static googleURL: string = `https://accounts.google.com`
   static clientGoogleId: string =
