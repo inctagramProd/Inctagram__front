@@ -1,9 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import GitAuth from '../features/auth/signInWithSocialMedia/GitAuth'
+import GoogleAuth from '../features/auth/signInWithSocialMedia/GoogleAuth'
 
 export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
+      <GitAuth name="Git" />
+      <GoogleAuth name="Google" />
       <div
         style={{
           display: 'flex',
