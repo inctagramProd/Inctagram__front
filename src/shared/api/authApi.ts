@@ -1,15 +1,27 @@
-import { baseApi } from './baseApi'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { baseQueryWithReauth } from './baseQueryWithReauth'
 
-export const authApi = baseApi.injectEndpoints({
-  endpoints: builder => ({
-    sendUserEmail: builder.mutation({
-      query: email => ({
-        url: '/api/v1/auth/password-recovery-request',
+export const AuthApi = createApi({
+  reducerPath: 'gitAuthApi',
+  baseQuery: baseQueryWithReauth,
+
+  endpoints: build => ({
+    gitAuth: build.mutation({
+      query: (body: object) => ({
+        url: '/auth/github-auth',
         method: 'POST',
-        body: { email },
+        body,
+      }),
+    }),
+    GoogleAuth: build.mutation({
+      query: (body: object) => ({
+        url: '/auth/google-auth',
+        method: 'POST',
+        body,
       }),
     }),
   }),
+  tagTypes: [],
 })
 
-export const { useSendUserEmailMutation } = authApi
+export const { useGitAuthMutation, useGoogleAuthMutation } = AuthApi

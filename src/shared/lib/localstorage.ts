@@ -14,7 +14,7 @@ export const loadState = () => {
   }
 }
 
-export const saveState = (state: AppRootState) => {
+export const saveState = async (state: AppRootState) => {
   const signIn = state.signIn
   let lsData = { signIn }
 

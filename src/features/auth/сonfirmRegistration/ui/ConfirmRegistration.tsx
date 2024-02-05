@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useEmailConfirmedMutation } from '@/src/features/auth/сonfirmRegistration/service/confirmRegistrationApi'
-import { InvalidLinkVerification } from '@/src/features/auth/invalidLinkVerification'
-import { EmailVerification } from '@/src/features/auth/emailVerification'
-import { Typography } from '@/src/shared/ui'
+import {useEffect, useState} from 'react'
+import {useRouter} from 'next/router'
+import {useEmailConfirmedMutation} from '@/src/features/auth/сonfirmRegistration/service/confirmRegistrationApi'
+import {InvalidLinkVerification} from '@/src/features/auth/invalidLinkVerification'
+import {EmailVerification} from '@/src/features/auth/emailVerification'
+import {LoaderSpin} from "@/src/shared/ui/Loader/Loader";
 
 export const ConfirmRegistration = () => {
   const router = useRouter()
@@ -26,9 +26,7 @@ export const ConfirmRegistration = () => {
 
   if (isLoading) {
     return (
-      <Typography variant="h2" className="flex justify-center items-center h-[calc(100vh - 60px)]">
-        Loading...
-      </Typography>
+      <LoaderSpin/>
     )
   }
 

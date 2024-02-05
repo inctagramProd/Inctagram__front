@@ -3,7 +3,7 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 // Mutex. Preventing multiple unauthorized errors
 import { Mutex } from 'async-mutex'
 import { api } from './ThirdPartyApi'
-import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
+import {clearToken, setToken} from '@/src/features/auth/signIn/model/signInSlice'
 
 const BASE_URL = 'https://inctagram-back.vercel.app/api/v1/'
 
@@ -47,7 +47,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           api.dispatch(setToken({ accessToken: newAccessToken }))
           result = await baseQuery(args, api, extraOptions)
         } else {
-          console.log('logout')
+          api.dispatch(clearToken())
         }
       } finally {
         // release must be called once the mutex should be released again.
