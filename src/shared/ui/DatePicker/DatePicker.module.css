@@ -1,14 +1,10 @@
 .customDateInput {
   cursor: pointer;
-
   position: relative;
-
   box-sizing: border-box;
   width: 150px;
   padding: 6px;
-
   color: #edf3fa;
-
   background-color: #333;
   border: 1px solid #4c4c4c;
   border-radius: 6px;
