@@ -2,16 +2,17 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 // Mutex. Preventing multiple unauthorized errors
 import { Mutex } from 'async-mutex'
+import { api } from './ThirdPartyApi'
 import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
 
 const BASE_URL = 'https://inctagram-back.vercel.app/api/v1/'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_URL,
-  referrerPolicy: 'no-referrer',
+  baseUrl: api.serverURL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
+    
     const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
