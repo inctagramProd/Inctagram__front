@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { ChangePassword } from '../../ChangePassword'
 import { useValidateEmailTokenMutation } from '../service/validateEmailToken'
 import { InvalidEmailPasswordLink } from '../../InvalidEmailPasswordLink/InvalidEmailPasswordLink'
+import { LoaderSpin } from '@/src/shared/ui'
 
 export const PasswordResetController = () => {
   const [userEmail, setUserEmail] = useState('')
@@ -23,7 +24,10 @@ export const PasswordResetController = () => {
   }, [token, validateEmailToken])
 
   if (isLoading) {
-    return <div>Загрузка ..</div>
+    return  (
+      <div className="flex items-center justify-center h-[calc(100vh-60px)]">
+       <LoaderSpin />
+      </div>)
   }
 
   return isSuccess ? (
