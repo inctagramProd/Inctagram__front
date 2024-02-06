@@ -1,5 +1,4 @@
 export const ru = {
-  // object = feature
   locale: {
     english: 'English',
     russian: 'Russian',
@@ -31,14 +30,14 @@ export const ru = {
     emailConfirmText: 'Ваш адрес электронной почты подтвержден',
     emailVerificationTitle: 'Срок действия ссылки для подтверждения электронной почты истек',
     emailVerificationText: 'Похоже, срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз',
-    resendLink: 'Повторно отправить ссылку для подтверждения',
+    resendLink: 'Отправить повторно',
     sendLink: 'Отправить ссылку',
     sendLinkAgain: 'Отправить ссылку снова',
     return: 'Вернуться',
     recaptchaLocal: 'ru',
     linkHasBeenSent: 'Ссылка отправлена по электронной почте. Если вы не получили письмо, отправьте ссылку еще раз',
     signUpTerms: {
-      description: 'Я согласен с <1>Правилами</1> и <2>Политикой</2>',
+      description: ' <1>Правилами</1> и <2>Политикой</2>',
     },
     agree: 'Я согласен с',
     termsOfService: 'Правилами',
@@ -130,6 +129,8 @@ export const ru = {
       },
       passwordConfirm: 'Подтвердите ваш пароль',
       refine: 'Пароли должны совпадать',
+      incorrectEmailOrPassword: 'Почта или пароль неверны. Попробуйте еще раз, пожалуйста',
+      alreadyInUse: 'Имя пользователя или электронная почта уже используются',
     },
     // ========================= error fields block end =========================
   },

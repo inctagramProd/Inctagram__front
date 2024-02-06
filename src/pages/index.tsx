@@ -1,9 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import GitAuth from '../features/auth/signInWithSocialMedia/GitAuth'
+import GoogleAuth from '../features/auth/signInWithSocialMedia/GoogleAuth'
 
 export default function Home() {
   return (
     <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
+      <GitAuth name="Git" />
+      <GoogleAuth name="Google" />
       <div
         style={{
           display: 'flex',
@@ -12,10 +16,10 @@ export default function Home() {
           textAlign: 'center',
         }}
       >
-        <Link href={`/signup`} style={{ color: 'white', fontSize: '30px', marginLeft: '25px' }}>
+        <Link href={`/auth/sign-up`} style={{ color: 'white', fontSize: '30px', marginLeft: '25px' }}>
           Register{' '}
         </Link>
-        <Link href={`/signin`} style={{ color: 'white', fontSize: '30px', marginLeft: '25px' }}>
+        <Link href={`/auth/sign-in`} style={{ color: 'white', fontSize: '30px', marginLeft: '25px' }}>
           Sign In{' '}
         </Link>
         <Link
