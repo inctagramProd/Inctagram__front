@@ -1,3 +1,5 @@
+import { FC, SVGProps } from 'react'
+
 export type IconProps = {
   width?: number
   height?: number
@@ -7,7 +9,6 @@ export type IconProps = {
   iconStyle?: string
   handleFocus?: () => void
 }
-
 // --------------Bell--------------------
 export const Bell = ({ width, height, fillType = 'outline', value = 0, iconStyle }: IconProps) => {
   return (
@@ -1767,13 +1768,7 @@ export const CreditCard = ({
   }
 }
 // --------------Github--------------------
-export const GithubLogo = ({
-  width,
-  height,
-  fillType = 'outline',
-  value = 0,
-  iconStyle,
-}: IconProps) => {
+export const GitLogo = ({ width, height, fillType = 'fill', value = 0, iconStyle }: IconProps) => {
   return (
     //fill
     <svg
@@ -1914,10 +1909,9 @@ export const RussiaFlag = ({ width, height }: IconProps) => {
       height={height}
       viewBox="0 0 36 36"
       xmlns="http://www.w3.org/2000/svg"
-      xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
-      class="iconify iconify--twemoji"
+      className="iconify iconify--twemoji"
       preserveAspectRatio="xMidYMid meet"
     >
       <path fill="#CE2028" d="M36 27a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4v-4h36v4z"></path>
@@ -1934,10 +1928,9 @@ export const EnglishFlag = ({ width, height }: IconProps) => {
       height={height}
       viewBox="0 0 36 36"
       xmlns="http://www.w3.org/2000/svg"
-      xlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
-      class="iconify iconify--twemoji"
+      className="iconify iconify--twemoji"
       preserveAspectRatio="xMidYMid meet"
     >
       <path
@@ -2081,7 +2074,7 @@ export const Stripe = ({
       </g>
       <defs>
         <clipPath id="clip0_3663_10330">
-          <rect width={width} height={height * 0.75} fill="white" />
+          <rect width={width} height={height === undefined ? height : height * 0.75} fill="white" />
         </clipPath>
       </defs>
     </svg>
@@ -2119,8 +2112,8 @@ export const Paid = ({ width, height, fillType = 'outline', value = 0, iconStyle
       <defs>
         <clipPath id="clip0_4700_12135">
           <rect
-            width={width * 0.75}
-            height={width * 0.75}
+            width={width === undefined ? width : width * 0.75}
+            height={width === undefined ? width : width * 0.75}
             fill="white"
             transform="translate(4 4)"
           />

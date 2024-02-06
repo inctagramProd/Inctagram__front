@@ -1,14 +1,14 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { signUpSchema } from '@/src/shared/schemas'
-import { FormikHelpers, useFormik } from 'formik'
+import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
-import { Card, Checkbox, Typography, Input, Button } from '@/src/shared/ui'
-import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
+import { Button, Card, Checkbox, Input, Typography } from '@/src/shared/ui'
+import { signUpSchema } from '@/src/features/auth/signUp/service/schema/signUpSchema'
 import {
   SignUpFormValues,
   SignUpParams,
 } from '@/src/features/auth/signUp/service/types/signUpTypes'
+import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
 
 type Props = {
   onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
@@ -21,18 +21,13 @@ export const SignUpForm = ({ onSubmit }: Props) => {
     const { username, email, password } = values
     onSubmit({ username, email, password }, actions)
   }
-
-  const formik = useFormik({
-    initialValues: {
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      terms: false,
-    } as SignUpFormValues,
-    validationSchema: signUpSchema(locale),
-    onSubmit: onSubmitHandler,
-  })
+  const initialValues: SignUpFormValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    terms: false,
+  }
 
   return (
     <Card className="w-[378px]">
@@ -44,76 +39,89 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           <GoogleLogo width={36} height={36} />
         </Link>
         <Link href="#">
-          <GithubLogo width={36} height={36} />
+          <GitLogo width={36} height={36} />
         </Link>
       </div>
       <div className="mb-[18px]">
-        <form onSubmit={formik.handleSubmit}>
-          <div className="flex flex-col gap-y-6 mb-6">
-            <Input
-              type="text"
-              label={locale.auth.userName}
-              {...formik.getFieldProps('username')}
-              error={formik.touched.username && formik.errors.username}
-            />
-            <Input
-              label={locale.auth.email}
-              type="text"
-              {...formik.getFieldProps('email')}
-              error={formik.touched.email && formik.errors.email}
-            />
-            <Input
-              label={locale.auth.password}
-              type="password"
-              {...formik.getFieldProps('password')}
-              error={formik.touched.password && formik.errors.password}
-            />
-            <Input
-              label={locale.auth.passwordConfirmation}
-              type="password"
-              {...formik.getFieldProps('confirmPassword')}
-              error={formik.touched.confirmPassword && formik.errors.confirmPassword}
-            />
-          </div>
-          <div className="mb-[18px]">
-            <Checkbox {...formik.getFieldProps('terms')} />
-            <Typography variant="small" className="inline">
-              <Trans
-                text={locale.auth.signUpTerms.description}
-                tags={{
-                  1: () => (
-                    <Link
-                      href="/terms-of-service"
-                      className="text-primary-300 hover:underline underline-offset-[3px]"
-                    >
-                      {locale.auth.termsOfService}
-                    </Link>
-                  ),
-                  2: () => (
-                    <Link
-                      href="/privacy-policy"
-                      className="text-primary-300 hover:underline underline-offset-[3px]"
-                    >
-                      {locale.auth.policy}
-                    </Link>
-                  ),
-                }}
-              />
-            </Typography>
-            <Typography variant="error">
-              {formik.touched.terms ? formik.errors.terms : ''}
-            </Typography>
-          </div>
-          <div className="[&>button]:w-full">
-            <Button
-              style="primary"
-              type="submit"
-              label={locale.auth.signUp}
-              disable={!(formik.isValid && formik.dirty)}
-              className="w-full"
-            />
-          </div>
-        </form>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={signUpSchema(locale)}
+          onSubmit={onSubmitHandler}
+        >
+          {({ errors, touched, isValid, dirty, isSubmitting }: FormikProps<SignUpFormValues>) => (
+            <Form>
+              <div className="flex flex-col gap-y-6 mb-6">
+                <Field
+                  name="username"
+                  type="text"
+                  as={Input}
+                  label={locale.auth.userName}
+                  error={touched.username && errors.username}
+                />
+                <Field
+                  name="email"
+                  type="email"
+                  as={Input}
+                  label={locale.auth.email}
+                  error={touched.email && errors.email}
+                />
+                <Field
+                  name="password"
+                  type="password"
+                  as={Input}
+                  label={locale.auth.password}
+                  error={touched.password && errors.password}
+                />
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  as={Input}
+                  label={locale.auth.passwordConfirmation}
+                  error={touched.confirmPassword && errors.confirmPassword}
+                />
+              </div>
+              <div className="mb-[18px]">
+                <Field name="terms" type="checkbox" as={Checkbox} className="text-xs">
+                  {locale.auth.agree}
+                </Field>
+                <Typography variant="small" className="inline">
+                  <Trans
+                    text={locale.auth.signUpTerms.description}
+                    tags={{
+                      1: () => (
+                        <Link
+                          href="/terms-of-service"
+                          className="text-primary-300 hover:underline underline-offset-[3px]"
+                        >
+                          {locale.auth.termsOfService}
+                        </Link>
+                      ),
+                      2: () => (
+                        <Link
+                          href="/privacy-policy"
+                          className="text-primary-300 hover:underline underline-offset-[3px]"
+                        >
+                          {locale.auth.policy}
+                        </Link>
+                      ),
+                    }}
+                  />
+                </Typography>
+                <Typography variant="error">{touched.terms && errors.terms}</Typography>
+              </div>
+              <div className="[&>button]:w-full">
+                <Button
+                  iconName=""
+                  style="primary"
+                  type="submit"
+                  label={locale.auth.signUp}
+                  disable={!(dirty && isValid) || isSubmitting}
+                  className="w-full"
+                />
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
       <Typography variant="regular_16" className="block text-center mb-[18px]">
         {locale.auth.haveAccount}

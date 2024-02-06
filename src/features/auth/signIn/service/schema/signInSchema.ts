@@ -4,12 +4,15 @@ import { LocaleType } from '@/public/locales/en'
 export const signInSchema = (locale: LocaleType) => {
   return Yup.object().shape({
     email: Yup.string()
-      .email(locale.auth.authErrors.emailField.email)
-      .required(locale.auth.authErrors.emailField.nonEmpty),
+      .required(locale.auth.authErrors.emailField.nonEmpty)
+      .matches(
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        locale.auth.authErrors.emailField.email
+      ),
     password: Yup.string()
       .min(6, locale.auth.authErrors.password.min)
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#$%*+-?^_]).*$/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
         locale.auth.authErrors.password.regex
       )
       .required(locale.auth.authErrors.password.nonEmpty),

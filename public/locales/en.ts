@@ -32,7 +32,7 @@ export const en: LocaleType = {
     emailConfirmText: 'Your email has been confirmed',
     emailVerificationTitle: 'Email verification link expired',
     emailVerificationText: 'Looks like the verification link has expired. Not to worry, we can send the link again',
-    resendLink: 'Resend verification link',
+    resendLink: 'Resend link',
     sendLink: 'Send Link',
     sendLinkAgain: 'Send Link Again',
     return: 'Return',
@@ -132,10 +132,12 @@ export const en: LocaleType = {
       recaptcha: {
         notARobot: 'I’m not a robot',
         verifyPlease: 'Please verify that you are not a robot',
-        expired: 'Verification expired. Check the checkbox\n' + 'again.',
+        expired: 'Verification expired. Check the checkbox\n' + 'again',
       },
       passwordConfirm: 'Confirm your password',
       refine: 'The passwords must match',
+      incorrectEmailOrPassword: 'The email or password are incorrect. Try again please',
+      alreadyInUse: 'The username or email is already in use',
     },
     // ========================= error fields block end =========================
   },

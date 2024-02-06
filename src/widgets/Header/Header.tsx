@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Typography, Icon, Button, Select, SelectOptionType } from '@/src/shared/ui'
+import { Button } from '../../shared/ui/Button/Button'
+import { Select } from '../../shared/ui/Select/Select'
+import { Typography } from '@/src/shared/ui/Typography/Typography'
+import { Icon } from '@/src/shared/ui/Icon/Icon'
 
 type Props = {
   user?: boolean
@@ -36,8 +39,8 @@ export const Header = (props: Props) => {
 
   const fontColor = theme === 'dark' ? 'text-light-100' : 'text-dark-100'
   const linkOptions = [
-    { title: 'Log In', value: '/logIn' },
-    { title: 'Sign Up', value: '/signUp' },
+    { title: 'Log In', value: 'auth/sign-in' },
+    { title: 'Sign Up', value: 'auth/sign-up' },
   ]
 
   const t = (value: any) => {
@@ -47,84 +50,94 @@ export const Header = (props: Props) => {
     router.push(`/${linkOptions[i].value}`)
   }
 
-  const handleLanguage = (selectedValue: SelectOptionType) => {
+  const handleLanguage = (selectedValue: any) => {
     alert(selectedValue?.title)
     t(selectedValue?.title)
   }
-  const handleLink = (selectedValue: SelectOptionType) => {
-    router.push(String(selectedValue?.value))
+  const handleLink = (selectedValue: any) => {
+    router.push(selectedValue?.value)
   }
-  return (
-    <div
-      className={`border-b-[1px] h-[60px] bg-dark-700 border-dark-300 flex flex-row justify-center items-center ${className}`}
-    >
-      <div
-        className={
-          'max-w-screen-xl w-full flex flex-row justify-between items-center px-4 max-sm:px-4'
-        }
-      >
-        <div>
+  if (user) {
+    return (
+      <div className={`w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 ${className}`}>
+        <div className={`h-[60px] w-[50%] items-center sm:w-[35%]`}>
           <Link href={'/'}>
             <Typography
               variant="large"
-              className={`leading-[36px] text-[26px]  ${fontColor} flex items-start`}
+              className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px] ${fontColor} flex items-start`}
             >
+              {' '}
               Inctagram
             </Typography>
           </Link>
         </div>
-        <div className={`flex flex-row justify-end gap-x-[36px] md:gap-x-[24px]`}>
-          {user && (
-            <div className={`flex items-center`}>
-              <Link href={`/${id}/alert`}>
+        <div
+          className={`flex flex-row justify-end  h-[60px] w-[50%] gap-x-[36px] sm:w-[65%] md:gap-x-[24px]`}
+        >
+          <div className={`h-[60px]  flex items-center`}>
+            <Link href={`/${id}/alert`}>
+              <Icon
+                iconName="Bell"
+                width={width}
+                height={height}
+                value={value}
+                fillType={fillType}
+                iconStyle={'fill-light-100 hover:fill-primary-100'}
+              />
+            </Link>
+          </div>
+          <div className={`w-fit  flex items-center mr-[40px]`}>
+            <Select options={options} onChange={handleLanguage} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  return (
+    <div className={`w-[100%] h-[60px] border-b-[1px] bg-dark-700 border-dark-300 ${className}`}>
+      <div className={`h-[60px] w-[50%] items-center sm:w-[35%]`}>
+        <Link href={'/'}>
+          <Typography
+            variant="large"
+            className={`mt-[12px] ml-[15px] sm:ml-[60px] leading-[36px] text-[26px]  ${fontColor} flex items-start`}
+          >
+            Inctagram
+          </Typography>
+        </Link>
+      </div>
+      <div
+        className={`flex flex-row justify-end  h-[60px] w-[50%] gap-x-[36px] sm:w-[65%] md:gap-x-[24px]`}
+      >
+        <div className={`w-fit flex items-center`}>
+          <Select options={options} onChange={handleLanguage} />
+        </div>
+        <div className={`sm:hidden h-[60px]  flex items-center mr-[15px]`}>
+          <div onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
+            {isOpen ? (
+              <div>
+                <Select options={linkOptions} onChange={handleLink} />
+              </div>
+            ) : (
+              <button>
                 <Icon
-                  iconName="Bell"
+                  iconName="MoreHorizontal"
                   width={width}
                   height={height}
                   value={value}
                   fillType={fillType}
                   iconStyle={'fill-light-100 hover:fill-primary-100'}
                 />
-              </Link>
-            </div>
-          )}
-          <div className={`w-fit flex items-center`}>
-            <Select options={options} onChange={handleLanguage} />
+              </button>
+            )}
           </div>
-          <div className={`sm:hidden flex items-center`}>
-            <div
-              className={`flex items-center`}
-              onMouseEnter={() => setIsOpen(true)}
-              onMouseLeave={() => setIsOpen(false)}
-            >
-              {isOpen ? (
-                <div>
-                  <Select options={linkOptions} onChange={handleLink} />
-                </div>
-              ) : (
-                <button>
-                  <Icon
-                    iconName="MoreHorizontal"
-                    width={width}
-                    height={height}
-                    value={value}
-                    fillType={fillType}
-                    iconStyle={'fill-light-100 hover:fill-primary-100'}
-                  />
-                </button>
-              )}
-            </div>
+        </div>
+        <div className={`w-fit mr-[15px] sm:mr-[64px] gap-x-[24px] items-center hidden sm:flex`}>
+          <div>
+            <Button iconName="" label="Log In" style="text" onClick={() => routerPath(0)} />
           </div>
-          {!user && (
-            <div className={`w-fit gap-x-[24px] items-center hidden sm:flex`}>
-              <div>
-                <Button label="Log In" style="text" onClick={() => routerPath(0)} />
-              </div>
-              <div>
-                <Button label="Sign Up" style="primary" onClick={() => routerPath(1)} />
-              </div>
-            </div>
-          )}
+          <div>
+            <Button iconName="" label="Sign Up" style="primary" onClick={() => routerPath(1)} />
+          </div>
         </div>
       </div>
     </div>

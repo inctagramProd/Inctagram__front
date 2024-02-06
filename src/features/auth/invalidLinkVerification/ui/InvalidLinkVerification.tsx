@@ -1,30 +1,34 @@
-import { useTranslate } from '@/src/app/hooks/useTranslate'
-import TimeIsOverIcon from '@/src/shared/assets/icons/TimeIsOverIcon'
-import { Typography, Button } from '@/src/shared/ui'
+import { useResendLinkMutation } from '@/src/features/auth/invalidLinkVerification/service/invalidLinkVerification'
+import { useState } from 'react'
+import { LinkHasExpired } from '../../LinkHasExpired'
 
-export const InvalidLinkVerification = () => {
-  const { locale } = useTranslate()
-  const onClickHandler = () => {}
+type Props = {
+  userEmail: string
+}
+export const InvalidLinkVerification = ({ userEmail }: Props) => {
+  const [emailSentModal, setEmailSentModal] = useState<boolean>(false)
+
+  const [resendLink] = useResendLinkMutation()
+  const resendLinkHandler = async () => {
+    if (userEmail)
+      await resendLink({ userEmail })
+        .unwrap()
+        .then(() => {
+          setEmailSentModal(true)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+  }
 
   return (
-    <div className="flex flex-col items-center ">
-      <div className="mt-[35px] mb-[31px] text-center">
-        <Typography variant="h1" className="mb-[19px]">
-          {locale.auth.emailVerificationTitle}
-        </Typography>
-        <Typography variant="regular_16" className="mb-[30px]">
-          {locale.auth.emailVerificationText}
-        </Typography>
-        <Button
-          style="primary"
-          label={locale.auth.resendLink}
-          className=""
-          onClick={onClickHandler}
-        />
-      </div>
-      <div>
-        <TimeIsOverIcon width={480} height={320} />
-      </div>
+    <div className="flex flex-col items-center mt-[35px]">
+      <LinkHasExpired
+        userEmail={userEmail}
+        sendCallBack={resendLinkHandler}
+        isOpenModal={emailSentModal}
+        onOpenChangeModal={setEmailSentModal}
+      />
     </div>
   )
 }

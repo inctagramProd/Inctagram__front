@@ -1,48 +1,47 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SignUpForm } from '@/src/features/auth/signUp/ui/SignUpForm/SignUpForm'
 import { Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'
 import { SignUpFormValues, SignUpParams } from '../service/types/signUpTypes'
 import { FormikHelpers } from 'formik'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 export const SignUp = () => {
   const [emailSentModal, setEmailSentModal] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>('')
+  const [userEmail, setEmail] = useState<string>('')
+  const [userRegistration] = useSignUpMutation()
+  const { locale } = useTranslate()
 
-  const [userRegistration, { data, isSuccess, isError }] = useSignUpMutation()
-
-  const onSubmit = async (value: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => {
-    userRegistration(value)
+  const onSubmitHandler = async (value: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => {
+    await userRegistration(value)
       .unwrap()
       .then(() => {
-        console.log('registration have done!: ', data)
+        setEmail(value.email)
+        setEmailSentModal(true)
         actions.resetForm()
       })
       .catch(e => {
-        console.log('registration error: ', e)
-        const regex = /\s(\S+)$/ // Регулярное выражение для поиска последнего слова после пробела
-        const match = e.data.match(regex)
-        if (match) {
-          const lastWord = match[1]
-          setEmail(lastWord)
+        const error = e as { data: { message: string }; status: number }
+        console.log(error)
+        if (error.status === 400) {
+          actions.setFieldError('confirmPassword', locale.auth.authErrors.alreadyInUse)
         }
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
       })
   }
 
-  useEffect(() => {
-    // if (isError) setEmailSentModal(true)
-  }, [isError])
-
   return (
-    <div className="flex items-center justify-center h-[90vh]">
+    <div className="flex items-center justify-center h-[calc(100vh-60px)]">
       <Modal
-        email={email}
+        email={userEmail}
         isOpen={emailSentModal}
         onOpenChange={() => {
           setEmailSentModal(false)
         }}
       />
-      <SignUpForm onSubmit={onSubmit} />
+      <SignUpForm onSubmit={onSubmitHandler} />
     </div>
   )
 }
