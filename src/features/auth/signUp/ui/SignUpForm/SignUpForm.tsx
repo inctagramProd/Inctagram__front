@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { Trans } from '@/src/shared/helpers/Trans'
 import { Button, Card, Checkbox, Input, Typography } from '@/src/shared/ui'
 import { signUpSchema } from '@/src/features/auth/signUp/service/schema/signUpSchema'
-import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
 import {
   SignUpFormValues,
   SignUpParams,
 } from '@/src/features/auth/signUp/service/types/signUpTypes'
+import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
 
 type Props = {
   onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
@@ -39,7 +39,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           <GoogleLogo width={36} height={36} />
         </Link>
         <Link href="#">
-          <GithubLogo width={36} height={36} />
+          <GitLogo width={36} height={36} />
         </Link>
       </div>
       <div className="mb-[18px]">
@@ -111,6 +111,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
               </div>
               <div className="[&>button]:w-full">
                 <Button
+                  iconName=""
                   style="primary"
                   type="submit"
                   label={locale.auth.signUp}

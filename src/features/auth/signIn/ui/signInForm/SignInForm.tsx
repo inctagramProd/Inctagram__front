@@ -2,9 +2,9 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Button, Card, Input, Typography } from '@/src/shared/ui'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
-import { GithubLogo, GoogleLogo } from '@/src/shared/assets/icons/icons'
 import { signInSchema } from '@/src/features/auth/signIn/service/schema/signInSchema'
 import { SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
+import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
 
 type Props = {
   onSubmit: (values: SingInParams, actions: FormikHelpers<SingInParams>) => void
@@ -31,7 +31,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
           <GoogleLogo width={36} height={36} />
         </Link>
         <Link href="#">
-          <GithubLogo width={36} height={36} />
+          <GitLogo width={36} height={36} />
         </Link>
       </div>
       <div className="mb-[18px]">
@@ -67,6 +67,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
               </div>
               <div className="[&>button]:w-full">
                 <Button
+                  iconName=''
                   type="submit"
                   style="primary"
                   label={locale.auth.signIn}

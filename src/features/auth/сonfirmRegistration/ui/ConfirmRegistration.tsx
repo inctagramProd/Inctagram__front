@@ -26,7 +26,9 @@ export const ConfirmRegistration = () => {
 
   if (isLoading) {
     return (
-      <LoaderSpin/>
+      <div className="flex items-center justify-center h-[calc(100vh-60px)]">
+        <LoaderSpin />
+      </div>
     )
   }
 
