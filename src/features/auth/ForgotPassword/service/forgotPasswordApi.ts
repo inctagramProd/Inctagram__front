@@ -5,7 +5,7 @@ export const forgotPassword = baseApi.injectEndpoints({
     sendUserEmail: build.mutation({
       query: data => ({
         method: 'POST',
-        url: '/api/v1/auth/password-recovery-request',
+        url: 'auth/password-recovery-request',
         body: data,
       }),
     }),

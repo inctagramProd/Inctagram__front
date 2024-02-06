@@ -3,7 +3,6 @@ import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { forgotPasswordSchema } from '../service/forgotPasswordSchema'
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useSendUserEmailMutation } from '../service/forgotPasswordApi'
 
@@ -29,14 +28,14 @@ export const ForgotPassword = () => {
       await sendUserEmail(payload).unwrap()
       setIsModalOpen(true)
     } catch (error) {
-      const err = error as { data: { message: string } } // error as FetchBaseQueryError
+      const err = error as { data: { message: string } } 
 
       setStatus(err.data.message)
     }
   }
 
   const handleToGoBack = () => {
-    router.push('./signin')
+    router.push('/sign-in')
   }
 
   return (

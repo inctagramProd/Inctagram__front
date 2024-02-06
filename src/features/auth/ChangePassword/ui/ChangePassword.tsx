@@ -29,7 +29,7 @@ export const ChangePassword = () => {
         password: values.password,
       }
       await sendNewPassword(payload).unwrap()
-      router.push('/auth/signin')
+      router.push('/auth/sign-in')
     } catch (error) {
       const err = error as { data: { message: string } }
 
