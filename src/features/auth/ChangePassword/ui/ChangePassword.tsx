@@ -1,9 +1,8 @@
 import { Card, Typography, Input, Button } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
-import { useValidateEmailTokenMutation } from '@/src/shared/api/authApi'
-import { useEffect } from 'react'
+import { useSendNewPasswordMutation } from '../service/changePasswordApi'
 import { createNewPasswordSchema } from '../service/createNewPasswordSchema'
 
 type FormValues = {
@@ -12,48 +11,30 @@ type FormValues = {
 }
 
 export const ChangePassword = () => {
-  // const [validateEmailToken, { isLoading }] = useValidateEmailTokenMutation()
-  // const router = useRouter()
-  // const token = router.query.code
-
-  // useEffect(() => {
-  //   validateEmailToken(token)
-  //     .unwrap()
-  //     .then()
-  //     .catch(() => router.push('/resend-link'))
-  // }, [token, validateEmailToken])
-
-  // if (isLoading) {
-  //   return <div>Загрузка ..</div>
-  // }
-
   const { locale } = useTranslate()
+  const router = useRouter()
+  const token = router.query.code
 
   const initialValues: FormValues = {
     password: '',
     passwordConfirmation: '',
   }
 
-  // const createNewPasswordSchema = Yup.object().shape({
-  //   password: Yup.string()
-  //     .matches(
-  //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
-  //       locale.auth.authErrors.password.regex
-  //     )
-  //     .min(6, locale.auth.authErrors.password.min)
-  //     .max(20, locale.auth.authErrors.password.max)
-  //     .required(locale.auth.authErrors.password.nonEmpty),
-  //   passwordConfirmation: Yup.string()
-  //     .oneOf([Yup.ref('password')], locale.auth.authErrors.refine)
-  //     .required(locale.auth.authErrors.passwordConfirm),
-  // })
+  const [sendNewPassword] = useSendNewPasswordMutation()
 
-  const handleSubmit = (values: FormValues) => {
-    const payload = {
-      password: values.password,
+  const handleSubmit = async (values: FormValues, { setStatus }: FormikHelpers<FormValues>) => {
+    try {
+      const payload = {
+        passwordRecoveryCode: token,
+        password: values.password,
+      }
+      await sendNewPassword(payload).unwrap()
+      router.push('/auth/signin')
+    } catch (error) {
+      const err = error as { data: { message: string } }
+
+      setStatus(err.data.message)
     }
-
-    console.log(payload)
   }
 
   return (
@@ -66,25 +47,21 @@ export const ChangePassword = () => {
         initialValues={initialValues}
         validationSchema={createNewPasswordSchema(locale)}
       >
-        {({ isSubmitting, errors, touched }) => (
+        {({ isSubmitting, errors, touched, status }) => (
           <Form className="flex flex-col gap-6">
             <Field
               name="password"
               type="password"
               as={Input}
               label={locale.auth.newPassword}
-              error={touched.password && errors.password ? errors.password : null}
+              error={touched.password && errors.password}
             />
             <Field
               name="passwordConfirmation"
               type="password"
               as={Input}
               label={locale.auth.passwordConfirmation}
-              error={
-                touched.passwordConfirmation && errors.passwordConfirmation
-                  ? errors.passwordConfirmation
-                  : null
-              }
+              error={(touched.passwordConfirmation && errors.passwordConfirmation) || status}
             />
             <Typography className="mb-5 text-light-900" variant="regular_14">
               {locale.auth.passwordCharacters}
@@ -92,8 +69,9 @@ export const ChangePassword = () => {
             <Button
               className="w-full"
               style="primary"
-              label={locale.auth.sendLink}
+              label={locale.auth.createNewPassword}
               disable={isSubmitting}
+              type="submit"
             />
           </Form>
         )}

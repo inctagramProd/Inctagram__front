@@ -1,5 +1,6 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { Typography, Button, Modal } from '..'
+import TimeIsOverIcon from '@/src/shared/assets/icons/TimeIsOverIcon'
+import { Typography, Button, Modal } from '@/src/shared/ui'
 
 type Props = {
   userEmail: string

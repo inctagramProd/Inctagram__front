@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { getLayout } from '@/src/widgets/Layout/Layout'
-import { PasswordResetController } from '@/src/features/auth/PasswordResetController/PasswordResetController'
+import { PasswordResetController } from '@/src/features/auth/PasswordResetController'
 
 const ResetPasswordPage = () => {
   return (

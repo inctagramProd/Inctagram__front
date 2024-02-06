@@ -1,6 +1,6 @@
 import { useResendPasswordRecoveryLinkMutation } from './service/invalidEmailLink'
 import { useState } from 'react'
-import { LinkHasExpired } from '@/src/shared/ui/LinkHasExpired/LinkHasExpired'
+import { LinkHasExpired } from '../LinkHasExpired/LinkHasExpired'
 
 type Props = {
   userEmail: string
