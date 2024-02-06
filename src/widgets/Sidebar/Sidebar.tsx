@@ -5,33 +5,6 @@ import { StoreProvider } from '@/src/app/providers'
 type Props = { className?: string; theme?: 'dark' | 'light' }
 
 export const Sidebar = (props: Props) => {
-  // const handleLogOut = async () => {
-  //   try {
-  //     await logOut_old({ accessToken: 'your-access-token' }).unwrap()
-  //     // Handle successful logout
-  //   } catch (error) {
-  //     // Handle error during logout
-  //   }
-  // }
-
-  // const handleLogOut = async () => {
-  //   userRegistration(value)
-  //     .unwrap()
-  //     .then(() => {
-  //       console.log('registration have done!: ', data)
-  //       actions.resetForm()
-  //     })
-  //     .catch(e => {
-  //       console.log('registration error: ', e)
-  //       const regex = /\s(\S+)$/ // Регулярное выражение для поиска последнего слова после пробела
-  //       const match = e.data.match(regex)
-  //       if (match) {
-  //         const lastWord = match[1]
-  //         setEmail(lastWord)
-  //       }
-  //     })
-  // }
-
   const {
     className = `fixed bottom-0 left-0 sm:h-screen 
   sm:top-[60px]  sm:left-0 sm:w-[220px] 
