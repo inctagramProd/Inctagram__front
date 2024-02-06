@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.5",
     "@reduxjs/toolkit": "^2.0.1",
     "async-mutex": "^0.4.1",
     "formik": "^2.4.5",

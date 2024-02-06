@@ -13,7 +13,7 @@ export const PolicySwitcher = ({ variant }: Props) => {
 
   return (
     <div className="py-6">
-      <Link href={'/signup'}>
+      <Link href={'./auth/sign-up'}>
         <div className="inline-flex gap-3 pb-6">
           <Icon iconName="ArrowBack" />
           <Typography variant="regular_14">{locale.auth.backToSignUp}</Typography>

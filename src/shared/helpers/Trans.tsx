@@ -20,7 +20,7 @@ const interpolateTags = (data: TransType) => {
 
   const tokens = text.split(tagsRegex)
 
-  return tokens.map(token => {
+  return tokens.map((token) => {
     const matchResult = openCloseTagRegex.exec(token)
 
     if (!matchResult) {
