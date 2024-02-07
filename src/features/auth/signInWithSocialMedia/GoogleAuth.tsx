@@ -26,7 +26,7 @@ const GoogleAuth = ({ name }: Props) => {
     localStorage.setItem('Google', 'true')
     localStorage.removeItem('Git')
     const googlePath =
-      api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
+      api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + '/home' + api.googleScope
     window.location.assign(googlePath)
   }
   console.log(data)
