@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from '../../../../shared/api/baseQueryWithReauth'
+import React from 'react'
 
 export const AuthApi = createApi({
   reducerPath: 'gitAuthApi',
