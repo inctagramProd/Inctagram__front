@@ -1,4 +1,4 @@
-import { AuthApi } from '@/src/shared/api/AuthApi'
+import { AuthApi } from '@/src/pages/auth/signInWithSocialMedia/service/authApi'
 import { baseApi } from '@/src/shared/api/baseApi'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
@@ -14,7 +14,7 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(baseApi.middleware).concat(AuthApi.middleware),
-    preloadedState: loadState(),
+  preloadedState: loadState(),
 })
 
 setupListeners(store.dispatch)

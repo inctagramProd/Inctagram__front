@@ -8,7 +8,8 @@ import {
   SignUpFormValues,
   SignUpParams,
 } from '@/src/features/auth/signUp/service/types/signUpTypes'
-import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
+import GoogleAuth from '@/src/pages/auth/signInWithSocialMedia/GoogleAuth'
+import GitAuth from '@/src/pages/auth/signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
@@ -35,12 +36,8 @@ export const SignUpForm = ({ onSubmit }: Props) => {
         {locale.auth.signUp}
       </Typography>
       <div className={`flex justify-center gap-x-[60px] mb-6`}>
-        <Link href="#">
-          <GoogleLogo width={36} height={36} />
-        </Link>
-        <Link href="#">
-          <GitLogo width={36} height={36} />
-        </Link>
+        <GoogleAuth name={'Google'} />
+        <GitAuth name={'Git'} />
       </div>
       <div className="mb-[18px]">
         <Formik

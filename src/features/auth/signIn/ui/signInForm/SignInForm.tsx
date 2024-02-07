@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { signInSchema } from '@/src/features/auth/signIn/service/schema/signInSchema'
 import { SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
 import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
+import GoogleAuth from '@/src/pages/auth/signInWithSocialMedia/GoogleAuth'
+import GitAuth from '@/src/pages/auth/signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SingInParams, actions: FormikHelpers<SingInParams>) => void
@@ -27,12 +29,8 @@ export const SignInForm = ({ onSubmit }: Props) => {
         {locale.auth.signIn}
       </Typography>
       <div className={`flex justify-center gap-x-[60px] mb-6`}>
-        <Link href="#">
-          <GoogleLogo width={36} height={36} />
-        </Link>
-        <Link href="#">
-          <GitLogo width={36} height={36} />
-        </Link>
+        <GoogleAuth name={'Google'} />
+        <GitAuth name={'Git'} />
       </div>
       <div className="mb-[18px]">
         <Formik
@@ -67,7 +65,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
               </div>
               <div className="[&>button]:w-full">
                 <Button
-                  iconName=''
+                  iconName=""
                   type="submit"
                   style="primary"
                   label={locale.auth.signIn}
