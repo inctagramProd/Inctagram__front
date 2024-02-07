@@ -1,6 +1,4 @@
-import React from 'react'
-import { Typography } from '../Typography/Typography'
-import { Icon } from '@/src/shared/ui/Icon/Icon'
+import { Icon, Typography } from '@/src/shared/ui'
 
 type Props = {
   //Button properties
@@ -29,7 +27,7 @@ type Props = {
   //Icon properties
   height?: number
   width?: number
-  iconName: string
+  iconName?: string
   iconStyle?: string
   fillType?: 'fill' | 'outline'
   handleFocus?: () => void
@@ -100,7 +98,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      className={`group flex  py-[6px] px-[24px] content-center gap-x-[10px] ${nameOfClass}`}
+      className={`group flex  py-[6px] px-[24px] content-center gap-x-[10px] ${nameOfClass} ${className}`}
       disabled={disable}
       {...props}
     >

@@ -1,6 +1,6 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import TimeIsOverIcon from '@/src/shared/assets/icons/TimeIsOverIcon'
-import { Button, Modal, Typography } from '@/src/shared/ui'
+import { Typography, Button, Modal } from '@/src/shared/ui'
 
 type Props = {
   userEmail: string
@@ -9,7 +9,12 @@ type Props = {
   onOpenChangeModal: (value: boolean) => void
 }
 
-export const LinkHasExpired = ({ userEmail, sendCallBack, isOpenModal, onOpenChangeModal }: Props) => {
+export const LinkHasExpired = ({
+  userEmail,
+  sendCallBack,
+  isOpenModal,
+  onOpenChangeModal,
+}: Props) => {
   const { locale } = useTranslate()
 
   return (
