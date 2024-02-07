@@ -9,14 +9,14 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 export const SignIn = () => {
   const { locale } = useTranslate()
   const router = useRouter()
-  const [loginUser, { isSuccess }] = useSignInMutation()
+  const [loginUser, { data, isSuccess }] = useSignInMutation()
 
   useEffect(() => {
     if (isSuccess) {
       router.push('/home')
     }
   }, [isSuccess])
-
+  console.log(data)
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
