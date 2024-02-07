@@ -4,9 +4,8 @@ import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
 import { signInSchema } from '@/src/features/auth/signIn/service/schema/signInSchema'
 import { SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
-import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
-import GoogleAuth from '@/src/pages/auth/signInWithSocialMedia/GoogleAuth'
-import GitAuth from '@/src/pages/auth/signInWithSocialMedia/GitAuth'
+import GoogleAuth from '../../../signInWithSocialMedia/GoogleAuth'
+import GitAuth from '../../../signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SingInParams, actions: FormikHelpers<SingInParams>) => void

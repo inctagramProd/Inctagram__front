@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 import { Icon } from '@/src/shared/ui'
-import { useGitAuthMutation } from '@/src/pages/auth/signInWithSocialMedia/service/authApi'
+import { useGitAuthMutation } from '@/src/features/auth/signInWithSocialMedia/service/authApi'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 
 type Props = {
   name: 'Google' | 'Git'
 }
-
 const GitAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
 

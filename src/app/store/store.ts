@@ -1,4 +1,4 @@
-import { AuthApi } from '@/src/pages/auth/signInWithSocialMedia/service/authApi'
+import { AuthApi } from '@/src/features/auth/signInWithSocialMedia/service/authApi'
 import { baseApi } from '@/src/shared/api/baseApi'
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query/react'

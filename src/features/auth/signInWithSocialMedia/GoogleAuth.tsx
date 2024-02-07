@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Icon } from '@/src/shared/ui'
-import { useGoogleAuthMutation } from '@/src/pages/auth/signInWithSocialMedia/service/authApi'
+import { useGoogleAuthMutation } from '@/src/features/auth/signInWithSocialMedia/service/authApi'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 

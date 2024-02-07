@@ -8,8 +8,8 @@ import {
   SignUpFormValues,
   SignUpParams,
 } from '@/src/features/auth/signUp/service/types/signUpTypes'
-import GoogleAuth from '@/src/pages/auth/signInWithSocialMedia/GoogleAuth'
-import GitAuth from '@/src/pages/auth/signInWithSocialMedia/GitAuth'
+import GoogleAuth from '@/src/features/auth/signInWithSocialMedia/GoogleAuth'
+import GitAuth from '@/src/features/auth/signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
