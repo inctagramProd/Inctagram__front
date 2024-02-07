@@ -1,6 +1,6 @@
 export class api {
   static serverURL: string =
-    /* 'https://inctagram-back.vercel.app/api/v1' */ 'https://deepwaterhorizon.ru/api/v1' 
+    /* 'https://inctagram-back.vercel.app/api/v1' */ 'https://deepwaterhorizon.ru/api/v1'
   static clientUrl = 'https://inctagram-front.vercel.app/'
 
   //GITHUB CONFIGS
@@ -13,6 +13,6 @@ export class api {
   static clientGoogleId: string =
     '621596965505-n57cqu1ifnmd34rqls715cao17t8r8n5.apps.googleusercontent.com'
   static googleAuth: string = this.googleURL + '/o/oauth2/v2/auth?response_type=code&client_id='
-  static redirUrl = '&redirect_uri='
+  static redirUrl = `&redirect_uri=${this.clientUrl}/home`
   static googleScope = '&scope=email profile'
 }
