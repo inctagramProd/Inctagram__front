@@ -17,6 +17,7 @@ const GitAuth = ({ name }: Props) => {
     if (Code) {
       if (localStorage.getItem('Git') === 'true') {
         localStorage.setItem('accessToken', data.accessToken)
+        localStorage.setItem('name', data.name)
         Auth({ code: Code }).unwrap()
       }
     }
