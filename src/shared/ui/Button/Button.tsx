@@ -27,7 +27,7 @@ type Props = {
   //Icon properties
   height?: number
   width?: number
-  iconName?: string
+  iconName: string
   iconStyle?: string
   fillType?: 'fill' | 'outline'
   handleFocus?: () => void
