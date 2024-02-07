@@ -1,5 +1,4 @@
 import { Icon, Typography } from '@/src/shared/ui'
-
 type Props = {
   //Button properties
   style: 'primary' | 'secondary' | 'outline' | 'text' | 'default'
