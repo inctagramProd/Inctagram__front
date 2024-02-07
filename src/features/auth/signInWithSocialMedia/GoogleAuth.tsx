@@ -17,6 +17,7 @@ const GoogleAuth = ({ name }: Props) => {
     console.log(localStorage.getItem('Google'))
     if (Code) {
       if (localStorage.getItem('Google') === 'true') {
+        localStorage.setItem('accessToken', data.accessToken)
         Auth({ code: Code }).unwrap()
       }
     }
