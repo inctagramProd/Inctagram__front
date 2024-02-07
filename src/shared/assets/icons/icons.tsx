@@ -2122,3 +2122,7 @@ export const Paid = ({ width, height, fillType = 'outline', value = 0, iconStyle
     </svg>
   )
 }
+
+export const Empty = () => {
+  return <></>
+}
