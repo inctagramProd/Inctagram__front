@@ -12,21 +12,22 @@ export const SignIn = () => {
   const [loginUser, { data, isSuccess }] = useSignInMutation()
   const [gitUser, { data: gitData, isSuccess: gitIsSuccess }] = useGitAuthMutation()
   const [apiStatus, setApiStatus] = useState<boolean>(false)
+  const queryCode = router.query as { code: string }
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
     const ApiStatus = localStorage.getItem('api')
-    if (Code) {
+    if (queryCode.code) {
       if (localStorage.getItem('Git') === 'true') {
-        gitUser({ code: Code }).unwrap()
+        gitUser({ code: queryCode.code }).unwrap()
       }
     } else {
       if (isSuccess || gitIsSuccess) {
         router.push('/home')
       }
     }
-  }, [isSuccess, gitIsSuccess])
+  }, [isSuccess, gitIsSuccess, queryCode])
 
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
