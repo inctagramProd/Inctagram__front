@@ -6,6 +6,7 @@ import { useGitAuthMutation } from '../signIn/service/signInApi'
 
 type Props = {
   name: 'Google' | 'Git'
+  handler?: () => void
 }
 const GitAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()

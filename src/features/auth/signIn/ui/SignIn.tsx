@@ -1,5 +1,5 @@
 import { FormikHelpers } from 'formik'
-import { useSignInMutation } from '../service/signInApi'
+import { useGoogleAuthMutation, useSignInMutation } from '../service/signInApi'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { SignInForm } from './signInForm/SignInForm'
@@ -10,13 +10,29 @@ export const SignIn = () => {
   const { locale } = useTranslate()
   const router = useRouter()
   const [loginUser, { data, isSuccess }] = useSignInMutation()
-
+  const [
+    GoogleAuth,
+    {
+      data: googleData,
+      isLoading: googleLoading,
+      isError: googleError,
+      isSuccess: googleIsSuccess,
+    },
+  ] = useGoogleAuthMutation()
+  const [
+    GitAuth,
+    { data: gitData, isLoading: gitLoading, isError: gitError, isSuccess: gitIsSuccess },
+  ] = useGoogleAuthMutation()
   useEffect(() => {
     if (isSuccess) {
       router.push('/home')
     }
   }, [isSuccess])
-  console.log(data)
+  console.log(googleData)
+  console.log(gitData)
+
+  const onGitSubmit = () => {}
+  const onGoogleSubmit = () => {}
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
