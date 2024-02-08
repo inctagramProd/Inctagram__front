@@ -11,6 +11,7 @@ export const SignIn = () => {
   const { locale } = useTranslate()
   const router = useRouter()
   const [loginUser, { data, isSuccess }] = useSignInMutation()
+  const [gitUser, { data: gitData, isSuccess: gitIsSuccess }] = useGitAuthMutation()
   const [apiStatus, setApiStatus] = useState<boolean>(false)
   useEffect(() => {
     const queryString = window.location.search
@@ -21,8 +22,7 @@ export const SignIn = () => {
       if (localStorage.getItem('Git') === 'true') {
         localStorage.setItem('accessToken', 'Token')
         localStorage.setItem('name', 'name')
-        console.log('code', Code)
-        console.log(apiStatus)
+        gitUser({ code: Code }).unwrap()
       }
     } else {
       if (isSuccess || ApiStatus === 'true') {
