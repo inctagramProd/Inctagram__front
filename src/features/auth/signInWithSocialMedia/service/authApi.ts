@@ -10,6 +10,17 @@ export const AuthApi = baseApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          if (data.accessToken) {
+            console.log(data)
+            dispatch(setToken({ accessToken: data.accessToken }))
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      },
     }),
     GoogleAuth: build.mutation<AccessToken, ThirdPartyAuth>({
       query: (body: object) => ({
