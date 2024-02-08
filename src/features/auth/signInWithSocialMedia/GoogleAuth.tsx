@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { Icon } from '@/src/shared/ui'
-import { useGoogleAuthMutation } from '@/src/features/auth/signInWithSocialMedia/service/authApi'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
+import { useGoogleAuthMutation } from '../signIn/service/signInApi'
 
 type Props = {
   name: 'Google' | 'Git'

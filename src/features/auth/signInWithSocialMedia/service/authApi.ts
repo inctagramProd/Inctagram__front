@@ -1,4 +1,4 @@
-import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
+/* import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
 import { AccessToken, ThirdPartyAuth } from '@/src/features/auth/signIn/service/types/signInTypes'
 import { baseApi } from '@/src/shared/api/baseApi'
 
@@ -46,3 +46,4 @@ export const AuthApi = baseApi.injectEndpoints({
 })
 
 export const { useGitAuthMutation, useGoogleAuthMutation } = AuthApi
+ */
