@@ -24,17 +24,18 @@ export const SignIn = () => {
     { data: gitData, isLoading: gitLoading, isError: gitError, isSuccess: gitIsSuccess },
   ] = useGoogleAuthMutation()
   useEffect(() => {
-    if (isSuccess) {
-      router.push('/home')
-    }
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
     console.log(localStorage.getItem('Google'))
+
     if (Code) {
       if (localStorage.getItem('Google') === 'true') {
         GitAuth({ code: Code }).unwrap()
       }
+    }
+    if (isSuccess || gitIsSuccess || googleIsSuccess) {
+      router.push('/home')
     }
   }, [isSuccess, gitIsSuccess])
   console.log(googleData)
