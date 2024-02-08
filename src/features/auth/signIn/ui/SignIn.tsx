@@ -24,6 +24,14 @@ export const SignIn = () => {
     { data: gitData, isLoading: gitLoading, isError: gitError, isSuccess: gitIsSuccess },
   ] = useGoogleAuthMutation()
   useEffect(() => {
+    if (isSuccess || gitIsSuccess || googleIsSuccess) {
+      router.push('/home')
+    }
+  }, [isSuccess, gitIsSuccess])
+  console.log(googleData)
+  console.log(gitData)
+
+  const onGitSubmit = async () => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
@@ -34,14 +42,7 @@ export const SignIn = () => {
         GitAuth({ code: Code }).unwrap()
       }
     }
-    if (isSuccess || gitIsSuccess || googleIsSuccess) {
-      router.push('/home')
-    }
-  }, [isSuccess, gitIsSuccess])
-  console.log(googleData)
-  console.log(gitData)
-
-  const onGitSubmit = () => {}
+  }
   const onGoogleSubmit = () => {}
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
@@ -63,7 +64,7 @@ export const SignIn = () => {
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
-      <SignInForm onSubmit={onSubmitHandler} />
+      <SignInForm onSubmit={onSubmitHandler} onGitSubmit={onGitSubmit} />
     </div>
   )
 }

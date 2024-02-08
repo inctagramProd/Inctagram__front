@@ -7,8 +7,9 @@ import { useGitAuthMutation } from '../signIn/service/signInApi'
 type Props = {
   name: 'Google' | 'Git'
   handler?: () => void
+  onGitSubmit?: () => void
 }
-const GitAuth = ({ name }: Props) => {
+const GitAuth = ({ name, onGitSubmit }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
 
   useEffect(() => {
@@ -32,8 +33,10 @@ const GitAuth = ({ name }: Props) => {
   ) : isError ? (
     <h1>isError</h1>
   ) : (
-    <div onClick={LoginWithApi}>
-      <Icon iconName={`${name}Logo`} />
+    <div onClick={onGitSubmit}>
+      <div onClick={LoginWithApi}>
+        <Icon iconName={`${name}Logo`} />
+      </div>
     </div>
   )
 }
