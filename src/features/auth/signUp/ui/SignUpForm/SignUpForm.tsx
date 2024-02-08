@@ -35,10 +35,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
       <Typography variant="h1" className="text-center mb-[13px] cursor-default">
         {locale.auth.signUp}
       </Typography>
-      <div className={`flex justify-center gap-x-[60px] mb-6`}>
-        <GoogleAuth name={'Google'} />
-        <GitAuth name={'Git'} />
-      </div>
+      <div className={`flex justify-center gap-x-[60px] mb-6`}></div>
       <div className="mb-[18px]">
         <Formik
           initialValues={initialValues}
