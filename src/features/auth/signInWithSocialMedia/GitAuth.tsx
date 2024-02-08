@@ -16,7 +16,6 @@ const GitAuth = ({ name }: Props) => {
     const Code = urlParams.get('code')
     if (Code) {
       if (localStorage.getItem('Git') === 'true') {
-        localStorage.setItem('name', data.name)
         Auth({ code: Code }).unwrap()
       }
     }
@@ -27,8 +26,6 @@ const GitAuth = ({ name }: Props) => {
     const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
     window.location.assign(gitPath)
   }
-
-  console.log(data)
   return isLoading ? (
     <LoaderSpin />
   ) : isError ? (
