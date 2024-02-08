@@ -27,7 +27,16 @@ export const SignIn = () => {
     if (isSuccess) {
       router.push('/home')
     }
-  }, [isSuccess])
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    const Code = urlParams.get('code')
+    console.log(localStorage.getItem('Google'))
+    if (Code) {
+      if (localStorage.getItem('Google') === 'true') {
+        GitAuth({ code: Code }).unwrap()
+      }
+    }
+  }, [isSuccess, gitIsSuccess])
   console.log(googleData)
   console.log(gitData)
 
