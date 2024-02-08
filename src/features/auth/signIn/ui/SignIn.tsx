@@ -11,7 +11,8 @@ export const SignIn = () => {
   const { locale } = useTranslate()
   const router = useRouter()
   const [loginUser, { data, isSuccess }] = useSignInMutation()
-  const [apiStatus, setApiStatus] = useState<boolean>(true)
+  const [apiStatus, setApiStatus] = useState<boolean>(false)
+  console.log(apiStatus)
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
@@ -23,7 +24,7 @@ export const SignIn = () => {
         console.log('code', Code)
       }
     } else {
-      if (isSuccess && apiStatus) {
+      if (isSuccess || apiStatus) {
         router.push('/home')
       }
     }
