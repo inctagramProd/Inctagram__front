@@ -26,7 +26,7 @@ export const SignIn = () => {
         router.push('/home')
       }
     }
-  }, [isSuccess, apiStatus])
+  }, [isSuccess, gitIsSuccess])
 
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
