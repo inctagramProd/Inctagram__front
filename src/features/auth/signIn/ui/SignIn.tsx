@@ -22,6 +22,7 @@ export const SignIn = () => {
         localStorage.setItem('accessToken', 'Token')
         localStorage.setItem('name', 'name')
         console.log('code', Code)
+        console.log(apiStatus)
       }
     } else {
       if (isSuccess || apiStatus) {

@@ -10,7 +10,6 @@ type Props = {
 }
 const GitAuth = ({ name, setApiStatus }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
-
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
