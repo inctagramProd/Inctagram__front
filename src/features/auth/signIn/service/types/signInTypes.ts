@@ -13,3 +13,7 @@ export type SignInSchema = {
 export type AccessToken = {
   accessToken: string
 }
+export type ThirdPartyAuth = {
+  name: string
+  accessToken: string
+}

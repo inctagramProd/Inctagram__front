@@ -2,6 +2,7 @@ import { baseApi } from '@/src/shared/api/baseApi'
 import { setToken, setName } from '@/src/features/auth/signIn/model/signInSlice'
 import {
   AccessToken,
+  ThirdPartyAuth,
   ApiAuth,
   SingInParams,
 } from '@/src/features/auth/signIn/service/types/signInTypes'
@@ -25,7 +26,7 @@ export const authByEmail = baseApi.injectEndpoints({
         }
       },
     }),
-    gitAuth: builder.mutation<AccessToken, ApiAuth>({
+    gitAuth: builder.mutation<ThirdPartyAuth, ApiAuth>({
       query: (data: object) => ({
         url: '/auth/github-auth',
         method: 'POST',
