@@ -21,7 +21,7 @@ export const SignIn = () => {
       }
     }
   }, [isSuccess, gitIsSuccess, queryCode])
-  console.log(gitData)
+  console.log(`git Data`, gitData)
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
