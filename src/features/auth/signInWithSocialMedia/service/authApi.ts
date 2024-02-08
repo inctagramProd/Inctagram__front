@@ -1,5 +1,5 @@
 import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
-import { AccessToken, SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
+import { AccessToken, ThirdPartyAuth } from '@/src/features/auth/signIn/service/types/signInTypes'
 import { baseApi } from '@/src/shared/api/baseApi'
 
 export const AuthApi = baseApi.injectEndpoints({
@@ -11,7 +11,7 @@ export const AuthApi = baseApi.injectEndpoints({
         body,
       }),
     }),
-    GoogleAuth: build.mutation<AccessToken, SingInParams>({
+    GoogleAuth: build.mutation<AccessToken, ThirdPartyAuth>({
       query: (body: object) => ({
         url: '/auth/google-auth',
         method: 'POST',
