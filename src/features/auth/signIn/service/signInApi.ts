@@ -21,8 +21,26 @@ export const authByEmail = baseApi.injectEndpoints({
         }
       },
     }),
+    gitAuth: builder.mutation({
+      query: (data: object) => ({
+        url: '/auth/github-auth',
+        method: 'POST',
+        body: data,
+      }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          if (data.accessToken) {
+            console.log(data)
+            dispatch(setToken({ accessToken: data.accessToken }))
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      },
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useSignInMutation } = authByEmail
+export const { useSignInMutation, useGitAuthMutation } = authByEmail
