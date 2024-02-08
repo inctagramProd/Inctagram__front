@@ -22,7 +22,7 @@ export const SignIn = () => {
         gitUser({ code: Code }).unwrap()
       }
     } else {
-      if (isSuccess || ApiStatus === 'true') {
+      if (isSuccess || gitIsSuccess) {
         router.push('/home')
       }
     }
