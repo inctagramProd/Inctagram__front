@@ -6,6 +6,7 @@ import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 
 type Props = {
   name: 'Google' | 'Git'
+  onGitSubmit:()=>void
 }
 const GitAuth = ({ name }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
