@@ -11,24 +11,17 @@ export const SignIn = () => {
   const router = useRouter()
   const [loginUser, { data, isSuccess }] = useSignInMutation()
   const [gitUser, { data: gitData, isSuccess: gitIsSuccess }] = useGitAuthMutation()
-  const [apiStatus, setApiStatus] = useState<boolean>(false)
   const queryCode = router.query as { code: string }
   useEffect(() => {
-    const queryString = window.location.search
-    const urlParams = new URLSearchParams(queryString)
-    const Code = urlParams.get('code')
-    const ApiStatus = localStorage.getItem('api')
-    if (queryCode.code) {
+    if (isSuccess || gitIsSuccess) {
+      router.push('/home')
+    } else if (queryCode.code) {
       if (localStorage.getItem('Git') === 'true') {
         gitUser({ code: queryCode.code }).unwrap()
       }
-    } else {
-      if (isSuccess || gitIsSuccess) {
-        router.push('/home')
-      }
     }
   }, [isSuccess, gitIsSuccess, queryCode])
-
+  console.log(gitData)
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
@@ -46,10 +39,9 @@ export const SignIn = () => {
         actions.setSubmitting(false)
       })
   }
-  console.log('hey')
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
-      <SignInForm setApiStatus={setApiStatus} onSubmit={onSubmitHandler} />
+      <SignInForm onSubmit={onSubmitHandler} />
     </div>
   )
 }

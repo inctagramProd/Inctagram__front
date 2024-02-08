@@ -14,6 +14,6 @@ export type AccessToken = {
   accessToken: string
 }
 export type ThirdPartyAuth = {
-  name: string
+  username: string
   accessToken: string
 }

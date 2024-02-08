@@ -13,8 +13,8 @@ export const signInSlice = createSlice({
     setToken: (state, action: PayloadAction<{ accessToken: string }>) => {
       state.accessToken = action.payload.accessToken
     },
-    setName: (state, action: PayloadAction<{ name: string }>) => {
-      state.accessToken = action.payload.name
+    setName: (state, action: PayloadAction<{ username: string }>) => {
+      state.accessToken = action.payload.username
     },
     clearToken: state => {
       state.accessToken = null
@@ -22,5 +22,5 @@ export const signInSlice = createSlice({
   },
 })
 
-export const { setToken, clearToken,setName } = signInSlice.actions
+export const { setToken, clearToken, setName } = signInSlice.actions
 export const signInReducer = signInSlice.reducer

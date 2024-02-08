@@ -14,7 +14,7 @@ const GoogleAuth = ({ name }: Props) => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
-    console.log(localStorage.getItem('Google'))
+
     if (Code) {
       if (localStorage.getItem('Google') === 'true') {
         localStorage.setItem('accessToken', data.accessToken)
@@ -30,7 +30,6 @@ const GoogleAuth = ({ name }: Props) => {
       api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
     window.location.assign(googlePath)
   }
-  console.log(data)
   return isLoading ? (
     <LoaderSpin />
   ) : isError ? (

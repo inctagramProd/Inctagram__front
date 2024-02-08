@@ -3,12 +3,12 @@ import { Icon } from '@/src/shared/ui'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 import { useGitAuthMutation } from '../signIn/service/signInApi'
+import { useRouter } from 'next/router'
 
 type Props = {
   name: 'Google' | 'Git'
-  setApiStatus: (status: boolean) => void
 }
-const GitAuth = ({ name, setApiStatus }: Props) => {
+const GitAuth = ({ name }: Props) => {
   function LoginWithApi() {
     localStorage.setItem('Git', 'true')
     localStorage.removeItem('Google')

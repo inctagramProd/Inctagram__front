@@ -9,10 +9,9 @@ import GitAuth from '../../../signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SingInParams, actions: FormikHelpers<SingInParams>) => void
-  setApiStatus: (status:boolean) => void
 }
 
-export const SignInForm = ({ onSubmit, setApiStatus }: Props) => {
+export const SignInForm = ({ onSubmit }: Props) => {
   const { locale } = useTranslate()
 
   const onSubmitHandler = (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
@@ -30,7 +29,7 @@ export const SignInForm = ({ onSubmit, setApiStatus }: Props) => {
       </Typography>
       <div className={`flex justify-center gap-x-[60px] mb-6`}>
         <GoogleAuth name={'Google'} />
-        <GitAuth name={'Git'} setApiStatus={setApiStatus} />
+        <GitAuth name={'Git'} />
       </div>
       <div className="mb-[18px]">
         <Formik
