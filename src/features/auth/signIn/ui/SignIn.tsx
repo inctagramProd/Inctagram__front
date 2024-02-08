@@ -16,7 +16,7 @@ export const SignIn = () => {
       router.push('/home')
     }
   }, [isSuccess])
-
+  console.log('Hey')
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
