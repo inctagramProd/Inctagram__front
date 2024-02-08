@@ -1,6 +1,6 @@
 import { FormikHelpers } from 'formik'
 import { useSignInMutation } from '../service/signInApi'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { SignInForm } from './signInForm/SignInForm'
 import { SingInParams } from '../service/types/signInTypes'
@@ -11,11 +11,7 @@ export const SignIn = () => {
   const { locale } = useTranslate()
   const router = useRouter()
   const [loginUser, { data, isSuccess }] = useSignInMutation()
-  const [
-    GitAuth,
-    { data: gitData, isLoading: gitIsLoading, isError: gitIsError, isSuccess: gitIsSuccess },
-  ] = useGitAuthMutation()
-
+  const [apiStatus, setApiStatus] = useState<boolean>(true)
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
@@ -27,11 +23,11 @@ export const SignIn = () => {
         console.log('code', Code)
       }
     } else {
-      if (isSuccess) {
+      if (isSuccess && apiStatus) {
         router.push('/home')
       }
     }
-  }, [isSuccess, gitIsSuccess])
+  }, [isSuccess, apiStatus])
 
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
@@ -50,16 +46,10 @@ export const SignIn = () => {
         actions.setSubmitting(false)
       })
   }
-  const onGitSubmit = async () => {
-    const queryString = window.location.search
-    const urlParams = new URLSearchParams(queryString)
-    const Code = urlParams.get('code')
-    GitAuth({ code: Code }).unwrap()
-  }
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
-      <SignInForm onGitSubmit={onGitSubmit} onSubmit={onSubmitHandler} />
+      <SignInForm setApiStatus={setApiStatus} onSubmit={onSubmitHandler} />
     </div>
   )
 }

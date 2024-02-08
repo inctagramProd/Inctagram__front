@@ -6,9 +6,9 @@ import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 
 type Props = {
   name: 'Google' | 'Git'
-  onGitSubmit:()=>void
+  setApiStatus: (status: boolean) => void
 }
-const GitAuth = ({ name }: Props) => {
+const GitAuth = ({ name, setApiStatus }: Props) => {
   const [Auth, { data, isLoading, isError }] = useGitAuthMutation()
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const GitAuth = ({ name }: Props) => {
     localStorage.removeItem('Google')
     const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
     window.location.assign(gitPath)
+    setApiStatus(false)
   }
 
   console.log(data)
