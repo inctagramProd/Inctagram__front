@@ -1,5 +1,5 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
+import { setToken, setName } from '@/src/features/auth/signIn/model/signInSlice'
 import {
   AccessToken,
   ApiAuth,
@@ -36,6 +36,7 @@ export const authByEmail = baseApi.injectEndpoints({
           const { data } = await queryFulfilled
           if (data.accessToken) {
             console.log(data)
+            dispatch(setName({ name: data.name }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
