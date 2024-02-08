@@ -14,6 +14,7 @@ export const authByEmail = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
           if (data.accessToken) {
+            console.log(data)
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
