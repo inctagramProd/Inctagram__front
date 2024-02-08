@@ -17,6 +17,7 @@ export const SignIn = () => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const Code = urlParams.get('code')
+    const ApiStatus = localStorage.getItem('api')
     if (Code) {
       if (localStorage.getItem('Git') === 'true') {
         localStorage.setItem('accessToken', 'Token')
@@ -25,7 +26,7 @@ export const SignIn = () => {
         console.log(apiStatus)
       }
     } else {
-      if (isSuccess || apiStatus) {
+      if (isSuccess || ApiStatus === 'true') {
         router.push('/home')
       }
     }
