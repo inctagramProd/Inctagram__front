@@ -4,7 +4,7 @@ import { baseApi } from '@/src/shared/api/baseApi'
 
 export const AuthApi = baseApi.injectEndpoints({
   endpoints: build => ({
-    gitAuth: build.mutation({
+    gitAuth: build.mutation<AccessToken, ThirdPartyAuth>({
       query: (body: object) => ({
         url: '/auth/github-auth',
         method: 'POST',
