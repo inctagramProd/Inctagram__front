@@ -12,7 +12,6 @@ export const SignIn = () => {
   const router = useRouter()
   const [loginUser, { data, isSuccess }] = useSignInMutation()
   const [apiStatus, setApiStatus] = useState<boolean>(false)
-  console.log(apiStatus)
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
