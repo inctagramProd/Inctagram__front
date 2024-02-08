@@ -20,8 +20,6 @@ export const SignIn = () => {
     const ApiStatus = localStorage.getItem('api')
     if (Code) {
       if (localStorage.getItem('Git') === 'true') {
-        localStorage.setItem('accessToken', 'Token')
-        localStorage.setItem('name', 'name')
         gitUser({ code: Code }).unwrap()
       }
     } else {

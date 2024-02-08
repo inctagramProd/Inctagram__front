@@ -28,7 +28,7 @@ export const authByEmail = baseApi.injectEndpoints({
     }),
     gitAuth: builder.mutation<ThirdPartyAuth, ApiAuth>({
       query: (data: object) => ({
-        url: '/auth/github-auth',
+        url: 'auth/github-auth',
         method: 'POST',
         body: data,
       }),
