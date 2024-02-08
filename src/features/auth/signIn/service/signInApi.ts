@@ -1,6 +1,10 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
-import { AccessToken, SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
+import {
+  AccessToken,
+  ApiAuth,
+  SingInParams,
+} from '@/src/features/auth/signIn/service/types/signInTypes'
 
 export const authByEmail = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -21,7 +25,7 @@ export const authByEmail = baseApi.injectEndpoints({
         }
       },
     }),
-    gitAuth: builder.mutation({
+    gitAuth: builder.mutation<AccessToken, ApiAuth>({
       query: (data: object) => ({
         url: '/auth/github-auth',
         method: 'POST',

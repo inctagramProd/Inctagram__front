@@ -16,8 +16,6 @@ const GitAuth = ({ name, setApiStatus }: Props) => {
     const Code = urlParams.get('code')
     if (Code) {
       if (localStorage.getItem('Git') === 'true') {
-        localStorage.setItem('accessToken', data.accessToken)
-        localStorage.setItem('name', data.name)
         Auth({ code: Code }).unwrap()
         setApiStatus(true)
       }
