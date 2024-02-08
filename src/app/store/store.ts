@@ -7,13 +7,11 @@ import { loadState, saveState } from '@/src/shared/lib/localstorage'
 
 const rootReducer: any = {
   [baseApi.reducerPath]: baseApi.reducer,
-  [AuthApi.reducerPath]: AuthApi.reducer,
   signIn: signInReducer,
 }
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(baseApi.middleware).concat(AuthApi.middleware),
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware),
   preloadedState: loadState(),
 })
 

@@ -1,6 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { baseQueryWithReauth } from '../../../../shared/api/baseQueryWithReauth'
-import React from 'react'
 import { setToken } from '@/src/features/auth/signIn/model/signInSlice'
 import { AccessToken, SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
 import { baseApi } from '@/src/shared/api/baseApi'
