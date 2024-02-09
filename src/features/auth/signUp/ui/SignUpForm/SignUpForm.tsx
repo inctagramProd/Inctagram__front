@@ -84,7 +84,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                     tags={{
                       1: () => (
                         <Link
-                          href="/terms-of-service"
+                          href="/auth/terms-of-service"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
                         >
                           {locale.auth.termsOfService}
@@ -92,7 +92,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                       ),
                       2: () => (
                         <Link
-                          href="/privacy-policy"
+                          href="/auth/privacy-policy"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
                         >
                           {locale.auth.policy}

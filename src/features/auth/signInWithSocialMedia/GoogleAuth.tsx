@@ -11,7 +11,7 @@ const GoogleAuth = ({ name }: Props) => {
     localStorage.removeItem('Git')
     const googlePath =
       api.googleAuth + api.clientGoogleId + api.redirUrl + api.clientUrl + api.googleScope
-    window.location.assign(googlePath)
+    window.location.assign(api.googlePath)
   }
   return (
     <div onClick={LoginWithApi}>
