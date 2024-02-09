@@ -8,8 +8,7 @@ const GitAuth = ({ name }: Props) => {
   function LoginWithApi() {
     localStorage.setItem('Git', 'true')
     localStorage.removeItem('Google')
-    const gitPath = api.gitAuth + api.clientGitId + api.gitHubScope
-    window.location.assign(gitPath)
+      window.location.assign(api.gitPath)
   }
 
   return (
