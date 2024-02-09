@@ -27,6 +27,7 @@ export const SignIn = () => {
   ] = useGoogleAuthMutation()
   const queryCode = router.query as { code: string }
   let Code
+
   useEffect(() => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
@@ -40,6 +41,7 @@ export const SignIn = () => {
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode, Code])
   console.log(`code`, Code)
+  console.log(`code`, queryCode.code)
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
