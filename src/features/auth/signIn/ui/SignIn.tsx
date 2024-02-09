@@ -26,14 +26,16 @@ export const SignIn = () => {
     },
   ] = useGoogleAuthMutation()
   const queryCode = router.query as { code: string }
-
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  const Code = urlParams.get('code')
   useEffect(() => {
     if (isSuccess || gitIsSuccess) {
       router.push('/home')
     } else if (queryCode.code) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
-        : googleUser({ code: queryCode.code }).unwrap()
+        : googleUser({ code: Code }).unwrap()
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
   console.log(`git Data`, gitData)
