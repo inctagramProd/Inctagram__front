@@ -28,7 +28,7 @@ export const SignIn = () => {
   const queryCode = router.query as { code: string }
 
   useEffect(() => {
-    if (isSuccess || gitIsSuccess) {
+    if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
     } else if (queryCode.code) {
       localStorage.getItem('Git')
