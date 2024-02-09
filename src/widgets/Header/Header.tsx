@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Typography, Icon, Button, Select, SelectOptionType } from '@/src/shared/ui'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type Props = {
   user?: boolean
@@ -25,34 +26,33 @@ export const Header = (props: Props) => {
     theme = 'dark',
     value = 0,
     style = 'primary',
-    options = [
-      { title: 'English', value: '/option1' },
-      { title: 'Russian', value: '/option2' },
-    ],
     className = 'fixed top-0 left-0 right-0  z-[20] flex',
   } = props
+  const { locale } = useTranslate()
   const [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
+  const { locale: defaultLocale, push, pathname, query, asPath, locales } = useRouter()
+
+  const localeOptions = [
+    { title: 'Russian', value: locales[0] },
+    { title: 'English', value: locales[1] },
+  ]
+  const changeLangHandler = (event: SelectOptionType) => {
+    const locale = event.value
+    push({ pathname, query }, asPath, { locale })
+  }
 
   const fontColor = theme === 'dark' ? 'text-light-100' : 'text-dark-100'
   const linkOptions = [
-    { title: 'Log In', value: '/auth/sign-in' },
-    { title: 'Sign Up', value: '/auth/sign-up' },
+    { title: locale.auth.signIn, value: 'sign-in' },
+    { title: locale.auth.signUp, value: 'sign-up' },
   ]
 
-  const t = (value: any) => {
-    console.log(value)
-  }
   const routerPath = (i: number) => {
-    router.push(`/${linkOptions[i].value}`)
+    push(`/${linkOptions[i].value}`)
   }
 
-  const handleLanguage = (selectedValue: SelectOptionType) => {
-    alert(selectedValue?.title)
-    t(selectedValue?.title)
-  }
   const handleLink = (selectedValue: SelectOptionType) => {
-    router.push(String(selectedValue?.value))
+    push(String(selectedValue?.value))
   }
   return (
     <div
@@ -89,7 +89,11 @@ export const Header = (props: Props) => {
             </div>
           )}
           <div className={`w-fit flex items-center`}>
-            <Select options={options} onChange={handleLanguage} />
+            <Select
+              defaultValue={defaultLocale}
+              options={localeOptions}
+              onChange={changeLangHandler}
+            />
           </div>
           <div className={`sm:hidden flex items-center`}>
             <div
@@ -118,10 +122,10 @@ export const Header = (props: Props) => {
           {!user && (
             <div className={`w-fit gap-x-[24px] items-center hidden sm:flex`}>
               <div>
-                <Button label="Log In" style="text" onClick={() => routerPath(0)} />
+                <Button label={locale.auth.signIn} style="text" onClick={() => routerPath(0)} />
               </div>
               <div>
-                <Button label="Sign Up" style="primary" onClick={() => routerPath(1)} />
+                <Button label={locale.auth.signUp} style="primary" onClick={() => routerPath(1)} />
               </div>
             </div>
           )}
