@@ -1,10 +1,12 @@
 import React from 'react'
 
 import { LinkItem } from './LinkedItem'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type Props = { className?: string; theme?: 'dark' | 'light' }
 
 export const Sidebar = (props: Props) => {
+  const { locale } = useTranslate()
   const {
     className = `fixed bottom-0 left-0 sm:h-screen 
   sm:top-[60px]  sm:left-0 sm:w-[220px] 
@@ -23,29 +25,49 @@ export const Sidebar = (props: Props) => {
   return (
     <div className={container}>
       <div className={upperBlock}>
-        <LinkItem iconName={'HomeIcon'} label={'Home'} link={'/home'} style={'default'} />
-        <LinkItem iconName={'PlusSquare'} label={'Create'} link={'/create'} style={'default'} />
-        <LinkItem iconName={'Person'} label={'My Profile'} link={'/profile'} style={'default'} />
+        <LinkItem
+          iconName={'HomeIcon'}
+          label={locale.profile.home}
+          link={'/home'}
+          style={'default'}
+        />
+        <LinkItem
+          iconName={'PlusSquare'}
+          label={locale.profile.createPost}
+          link={'/create'}
+          style={'default'}
+        />
+        <LinkItem
+          iconName={'Person'}
+          label={locale.profile.myProfile}
+          link={'/profile'}
+          style={'default'}
+        />
         <LinkItem
           iconName={'MessageCircle'}
-          label={'Messanger'}
+          label={locale.profile.messenger}
           link={'/message'}
           style={'default'}
         />
-        <LinkItem iconName={'Search'} label={'Search'} link={'/search'} style={'default'} />
+        <LinkItem
+          iconName={'Search'}
+          label={locale.profile.search}
+          link={'/search'}
+          style={'default'}
+        />
       </div>
       <div className={bodyBlock}>
         <div className={`flex sm:flex-col sm:gap-y-[24px]`}>
           <LinkItem
             iconName={'TrendingUp'}
-            label={'Statistics'}
+            label={locale.profile.statistics}
             link={'/statistics'}
             style={'default'}
           />
           <LinkItem
             iconName={'Bookmark'}
-            label={'Faivorites'}
-            link={'/faivorites'}
+            label={locale.profile.favorites}
+            link={'/favorites'}
             style={'default'}
           />
         </div>
@@ -54,7 +76,7 @@ export const Sidebar = (props: Props) => {
         <div className={`hidden sm:flex`}>
           <LinkItem
             iconName={'LogOut'}
-            label={'Log Out'}
+            label={locale.profile.logout}
             link={'/auth/sign-in'}
             style={'default'}
           />

@@ -30,11 +30,13 @@ export const Header = (props: Props) => {
   } = props
   const { locale } = useTranslate()
   const [isOpen, setIsOpen] = useState(false)
-  const { locale: defaultLocale, push, pathname, query, asPath, locales } = useRouter()
+  const { locale: currentLocale, push, pathname, query, asPath, locales } = useRouter()
+
+  console.log(currentLocale)
 
   const localeOptions = [
-    { title: 'Russian', value: locales ? locales[0] : ''},
-    { title: 'English', value: locales ? locales[1] : ''},
+    { title: locale.locale.russian, value: locales ? locales[0] : '' },
+    { title: locale.locale.english, value: locales ? locales[1] : '' },
   ]
   const changeLangHandler = (event: SelectOptionType) => {
     const locale = event.value.toString()
@@ -90,7 +92,7 @@ export const Header = (props: Props) => {
           )}
           <div className={`w-fit flex items-center`}>
             <Select
-              defaultValue={defaultLocale}
+              defaultValue={currentLocale}
               options={localeOptions}
               onChange={changeLangHandler}
             />
