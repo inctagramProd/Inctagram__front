@@ -32,8 +32,6 @@ export const Header = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const { locale: currentLocale, push, pathname, query, asPath, locales } = useRouter()
 
-  console.log(currentLocale)
-
   const localeOptions = [
     { title: locale.locale.russian, value: locales ? locales[0] : '' },
     { title: locale.locale.english, value: locales ? locales[1] : '' },
