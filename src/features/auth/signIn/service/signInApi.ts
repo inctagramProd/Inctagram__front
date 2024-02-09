@@ -36,11 +36,33 @@ export const authByEmail = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
           if (data.accessToken) {
+            localStorage.setItem('Git Data', JSON.stringify(data))
             dispatch(setName({ username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
           console.error(e)
+          localStorage.setItem('apiError', JSON.stringify(e))
+        }
+      },
+    }),
+    googleAuth: builder.mutation<ThirdPartyAuth, ApiAuth>({
+      query: (data: object) => ({
+        url: 'auth/google-auth',
+        method: 'POST',
+        body: data,
+      }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          if (data.accessToken) {
+            localStorage.setItem('Google Data', JSON.stringify(data))
+            dispatch(setName({ username: data.username }))
+            dispatch(setToken({ accessToken: data.accessToken }))
+          }
+        } catch (e) {
+          console.error(e)
+          localStorage.setItem('apiError', JSON.stringify(e))
         }
       },
     }),
@@ -48,4 +70,4 @@ export const authByEmail = baseApi.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useSignInMutation, useGitAuthMutation } = authByEmail
+export const { useSignInMutation, useGitAuthMutation, useGoogleAuthMutation } = authByEmail
