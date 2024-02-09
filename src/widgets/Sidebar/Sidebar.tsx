@@ -52,7 +52,12 @@ export const Sidebar = (props: Props) => {
       </div>
       <div className={`flex flex-1 items-end`}>
         <div className={`hidden sm:flex`}>
-          <LinkItem iconName={'LogOut'} label={'Log Out'} link={'/logout'} style={'default'} />
+          <LinkItem
+            iconName={'LogOut'}
+            label={'Log Out'}
+            link={'/auth/sign-in'}
+            style={'default'}
+          />
         </div>
       </div>
     </div>
