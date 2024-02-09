@@ -40,7 +40,7 @@ export const en: LocaleType = {
     linkHasBeenSent: 'The link has been sent by email. If you dont receive an email send link again',
     signUpTerms: {
       description:
-        'I agree to the <1>Terms of service</1> and <2>Privacy Policy</2>',
+        ' <1>Terms of service</1> and <2>Privacy Policy</2>',
     },
     agree: 'I agree to the',
     termsOfService: 'Terms of Service',

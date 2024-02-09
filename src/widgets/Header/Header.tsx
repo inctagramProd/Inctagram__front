@@ -33,11 +33,11 @@ export const Header = (props: Props) => {
   const { locale: defaultLocale, push, pathname, query, asPath, locales } = useRouter()
 
   const localeOptions = [
-    { title: 'Russian', value: locales[0] },
-    { title: 'English', value: locales[1] },
+    { title: 'Russian', value: locales ? locales[0] : ''},
+    { title: 'English', value: locales ? locales[1] : ''},
   ]
   const changeLangHandler = (event: SelectOptionType) => {
-    const locale = event.value
+    const locale = event.value.toString()
     push({ pathname, query }, asPath, { locale })
   }
 
@@ -48,7 +48,7 @@ export const Header = (props: Props) => {
   ]
 
   const routerPath = (i: number) => {
-    push(`/${linkOptions[i].value}`)
+    push(`${linkOptions[i].value}`)
   }
 
   const handleLink = (selectedValue: SelectOptionType) => {
