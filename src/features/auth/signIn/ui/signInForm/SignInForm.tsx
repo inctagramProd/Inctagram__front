@@ -56,7 +56,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
                 />
               </div>
               <div className="text-end mb-6">
-                <Link href="/auth/password-recovery" className="inline-block">
+                <Link href="/auth/forgot-password" className="inline-block">
                   <Typography variant="regular_14" className="text-light-900">
                     {locale.auth.forgotPassword}
                   </Typography>
