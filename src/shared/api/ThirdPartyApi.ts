@@ -16,5 +16,5 @@ export class api {
   static googleAuth: string = this.googleURL + '/o/oauth2/v2/auth?response_type=code&client_id='
   static redirUrl = '&redirect_uri='
   static googleScope = '&scope=email profile'
-  static googlePath = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${this.clientGoogleId}&redirect_uri=${this.clientUrl}&scope=email profile`
+  static googlePath = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=621596965505-n57cqu1ifnmd34rqls715cao17t8r8n5.apps.googleusercontent.com&redirect_uri=https://inctagram-front.vercel.app/auth/sign-in&scope=email profile`
 }
