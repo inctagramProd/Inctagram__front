@@ -28,14 +28,14 @@ export const ForgotPassword = () => {
       await sendUserEmail(payload).unwrap()
       setIsModalOpen(true)
     } catch (error) {
-      const err = error as { data: { message: string } } 
+      const err = error as { data: { message: string } }
 
       setStatus(err.data.message)
     }
   }
 
   const handleToGoBack = () => {
-    router.push('/sign-in')
+    router.push('/auth/sign-in')
   }
 
   return (
