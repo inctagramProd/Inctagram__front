@@ -37,6 +37,7 @@ export const authByEmail = baseApi.injectEndpoints({
           const { data } = await queryFulfilled
           if (data.accessToken) {
             localStorage.setItem('Git Data', JSON.stringify(data))
+            localStorage.removeItem('Google Data')
             dispatch(setName({ username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
@@ -57,6 +58,7 @@ export const authByEmail = baseApi.injectEndpoints({
           const { data } = await queryFulfilled
           if (data.accessToken) {
             localStorage.setItem('Google Data', JSON.stringify(data))
+            localStorage.removeItem('Git Data')
             dispatch(setName({ username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
