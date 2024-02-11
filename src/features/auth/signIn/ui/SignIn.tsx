@@ -28,7 +28,7 @@ export const SignIn = () => {
 
   useEffect(() => {
     const { code } = router.query
-    console.log(code)
+    console.log(`code is ${code} and type of code is ${typeof code}`)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
     } else if (queryCode.code || code) {
