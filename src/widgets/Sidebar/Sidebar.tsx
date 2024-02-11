@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { LinkItem } from './LinkedItem'
+import { LogOut } from '@/src/features/auth/logOut'
+import { StoreProvider } from '@/src/app/providers'
 
 type Props = { className?: string; theme?: 'dark' | 'light' }
 
@@ -21,40 +23,42 @@ export const Sidebar = (props: Props) => {
                 items-start gap-y-[180px] sm:flex-col sm:flex hidden sm:block`
 
   return (
-    <div className={container}>
-      <div className={upperBlock}>
-        <LinkItem iconName={'HomeIcon'} label={'Home'} link={'/home'} style={'default'} />
-        <LinkItem iconName={'PlusSquare'} label={'Create'} link={'/create'} style={'default'} />
-        <LinkItem iconName={'Person'} label={'My Profile'} link={'/profile'} style={'default'} />
-        <LinkItem
-          iconName={'MessageCircle'}
-          label={'Messanger'}
-          link={'/message'}
-          style={'default'}
-        />
-        <LinkItem iconName={'Search'} label={'Search'} link={'/search'} style={'default'} />
-      </div>
-      <div className={bodyBlock}>
-        <div className={`flex sm:flex-col sm:gap-y-[24px]`}>
+    <StoreProvider>
+      <div className={container}>
+        <div className={upperBlock}>
+          <LinkItem iconName={'HomeIcon'} label={'Home'} link={'/home'} style={'default'} />
+          <LinkItem iconName={'PlusSquare'} label={'Create'} link={'/create'} style={'default'} />
+          <LinkItem iconName={'Person'} label={'My Profile'} link={'/profile'} style={'default'} />
           <LinkItem
-            iconName={'TrendingUp'}
-            label={'Statistics'}
-            link={'/statistics'}
+            iconName={'MessageCircle'}
+            label={'Messanger'}
+            link={'/message'}
             style={'default'}
           />
-          <LinkItem
-            iconName={'Bookmark'}
-            label={'Faivorites'}
-            link={'/faivorites'}
-            style={'default'}
-          />
+          <LinkItem iconName={'Search'} label={'Search'} link={'/search'} style={'default'} />
+        </div>
+        <div className={bodyBlock}>
+          <div className={`flex sm:flex-col sm:gap-y-[24px]`}>
+            <LinkItem
+              iconName={'TrendingUp'}
+              label={'Statistics'}
+              link={'/statistics'}
+              style={'default'}
+            />
+            <LinkItem
+              iconName={'Bookmark'}
+              label={'Faivorites'}
+              link={'/faivorites'}
+              style={'default'}
+            />
+          </div>
+        </div>
+        <div className={`flex flex-1 items-end`}>
+          <div className={`hidden sm:flex`}>
+            <LogOut />
+          </div>
         </div>
       </div>
-      <div className={`flex flex-1 items-end`}>
-        <div className={`hidden sm:flex`}>
-          <LinkItem iconName={'LogOut'} label={'Log Out'} link={'/logout'} style={'default'} />
-        </div>
-      </div>
-    </div>
+    </StoreProvider>
   )
 }
