@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { SignUpForm } from '@/src/features/auth/signUp/ui/SignUpForm/SignUpForm'
-import { Modal } from '@/src/shared/ui'
+import { LoaderSpin, Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'
 import { SignUpFormValues, SignUpParams } from '../service/types/signUpTypes'
 import { FormikHelpers } from 'formik'
@@ -57,7 +57,15 @@ export const SignUp = () => {
         actions.setSubmitting(false)
       })
   }
-
+  if (gitLoading || googleLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoaderSpin />
+      </div>
+    )
+  } else if (gitError || googleError) {
+    return <div>{localStorage.apiError}</div>
+  }
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
       <Modal
