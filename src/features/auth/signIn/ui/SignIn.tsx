@@ -1,12 +1,11 @@
 import { FormikHelpers } from 'formik'
-import { useSignInMutation, useGitAuthMutation } from '../service/signInApi'
+import { useSignInMutation, useGitAuthMutation, useGoogleAuthMutation } from '../service/signInApi'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { SignInForm } from './signInForm/SignInForm'
 import { SingInParams } from '../service/types/signInTypes'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LoaderSpin } from '@/src/shared/ui'
-import { useGoogleAuthMutation } from '@/src/features/auth/signInWithSocialMedia/service/authApi'
 
 export const SignIn = () => {
   const { locale } = useTranslate()
