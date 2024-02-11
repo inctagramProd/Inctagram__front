@@ -5,11 +5,8 @@ import { useSignUpMutation } from '../service/signUpApi'
 import { SignUpFormValues, SignUpParams } from '../service/types/signUpTypes'
 import { FormikHelpers } from 'formik'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import {
-  useGitAuthMutation,
-  useGoogleAuthMutation,
-} from '@/src/features/auth/signInWithSocialMedia/service/authApi'
 import { useRouter } from 'next/router'
+import { useGitAuthMutation, useGoogleAuthMutation } from '../../signIn/service/signInApi'
 
 export const SignUp = () => {
   const [emailSentModal, setEmailSentModal] = useState<boolean>(false)
@@ -32,15 +29,14 @@ export const SignUp = () => {
   ] = useGoogleAuthMutation()
   const queryCode = router.query as { code: string }
   useEffect(() => {
-    const { code } = router.query
     if (gitIsSuccess || googleIsSuccess) {
       router.push('/home')
     } else if (queryCode.code) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
-        : googleUser({ code: code }).unwrap()
+        : googleUser({ code: queryCode.code }).unwrap()
     }
-  }, [gitIsSuccess, googleIsSuccess, queryCode, router.query])
+  }, [gitIsSuccess, googleIsSuccess, queryCode])
 
   const onSubmitHandler = async (value: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => {
     await userRegistration(value)

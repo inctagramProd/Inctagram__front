@@ -34,7 +34,7 @@ export const SignIn = () => {
         ? gitUser({ code: queryCode.code }).unwrap()
         : googleUser({ code: queryCode.code }).unwrap()
     }
-  }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode, router.query])
+  }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
