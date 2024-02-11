@@ -53,7 +53,7 @@ export const SignIn = () => {
       })
   }
   if (gitLoading || googleLoading) {
-    return (s
+    return (
       <div className="min-h-screen flex items-center justify-center">
         <LoaderSpin />
       </div>
