@@ -31,12 +31,12 @@ export const SignIn = () => {
     console.log(originalCode)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
-    } else if (originalCode != undefined) {
+    } else if (router.query) {
       localStorage.getItem('Git')
         ? gitUser({ code: originalCode }).unwrap()
         : googleUser({ code: originalCode }).unwrap()
     }
-  }, [isSuccess, gitIsSuccess, googleIsSuccess, router.query.code])
+  }, [isSuccess, gitIsSuccess, googleIsSuccess, router.query])
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
