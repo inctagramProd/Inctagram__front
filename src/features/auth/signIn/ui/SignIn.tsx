@@ -32,7 +32,7 @@ export const SignIn = () => {
     } else if (queryCode.code) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
-        : googleUser({ code: queryCode.code.replace('/', '%2F') }).unwrap()
+        : /* googleUser({ code: queryCode.code.replace('/', '%2F') }).unwrap() */ null
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
