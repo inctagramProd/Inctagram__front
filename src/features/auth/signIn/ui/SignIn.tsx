@@ -33,6 +33,8 @@ export const SignIn = () => {
     } else if (queryCode.code || router.query) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
+        : urlCode === undefined
+        ? null
         : googleUser({ code: urlCode }).unwrap()
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
