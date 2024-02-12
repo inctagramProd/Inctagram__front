@@ -34,7 +34,7 @@ export const SignUp = () => {
     } else if (queryCode.code) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
-        : googleUser({ code: decodeURIComponent(queryCode.code) }).unwrap()
+        : googleUser({ code: queryCode.code.replace('/', '%2F') }).unwrap()
     }
   }, [gitIsSuccess, googleIsSuccess, queryCode])
 
