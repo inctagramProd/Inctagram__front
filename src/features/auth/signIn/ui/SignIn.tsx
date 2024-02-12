@@ -27,12 +27,13 @@ export const SignIn = () => {
   const queryCode = router.query as { code: string }
 
   useEffect(() => {
+    const urlCode: string | undefined = router.query.code as string | undefined
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
-    } else if (queryCode.code) {
+    } else if (queryCode.code || router.query) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
-        : googleUser({ code: queryCode.code }).unwrap()
+        : googleUser({ code: urlCode }).unwrap()
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {

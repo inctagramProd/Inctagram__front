@@ -3,7 +3,7 @@ export type SingInParams = {
   password: string
 }
 export type ApiAuth = {
-  code: string
+  code: string | undefined
 }
 
 export type SignInSchema = {
