@@ -31,6 +31,8 @@ export const SignIn = () => {
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
     } else if (queryCode.code || router.query) {
+      console.log(queryCode.code)
+      console.log(urlCode)
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
         : urlCode === undefined
