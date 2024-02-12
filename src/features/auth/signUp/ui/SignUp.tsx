@@ -34,9 +34,9 @@ export const SignUp = () => {
     const Code = urlParams.get('code')
     if (gitIsSuccess || googleIsSuccess) {
       router.push('/home')
-    } else if (Code) {
+    } else if (Code || queryCode.code) {
       localStorage.getItem('Git')
-        ? gitUser({ code: Code }).unwrap()
+        ? gitUser({ code: queryCode.code }).unwrap()
         : googleUser({ code: Code }).unwrap()
     }
   }, [gitIsSuccess, googleIsSuccess, queryCode])
