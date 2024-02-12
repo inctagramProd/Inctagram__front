@@ -31,7 +31,7 @@ export const SignIn = () => {
     console.log(originalCode)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
-    } else if (originalCode != null) {
+    } else if (originalCode != undefined) {
       localStorage.getItem('Git')
         ? gitUser({ code: originalCode }).unwrap()
         : googleUser({ code: originalCode }).unwrap()
