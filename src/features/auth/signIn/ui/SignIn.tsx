@@ -29,13 +29,10 @@ export const SignIn = () => {
     console.log(queryCode)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
-    } else if (queryCode) {
-      const encodedCode = router.query.code as string
-      const originalCode = decodeURIComponent(encodedCode)
-      console.log(originalCode)
+    } else if (queryCode.code) {
       localStorage.getItem('Git')
         ? gitUser({ code: queryCode.code }).unwrap()
-        : /* googleUser({ code: originalCode }).unwrap() */ null
+        : googleUser({ code: decodeURIComponent(queryCode.code) }).unwrap()
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
