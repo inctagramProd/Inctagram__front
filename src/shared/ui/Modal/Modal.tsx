@@ -20,7 +20,7 @@ export const Modal = ({ isOpen, title, onCancel, className, footer, children }: 
           className="fixed inset-0 bg-dark-900 bg-opacity-50 z-[999]"
         />
         <Dialog.Content
-          className={`fixed left-2/4 top-2/4 translate-x-[-50%] translate-y-[-50%] bg-dark-300 z-[999] rounded border border-dark-100 ease-out duration-300 transition ${className}`}
+          className={`fixed left-2/4 top-2/4 translate-x-[-50%] translate-y-[-50%] max-w-[378px] bg-dark-300 z-[999] rounded border border-dark-100 ease-out duration-300 transition ${className}`}
         >
           <div className="border-b border-dark-100">
             <div className="flex items-center justify-between p-4">

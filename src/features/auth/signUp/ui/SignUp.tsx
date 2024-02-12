@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { SignUpForm } from '@/src/features/auth/signUp/ui/SignUpForm/SignUpForm'
-import { Modal } from '@/src/shared/ui'
+import { Button, Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'
 import { SignUpFormValues, SignUpParams } from '../service/types/signUpTypes'
 import { FormikHelpers } from 'formik'
@@ -35,12 +35,15 @@ export const SignUp = () => {
   return (
     <div className="flex items-center justify-center h-[calc(100vh-60px)]">
       <Modal
-        email={userEmail}
         isOpen={emailSentModal}
-        onOpenChange={() => {
-          setEmailSentModal(false)
-        }}
-      />
+        title="Письмо отправлено"
+        onCancel={() => setEmailSentModal(false)}
+        footer={[
+          <Button label="Ok" style="primary" onClick={() => setEmailSentModal(false)}></Button>,
+        ]}
+      >
+        <p>Мы отправили ссылку для подтверждения электронной почты на {userEmail}</p>
+      </Modal>
       <SignUpForm onSubmit={onSubmitHandler} />
     </div>
   )

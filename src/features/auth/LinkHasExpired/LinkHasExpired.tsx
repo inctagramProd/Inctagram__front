@@ -1,6 +1,7 @@
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import TimeIsOverIcon from '@/src/shared/assets/icons/TimeIsOverIcon'
 import { Typography, Button, Modal } from '@/src/shared/ui'
+import React from 'react'
 
 type Props = {
   userEmail: string
@@ -21,11 +22,14 @@ export const LinkHasExpired = ({
     <div className="flex flex-col items-center mt-[35px]">
       <Modal
         isOpen={isOpenModal}
-        onOpenChange={() => {
-          onOpenChangeModal(false)
-        }}
-        email={userEmail}
-      />
+        title="Письмо отправлено"
+        onCancel={() => onOpenChangeModal(false)}
+        footer={[
+          <Button label="Ok" style="primary" onClick={() => onOpenChangeModal(false)}></Button>,
+        ]}
+      >
+        <p>Мы отправили ссылку для подтверждения электронной почты на {userEmail}</p>
+      </Modal>
       <div className="mb-[31px] text-center max-w-[300px]">
         <Typography variant="h1" className="mb-[19px]">
           {locale.auth.emailVerificationTitle}
