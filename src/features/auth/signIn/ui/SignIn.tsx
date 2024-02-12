@@ -24,19 +24,19 @@ export const SignIn = () => {
       isError: googleError,
     },
   ] = useGoogleAuthMutation()
-
+  const queryCode = router.query as { code: string }
   useEffect(() => {
     const encodedCode = router.query.code as string
     const originalCode = decodeURIComponent(encodedCode)
     console.log(originalCode)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
-    } else if (router.query) {
+    } else if (queryCode) {
       localStorage.getItem('Git')
         ? gitUser({ code: originalCode }).unwrap()
         : googleUser({ code: originalCode }).unwrap()
     }
-  }, [isSuccess, gitIsSuccess, googleIsSuccess, router.query])
+  }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
