@@ -8,7 +8,8 @@ import {
   SignUpFormValues,
   SignUpParams,
 } from '@/src/features/auth/signUp/service/types/signUpTypes'
-import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
+import GoogleAuth from '@/src/features/auth/signInWithSocialMedia/GoogleAuth'
+import GitAuth from '@/src/features/auth/signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SignUpParams, actions: FormikHelpers<SignUpFormValues>) => void
@@ -35,12 +36,8 @@ export const SignUpForm = ({ onSubmit }: Props) => {
         {locale.auth.signUp}
       </Typography>
       <div className={`flex justify-center gap-x-[60px] mb-6`}>
-        <Link href="#">
-          <GoogleLogo width={36} height={36} />
-        </Link>
-        <Link href="#">
-          <GitLogo width={36} height={36} />
-        </Link>
+        <GoogleAuth name={'Google'} />
+        <GitAuth name={'Git'} />
       </div>
       <div className="mb-[18px]">
         <Formik
@@ -90,7 +87,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                     tags={{
                       1: () => (
                         <Link
-                          href="/terms-of-service"
+                          href="/auth/terms-of-service"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
                         >
                           {locale.auth.termsOfService}
@@ -98,7 +95,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                       ),
                       2: () => (
                         <Link
-                          href="/privacy-policy"
+                          href="/auth/privacy-policy"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
                         >
                           {locale.auth.policy}

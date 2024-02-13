@@ -11,6 +11,7 @@ export const signInSchema = (locale: LocaleType) => {
       ),
     password: Yup.string()
       .min(6, locale.auth.authErrors.password.min)
+      .max(20, locale.auth.authErrors.password.max)
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
         locale.auth.authErrors.password.regex

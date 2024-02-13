@@ -35,7 +35,7 @@ export const ForgotPassword = () => {
   }
 
   const handleToGoBack = () => {
-    router.push('/sign-in')
+    router.push('/auth/sign-in')
   }
 
   return (

@@ -4,7 +4,8 @@ import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import Link from 'next/link'
 import { signInSchema } from '@/src/features/auth/signIn/service/schema/signInSchema'
 import { SingInParams } from '@/src/features/auth/signIn/service/types/signInTypes'
-import { GoogleLogo, GitLogo } from '@/src/shared/assets/icons/icons'
+import GoogleAuth from '../../../signInWithSocialMedia/GoogleAuth'
+import GitAuth from '../../../signInWithSocialMedia/GitAuth'
 
 type Props = {
   onSubmit: (values: SingInParams, actions: FormikHelpers<SingInParams>) => void
@@ -27,12 +28,8 @@ export const SignInForm = ({ onSubmit }: Props) => {
         {locale.auth.signIn}
       </Typography>
       <div className={`flex justify-center gap-x-[60px] mb-6`}>
-        <Link href="#">
-          <GoogleLogo width={36} height={36} />
-        </Link>
-        <Link href="#">
-          <GitLogo width={36} height={36} />
-        </Link>
+        <GoogleAuth name={'Google'} />
+        <GitAuth name={'Git'} />
       </div>
       <div className="mb-[18px]">
         <Formik
@@ -59,7 +56,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
                 />
               </div>
               <div className="text-end mb-6">
-                <Link href="/auth/password-recovery" className="inline-block">
+                <Link href="/auth/forgot-password" className="inline-block">
                   <Typography variant="regular_14" className="text-light-900">
                     {locale.auth.forgotPassword}
                   </Typography>
@@ -67,7 +64,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
               </div>
               <div className="[&>button]:w-full">
                 <Button
-                  iconName=''
+                  iconName=""
                   type="submit"
                   style="primary"
                   label={locale.auth.signIn}

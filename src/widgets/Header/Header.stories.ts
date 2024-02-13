@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Header } from './Header';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Header } from './Header'
 
 const meta = {
   title: 'Components/Header',
@@ -8,23 +8,24 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof Header>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const LogIn: Story = {
   args: {
     user: false,
-    fillType:'outline',
-    theme:'dark'
+    fillType: 'outline',
+    theme: 'dark',
+    className: '',
   },
-};
+}
 export const LogOut: Story = {
   args: {
     user: true,
-    fillType:'outline',
-    theme:'dark'
+    fillType: 'outline',
+    theme: 'dark',
+    className: '',
   },
-
-};
+}

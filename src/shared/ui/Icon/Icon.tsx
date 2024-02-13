@@ -1,7 +1,7 @@
 import * as Icons from '../../assets/icons/icons'
 
 type Props = Icons.IconProps & {
-  iconName: string
+  iconName?: string
   iconStyle?: string
 }
 
@@ -19,7 +19,7 @@ export const Icon = ({
   iconStyle = 'fill-light-100',
   handleFocus,
 }: Props) => {
-  const IconComponent = (Icons as IconComponent)[iconName]
+  const IconComponent = iconName ? (Icons as IconComponent)[iconName] : undefined
   if (!IconComponent) {
     return null
   }
