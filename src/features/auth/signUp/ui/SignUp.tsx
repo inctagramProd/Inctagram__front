@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { LoaderSpin } from '@/src/shared/ui'
 import { SignUpForm } from '@/src/features/auth/signUp/ui/SignUpForm/SignUpForm'
 import { Button, Modal } from '@/src/shared/ui'
 import { useSignUpMutation } from '../service/signUpApi'

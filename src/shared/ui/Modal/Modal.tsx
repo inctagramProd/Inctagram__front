@@ -37,8 +37,8 @@ export const Modal = ({ isOpen, title, onCancel, className, footer, children }: 
           <div className="p-4">{children}</div>
           {footer && (
             <div className="p-4 flex gap-2 justify-end">
-              {footer.map(item => (
-                <div>{item}</div>
+              {footer.map((item, key) => (
+                <div key={key}>{item}</div>
               ))}
             </div>
           )}
