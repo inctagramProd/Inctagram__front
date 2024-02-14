@@ -4,10 +4,10 @@ import { HeadMeta } from '@/src/widgets/HeadMeta/HeadMeta'
 
 const SignInPage = () => {
   return (
-   <>
-     <HeadMeta title='Sign In'/>
-     <SignIn />
-   </>
+    <>
+      <HeadMeta title="Sign In" />
+      <SignIn />
+    </>
   )
 }
 
