@@ -17,6 +17,7 @@ export const Default: Story = {
   args: {
     error: false,
     text: 'Your settings are saved',
+    id: '1',
   },
 }
 
@@ -24,5 +25,6 @@ export const Error: Story = {
   args: {
     error: true,
     text: 'Server is not available',
+    id: '2',
   },
 }

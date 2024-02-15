@@ -1,13 +1,13 @@
 import { Icon } from '@/src/shared/ui'
-import toast, { Toast } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 
 type Props = {
   error?: boolean
   text: string
-  t: Toast
+  id: string
 }
 
-export const Alerts = ({ error, text, t }: Props) => {
+export const Alerts = ({ error, text, id }: Props) => {
   return (
     <div
       className={`flex justify-between items-center w-[387px] py-3.5 px-6 border rounded-sm ${
@@ -18,7 +18,7 @@ export const Alerts = ({ error, text, t }: Props) => {
         {error && <b>Error! </b>}
         <span>{text}</span>
       </div>
-      <button onClick={() => toast.remove(t.id)}>
+      <button onClick={() => toast.remove(id)}>
         <Icon iconName="Close" />
       </button>
     </div>
