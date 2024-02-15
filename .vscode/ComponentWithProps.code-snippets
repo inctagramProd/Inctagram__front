@@ -1,0 +1,39 @@
+{
+  "react component with props": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "=cp",
+    "body": [
+      "",
+      "type Props= {",
+	  "props:''"
+      "}",
+      "",
+      "const ${1} = ({props}:Props) => {",
+      "\tconst {} = props",
+      "",
+      "\treturn <div>${1}</div>",
+      "}",
+      "",
+      "export default ${1}",
+      ""
+    ]
+  },
+  "react component without props": {
+    "scope": "javascriptreact,typescriptreact",
+    "prefix": "=c",
+    "body": [
+      "",
+      "const ${1} = () => {",
+      "\treturn <div>${1}</div>",
+      "}",
+      "",
+      "export default ${1}",
+      ""
+    ]
+  },
+  "ts export default": {
+    "scope": "javascript,typescript",
+    "prefix": "=ed",
+    "body": ["export { default } from \"./${1}\""]
+  }
+}
