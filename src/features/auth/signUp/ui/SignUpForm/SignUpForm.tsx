@@ -89,6 +89,8 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                         <Link
                           href="/auth/terms-of-service"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           {locale.auth.termsOfService}
                         </Link>
@@ -97,6 +99,8 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                         <Link
                           href="/auth/privacy-policy"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           {locale.auth.policy}
                         </Link>
