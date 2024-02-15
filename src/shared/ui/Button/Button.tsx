@@ -1,5 +1,4 @@
 import { Icon, Typography } from '@/src/shared/ui'
-
 type Props = {
   //Button properties
   style: 'primary' | 'secondary' | 'outline' | 'text' | 'default'
@@ -54,7 +53,7 @@ export const Button = ({
   switch (style) {
     case 'primary':
       nameOfClass = ` 
-        bg-primary-500 text-light-100 rounded-[2px] cursor-pointer 
+        bg-primary-500 text-light-100 rounded-[2px] border-[1px] border-transparent cursor-pointer 
         active:bg-primary-700 active:text-light-500  
         hover:bg-primary-100 hover:text-light-100
         focus:bg-primary-500 focus:border-2 focus:border-primary-700
@@ -62,7 +61,7 @@ export const Button = ({
       break
     case 'secondary':
       nameOfClass = ` 
-    bg-dark-300 text-light-100 rounded-[2px] cursor-pointer 
+    bg-dark-300 text-light-100 rounded-[2px] cursor-pointer border-[1px] border-transparent
     active:bg-[#212121] active:text-light-100  
     hover:bg-dark-100 hover:text-light-100
     focus:bg-dark-300 focus:border-[1px] focus:border-primary-300
@@ -70,7 +69,7 @@ export const Button = ({
       break
     case 'text':
       nameOfClass = `
-      bg-none text-primary-500  cursor-pointer 
+      bg-none text-primary-500  cursor-pointer border-[1px] border-transparent 
       active:text-primary-700 hover:text-primary-100
       focus:border-[2px] focus:border-primary-700 focus:text-primary-500 focus:rounded-[2px]
       disabled:text-primary-900`
@@ -86,7 +85,7 @@ export const Button = ({
     case 'default':
       nameOfClass = `
             gap-y-[10px]
-            bg-none text-light-100  cursor-pointer 
+            bg-none text-light-100  cursor-pointer border-[1px] border-transparent 
             active:text-primary-700 hover:text-primary-100
             focus:text-primary-700 focus:border-[2px] focus:rounded-[2px] focus:border-primary-700 
             disabled:text-dark-100

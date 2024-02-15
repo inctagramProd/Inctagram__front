@@ -1,7 +1,7 @@
 import { Card, Typography, Input, Button, Modal, ReCaptcha } from '@/src/shared/ui'
 import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { forgotPasswordSchema } from '../service/forgotPasswordSchema'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useSendUserEmailMutation } from '../service/forgotPasswordApi'
@@ -28,14 +28,14 @@ export const ForgotPassword = () => {
       await sendUserEmail(payload).unwrap()
       setIsModalOpen(true)
     } catch (error) {
-      const err = error as { data: { message: string } } 
+      const err = error as { data: { message: string } }
 
       setStatus(err.data.message)
     }
   }
 
   const handleToGoBack = () => {
-    router.push('/sign-in')
+    router.push('/auth/sign-in')
   }
 
   return (
@@ -80,7 +80,16 @@ export const ForgotPassword = () => {
               type="button"
               onClick={handleToGoBack}
             ></Button>
-            <Modal isOpen={isModalOpen} onOpenChange={setIsModalOpen} email={values.email} />
+            <Modal
+              isOpen={isModalOpen}
+              title="Письмо отправлено"
+              onCancel={() => setIsModalOpen(false)}
+              footer={[
+                <Button label="Ok" style="primary" onClick={() => setIsModalOpen(false)}></Button>,
+              ]}
+            >
+              <p>Мы отправили ссылку для подтверждения электронной почты на {values.email}</p>
+            </Modal>
           </Form>
         )}
       </Formik>
