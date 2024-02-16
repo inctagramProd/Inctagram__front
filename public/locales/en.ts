@@ -118,13 +118,13 @@ export const en: LocaleType = {
             },
             emailField: {
                 nonEmpty: 'Enter email',
-                email: 'Invalid email address',
+                email: 'The email must match the format example@example.com',
             },
             terms:
                 'Please, review and agree to the Terms of Service and Privacy Policy to proceed',
             password: {
                 nonEmpty: 'Enter password',
-                regex: 'Password must contain A-z, 0-9, !#$%*+-?^_',
+                regex: 'Password must contain a-z, A-Z, ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
                 min: 'Minimum number of characters 6',
                 max: 'Maximum number of characters 20',
             },
