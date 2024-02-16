@@ -1,21 +1,27 @@
-import { redirect } from 'next/navigation'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { LayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 
-let isUserAuth = true
+let isUserAuth = false
 export const withAuth = (Component: any) => {
   return function WithAuth(props: any) {
+    const router = useRouter()
     let session = isUserAuth
 
     useEffect(() => {
-      if (!session) {
-        redirect('/auth/sign-in')
+      if (!session && typeof window !== 'undefined') {
+        router.push('/auth/sign-in')
       }
-    }, [])
+    }, [session, router])
 
     if (!session) {
       return null
     }
 
-    return <Component {...props} />
+    return (
+      <LayoutWithSidebar>
+        <Component {...props} />
+      </LayoutWithSidebar>
+    )
   }
 }

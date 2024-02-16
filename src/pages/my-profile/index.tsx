@@ -2,13 +2,13 @@ import { Typography } from '@/src/shared/ui'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 import { withAuth } from '@/src/features/private_routes/withAuth'
 
-const HomePage = () => {
+const ProfilePage = () => {
   return (
     <Typography variant="h1" className="text-center mt-12">
-      Hello!
+      My Profile
     </Typography>
   )
 }
 
-HomePage.getLayout = getLayoutWithSidebar
-export default withAuth(HomePage)
+ProfilePage.getLayout = getLayoutWithSidebar
+export default withAuth(ProfilePage)
