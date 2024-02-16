@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import { StoreProvider } from '../app/providers'
+import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <StoreProvider>
         <Component {...pageProps} />
       </StoreProvider>
+      <Toaster />
     </main>
   )
 }
