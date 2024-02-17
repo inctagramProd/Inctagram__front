@@ -68,17 +68,23 @@ export const SignUp = () => {
     return <div>{localStorage.apiError}</div>
   }
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-60px)]">
-      <Modal
-        isOpen={emailSentModal}
-        title="Письмо отправлено"
-        onCancel={() => setEmailSentModal(false)}
-        footer={[
-          <Button label="Ok" style="primary" onClick={() => setEmailSentModal(false)}></Button>,
-        ]}
+    <div className="flex items-center justify-center h-[calc(100vh-60px)] ">
+      <div
+        className={`${
+          emailSentModal ? 'block' : 'hidden'
+        } w-full h-screen bg-dark-300 absolute top-0 left-0 flex z-[992] `}
       >
-        <p>Мы отправили ссылку для подтверждения электронной почты на {userEmail}</p>
-      </Modal>
+        <Modal
+          isOpen={emailSentModal}
+          title={locale.auth.emailSent}
+          onCancel={() => setEmailSentModal(false)}
+          footer={[
+            <Button label="Ok" style="primary" onClick={() => setEmailSentModal(false)}></Button>,
+          ]}
+        >
+          <p>{locale.auth.emailConfirm(userEmail)}</p>
+        </Modal>
+      </div>
       <SignUpForm onSubmit={onSubmitHandler} />
     </div>
   )
