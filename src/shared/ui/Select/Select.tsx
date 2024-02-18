@@ -128,12 +128,12 @@ export const Select = ({
             aria-selected={activeOption.value == item.value}
             role={'option'}
             onClick={handleSetActiveOption}
-            className={`py-2 px-4 flex flex-row items-center gap-2 cursor-pointer select-none text-light-100 hover:bg-dark-300 hover:text-primary-500 text-base ${
+            className={`py-2 px-4 flex flex-row items-center gap-2 cursor-pointer select-none text-s text-light-100 hover:bg-dark-300 hover:text-primary-500 text-base ${
               activeOption.value == item.value ? 'bg-dark-300 text-primary-500' : ''
             } ${variant === 'Pagination' ? 'px-2 py-0.5 text-light-100 text-sm' : ''}`}
             tabIndex={-1}
           >
-            <Typography children={item.title} variant={'regular_14'} />
+            {item.title}
           </li>
         ))}
       </ul>

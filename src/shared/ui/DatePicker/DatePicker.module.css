@@ -1,0 +1,31 @@
+.customDateInput {
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  width: 150px;
+  padding: 6px;
+  color: #edf3fa;
+  background-color: #333;
+  border: 1px solid #4c4c4c;
+  border-radius: 6px;
+
+  transition: ease-in 0.3s;
+}
+
+.customDateInput:hover {
+  border: 1px solid #8d9094;
+}
+
+.customDateInput:focus {
+  box-sizing: border-box;
+  border: 1px solid #397df6;
+}
+
+.error {
+  color: #cc1439;
+  border: 1px solid #cc1439;
+}
+
+.range {
+  width: 258px !important;
+}

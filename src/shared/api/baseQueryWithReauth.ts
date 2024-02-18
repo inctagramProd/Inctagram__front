@@ -2,15 +2,14 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 // Mutex. Preventing multiple unauthorized errors
 import { Mutex } from 'async-mutex'
-
-const BASE_URL = 'https://deepwaterhorizon.ru/api/v1'
+import { api } from './ThirdPartyApi'
+import { clearToken, setToken } from '@/src/features/auth/signIn/model/signInSlice'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_URL,
+  baseUrl: api.serverURL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    
     const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
@@ -42,10 +41,10 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           const newAccessToken = refreshResult.data as string
           console.log(newAccessToken)
-          localStorage.setItem('accessToken', newAccessToken)
+          api.dispatch(setToken({ accessToken: newAccessToken }))
           result = await baseQuery(args, api, extraOptions)
         } else {
-          console.log('logout')
+          api.dispatch(clearToken())
         }
       } finally {
         // release must be called once the mutex should be released again.
