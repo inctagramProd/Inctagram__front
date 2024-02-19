@@ -11,7 +11,6 @@ type Props = {
 
 export const Input = ({ error, label, required, type, ...inputProps }: Props) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
-
   const inputType = type === 'password' ? (isPasswordShown ? 'text' : 'password') : type
 
   const togglePasswordVisibility = (e: FormEvent<HTMLButtonElement>) => {
