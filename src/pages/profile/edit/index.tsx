@@ -1,9 +1,19 @@
-import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
-import { Button, Icon, Input, Select, Tabs, Typography, TextArea } from '@/src/shared/ui'
 import { RefObject, useRef, useState } from 'react'
 
+import {
+  Button,
+  DatePickerInput,
+  Icon,
+  Input,
+  Select,
+  Tabs,
+  TextArea,
+  Typography,
+} from '@/src/shared/ui'
+import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
+
 const EditProfile = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedImage, setSelectedImage] = useState<null | string>(null)
   const uploadRef: RefObject<HTMLInputElement> = useRef(null)
 
   const handleImageUpload = (e: { target: any }): void => {
@@ -46,45 +56,46 @@ const EditProfile = () => {
           >
             {selectedImage ? (
               <img
+                alt={'Profile'}
+                className={'rounded-full w-full h-full object-cover'}
                 src={selectedImage}
-                alt="Profile"
-                className="rounded-full w-full h-full object-cover"
               />
             ) : (
-              <Icon iconName="Picture" width={48} height={48} />
+              <Icon height={48} iconName={'Picture'} width={48} />
             )}
           </div>
           <div className={'mt-6 upload'}>
             <label>
               <Button
                 label={'Add a Profile Photo'}
-                style={'outline'}
                 onClick={handleOpenFileUploadWindow}
+                style={'outline'}
               ></Button>
               <input
-                type="file"
-                accept="image/jpeg, image/png"
-                onChange={handleImageUpload}
+                accept={'image/jpeg, image/png'}
                 className={'hidden'}
-                id="upload-button"
+                id={'upload-button'}
+                onChange={handleImageUpload}
                 ref={uploadRef}
+                type={'file'}
               />
             </label>
           </div>
         </div>
         <div className={'flex-1 flex flex-col gap-4'}>
-          <Input label={'Username'} type={'text'}></Input>
-          <Input label={'First Name'} type={'text'}></Input>
-          <Input label={'Last Name'} type={'text'}></Input>
+          <Input label={'Username'} required type={'text'}></Input>
+          <Input label={'First Name'} required type={'text'}></Input>
+          <Input label={'Last Name'} required type={'text'}></Input>
+          <DatePickerInput label={'Date of birth'} />
           <div className={'flex flex-row gap-4'}>
             <div className={'flex-1'}>
               <Typography
-                variant={'regular_14'}
                 children={'About Me'}
                 className={'text-light-900'}
+                variant={'regular_14'}
               />
               <Select
-                className={'max-w-none'}
+                className={'max-w-none z-10'}
                 options={[
                   { title: 'Belarus', value: 'Belarus' },
                   { title: 'Russia', value: 'Russia' },
@@ -93,12 +104,12 @@ const EditProfile = () => {
             </div>
             <div className={'flex-1'}>
               <Typography
-                variant={'regular_14'}
                 children={'About Me'}
                 className={'text-light-900'}
+                variant={'regular_14'}
               />
               <Select
-                className={'max-w-none w-full'}
+                className={'max-w-none w-full z-10'}
                 options={[
                   { title: 'Minsk', value: 'Minsk' },
                   { title: 'Moscow', value: 'Moscow' },
@@ -107,7 +118,7 @@ const EditProfile = () => {
             </div>
           </div>
           <div>
-            <Typography variant={'regular_14'} children={'About Me'} className={'text-light-900'} />
+            <Typography children={'About Me'} className={'text-light-900'} variant={'regular_14'} />
             <TextArea placeholder={'Enter text'} />
           </div>
         </div>
@@ -115,7 +126,7 @@ const EditProfile = () => {
       <div className={'flex items-end flex-col'}>
         <div className={'w-full h-px bg-dark-300 mt-4 mb-4'}></div>
         <div>
-          <Button style={'primary'} label={'Save Changes'} />
+          <Button label={'Save Changes'} style={'primary'} />
         </div>
       </div>
     </div>
