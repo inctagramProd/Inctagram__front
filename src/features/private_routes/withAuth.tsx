@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { LayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 import { useAppSelector } from '@/src/app/hooks/useAppSelectorAndDispatch'
 import { RootState } from '@/src/app/store/store'
+import { useToast } from '@/src/app/hooks/useToast'
 
 export const withAuth = (Component: any) => {
   return React.memo((props: any) => {
@@ -12,6 +13,7 @@ export const withAuth = (Component: any) => {
     useEffect(() => {
       if (!accessToken && typeof window !== 'undefined') {
         router.push('/auth/sign-in')
+        useToast('Please get logged in to proceed', true)
       }
     }, [accessToken, router])
 
