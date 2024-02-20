@@ -11,7 +11,6 @@ export const withAuth = (Component: any) => {
     const router = useRouter()
     const accessToken = useAppSelector((state: RootState) => state.signIn?.accessToken)
     const { locale } = useTranslate()
-
     useEffect(() => {
       if (!accessToken && typeof window !== 'undefined') {
         router.push('/auth/sign-in')
