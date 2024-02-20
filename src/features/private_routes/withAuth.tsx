@@ -1,20 +1,21 @@
-import { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { LayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
+import { useAppSelector } from '@/src/app/hooks/useAppSelectorAndDispatch'
+import { RootState } from '@/src/app/store/store'
 
-let isUserAuth = false
 export const withAuth = (Component: any) => {
-  return function WithAuth(props: any) {
+  return React.memo((props: any) => {
     const router = useRouter()
-    let session = isUserAuth
+    const accessToken = useAppSelector((state: RootState) => state.signIn?.accessToken)
 
     useEffect(() => {
-      if (!session && typeof window !== 'undefined') {
+      if (!accessToken && typeof window !== 'undefined') {
         router.push('/auth/sign-in')
       }
-    }, [session, router])
+    }, [accessToken, router])
 
-    if (!session) {
+    if (!accessToken) {
       return null
     }
 
@@ -23,5 +24,5 @@ export const withAuth = (Component: any) => {
         <Component {...props} />
       </LayoutWithSidebar>
     )
-  }
+  })
 }
