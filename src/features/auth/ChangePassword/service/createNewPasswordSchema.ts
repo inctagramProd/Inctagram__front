@@ -5,7 +5,7 @@ export const createNewPasswordSchema = (locale: LocaleType) => {
   return Yup.object().shape({
     password: Yup.string()
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])[^\u0400-\u04FF]+$/,
         locale.auth.authErrors.password.regex
       )
       .min(6, locale.auth.authErrors.password.min)
