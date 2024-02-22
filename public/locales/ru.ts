@@ -1,7 +1,7 @@
 export const ru = {
     locale: {
         english: 'English',
-        russian: 'Russian',
+        russian: 'Русский',
     },
     auth: {
         backToSignUp: 'Вернуться на страницу регистрации',
