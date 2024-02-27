@@ -1,5 +1,4 @@
-import { ComponentPropsWithoutRef, FormEvent, useState } from 'react'
-
+import { ComponentPropsWithoutRef, FormEvent, useState, KeyboardEvent } from 'react'
 import { Icon } from '../Icon/Icon'
 
 type Props = {
@@ -19,6 +18,9 @@ export const Input = ({ error, label, required, type, ...inputProps }: Props) =>
       setIsPasswordShown(!isPasswordShown)
     }
   }
+  const checkKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') e.preventDefault()
+  }
 
   const requiredItem = <div className={'text-danger-500'}>*</div>
 
@@ -37,6 +39,7 @@ export const Input = ({ error, label, required, type, ...inputProps }: Props) =>
           />
         )}
         <input
+          onKeyDown={e => checkKeyDown(e)}
           {...inputProps}
           className={`border rounded-sm py-1.5 w-full
           text-light-100 placeholder-light-900
