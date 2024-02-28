@@ -1,13 +1,9 @@
-import { baseApi } from '@/src/shared/api/baseApi'
 import { clearToken } from '@/src/features/auth/signIn/model/signInSlice'
+import { baseApi } from '@/src/shared/api/baseApi'
 
 export const LogOut = baseApi.injectEndpoints({
   endpoints: build => ({
     logOut: build.mutation<any, void>({
-      query: () => ({
-        method: 'POST',
-        url: 'auth/logout',
-      }),
       async onQueryStarted(args, { dispatch }) {
         try {
           dispatch(clearToken())
@@ -15,6 +11,10 @@ export const LogOut = baseApi.injectEndpoints({
           console.error(e)
         }
       },
+      query: () => ({
+        method: 'DELETE',
+        url: 'auth/logout',
+      }),
     }),
   }),
 })
