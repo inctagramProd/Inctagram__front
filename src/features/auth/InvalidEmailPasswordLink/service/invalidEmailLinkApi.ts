@@ -1,6 +1,6 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 
-export const invalidEmailLink = baseApi.injectEndpoints({
+export const invalidEmailLinkApi = baseApi.injectEndpoints({
   endpoints: build => ({
     resendPasswordRecoveryLink: build.mutation<any, { userEmail: string }>({
       query: data => ({
@@ -13,4 +13,4 @@ export const invalidEmailLink = baseApi.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useResendPasswordRecoveryLinkMutation } = invalidEmailLink
+export const { useResendPasswordRecoveryLinkMutation } = invalidEmailLinkApi
