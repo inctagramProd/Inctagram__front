@@ -79,14 +79,37 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
           iconStyle="cursor-pointer fill-light-100 transition duration-700 ease-in-out hover:fill-primary-100"
         />
       </div>
-      <div className="border border-solid border-indigo-500 w-full min-h-[60px] h-auto flex gap-1">
-        <DescriptionBlock
-          visibleDescription={visibleDescription}
-          postDescreption={postDescreption}
-          setVisibleDescription={setVisibleDescription}
-          name={name}
-        />
-      </div>
+
+      {postDescreption ? (
+        <div className="border border-solid border-indigo-500 w-full min-h-[60px] h-auto flex gap-1">
+          <div className="rounded-full bg-dark-100 w-[30px] h-[30px]" />
+
+          <div className="w-[90%] text-justify">
+            <Typography variant="bold_16" className="w-auto">
+              {name}
+            </Typography>
+            <div>
+              <div>
+                <Typography
+                  variant="regular_14"
+                  className={`h-${visibleDescription ? 'auto' : '20'} overflow-hidden`}
+                >
+                  {postDescreption}{' '}
+                </Typography>
+                <Typography
+                  variant="small"
+                  className={
+                    'text-dark-100 cursor-pointer italic hover:text-dark-300 transition duration-300 ease-in-out'
+                  }
+                  onClick={() => setVisibleDescription(!visibleDescription)}
+                >
+                  {visibleDescription ? 'свернуть' : 'еще'}
+                </Typography>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="border border-solid border-indigo-500 w-full h-[30px]">Likes:{like}</div>
       <div className="border border-solid border-indigo-500 w-full h-[30px]">
         Comments:{comments}
