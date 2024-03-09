@@ -5,12 +5,16 @@ import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 const posts = [
   {
     name: 'Alex',
-    img: ['1.jpg', '2.jpg', '3.jpg'],
+    img: [
+      'https://as2.ftcdn.net/v2/jpg/07/40/63/61/1000_F_740636193_LaH6wbGYu9RIIinG1kCDPtJgOLkq494b.jpg',
+      'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg',
+      'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg',
+    ],
     postDescreption: null,
     like: null,
     comments: null,
   },
-  {
+  /*   {
     name: 'Alex',
     img: ['1.jpg', '2.jpg', '3.jpg'],
     postDescreption: null,
@@ -56,7 +60,7 @@ const posts = [
     postDescreption: null,
     like: 10,
     comments: null,
-  },
+  }, */
 ]
 const ProfilePage = () => {
   return (
