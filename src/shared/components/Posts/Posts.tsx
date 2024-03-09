@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import SliderArrow from './service/ui/sliderArrow/sliderArrow'
 import CircleBlock from './service/ui/CircleBlock/CircleBlock'
-import { Button, Icon } from '../../ui'
+import { Button, Icon, Typography } from '../../ui'
+import DescriptionBlock from './service/ui/DescreptionBlock/DescriptionBlock'
 
 export type PostsProps = {
   name: string
@@ -12,6 +13,8 @@ export type PostsProps = {
 }
 const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
+  const [visibleDescription, setVisibleDescription] = useState(false)
+
   useEffect(() => {}, [imgItem])
   const Circle = []
   for (let i = 1; i <= img.length; i++) {
@@ -32,8 +35,8 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
     <div className="flex flex-col gap-[5px]">
       <div className="flex justify-between border border-solid border-indigo-500 w-full h-[30px] ">
         <div className="flex gap-1 items-center justify-center">
-          <div className="rounded-full bg-dark-100 w-[30px] h-[30px]">A</div>
-          {name}
+          <div className="rounded-full bg-dark-100 w-[30px] h-[30px]" />
+          <Typography variant="bold_16">{name}</Typography>
         </div>
         <div className="cursor-pointer " onClick={() => alert('123')}>
           <Icon
@@ -56,8 +59,34 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
           </div>
         </div>
       </div>
-      <div className="border border-solid border-indigo-500 w-full h-[30px]">settings</div>
-      <div className="border border-solid border-indigo-500 w-full h-[60px]">{postDescreption}</div>
+      <div className="border border-solid border-indigo-500 w-full h-[30px] flex  justify-between w-full">
+        <div className="flex gap-3">
+          <Icon
+            iconName="Heart"
+            iconStyle="cursor-pointer fill-light-100 transition duration-700 ease-in-out hover:fill-primary-100"
+          />
+          <Icon
+            iconName="MessageCircle"
+            iconStyle="cursor-pointer fill-light-100 transition duration-700 ease-in-out hover:fill-primary-100"
+          />
+          <Icon
+            iconName="PaperPlane"
+            iconStyle="cursor-pointer fill-light-100 transition duration-700 ease-in-out hover:fill-primary-100"
+          />
+        </div>
+        <Icon
+          iconName="Bookmark"
+          iconStyle="cursor-pointer fill-light-100 transition duration-700 ease-in-out hover:fill-primary-100"
+        />
+      </div>
+      <div className="border border-solid border-indigo-500 w-full min-h-[60px] h-auto flex gap-1">
+        <DescriptionBlock
+          visibleDescription={visibleDescription}
+          postDescreption={postDescreption}
+          setVisibleDescription={setVisibleDescription}
+          name={name}
+        />
+      </div>
       <div className="border border-solid border-indigo-500 w-full h-[30px]">Likes:{like}</div>
       <div className="border border-solid border-indigo-500 w-full h-[30px]">
         Comments:{comments}
