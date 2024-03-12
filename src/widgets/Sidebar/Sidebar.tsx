@@ -35,7 +35,7 @@ export const Sidebar = (props: Props) => {
           <LinkItem
             iconName={'PlusSquare'}
             label={locale.profile.createPost}
-            link={'/create'}
+            link={'/post/create'}
             style={'default'}
           />
           <LinkItem
