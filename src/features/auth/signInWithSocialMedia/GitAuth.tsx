@@ -8,11 +8,11 @@ const GitAuth = ({ name }: Props) => {
   function LoginWithApi() {
     localStorage.setItem('Git', 'true')
     localStorage.removeItem('Google')
-      window.location.assign(api.gitPath)
+    window.location.assign(api.gitPath)
   }
 
   return (
-    <div onClick={LoginWithApi}>
+    <div className={`cursor-pointer`} onClick={LoginWithApi}>
       <Icon iconName={`${name}Logo`} />
     </div>
   )

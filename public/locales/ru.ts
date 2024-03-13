@@ -23,6 +23,7 @@ export const ru = {
         userName: 'Имя пользователя',
         emailSent: 'Письмо отправлено',
         ok: 'ОК',
+        getLoggedToProceed: 'Войдите в свой профиль чтобы продолжить',
         emailConfirm(email: string) {
             return `Мы отправили ссылку для подтверждения электронной почты на ${email}`
         },
