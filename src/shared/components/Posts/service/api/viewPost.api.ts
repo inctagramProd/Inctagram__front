@@ -20,7 +20,7 @@ export const viewPostsApi = createApi({
       headers.set(
         'Authorization',
         `Bearer ${
-          /* access */ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMDYwMTQ0NiwiZXhwIjoxNzEwNjAyMzQ2fQ.R1j3GT60lbOeqQIPuw8AxJcHmZm1-2oyHvUNEi7QqG8'
+          access /* 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMDYwMTQ0NiwiZXhwIjoxNzEwNjAyMzQ2fQ.R1j3GT60lbOeqQIPuw8AxJcHmZm1-2oyHvUNEi7QqG8' */
         }`
       )
     },
