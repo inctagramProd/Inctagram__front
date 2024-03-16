@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import SliderArrow from './service/ui/sliderArrow/sliderArrow'
-import CircleBlock from './service/ui/CircleBlock/CircleBlock'
-import { Button, Icon, Typography } from '../../ui'
-import DescriptionBlock from './service/ui/DescreptionBlock/DescriptionBlock'
+
+import { Icon, Typography } from '../../ui'
+import { useVeiwPostsQuery } from './service/api/viewPost.api'
 
 export type PostsProps = {
   name: string
@@ -14,6 +14,7 @@ export type PostsProps = {
 const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState(false)
+  const { data, isLoading, isError } = useVeiwPostsQuery(1)
 
   useEffect(() => {}, [imgItem])
   const Circle = []
@@ -30,7 +31,7 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
       />
     )
   })
-
+  console.log(data)
   return (
     <div className="flex flex-col gap-[5px]">
       <div className="flex justify-between border border-solid border-indigo-500 w-full h-[30px] ">
