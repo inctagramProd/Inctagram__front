@@ -1,7 +1,8 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 
 const accessToken = () => {
-  localStorage.getItem('accessToken')
+  console.log(localStorage.getItem('accessToken'))
+  return localStorage.getItem('accessToken')
 }
 
 export const viewPostsApi = baseApi.injectEndpoints({
