@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import SliderArrow from './service/ui/sliderArrow/sliderArrow'
 
 import { Icon, Typography } from '../../ui'
-import { useVeiwPostsQuery } from './service/api/viewPost.api'
+import { useViewPostsQuery } from './service/api/viewPost.api'
 
 export type PostsProps = {
   name: string
@@ -14,7 +14,7 @@ export type PostsProps = {
 const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState(false)
-  const { data, isLoading, isError } = useVeiwPostsQuery(1)
+  const { data, isLoading, isError } = useViewPostsQuery(1)
 
   useEffect(() => {}, [imgItem])
   const Circle = []

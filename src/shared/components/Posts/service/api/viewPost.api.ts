@@ -1,12 +1,18 @@
-import { AccessToken } from '@/src/features/auth/signIn/service/types/signInTypes'
 import { baseApi } from '@/src/shared/api/baseApi'
 
-export const ViewPostsApi = baseApi.injectEndpoints({
+const accessToken = localStorage.getItem('accessToken')
+
+export const viewPostsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
-    veiwPosts: builder.query({
-      query: page => ({ url: `user-posts/${page}` }),
+    viewPosts: builder.query({
+      query: page => ({
+        url: `user-posts/${page}`,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
     }),
   }),
 })
 
-export const { useVeiwPostsQuery } = ViewPostsApi
+export const { useViewPostsQuery } = viewPostsApi
