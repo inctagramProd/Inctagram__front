@@ -1,8 +1,14 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 
-const accessToken = () => {
-  console.log(localStorage.getItem('accessToken'))
-  return localStorage.getItem('accessToken')
+const accessToken = (): string | null => {
+  const dataString = localStorage.getItem('accessToken')
+  if (dataString) {
+    const data = JSON.parse(dataString)
+    if (data && data.signIn && typeof data.signIn.accessToken === 'string') {
+      return data.signIn.accessToken
+    }
+  }
+  return null
 }
 
 export const viewPostsApi = baseApi.injectEndpoints({
