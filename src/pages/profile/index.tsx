@@ -8,6 +8,8 @@ const ProfilePage = () => {
   const username = localStorage.getItem('Google Data')
     ? localStorage.getItem('Google Data')
     : localStorage.getItem('Git Data')
+    ? localStorage.getItem('Git Data')
+    : null
   const name = username ? JSON.parse(username).username : null
   return (
     <div className="flex items-start justify-center w-full min-h-screen h-auto gap-[20px]">
