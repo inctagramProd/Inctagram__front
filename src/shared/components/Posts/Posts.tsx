@@ -8,7 +8,7 @@ type imgType = {
   imageUrl: string
 }
 export type PostsProps = {
-  name: string | null
+  name: string
   img: imgType[]
   postDescreption: string | null
   like: number | null

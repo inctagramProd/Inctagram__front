@@ -5,12 +5,6 @@ import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 
 const ProfilePage = () => {
   const { data, isLoading, isError, isFetching } = useViewPostsQuery(8)
-  const username = localStorage.getItem('Google Data')
-    ? localStorage.getItem('Google Data')
-    : localStorage.getItem('Git Data')
-    ? localStorage.getItem('Git Data')
-    : null
-  const name = username ? JSON.parse(username).username : null
   return (
     <div className="flex items-start justify-center w-full min-h-screen h-auto gap-[20px]">
       <div className="w-[46%] h-auto mt-[50px]">
@@ -20,7 +14,7 @@ const ProfilePage = () => {
           data.map((el: any, id: any) => {
             return (
               <Posts
-                name={name}
+                name={'Alex'}
                 img={el.postImages}
                 postDescreption={el.postDescription}
                 like={6}
