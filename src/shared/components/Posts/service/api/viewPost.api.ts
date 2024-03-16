@@ -6,12 +6,18 @@ export const viewPostsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: api.serverURL,
     prepareHeaders: (headers, { getState }) => {
-      const dataString = localStorage.getItem('accessToken')
-      if (dataString) {
-        const data = JSON.parse(dataString)
-        headers.set('Authorization', `Bearer ${data.signIn}`)
+      const google = localStorage.getItem('Google Data')
+      const git = localStorage.getItem('Git Data')
+      const signIn = localStorage.getItem('accessToken')
+      let access
+      if (google) {
+        access = JSON.parse(google).accessToken
+      } else if (git) {
+        access = JSON.parse(git).accessToken
+      } else if (signIn) {
+        access = JSON.parse(signIn).signIn.accessToken
       }
-      return headers
+      headers.set('Authorization', `Bearer ${access}`)
     },
   }),
   endpoints: builder => ({
