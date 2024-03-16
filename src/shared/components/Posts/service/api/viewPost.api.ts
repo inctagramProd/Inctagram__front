@@ -1,4 +1,5 @@
-import { baseApi } from '@/src/shared/api/baseApi'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { api } from '@/src/shared/api/ThirdPartyApi'
 
 const accessToken = (): string | null => {
   const dataString = localStorage.getItem('Google Data')
@@ -12,11 +13,13 @@ const accessToken = (): string | null => {
   return null
 }
 
-export const viewPostsApi = baseApi.injectEndpoints({
+export const viewPostsApi = createApi({
+  reducerPath: 'posts',
+  baseQuery: fetchBaseQuery({ baseUrl: api.serverURL }),
   endpoints: builder => ({
     viewPosts: builder.query({
       query: page => ({
-        url: `user-posts/${page}`,
+        url: `/user-posts/${page}`,
         headers: {
           Authorization: `Bearer ${accessToken()}`,
         },
