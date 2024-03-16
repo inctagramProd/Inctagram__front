@@ -3,6 +3,7 @@ import SliderArrow from './service/ui/sliderArrow/sliderArrow'
 
 import { Icon, Typography } from '../../ui'
 import { useViewPostsQuery } from './service/api/viewPost.api'
+import { LoaderSpin } from './../../ui/Loader/Loader'
 
 export type PostsProps = {
   name: string
@@ -14,9 +15,11 @@ export type PostsProps = {
 const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState(false)
-  const { data, isLoading, isError } = useViewPostsQuery(1)
+  const { data, isLoading, isError, isFetching } = useViewPostsQuery(1)
 
-  useEffect(() => {}, [imgItem])
+  useEffect(() => {
+    console.log(data)
+  }, [imgItem, data])
   const Circle = []
   for (let i = 1; i <= img.length; i++) {
     Circle.push(i)
@@ -31,9 +34,11 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
       />
     )
   })
-  console.log(data)
-  return (
+  return isLoading ? (
+    <LoaderSpin />
+  ) : (
     <div className="flex flex-col gap-[5px]">
+      <div>{data[0].postId}</div>
       <div className="flex justify-between border border-solid border-indigo-500 w-full h-[30px] ">
         <div className="flex gap-1 items-center justify-center">
           <div className="rounded-full bg-dark-100 w-[30px] h-[30px]" />
