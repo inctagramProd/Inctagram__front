@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react'
 import SliderArrow from './service/ui/sliderArrow/sliderArrow'
 
 import { Icon, Typography } from '../../ui'
-import { LoaderSpin } from './../../ui/Loader/Loader'
 
+type imgType = {
+  imageId: number
+  imageUrl: string
+}
 export type PostsProps = {
   name: string
-  img: string[]
+  img: imgType[]
   postDescreption: string | null
   like: number | null
   comments: string[] | null
@@ -14,7 +17,6 @@ export type PostsProps = {
 const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState(false)
-
 
   useEffect(() => {}, [imgItem])
   const Circle = []
@@ -33,7 +35,6 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
   })
   return (
     <div className="flex flex-col gap-[5px]">
-      
       <div className="flex justify-between border border-solid border-indigo-500 w-full h-[30px] ">
         <div className="flex gap-1 items-center justify-center">
           <div className="rounded-full bg-dark-100 w-[30px] h-[30px]" />
@@ -50,7 +51,7 @@ const Posts = ({ name, img, postDescreption, like, comments }: PostsProps) => {
         <div className="d-flex align-center justify-center">
           <div className={'relative inline-block h-[400px] flex '}>
             <SliderArrow img={img} setImgItem={setImgItem} imgItem={imgItem} direction={'left'} />
-            <img src={img[imgItem]} alt={'img'} className="w-full h-auto" />
+            <img src={img[imgItem].imageUrl} alt={'img'} className="w-full h-auto" />
             <SliderArrow img={img} setImgItem={setImgItem} imgItem={imgItem} direction={'right'} />
             <div className="absolute bottom-[10px] w-full flex  justify-center">
               <div className="w-auto bg-dark-100/50 flex flex-column justify-center gap-3 p-2">

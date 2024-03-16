@@ -19,31 +19,29 @@ const posts = [
 ]
 const ProfilePage = () => {
   const { data, isLoading, isError, isFetching } = useViewPostsQuery(1)
-  console.log(data)
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-  return isLoading ? (
-    <LoaderSpin />
-  ) : (
+  console.log(`outside`, data)
+  return (
     <div className="flex items-start justify-center w-full min-h-screen h-auto gap-[20px]">
       <div className="w-[46%] h-auto mt-[50px]">
-        {posts.map((el, id) => {
-          return (
-            <Posts
-              name={el.name}
-              img={el.img}
-              postDescreption={el.postDescreption}
-              like={el.like}
-              comments={el.comments}
-              key={id}
-            />
-          )
-        })}
+        {isLoading ? (
+          <LoaderSpin />
+        ) : (
+          data.map((el: any, id: any) => {
+            return (
+              <Posts
+                name={'Alex'}
+                img={el.postImages}
+                postDescreption={el.postDescription}
+                like={6}
+                comments={['123']}
+                key={id}
+              />
+            )
+          })
+        )}
       </div>
     </div>
   )
 }
-
 ProfilePage.getLayout = getLayoutWithSidebar
 export default ProfilePage

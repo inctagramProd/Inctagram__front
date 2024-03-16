@@ -1,8 +1,11 @@
 import { Icon } from '@/src/shared/ui'
 import { SetStateAction } from 'react'
-
+type imgType = {
+  imageId: number
+  imageUrl: string
+}
 type Props = {
-  img: string[]
+  img: imgType[],
   setImgItem: (value: SetStateAction<number>) => void
   imgItem: number
   direction: 'left' | 'right'
