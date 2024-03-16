@@ -1,6 +1,8 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 
-const accessToken = localStorage.getItem('accessToken')
+const accessToken = () => {
+  localStorage.getItem('accessToken')
+}
 
 export const viewPostsApi = baseApi.injectEndpoints({
   endpoints: builder => ({
@@ -8,7 +10,7 @@ export const viewPostsApi = baseApi.injectEndpoints({
       query: page => ({
         url: `user-posts/${page}`,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken()}`,
         },
       }),
     }),
