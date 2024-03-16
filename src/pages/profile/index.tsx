@@ -2,6 +2,7 @@ import Posts from '@/src/shared/components/Posts/Posts'
 import { useViewPostsQuery } from '@/src/shared/components/Posts/service/api/viewPost.api'
 import { LoaderSpin, Typography } from '@/src/shared/ui'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
+import { useEffect } from 'react'
 
 const posts = [
   {
@@ -19,7 +20,9 @@ const posts = [
 const ProfilePage = () => {
   const { data, isLoading, isError, isFetching } = useViewPostsQuery(1)
   console.log(data)
-
+  useEffect(() => {
+    console.log(data)
+  }, [data])
   return isLoading ? (
     <LoaderSpin />
   ) : (
