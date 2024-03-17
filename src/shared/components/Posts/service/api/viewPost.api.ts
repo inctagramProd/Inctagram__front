@@ -28,7 +28,7 @@ export const viewPostsApi = createApi({
   endpoints: builder => ({
     viewPosts: builder.query({
       query: page => ({
-        url: `/user-posts/${page}&limit=8`,
+        url: `/user-posts/${page}`,
       }),
     }),
   }),
