@@ -4,7 +4,7 @@ import { LoaderSpin, Typography } from '@/src/shared/ui'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 
 const ProfilePage = () => {
-  const { data, isLoading, isError, isFetching } = useViewPostsQuery(8)
+  const { data, isLoading, isError, isFetching } = useViewPostsQuery(1)
   return (
     <div className="flex items-start justify-center w-full min-h-screen h-auto gap-[20px]">
       <div className="w-[46%] h-auto mt-[50px]">
