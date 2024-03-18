@@ -1,23 +1,17 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { createPostParams, CreatePostResponse } from '@/src/features/post/types/CreatePostType'
+import { CreatePostResponse } from '@/src/features/post/types/CreatePostType'
 
 export const createPost = baseApi.injectEndpoints({
   endpoints: build => ({
-    createPost: build.mutation<CreatePostResponse, createPostParams>({
+    createPost: build.mutation<CreatePostResponse, FormData>({
       query: data => ({
         method: 'POST',
         url: 'user-posts',
         body: data,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
       }),
     }),
   }),
   overrideExisting: false,
 })
 
-export const {useCreatePostMutation} = createPost
-
-//const formData = new FormData();
-//     formData.append("image", file);
+export const { useCreatePostMutation } = createPost

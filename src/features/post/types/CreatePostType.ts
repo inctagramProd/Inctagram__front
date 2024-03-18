@@ -11,6 +11,6 @@ export type PostImage = {
 }
 
 export type createPostParams = {
-  files: string
+  files: string | Blob
   description?: string
 }

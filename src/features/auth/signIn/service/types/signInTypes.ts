@@ -12,6 +12,8 @@ export type SignInSchema = {
 
 export type AccessToken = {
   accessToken: string
+  userId: number
+  username: string
 }
 export type ThirdPartyAuth = {
   username: string
