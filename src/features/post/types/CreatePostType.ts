@@ -1,4 +1,4 @@
-export type CreatePostResponse = {
+export type Post = {
   postId: number
   postDescription: string
   createdAt: string

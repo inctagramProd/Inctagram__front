@@ -1,17 +1,17 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 // Mutex. Preventing multiple unauthorized errors
 import { Mutex } from 'async-mutex'
 import { api } from './ThirdPartyApi'
 import { clearToken, setToken } from '@/src/features/auth/signIn/model/signInSlice'
+import { AppRootState } from '@/src/app/store'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: api.serverURL,
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
-    const accessToken = localStorage.getItem('accessToken')
-
+    const accessToken = (getState() as AppRootState).signIn.accessToken
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
     }
@@ -39,9 +39,8 @@ export const baseQueryWithReauth: BaseQueryFn<
         )
         // try to get a new token
         if (refreshResult.data) {
-          const newAccessToken = refreshResult.data as string
-          console.log(newAccessToken)
-          api.dispatch(setToken({ accessToken: newAccessToken }))
+          const newAccessToken = refreshResult.data as { accessToken: string }
+          api.dispatch(setToken(newAccessToken))
           result = await baseQuery(args, api, extraOptions)
         } else {
           api.dispatch(clearToken())
