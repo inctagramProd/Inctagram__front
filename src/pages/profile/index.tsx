@@ -129,7 +129,7 @@ const ProfilePage = () => {
   ]
   return (
     <div className="flex items-start justify-center w-full min-h-screen h-auto gap-[20px]">
-      <div className="flex flex-col w-[46%] h-auto mt-[50px] gap-20">
+      <div className="flex flex-col w-[46%] h-auto mt-[50px] mb-[50px] gap-20">
         {post.map((el: any, id: any) => {
           return (
             <Posts

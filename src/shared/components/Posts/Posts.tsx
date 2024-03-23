@@ -26,10 +26,10 @@ export type PostsProps = {
   likes: likeType[]
 }
 const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
-  console.log(comments)
   const [imgItem, setImgItem] = useState<number>(0)
-  const [visibleDescription, setVisibleDescription] = useState(false)
+  const [visibleDescription, setVisibleDescription] = useState<boolean>(false)
   const [textArea, setTextArea] = useState<boolean>(false)
+  const [commentOpen, setCommentOpen] = useState<boolean>(false)
   useEffect(() => {}, [imgItem, visibleDescription])
   const openDescription = () => {
     console.log(`openDescription ${visibleDescription}`)
@@ -37,6 +37,9 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
   }
   const openTextArea = () => {
     setTextArea(!textArea)
+  }
+  const openComments = () => {
+    setCommentOpen(!commentOpen)
   }
   const Circle = []
   for (let i = 1; i <= img.length; i++) {
@@ -107,39 +110,13 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
       </div>
 
       {postDescreption ? (
-        <div className="w-full min-h-[60px] h-auto flex gap-1">
-          <div className="rounded-full bg-dark-100 w-[30px] h-[30px]" />
-
-          <div className="w-[90%] text-justify">
+        <div className="w-full min-h-10 h-full overflow-hidden">
+          <div className={`${visibleDescription ? 'h-10 ' : 'h-full'}`}>{postDescreption}</div>
+          {postDescreption.length >= 30 ? (
             <div>
-              <div>
-                <div
-                  className={`${
-                    visibleDescription === true ? 'h-auto' : 'm-h-10'
-                  } overflow-hidden text-justify h-20`}
-                >
-                  {' '}
-                  <Typography
-                    variant="regular_14"
-                    className={`${
-                      visibleDescription === true ? 'h-auto' : 'm-h-10'
-                    } overflow-hidden text-justify h-20`}
-                  >
-                    <span className="inline-block font-bold">{name}</span> {postDescreption}{' '}
-                  </Typography>
-                </div>
-                <Typography
-                  variant="small"
-                  className={
-                    'text-dark-100 cursor-pointer italic hover:text-dark-300 transition duration-300 ease-in-out'
-                  }
-                  onClick={openDescription}
-                >
-                  {visibleDescription ? 'свернуть' : 'еще'}
-                </Typography>
-              </div>
+              <span onClick={openDescription}>{visibleDescription ? 'Else' : 'Hide'}</span>
             </div>
-          </div>
+          ) : null}
         </div>
       ) : null}
       {likes?.length > 0 ? (
@@ -163,41 +140,51 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
         </div>
       ) : null}
       <div className=" w-full m-h-[30px] h-auto">
-        <span className="font-bold cursor-pointer" onClick={() => console.log(1)}>
+        <span className="font-bold cursor-pointer" onClick={openComments}>
           {' '}
           {comments?.length > 0
             ? `View all comments (${comments?.length}) `
             : 'There are no comments'}
         </span>
-        {comments.map((el: any, i: any) => {
-          return (
-            <div key={i} className="flex gap-1">
-              <div className="flex justify-start align -center  h-100 w-auto ">
-                <img src={el.avatar} className={`h-5 w-5`} />
-              </div>
-              <div>
-                <div>
-                  <span className="inline-block font-bold">{el.name}</span>
-                  {`${el.comment}`}
-                </div>
-                <Typography
-                  variant="small"
-                  className={
-                    'text-dark-100 cursor-pointer italic hover:text-dark-300 transition duration-300 ease-in-out'
-                  }
-                >
-                  {el.data}
-                </Typography>
-              </div>
-            </div>
-          )
-        })}
-        <div className={'flex justify-between border-b-2 border-gray'}>
-          <span className="text-dark-100 cursor-pointer italic" onClick={openTextArea}>
-            Add comment...
-          </span>{' '}
+        <div className="transition duration-600 ease-in-out">
+          {commentOpen
+            ? comments.map((el: any, i: any) => {
+                return (
+                  <div key={i} className="flex gap-1">
+                    <div className="flex justify-start align -center  h-100 w-auto ">
+                      <img src={el.avatar} className={`h-5 w-5`} />
+                    </div>
+                    <div>
+                      <div>
+                        <span className="inline-block font-bold">{el.name}</span>
+                        {`${el.comment}`}
+                      </div>
+                      <Typography
+                        variant="small"
+                        className={
+                          'text-dark-100 cursor-pointer italic hover:text-dark-300 transition duration-300 ease-in-out'
+                        }
+                      >
+                        {el.data}
+                      </Typography>
+                    </div>
+                  </div>
+                )
+              })
+            : null}
+        </div>
+
+        <div className={'flex flex-col border-b-2 border-gray'}>
+          <div className="flex justify-between transition duration-700 ease-in-out">
+            <span
+              className="text-dark-100 cursor-pointer italic hover:not-italic "
+              onClick={openTextArea}
+            >
+              Add comment...
+            </span>{' '}
+            <Button label="Publish" style={'text'} />
+          </div>
           {textArea ? <TextArea /> : null}
-          <Button label="Publish" style={'text'} />
         </div>
       </div>
     </div>
