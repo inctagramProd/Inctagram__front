@@ -216,7 +216,12 @@ export const en: LocaleType = {
                 refine: 'A user under 13 cannot create a profile.',
                 aboutMeError: 'Max number of characters 200',
             },
-        },
+        }, postViews:{publish:'Publish',
+        noComments:'Theres no comments',
+        else:'View else',
+        hide:'Hide',
+    viewAllComments:'View all comments',
+addComment:'Add a new comment',like:' "Like"'},
         addNewPost: {
             showResult: 'Show Result',
             cropping: 'Cropping',

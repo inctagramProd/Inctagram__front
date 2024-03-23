@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import SliderArrow from './service/ui/sliderArrow/sliderArrow'
-
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Icon, TextArea, Typography } from '../../ui'
 import { Button } from '@/src/shared/ui'
 
@@ -30,6 +30,9 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
   const [visibleDescription, setVisibleDescription] = useState<boolean>(false)
   const [textArea, setTextArea] = useState<boolean>(false)
   const [commentOpen, setCommentOpen] = useState<boolean>(false)
+  const { locale } = useTranslate()
+  const pageText = locale.profile.postViews
+
   useEffect(() => {}, [imgItem, visibleDescription])
   const openDescription = () => {
     console.log(`openDescription ${visibleDescription}`)
@@ -122,7 +125,7 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
       {postDescreption && postDescreption.length >= 30 ? (
         <div>
           <span className={'text-dark-100 cursor-pointer italic'} onClick={openDescription}>
-            {visibleDescription ? 'Else' : 'Hide'}
+            {visibleDescription ? pageText.else : pageText.hide}
           </span>
         </div>
       ) : null}
@@ -143,15 +146,15 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
                 </div>
               )
             })}
-          {`   ${likes?.length}`} <span className="inline-block font-bold">"Like"</span>
+          {`   ${likes?.length}`} <span className="inline-block font-bold">{pageText.like}</span>
         </div>
       ) : null}
       <div className=" w-full m-h-[30px] h-auto">
         <span className="font-bold cursor-pointer" onClick={openComments}>
           {' '}
           {comments?.length > 0
-            ? `View all comments (${comments?.length}) `
-            : 'There are no comments'}
+            ? `${pageText.viewAllComments} (${comments?.length}) `
+            : pageText.noComments}
         </span>
         <div className="transition duration-600 ease-in-out">
           {commentOpen
@@ -187,9 +190,9 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
               className="text-dark-100 cursor-pointer italic hover:not-italic "
               onClick={openTextArea}
             >
-              Add comment...
+              {pageText.addComment}
             </span>{' '}
-            <Button label="Publish" style={'text'} />
+            <Button label={pageText.publish} style={'text'} />
           </div>
           {textArea ? <TextArea /> : null}
         </div>
