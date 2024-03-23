@@ -110,13 +110,20 @@ const Posts = ({ name, img, postDescreption, likes, comments }: PostsProps) => {
       </div>
 
       {postDescreption ? (
-        <div className="w-full min-h-10 h-full overflow-hidden">
-          <div className={`${visibleDescription ? 'h-10 ' : 'h-full'}`}>{postDescreption}</div>
-          {postDescreption.length >= 30 ? (
-            <div>
-              <span onClick={openDescription}>{visibleDescription ? 'Else' : 'Hide'}</span>
+        <div className="flex flex-col w-full min-h-15 h-full overflow-hidden gap-2">
+          <div className={`${visibleDescription ? 'h-5 ' : 'h-full'} flex gap-1`}>
+            <div className="w-[30px] h-full flex align-center justify-center">
+              <div className=" rounded-full bg-light-500 w-5 h-5" />
             </div>
-          ) : null}
+            <div className="w-auto text-justify">{postDescreption}</div>
+          </div>
+        </div>
+      ) : null}
+      {postDescreption && postDescreption.length >= 30 ? (
+        <div>
+          <span className={'text-dark-100 cursor-pointer italic'} onClick={openDescription}>
+            {visibleDescription ? 'Else' : 'Hide'}
+          </span>
         </div>
       ) : null}
       {likes?.length > 0 ? (
