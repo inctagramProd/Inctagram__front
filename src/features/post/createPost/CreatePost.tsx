@@ -4,10 +4,10 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { CroppedImage } from '@/src/features/post/createPost/croppedImage/CroppedImage'
 
 export const CreatePost = () => {
-  const [imageSrc, setImageSrc] = useState('')
+  const [images, setImages] = useState<PostImage[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
   const [isBaseModalOpen, setIsBaseModalOpen] = useState(true)
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(true)
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const { locale } = useTranslate()
   const handlerPick = () => {
     inputRef.current?.click()
@@ -26,12 +26,12 @@ export const CreatePost = () => {
           }
           reader.readAsDataURL(file)
         })
-        setImageSrc(url)
+        setImages([{ url }])
         setIsBaseModalOpen(false)
         setIsOpenModal(true)
       }
     } catch (error) {
-      console.error('Ошибка при обработке файла:', error)
+      console.error('Ошибка при обработке файла: ', error)
     }
   }
 
@@ -43,7 +43,7 @@ export const CreatePost = () => {
           title={'Add Photo'}
           isOpen={isBaseModalOpen}
           onCancel={() => {
-            setIsOpenModal(prev => !prev)
+            setIsBaseModalOpen(prev => !prev)
           }}
         >
           <>
@@ -67,12 +67,12 @@ export const CreatePost = () => {
           </>
         </Modal>
       ) : (
-        <CroppedImage
-          isOpenModal={isOpenModal}
-          setIsOpenModal={setIsOpenModal}
-          imageSrc={imageSrc}
-        />
+        <CroppedImage isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} images={images} />
       )}
     </div>
   )
+}
+
+export type PostImage = {
+    url: string
 }
