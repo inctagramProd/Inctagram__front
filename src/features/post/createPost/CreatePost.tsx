@@ -1,38 +1,29 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 import { Button, Icon, Modal } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { CroppedImage } from '@/src/features/post/createPost/croppedImage/CroppedImage'
+import { uploadFile } from '@/src/shared/helpers/uploadFile'
+import { v4 as uuidv4 } from 'uuid'
+import { CroppedImage } from '@/src/features/post/createPost/editImage/croppedImage'
 
 export const CreatePost = () => {
   const [images, setImages] = useState<PostImage[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isBaseModalOpen, setIsBaseModalOpen] = useState(true)
+  const [isBaseModalOpen, setIsBaseModalOpen] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const { locale } = useTranslate()
-  const handlerPick = () => {
-    inputRef.current?.click()
-  }
-  const uploadPhotoHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    try {
-      if (event.target.files?.length) {
-        const file = event.target.files[0]
-        const url = await new Promise<string>((resolve, reject) => {
-          const reader = new FileReader()
-          reader.onload = e => {
-            resolve(e.target?.result as string)
-          }
-          reader.onerror = e => {
-            reject(e.target?.error)
-          }
-          reader.readAsDataURL(file)
-        })
-        setImages([{ url }])
+
+  const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    await uploadFile(event).then(imageUrl => {
+      if (imageUrl) {
+        setImages([...images, { id: uuidv4(), url: imageUrl?.url }])
         setIsBaseModalOpen(false)
         setIsOpenModal(true)
       }
-    } catch (error) {
-      console.error('Ошибка при обработке файла: ', error)
-    }
+    })
+  }
+
+  const handlerPick = () => {
+    inputRef.current?.click()
   }
 
   return (
@@ -49,7 +40,7 @@ export const CreatePost = () => {
           <>
             <input
               ref={inputRef}
-              onChange={uploadPhotoHandler}
+              onChange={uploadImageHandler}
               type="file"
               accept="image*/,.png,.jpeg,.jpg"
               className="hidden"
@@ -67,12 +58,27 @@ export const CreatePost = () => {
           </>
         </Modal>
       ) : (
-        <CroppedImage isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} images={images} />
+        <CroppedImage
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          images={images}
+          setImages={setImages}
+        />
       )}
+      <Button
+        variant="medium_14"
+        iconName={'PlusSquare'}
+        label={locale.profile.createPost}
+        style='default'
+        onClick={() => {
+          setIsBaseModalOpen(true)
+        }}
+      />
     </div>
   )
 }
 
 export type PostImage = {
+    id: string
     url: string
 }

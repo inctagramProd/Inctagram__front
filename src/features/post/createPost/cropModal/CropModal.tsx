@@ -23,15 +23,13 @@ export const CropModal = ({ isOpen, onCancel, className, children, callback }: P
         <Dialog.Content
           className={`max-w-[492px] w-full h-[564px] fixed left-2/4 top-2/4 translate-x-[-50%] translate-y-[-50%] bg-dark-300 z-[999] rounded border border-dark-100 ease-out duration-300 transition ${className}`}
         >
-          <div className="">
-            <div className="flex items-center justify-center p-4">
-              <Dialog.Title>
-                <Typography variant="h1">{locale.profile.addNewPost.cropping}</Typography>
-              </Dialog.Title>
-              <Button style="text" label={locale.profile.next} onClick={callback} className={''} />
-            </div>
+          <div className="flex items-center justify-between p-4">
+            <Dialog.Title>
+              <Typography variant="h1">{locale.profile.addNewPost.cropping}</Typography>
+            </Dialog.Title>
+            <Button style="text" label={locale.profile.next} onClick={callback} />
           </div>
-          <div className="">{children}</div>
+          <div>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
