@@ -1,15 +1,19 @@
 import React, { ChangeEvent, MutableRefObject, useEffect, useRef, useState } from 'react'
 import { Icon } from '@/src/shared/ui'
+import {useAppDispatch} from "@/src/app/store/store";
+import {updateImage} from "@/src/entities/post/model/slice/postSlice";
 
 type Props = {
+  imageURL: string
   zoom: number
-  setZoom: (value: number) => void
 }
 
-export const ZoomImage = ({ zoom, setZoom }: Props) => {
+export const ZoomImage = ({ zoom, imageURL }: Props) => {
   const [isOpenZoom, setIsOpenZoom] = useState<boolean>(false)
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
 
+  const dispatch = useAppDispatch()
+  
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (addRef.current && !e.composedPath().includes(addRef.current)) {
@@ -22,7 +26,7 @@ export const ZoomImage = ({ zoom, setZoom }: Props) => {
 
   const onZoomChange = (event: ChangeEvent<HTMLInputElement>) => {
     const scale = parseFloat(event.target.value)
-    setZoom(scale)
+    dispatch(updateImage({imageURL, zoom: scale}))
   }
 
   return (
@@ -36,7 +40,7 @@ export const ZoomImage = ({ zoom, setZoom }: Props) => {
           setIsOpenZoom(prev => !prev)
         }}
       >
-        <Icon iconName='zoomIcon' width={26} height={26} />
+        <Icon iconName='zoomIcon' width={26} height={26} iconStyle='fill-light-100 hover:fill-primary-500'/>
       </div>
       {isOpenZoom && (
         <div className="absolute w-[124px] h-9 -top-10 left-0 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75">

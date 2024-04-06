@@ -1,48 +1,48 @@
-import { PostImage } from '@/src/features/post/createPost/CreatePost'
 import { Icon } from '@/src/shared/ui'
 import React, { ChangeEvent, MutableRefObject, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { uploadFile } from '@/src/shared/helpers/uploadFile'
-import { v4 as uuidv4 } from 'uuid'
 import { useToast } from '@/src/app/hooks/useToast'
+import {ImageObj} from '@/src/entities/post/model/types/postSliceTypes'
 
 type Props = {
-  images: PostImage[]
-  setImages: (images: PostImage[]) => void
+  images: ImageObj[]
+  setImages: (imageURL: string) => void
+  removeImages: (ImageURL: string) => void
 }
 
-export const AddImage = ({ images, setImages }: Props) => {
+export const AddImage = ({ images, setImages, removeImages }: Props) => {
   const [isOpenAddImage, setIsOpenAddImage] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
+    const clickOutsideHandler = (e: MouseEvent) => {
       if (addRef.current && !e.composedPath().includes(addRef.current)) {
         setIsOpenAddImage(false)
       }
     }
-    document.body.addEventListener('click', handleClickOutside)
-    return () => document.body.removeEventListener('click', handleClickOutside)
+    document.body.addEventListener('click', clickOutsideHandler)
+    return () => document.body.removeEventListener('click', clickOutsideHandler)
   }, [])
 
   const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    await uploadFile(event).then(imageUrl => {
-      if (imageUrl && images.length <= 9) {
-        console.log('added image', images.length)
-        setImages([...images, { id: uuidv4(), url: imageUrl.url }])
+    await uploadFile(event).then(imageURL => {
+      if (imageURL && images.length <= 9) {
+        const {url} = imageURL
+        setImages(url)
       } else {
+        //TODO зарефакторить
         useToast({ text: 'разместить можно не более 10 изображений', error: true })
       }
     })
   }
 
-  const deleteImageHandler = (id: string) => {
-    let deletedImages = images.filter(img => img.id !== id)
-    setImages(deletedImages)
+  const deleteImageHandler = (imageURL: string) => {
+    removeImages(imageURL)
   }
 
-  const handlerPick = () => {
+  const pickHandler = () => {
     inputRef.current?.click()
   }
 
@@ -51,7 +51,7 @@ export const AddImage = ({ images, setImages }: Props) => {
       ref={addRef}
       className="w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75"
     >
-      {isOpenAddImage ? (
+      {isOpenAddImage && (
         <div className="absolute right-3 bottom-14">
           <input
             ref={inputRef}
@@ -61,12 +61,12 @@ export const AddImage = ({ images, setImages }: Props) => {
             className="hidden"
           />
           <div className="flex gap-3 flex-wrap py-3 pl-3 pr-14 max-w-[425px] rounded-sm bg-dark-500 bg-opacity-75">
-            {images.map((i, index) => (
+            {images.map((img, index) => (
               <div key={index} className="relative">
                 <span
                   className="absolute top-[2px] right-[2px] p-[3px] rounded-sm bg-dark-300 bg-opacity-75 cursor-pointer"
                   onClick={() => {
-                    deleteImageHandler(i.id)
+                    deleteImageHandler(img.imageURL)
                   }}
                 >
                   <Icon
@@ -77,7 +77,7 @@ export const AddImage = ({ images, setImages }: Props) => {
                   />
                 </span>
                 <Image
-                  src={i.url}
+                  src={img.imageURL}
                   width={80}
                   height={82}
                   alt="image"
@@ -86,7 +86,7 @@ export const AddImage = ({ images, setImages }: Props) => {
               </div>
             ))}
           </div>
-          <div onClick={handlerPick} className="absolute top-3 right-3 cursor-pointer max-h-full">
+          <div onClick={pickHandler} className="absolute top-3 right-3 cursor-pointer max-h-full">
             <Icon
               iconName="plusCircleOutlineIcon"
               width={36}
@@ -95,8 +95,6 @@ export const AddImage = ({ images, setImages }: Props) => {
             />
           </div>
         </div>
-      ) : (
-        ''
       )}
       <div
         onClick={() => {

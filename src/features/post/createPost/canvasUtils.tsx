@@ -1,3 +1,5 @@
+import { CroppedArea } from '@/src/entities/post/model/types/postSliceTypes'
+
 export const createImage = (url: string | null): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image()
@@ -28,17 +30,15 @@ export function rotateSize(width: number, height: number, rotation: number) {
 
 export async function getCroppedImg(
   imageSrc: string | null,
-  pixelCrop: any,
+  pixelCrop: CroppedArea | null,
   rotation = 0,
   flip = { horizontal: false, vertical: false }
-): Promise<string | undefined> {
+): Promise<string> {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 
-  if (!ctx) {
-    return undefined
-  }
+
 
   const rotRad = getRadianAngle(rotation)
 
@@ -50,37 +50,36 @@ export async function getCroppedImg(
   canvas.height = bBoxHeight
 
   // translate canvas context to a central location to allow rotating and flipping around the center
-  ctx.translate(bBoxWidth / 2, bBoxHeight / 2)
-  ctx.rotate(rotRad)
-  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1)
-  ctx.translate(-image.width / 2, -image.height / 2)
+  ctx?.translate(bBoxWidth / 2, bBoxHeight / 2)
+  ctx?.rotate(rotRad)
+  ctx?.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1)
+  ctx?.translate(-image.width / 2, -image.height / 2)
   // draw rotated image
-  ctx.drawImage(image, 0, 0)
+  ctx?.drawImage(image, 0, 0)
 
   const croppedCanvas = document.createElement('canvas')
 
   const croppedCtx = croppedCanvas.getContext('2d')
 
-  if (!croppedCtx) {
-    return undefined
+
+  if (pixelCrop) {
+    // Set the size of the cropped canvas
+    croppedCanvas.width = pixelCrop.width
+    croppedCanvas.height = pixelCrop.height
+
+    // Draw the cropped image onto the new canvas
+    croppedCtx?.drawImage(
+      canvas,
+      pixelCrop.x,
+      pixelCrop.y,
+      pixelCrop.width,
+      pixelCrop.height,
+      0,
+      0,
+      pixelCrop.width,
+      pixelCrop.height
+    )
   }
-
-  // Set the size of the cropped canvas
-  croppedCanvas.width = pixelCrop.width
-  croppedCanvas.height = pixelCrop.height
-
-  // Draw the cropped image onto the new canvas
-  croppedCtx.drawImage(
-    canvas,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
-    0,
-    0,
-    pixelCrop.width,
-    pixelCrop.height
-  )
   return new Promise((resolve, reject) => {
     croppedCanvas.toBlob(file => {
       if (file) {

@@ -1,75 +1,105 @@
-import React, { ChangeEvent, useRef, useState } from 'react'
-import { Button, Icon, Modal } from '@/src/shared/ui'
+import React, { useState } from 'react'
+import { Button } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { uploadFile } from '@/src/shared/helpers/uploadFile'
-import { v4 as uuidv4 } from 'uuid'
+import { useAppDispatch, useAppSelector } from '@/src/app/store/store'
+import { resetImage, setCroppedImage, setImage } from '@/src/entities/post/model/slice/postSlice'
+import { UpLoaderImage } from '@/src/entities/post/ui/upLoaderImage/UpLoaderImage'
 import { CroppedImage } from '@/src/features/post/createPost/editImage/croppedImage'
+import { CreatePostModal } from '@/src/features/post/createPost/createPostModal'
+import { getCroppedImg } from '@/src/features/post/createPost/canvasUtils'
+import Image from 'next/image'
+import {useToast} from "@/src/app/hooks/useToast";
 
 export const CreatePost = () => {
-  const [images, setImages] = useState<PostImage[]>([])
-  const inputRef = useRef<HTMLInputElement>(null)
+  const images = useAppSelector(state => state.posts?.images)
+  const croppedImages = useAppSelector(state => state.posts?.croppedImages)
+  const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('upload')
   const [isBaseModalOpen, setIsBaseModalOpen] = useState(false)
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const { locale } = useTranslate()
 
-  const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    await uploadFile(event).then(imageUrl => {
-      if (imageUrl) {
-        setImages([...images, { id: uuidv4(), url: imageUrl?.url }])
-        setIsBaseModalOpen(false)
-        setIsOpenModal(true)
-      }
-    })
+  const isBigSizeScreen = currentWindow === 'filter' || currentWindow === 'description'
+
+  const dispatch = useAppDispatch()
+
+  const titles: Record<CurrentWindow, string> = {
+    upload: locale.profile.addPostPhoto,
+    crop: locale.profile.addNewPost.cropping,
+    filter: locale.profile.addNewPost.filters,
+    description: locale.profile.addNewPost.addDescription,
   }
 
-  const handlerPick = () => {
-    inputRef.current?.click()
+  const setImageHandler = (imageURL: string) => {
+    dispatch(setImage(imageURL))
+    setCurrentWindow('crop')
   }
+
+  const setCroppedImageHandler = () => {
+    const croppedImages = images.map(img => getCroppedImg(img.imageURL, img.croppedAreaPixels))
+
+    Promise.all(croppedImages)
+      .then(croppedImageURLs => {
+        dispatch(setCroppedImage(croppedImageURLs))
+        setCurrentWindow('filter')
+      })
+      .catch(error => {
+        useToast({text:'Error cropping images:', error:true})
+      })
+  }
+
+  const clickNextHandler = () => {
+    if (currentWindow === 'crop') {
+      setCroppedImageHandler()
+    } else if (currentWindow === 'filter') {
+    }
+  }
+
+  const renderWindow = (currentWindow: CurrentWindow) => {
+    switch (true) {
+      case !images.length && currentWindow === 'upload': {
+        return <UpLoaderImage setImage={setImageHandler} />
+      }
+      case currentWindow === 'crop': {
+        return <CroppedImage images={images} setCurrentWindow={setCurrentWindow} />
+      }
+      case currentWindow === 'filter': {
+        return (
+          <div className='flex'>
+            {' '}
+            {croppedImages?.map(img => (
+              <Image src={img.imageURL} alt={'ll'} width={320} height={180} />
+            ))}
+          </div>
+        )
+      }
+      case currentWindow === 'description': {
+        return 'description'
+      }
+    }
+  }
+  console.log(images)
 
   return (
     <div>
-      {isBaseModalOpen ? (
-        <Modal
-          className="max-w-[492px] w-full h-[564px]"
-          title={'Add Photo'}
+      {isBaseModalOpen && (
+        <CreatePostModal
+          className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px]`}
+          title={titles[currentWindow]}
+          onNextClick={clickNextHandler}
           isOpen={isBaseModalOpen}
           onCancel={() => {
             setIsBaseModalOpen(prev => !prev)
+            dispatch(resetImage())
+            setCurrentWindow('upload')
           }}
         >
-          <>
-            <input
-              ref={inputRef}
-              onChange={uploadImageHandler}
-              type="file"
-              accept="image*/,.png,.jpeg,.jpg"
-              className="hidden"
-            />
-            <div className="flex justify-center items-center flex-col mt-[72px]">
-              <div className="bg-dark-500 w-[222px] h-[228px] flex items-center justify-center mb-[60px]">
-                <Icon iconName="imgOutlineIcon" height={48} width={48} />
-              </div>
-              <Button
-                onClick={handlerPick}
-                style="primary"
-                label={locale.profile.selectFromComputer}
-              />
-            </div>
-          </>
-        </Modal>
-      ) : (
-        <CroppedImage
-          isOpenModal={isOpenModal}
-          setIsOpenModal={setIsOpenModal}
-          images={images}
-          setImages={setImages}
-        />
+          {renderWindow(currentWindow)}
+        </CreatePostModal>
       )}
       <Button
         variant="medium_14"
         iconName={'PlusSquare'}
         label={locale.profile.createPost}
-        style='default'
+        style="default"
         onClick={() => {
           setIsBaseModalOpen(true)
         }}
@@ -78,7 +108,4 @@ export const CreatePost = () => {
   )
 }
 
-export type PostImage = {
-    id: string
-    url: string
-}
+export type CurrentWindow = 'description' | 'crop' | 'filter' | 'upload'

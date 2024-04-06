@@ -54,4 +54,4 @@ const SvgComponent = forwardRef(
   }
 )
 
-export const SwiperArrowIcon = memo(SvgComponent)
+export const SliderArrowIcon = memo(SvgComponent)

@@ -4,6 +4,8 @@
 
 body {
     @apply text-light-100 bg-dark-700;
+
+    font-family: Inter, sans-serif;
 }
 
 /* Removing input background colour for autocomplete */
