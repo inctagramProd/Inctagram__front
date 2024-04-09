@@ -1,6 +1,10 @@
 'use client'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PostsState, UpdateImageModel } from '@/src/entities/post/model/types/postSliceTypes'
+import {
+  CroppedImage,
+  PostsState,
+  UpdateImageModel,
+} from '@/src/entities/post/model/types/postSliceTypes'
 
 const initialState: PostsState = {
   images: [],
@@ -14,7 +18,7 @@ export const postsSlice = createSlice({
   reducers: {
     setImage(state, action: PayloadAction<string>) {
       state.images.push({
-        aspect: 4/3,
+        aspect: 4 / 3,
         crop: { x: 0, y: 0 },
         croppedAreaPixels: null,
         imageURL: action.payload,
@@ -39,6 +43,18 @@ export const postsSlice = createSlice({
         imageURL: el,
       }))
     },
+    setImagesWithFilters(state, action: PayloadAction<string[]>) {
+      state.imagesWithFilters = action.payload.map(el => ({ imageURL: el }))
+    },
+    updateFilterCroppedImage(state, action: PayloadAction<CroppedImage>) {
+      const { filter, imageURL } = action.payload
+
+      const imageIdx = state.croppedImages.findIndex(el => el.imageURL === imageURL)
+
+      if (imageIdx !== -1) {
+        state.croppedImages[imageIdx] = { ...state.croppedImages[imageIdx], filter }
+      }
+    },
     resetImage: (state, action: PayloadAction) => {
       state.images = []
       state.croppedImages = []
@@ -47,6 +63,13 @@ export const postsSlice = createSlice({
   },
 })
 
-export const { setImage, removeImage, updateImage, setCroppedImage, resetImage } =
-  postsSlice.actions
+export const {
+  setImage,
+  removeImage,
+  updateImage,
+  setCroppedImage,
+  setImagesWithFilters,
+  updateFilterCroppedImage,
+  resetImage,
+} = postsSlice.actions
 export const postsReducer = postsSlice.reducer

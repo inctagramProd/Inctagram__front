@@ -1,4 +1,5 @@
 import { Point } from 'react-easy-crop'
+import {FilterImage} from "@/src/shared/helpers/canvasUtils";
 
 type Nullable<T> = T | null
 
@@ -25,7 +26,7 @@ export type ImageObj = ImageURL & ImageOptions
 
 export type UpdateImageModel = ImageURL & Partial<ImageObj>
 
-export type CroppedImage = ImageURL & { filter: string }
+export type CroppedImage = ImageURL & { filter: FilterImage }
 
 export type PostsState = {
     croppedImages: CroppedImage[]

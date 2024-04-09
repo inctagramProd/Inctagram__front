@@ -2,7 +2,7 @@ import { LinkItem } from './LinkedItem'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LogOut } from '@/src/features/auth/logOut'
 import { StoreProvider } from '@/src/app/providers'
-import { CreatePost } from '@/src/features/post/createPost'
+import { CreatePost } from '@/src/features/post/ui/createPost'
 
 type Props = { className?: string; theme?: 'dark' | 'light' }
 

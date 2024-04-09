@@ -27,12 +27,12 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
   }, [])
 
   const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    //TODO зарефакторить
     await uploadFile(event).then(imageURL => {
       if (imageURL && images.length <= 9) {
         const {url} = imageURL
         setImages(url)
       } else {
-        //TODO зарефакторить
         useToast({ text: 'разместить можно не более 10 изображений', error: true })
       }
     })

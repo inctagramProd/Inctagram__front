@@ -2,17 +2,25 @@ import React, { useState } from 'react'
 import { Button } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useAppDispatch, useAppSelector } from '@/src/app/store/store'
-import { resetImage, setCroppedImage, setImage } from '@/src/entities/post/model/slice/postSlice'
+import {
+  resetImage,
+  setCroppedImage,
+  setImage,
+  setImagesWithFilters,
+} from '@/src/entities/post/model/slice/postSlice'
 import { UpLoaderImage } from '@/src/entities/post/ui/upLoaderImage/UpLoaderImage'
-import { CroppedImage } from '@/src/features/post/createPost/editImage/croppedImage'
-import { CreatePostModal } from '@/src/features/post/createPost/createPostModal'
-import { getCroppedImg } from '@/src/features/post/createPost/canvasUtils'
-import Image from 'next/image'
-import {useToast} from "@/src/app/hooks/useToast";
+import { useToast } from '@/src/app/hooks/useToast'
+import { getModifiedImage } from '@/src/shared/helpers/canvasUtils'
+import { CroppedImage } from '@/src/features/post/ui/croppedImage'
+import { FilteredImage } from '@/src/features/post/ui/filteredImage'
+import { CreatePostModal } from '@/src/entities/post/ui/createPostModal'
+import Image from "next/image";
 
 export const CreatePost = () => {
   const images = useAppSelector(state => state.posts?.images)
   const croppedImages = useAppSelector(state => state.posts?.croppedImages)
+  const imagesWithFilters = useAppSelector(state => state.posts.imagesWithFilters)
+
   const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('upload')
   const [isBaseModalOpen, setIsBaseModalOpen] = useState(false)
   const { locale } = useTranslate()
@@ -34,7 +42,14 @@ export const CreatePost = () => {
   }
 
   const setCroppedImageHandler = () => {
-    const croppedImages = images.map(img => getCroppedImg(img.imageURL, img.croppedAreaPixels))
+    const croppedImages = images.map(
+      img =>
+        getModifiedImage({
+          imageSrc: img.imageURL,
+          crop: img.croppedAreaPixels,
+          mode: 'url',
+        }) as Promise<string>
+    )
 
     Promise.all(croppedImages)
       .then(croppedImageURLs => {
@@ -42,7 +57,27 @@ export const CreatePost = () => {
         setCurrentWindow('filter')
       })
       .catch(error => {
-        useToast({text:'Error cropping images:', error:true})
+        useToast({ text: `Error cropping images: ${error}`, error: true })
+      })
+  }
+
+  const setImagesWithFiltersHandler = () => {
+    const imagesWithFilter = croppedImages.map(
+      img =>
+        getModifiedImage({
+          imageSrc: img.imageURL,
+          filter: img.filter,
+          mode: 'filters',
+        }) as Promise<string>
+    )
+
+    Promise.all(imagesWithFilter)
+      .then(ImageURLs => {
+        dispatch(setImagesWithFilters(ImageURLs))
+        setCurrentWindow('description')
+      })
+      .catch(error => {
+        useToast({ text: `Error cropping images: ${error}`, error: true })
       })
   }
 
@@ -50,6 +85,7 @@ export const CreatePost = () => {
     if (currentWindow === 'crop') {
       setCroppedImageHandler()
     } else if (currentWindow === 'filter') {
+      setImagesWithFiltersHandler()
     }
   }
 
@@ -62,21 +98,14 @@ export const CreatePost = () => {
         return <CroppedImage images={images} setCurrentWindow={setCurrentWindow} />
       }
       case currentWindow === 'filter': {
-        return (
-          <div className='flex'>
-            {' '}
-            {croppedImages?.map(img => (
-              <Image src={img.imageURL} alt={'ll'} width={320} height={180} />
-            ))}
-          </div>
-        )
+        return <FilteredImage images={croppedImages} />
       }
       case currentWindow === 'description': {
-        return 'description'
+        return <div>{imagesWithFilters.map(i => (<Image src={i.imageURL} alt={'100'} width={300} height={300}/>))}</div>
       }
     }
   }
-  console.log(images)
+  console.log(croppedImages)
 
   return (
     <div>

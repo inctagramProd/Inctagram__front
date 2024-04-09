@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { getCroppedImg } from '@/src/features/post/createPost/canvasUtils'
 import Cropper, { Point } from 'react-easy-crop'
 import { SliderArrowIcon } from '@/src/shared/assets/icons/SliderArrowIcon'
 import { AddImage, AspectRatioImage, ZoomImage } from '@/src/entities/post/ui'
 import { CroppedArea, ImageObj } from '@/src/entities/post/model/types/postSliceTypes'
 import { useAppDispatch } from '@/src/app/store/store'
 import { removeImage, setImage, updateImage } from '@/src/entities/post/model/slice/postSlice'
-import { CurrentWindow } from '@/src/features/post/createPost/CreatePost'
+import {CurrentWindow} from "@/src/features/post/ui/createPost/CreatePost";
 
 type Props = {
   images: ImageObj[]
@@ -75,7 +74,7 @@ export const CroppedImage = ({ images, setCurrentWindow }: Props) => {
 
 
   return (
-    <Slider arrows={images.length !== 1} {...settings}>
+      <Slider arrows={images.length !== 1} {...settings}>
       {images.map((img, index) => {
         const handleChangeCrop = (crop: Point) => {
           dispatch(updateImage({ crop, imageURL: img.imageURL }))
