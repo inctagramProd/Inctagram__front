@@ -4,6 +4,7 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useAppDispatch, useAppSelector } from '@/src/app/store/store'
 import {
   resetImage,
+  resetImagesWithFilters,
   setCroppedImage,
   setImage,
   setImagesWithFilters,
@@ -13,8 +14,8 @@ import { useToast } from '@/src/app/hooks/useToast'
 import { getModifiedImage } from '@/src/shared/helpers/canvasUtils'
 import { CroppedImage } from '@/src/features/post/ui/croppedImage'
 import { FilteredImage } from '@/src/features/post/ui/filteredImage'
-import { CreatePostModal } from '@/src/entities/post/ui/createPostModal'
-import Image from "next/image";
+import { DescriptionImage } from '@/src/features/post/ui/decriptionImage'
+import { CreatePostModal } from '@/src/shared/ui/СreatePostModal'
 
 export const CreatePost = () => {
   const images = useAppSelector(state => state.posts?.images)
@@ -26,6 +27,7 @@ export const CreatePost = () => {
   const { locale } = useTranslate()
 
   const isBigSizeScreen = currentWindow === 'filter' || currentWindow === 'description'
+  const isShowUploadScreen = currentWindow === 'upload' && images.length === 0
 
   const dispatch = useAppDispatch()
 
@@ -88,6 +90,24 @@ export const CreatePost = () => {
       setImagesWithFiltersHandler()
     }
   }
+  const clickBackHandler = () => {
+    switch (true) {
+      case currentWindow === 'description': {
+        setCurrentWindow('filter')
+        break
+      }
+      case currentWindow === 'filter': {
+        setCurrentWindow('crop')
+        dispatch(resetImagesWithFilters())
+        break
+      }
+      case currentWindow === 'crop': {
+        setCurrentWindow('upload')
+        dispatch(resetImage())
+        break
+      }
+    }
+  }
 
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
@@ -101,7 +121,7 @@ export const CreatePost = () => {
         return <FilteredImage images={croppedImages} />
       }
       case currentWindow === 'description': {
-        return <div>{imagesWithFilters.map(i => (<Image src={i.imageURL} alt={'100'} width={300} height={300}/>))}</div>
+        return <DescriptionImage imagesWithFilters={imagesWithFilters} />
       }
     }
   }
@@ -114,12 +134,15 @@ export const CreatePost = () => {
           className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px]`}
           title={titles[currentWindow]}
           onNextClick={clickNextHandler}
+          onBackClick={clickBackHandler}
           isOpen={isBaseModalOpen}
           onCancel={() => {
             setIsBaseModalOpen(prev => !prev)
             dispatch(resetImage())
             setCurrentWindow('upload')
           }}
+          onShowLeftButton={currentWindow !== 'upload'}
+          onShowRightButton={currentWindow !== 'description' && !isShowUploadScreen}
         >
           {renderWindow(currentWindow)}
         </CreatePostModal>

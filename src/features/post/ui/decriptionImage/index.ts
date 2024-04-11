@@ -1,0 +1,1 @@
+export { DescriptionImage } from './DescriptionImage'

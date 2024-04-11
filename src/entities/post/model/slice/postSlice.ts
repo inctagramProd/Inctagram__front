@@ -55,6 +55,9 @@ export const postsSlice = createSlice({
         state.croppedImages[imageIdx] = { ...state.croppedImages[imageIdx], filter }
       }
     },
+    resetImagesWithFilters(state, action: PayloadAction ){
+      state.imagesWithFilters = []
+    },
     resetImage: (state, action: PayloadAction) => {
       state.images = []
       state.croppedImages = []
@@ -70,6 +73,7 @@ export const {
   setCroppedImage,
   setImagesWithFilters,
   updateFilterCroppedImage,
+  resetImagesWithFilters,
   resetImage,
 } = postsSlice.actions
 export const postsReducer = postsSlice.reducer

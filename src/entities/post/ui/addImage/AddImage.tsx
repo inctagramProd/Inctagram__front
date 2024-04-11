@@ -3,7 +3,7 @@ import React, { ChangeEvent, MutableRefObject, useEffect, useRef, useState } fro
 import Image from 'next/image'
 import { uploadFile } from '@/src/shared/helpers/uploadFile'
 import { useToast } from '@/src/app/hooks/useToast'
-import {ImageObj} from '@/src/entities/post/model/types/postSliceTypes'
+import { ImageObj } from '@/src/entities/post/model/types/postSliceTypes'
 
 type Props = {
   images: ImageObj[]
@@ -30,7 +30,7 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
     //TODO зарефакторить
     await uploadFile(event).then(imageURL => {
       if (imageURL && images.length <= 9) {
-        const {url} = imageURL
+        const { url } = imageURL
         setImages(url)
       } else {
         useToast({ text: 'разместить можно не более 10 изображений', error: true })
@@ -73,7 +73,7 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
                     iconName="closeIcon"
                     width={16}
                     height={16}
-                    iconStyle={'fill-light-100 hover:fill-primary-500'}
+                    iconStyle="fill-light-100 hover:fill-primary-500"
                   />
                 </span>
                 <Image
@@ -91,7 +91,7 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
               iconName="plusCircleOutlineIcon"
               width={36}
               height={36}
-              iconStyle={'fill-light-100 hover:fill-primary-500'}
+              iconStyle="fill-light-100 hover:fill-primary-500"
             />
           </div>
         </div>

@@ -9,11 +9,14 @@ export const createPost = baseApi.injectEndpoints({
       }),
       providesTags: ['Posts'],
     }),
-    createPost: build.mutation<any, FormData>({
+    createPost: build.mutation<CreatePostResponse, FormData>({
       query: body => ({
         method: 'POST',
         url: 'user-posts',
-        body,
+        body: {
+            files: body,
+            description: 'text post'
+        },
       }),
       invalidatesTags: ['Posts'],
     }),
@@ -22,3 +25,21 @@ export const createPost = baseApi.injectEndpoints({
 })
 
 export const { useCreatePostMutation, useGetPostsQuery } = createPost
+
+
+export type CreatePostResponse = {
+	postId: number;
+	postDescription: string;
+	createdAt: string;
+	updatedAt: string;
+	postImages: PostImage[];
+}
+export type PostImage = {
+	imageId: number;
+	imageUrl: string;
+}
+
+type CreatePostArgs = {
+  files: FormData
+  description: string
+}

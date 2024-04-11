@@ -1,4 +1,4 @@
-import { CroppedArea } from '@/src/entities/post/model/types/postSliceTypes'
+import {CroppedArea} from "@/src/entities/post/model/types/postSliceTypes";
 
 const filtersStyle = {
   'image_filter--clarendon': 'saturate(2)',
@@ -28,7 +28,7 @@ export const getModifiedImage = ({
   fileName = 'file',
   filter,
   imageSrc,
-  mode = 'formData',
+  mode = 'formData'
 }: Params): Promise<Blob | FormData | string> => {
   return new Promise((resolve, reject) => {
     const image = new Image()
@@ -78,7 +78,7 @@ export const getModifiedImage = ({
 
       canvas.toBlob(blob => {
         if (!blob) {
-          reject(new Error('some error occurred'))
+          reject(new Error('error'))
 
           return
         }
@@ -97,7 +97,7 @@ export const getModifiedImage = ({
     }
 
     image.onerror = () => {
-      reject(new Error('some error occurred'))
+      reject(new Error('error'))
     }
   })
 }
