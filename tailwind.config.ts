@@ -68,6 +68,7 @@ const config: Config = {
     plugins: [
         require('tailwindcss'),
         require('autoprefixer'),
+        require('tailwind-scrollbar'),
         // Add other Tailwind CSS plugins if needed
     ],
 }
