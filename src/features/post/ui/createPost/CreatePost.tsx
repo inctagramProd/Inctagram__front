@@ -3,19 +3,20 @@ import { Button } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useAppDispatch, useAppSelector } from '@/src/app/store/store'
 import {
-  resetImage,
+  resetAllImages,
   resetImagesWithFilters,
   setCroppedImage,
   setImage,
   setImagesWithFilters,
 } from '@/src/entities/post/model/slice/postSlice'
-import { UpLoaderImage } from '@/src/entities/post/ui/upLoaderImage/UpLoaderImage'
 import { useToast } from '@/src/app/hooks/useToast'
 import { getModifiedImage } from '@/src/shared/helpers/canvasUtils'
-import { CroppedImage } from '@/src/features/post/ui/croppedImage'
-import { FilteredImage } from '@/src/features/post/ui/filteredImage'
-import { DescriptionImage } from '@/src/features/post/ui/decriptionImage'
+import { CroppedImageScreen } from '../croppedImageScreen'
+import { FilteredImageScreen } from '../filteredImageScreen'
+import { DescriptionImageScreen } from '../decriptionImageScreen'
 import { CreatePostModal } from '@/src/shared/ui/СreatePostModal'
+import { UpLoaderImage } from '@/src/features/post/ui/upLoaderImage'
+import { CurrentWindow } from '@/src/features/post/types/creatPostTypes'
 
 export const CreatePost = () => {
   const images = useAppSelector(state => state.posts?.images)
@@ -59,7 +60,7 @@ export const CreatePost = () => {
         setCurrentWindow('filter')
       })
       .catch(error => {
-        useToast({ text: `Error cropping images: ${error}`, error: true })
+        useToast({ text: `An error has occurred: ${error}`, error: true })
       })
   }
 
@@ -79,7 +80,7 @@ export const CreatePost = () => {
         setCurrentWindow('description')
       })
       .catch(error => {
-        useToast({ text: `Error cropping images: ${error}`, error: true })
+        useToast({ text: `An error has occurred: ${error}`, error: true })
       })
   }
 
@@ -103,10 +104,16 @@ export const CreatePost = () => {
       }
       case currentWindow === 'crop': {
         setCurrentWindow('upload')
-        dispatch(resetImage())
+        dispatch(resetAllImages())
         break
       }
     }
+  }
+
+  const handleCloseModal = () => {
+    setIsBaseModalOpen(false)
+    setCurrentWindow('upload')
+    dispatch(resetAllImages())
   }
 
   const renderWindow = (currentWindow: CurrentWindow) => {
@@ -115,17 +122,21 @@ export const CreatePost = () => {
         return <UpLoaderImage setImage={setImageHandler} />
       }
       case currentWindow === 'crop': {
-        return <CroppedImage images={images} setCurrentWindow={setCurrentWindow} />
+        return <CroppedImageScreen images={images} setCurrentWindow={setCurrentWindow} />
       }
       case currentWindow === 'filter': {
-        return <FilteredImage images={croppedImages} />
+        return <FilteredImageScreen images={croppedImages} />
       }
       case currentWindow === 'description': {
-        return <DescriptionImage imagesWithFilters={imagesWithFilters} />
+        return (
+          <DescriptionImageScreen
+            imagesWithFilters={imagesWithFilters}
+            closeModal={handleCloseModal}
+          />
+        )
       }
     }
   }
-  console.log(croppedImages)
 
   return (
     <div>
@@ -138,7 +149,7 @@ export const CreatePost = () => {
           isOpen={isBaseModalOpen}
           onCancel={() => {
             setIsBaseModalOpen(prev => !prev)
-            dispatch(resetImage())
+            dispatch(resetAllImages())
             setCurrentWindow('upload')
           }}
           onShowLeftButton={currentWindow !== 'upload'}
@@ -159,5 +170,3 @@ export const CreatePost = () => {
     </div>
   )
 }
-
-export type CurrentWindow = 'description' | 'crop' | 'filter' | 'upload'

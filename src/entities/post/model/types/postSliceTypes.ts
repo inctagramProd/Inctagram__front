@@ -10,7 +10,6 @@ export type CroppedArea = {
     y: number
 }
 
-
 export type ImageURL = {
     imageURL: string
 }
@@ -18,7 +17,7 @@ export type ImageURL = {
 type ImageOptions = {
     aspect: number
     crop: Point
-    croppedAreaPixels: Nullable<CroppedArea> | null
+    croppedAreaPixels: Nullable<CroppedArea>
     zoom: number
 }
 

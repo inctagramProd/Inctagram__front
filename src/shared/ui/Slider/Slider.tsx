@@ -6,7 +6,7 @@ import { SliderArrowIcon } from '@/src/shared/assets/icons/SliderArrowIcon'
 
 type Props = {
   children: React.ReactNode
-  isShowArrow: boolean
+  isShowNavigation?: boolean
   afterChangeCallback?: (value: number) => void
 }
 
@@ -14,7 +14,6 @@ type SamplePrevArrow = {
   onClick?: () => void
   direction?: 'left' | 'right'
 }
-
 const SliderArrows = ({ direction, onClick }: SamplePrevArrow) => {
   return (
     <div
@@ -42,9 +41,9 @@ const SliderArrows = ({ direction, onClick }: SamplePrevArrow) => {
     </div>
   )
 }
+//TODO: 'refactor SliderArrows'
 const settings = {
   swipe: false,
-  dots: true,
   infinite: true,
   speed: 0,
   variableWidth: false,
@@ -64,9 +63,9 @@ const settings = {
   customPaging: (i: any) => <div className="w-2 h-2 rounded-full bg-light-100"></div>,
 }
 
-export const SlickSlider = ({ children, isShowArrow, afterChangeCallback }: Props) => {
+export const SlickSlider = ({ children, isShowNavigation, afterChangeCallback }: Props) => {
   return (
-    <Slider afterChange={afterChangeCallback} arrows={isShowArrow} {...settings}>
+    <Slider afterChange={afterChangeCallback} arrows={isShowNavigation} dots={isShowNavigation} {...settings}>
       {children}
     </Slider>
   )

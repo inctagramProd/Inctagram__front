@@ -9,15 +9,15 @@ type Props = {
 
 export const UpLoaderImage = ({ setImage }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const { locale } = useTranslate()
 
   const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    await uploadFile(event).then(imageUrl => {
+    await uploadFile(event, locale).then(imageUrl => {
       if (imageUrl) {
         setImage(imageUrl?.url)
       }
     })
   }
-  const { locale } = useTranslate()
 
   const handlerPick = () => {
     inputRef.current?.click()

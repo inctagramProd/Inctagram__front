@@ -4,18 +4,47 @@ import Image from 'next/image'
 import { uploadFile } from '@/src/shared/helpers/uploadFile'
 import { useToast } from '@/src/app/hooks/useToast'
 import { ImageObj } from '@/src/entities/post/model/types/postSliceTypes'
+import { useAppDispatch } from '@/src/app/store/store'
+import { removeImage, setImage } from '@/src/entities/post/model/slice/postSlice'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
+import {CurrentWindow} from "@/src/features/post/types/creatPostTypes";
 
 type Props = {
   images: ImageObj[]
-  setImages: (imageURL: string) => void
-  removeImages: (ImageURL: string) => void
+  setCurrentWindow: (currentWindow: CurrentWindow) => void
 }
-
-export const AddImage = ({ images, setImages, removeImages }: Props) => {
+export const AddImage = ({ images, setCurrentWindow }: Props) => {
   const [isOpenAddImage, setIsOpenAddImage] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
+  const { locale } = useTranslate()
 
+  const dispatch = useAppDispatch()
+
+  const setImageHandler = (imageURL: string) => {
+    dispatch(setImage(imageURL))
+  }
+  const removeImageHandler = (imageURL: string) => {
+    if (images.length === 1) {
+      setCurrentWindow('upload')
+    }
+    dispatch(removeImage(imageURL))
+  }
+
+  const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    await uploadFile(event, locale).then(imageURL => {
+      if (imageURL && images.length <= 9) {
+        const { url } = imageURL
+        setImageHandler(url)
+      }
+      if (images.length === 10) {
+        useToast({ text: locale.profile.addNewPost.imageError.upload, error: true })
+      }
+    })
+  }
+  const pickHandler = () => {
+    inputRef.current?.click()
+  }
   useEffect(() => {
     const clickOutsideHandler = (e: MouseEvent) => {
       if (addRef.current && !e.composedPath().includes(addRef.current)) {
@@ -26,30 +55,13 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
     return () => document.body.removeEventListener('click', clickOutsideHandler)
   }, [])
 
-  const uploadImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
-    //TODO зарефакторить
-    await uploadFile(event).then(imageURL => {
-      if (imageURL && images.length <= 9) {
-        const { url } = imageURL
-        setImages(url)
-      } else {
-        useToast({ text: 'разместить можно не более 10 изображений', error: true })
-      }
-    })
-  }
-
-  const deleteImageHandler = (imageURL: string) => {
-    removeImages(imageURL)
-  }
-
-  const pickHandler = () => {
-    inputRef.current?.click()
-  }
-
   return (
     <div
       ref={addRef}
-      className="w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75"
+      onClick={() => {
+        setIsOpenAddImage(prevState => !prevState)
+      }}
+      className="w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75 cursor-pointer"
     >
       {isOpenAddImage && (
         <div className="absolute right-3 bottom-14">
@@ -60,13 +72,13 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
             accept="image*/,.png,.jpeg,.jpg"
             className="hidden"
           />
-          <div className="flex gap-3 flex-wrap py-3 pl-3 pr-14 max-w-[425px] rounded-sm bg-dark-500 bg-opacity-75">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700 py-3 pl-3 pr-14 flex gap-3.5 max-w-[430px] w-full rounded-sm bg-dark-500 bg-opacity-75">
             {images.map((img, index) => (
               <div key={index} className="relative">
                 <span
                   className="absolute top-[2px] right-[2px] p-[3px] rounded-sm bg-dark-300 bg-opacity-75 cursor-pointer"
                   onClick={() => {
-                    deleteImageHandler(img.imageURL)
+                    removeImageHandler(img.imageURL)
                   }}
                 >
                   <Icon
@@ -81,7 +93,7 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
                   width={80}
                   height={82}
                   alt="image"
-                  className="max-w-[80px] h-[82px] w-full object-cover"
+                  className="max-w-[80px] h-[82px] object-cover"
                 />
               </div>
             ))}
@@ -96,19 +108,13 @@ export const AddImage = ({ images, setImages, removeImages }: Props) => {
           </div>
         </div>
       )}
-      <div
-        onClick={() => {
-          setIsOpenAddImage(prevState => !prevState)
-        }}
-        className="cursor-pointer"
-      >
-        <Icon
-          iconName="imgOutlineIcon"
-          width={24}
-          height={24}
-          iconStyle={'fill-light-100 hover:fill-primary-500'}
-        />
-      </div>
+
+      <Icon
+        iconName="imgOutlineIcon"
+        width={24}
+        height={24}
+        iconStyle={'fill-light-100 hover:fill-primary-500'}
+      />
     </div>
   )
 }

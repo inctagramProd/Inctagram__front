@@ -1,1 +1,0 @@
-export { FilteredImage } from './FilteredImage'

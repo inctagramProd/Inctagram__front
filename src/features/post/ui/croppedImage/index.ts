@@ -1,1 +1,0 @@
-export { CroppedImage } from './CroppedImage'
