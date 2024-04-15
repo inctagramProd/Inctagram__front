@@ -15,8 +15,9 @@ import { CroppedImageScreen } from '../croppedImageScreen'
 import { FilteredImageScreen } from '../filteredImageScreen'
 import { DescriptionImageScreen } from '../decriptionImageScreen'
 import { CreatePostModal } from '@/src/shared/ui/СreatePostModal'
-import { UpLoaderImage } from '@/src/features/post/ui/upLoaderImage'
+import { UpLoaderImageScreen } from '../upLoaderImageScreen'
 import { CurrentWindow } from '@/src/features/post/types/creatPostTypes'
+import { ConfirmDialog } from '@/src/entities/post/ui/confirmDialog'
 
 export const CreatePost = () => {
   const images = useAppSelector(state => state.posts?.images)
@@ -25,6 +26,8 @@ export const CreatePost = () => {
 
   const [currentWindow, setCurrentWindow] = useState<CurrentWindow>('upload')
   const [isBaseModalOpen, setIsBaseModalOpen] = useState(false)
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
+
   const { locale } = useTranslate()
 
   const isBigSizeScreen = currentWindow === 'filter' || currentWindow === 'description'
@@ -110,16 +113,24 @@ export const CreatePost = () => {
     }
   }
 
+  const handleChangeOpen = () => {
+    currentWindow === 'upload' ? setIsBaseModalOpen(false) : setIsConfirmModalOpen(true)
+  }
+
   const handleCloseModal = () => {
     setIsBaseModalOpen(false)
     setCurrentWindow('upload')
     dispatch(resetAllImages())
   }
+  const closeConfirmDialog = () => {
+    setIsConfirmModalOpen(false)
+    handleCloseModal()
+  }
 
   const renderWindow = (currentWindow: CurrentWindow) => {
     switch (true) {
       case !images.length && currentWindow === 'upload': {
-        return <UpLoaderImage setImage={setImageHandler} />
+        return <UpLoaderImageScreen setImage={setImageHandler} />
       }
       case currentWindow === 'crop': {
         return <CroppedImageScreen images={images} setCurrentWindow={setCurrentWindow} />
@@ -139,34 +150,39 @@ export const CreatePost = () => {
   }
 
   return (
-    <div>
-      {isBaseModalOpen && (
-        <CreatePostModal
-          className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px]`}
-          title={titles[currentWindow]}
-          onNextClick={clickNextHandler}
-          onBackClick={clickBackHandler}
-          isOpen={isBaseModalOpen}
-          onCancel={() => {
-            setIsBaseModalOpen(prev => !prev)
-            dispatch(resetAllImages())
-            setCurrentWindow('upload')
+    <>
+      <div>
+        {isBaseModalOpen && (
+          <CreatePostModal
+            className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px]`}
+            title={titles[currentWindow]}
+            onNextClick={clickNextHandler}
+            onBackClick={clickBackHandler}
+            isOpen={isBaseModalOpen}
+            onCancel={() => {
+              handleChangeOpen()
+            }}
+            onShowLeftButton={currentWindow !== 'upload'}
+            onShowRightButton={currentWindow !== 'description' && !isShowUploadScreen}
+          >
+            {renderWindow(currentWindow)}
+          </CreatePostModal>
+        )}
+        <Button
+          variant="medium_14"
+          iconName={'PlusSquare'}
+          label={locale.profile.createPost}
+          style="default"
+          onClick={() => {
+            setIsBaseModalOpen(true)
           }}
-          onShowLeftButton={currentWindow !== 'upload'}
-          onShowRightButton={currentWindow !== 'description' && !isShowUploadScreen}
-        >
-          {renderWindow(currentWindow)}
-        </CreatePostModal>
-      )}
-      <Button
-        variant="medium_14"
-        iconName={'PlusSquare'}
-        label={locale.profile.createPost}
-        style="default"
-        onClick={() => {
-          setIsBaseModalOpen(true)
-        }}
+        />
+      </div>
+      <ConfirmDialog
+        isConfirmModalOpen={isConfirmModalOpen}
+        setIsConfirmModalOpen={setIsConfirmModalOpen}
+        closeConfirmDialog={closeConfirmDialog}
       />
-    </div>
+    </>
   )
 }

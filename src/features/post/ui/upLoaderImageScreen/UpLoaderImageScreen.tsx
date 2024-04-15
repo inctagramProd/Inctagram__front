@@ -7,7 +7,7 @@ type Props = {
   setImage: (imageUrl: string) => void
 }
 
-export const UpLoaderImage = ({ setImage }: Props) => {
+export const UpLoaderImageScreen = ({ setImage }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const { locale } = useTranslate()
 
