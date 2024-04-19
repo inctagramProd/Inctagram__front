@@ -60,20 +60,27 @@ export const AspectRatioImage = ({ imageURL, aspectRatio }: Props) => {
               iconName="imgOutlineIcon"
               width={24}
               height={24}
-              iconStyle={aspectRatio === AspectRatio.original ? 'fill-light-100' : 'fill-light-900'}
+              iconStyle={aspectRatio === AspectRatio.original ? 'fill-light-100' : 'fill-dark-300'}
             />
           </div>
           <div className="flex justify-between cursor-pointer" onClick={changeAspectHandler(1)}>
             <Typography variant={aspectRatio === AspectRatio['1:1'] ? 'regular_16' : 'not_active'}>
               1:1
             </Typography>
-            <Icon iconName="rectangleIcon1_1" width={18} height={18} iconStyle={''} />
+            <Icon
+              iconName="rectangleIcon1_1"
+              width={18}
+              height={18}
+              iconStyle={
+                aspectRatio === AspectRatio['1:1'] ? 'brightness-0 invert' : ' invert saturate hue-rotate-180'
+              }
+            />
           </div>
           <div className="flex justify-between cursor-pointer" onClick={changeAspectHandler(4 / 5)}>
             <Typography variant={aspectRatio === AspectRatio['4/5'] ? 'regular_16' : 'not_active'}>
               4:5
             </Typography>
-            <Icon iconName="rectangleIcon4_5" width={18} height={26} iconStyle={''} />
+            <Icon iconName="rectangleIcon4_5" width={18} height={26} iconStyle={aspectRatio === AspectRatio["4/5"] ? 'brightness-0 invert' : ' invert saturate hue-rotate-180'} />
           </div>
           <div
             className="flex justify-between cursor-pointer"
@@ -86,7 +93,7 @@ export const AspectRatioImage = ({ imageURL, aspectRatio }: Props) => {
               iconName="rectangleIcon16_9"
               width={26}
               height={20}
-              iconStyle={aspectRatio === AspectRatio['16/9'] ? 'hue-rotate-180' : 'filter-none'}
+              iconStyle={aspectRatio === AspectRatio['16/9'] ? 'brightness-0 invert' : 'invert saturate hue-rotate-180'}
             />
           </div>
         </div>

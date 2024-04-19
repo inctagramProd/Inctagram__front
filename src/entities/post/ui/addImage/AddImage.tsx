@@ -7,7 +7,7 @@ import { ImageObj } from '@/src/entities/post/model/types/postSliceTypes'
 import { useAppDispatch } from '@/src/app/store/store'
 import { removeImage, setImage } from '@/src/entities/post/model/slice/postSlice'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import {CurrentWindow} from "@/src/features/post/types/creatPostTypes";
+import { CurrentWindow } from '@/src/features/post/types/creatPostTypes'
 
 type Props = {
   images: ImageObj[]
@@ -61,7 +61,7 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
       onClick={() => {
         setIsOpenAddImage(prevState => !prevState)
       }}
-      className="w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75 cursor-pointer"
+      className="w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75 "
     >
       {isOpenAddImage && (
         <div className="absolute right-3 bottom-14">
@@ -113,7 +113,7 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
         iconName="imgOutlineIcon"
         width={24}
         height={24}
-        iconStyle={'fill-light-100 hover:fill-primary-500'}
+        iconStyle="fill-light-100 hover:fill-primary-500 cursor-pointer"
       />
     </div>
   )

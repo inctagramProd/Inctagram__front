@@ -154,7 +154,7 @@ export const CreatePost = () => {
       <div>
         {isBaseModalOpen && (
           <CreatePostModal
-            className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px]`}
+            className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px] overflow-hidden`}
             title={titles[currentWindow]}
             onNextClick={clickNextHandler}
             onBackClick={clickBackHandler}

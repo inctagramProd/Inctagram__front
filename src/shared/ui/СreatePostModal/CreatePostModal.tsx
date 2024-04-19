@@ -63,7 +63,7 @@ export const CreatePostModal = ({
               <Dialog.Close asChild>
                 <div className="flex-1 flex items-center">
                   <button onClick={onCancel} className='ml-auto'>
-                    <Icon iconName="Close" iconStyle="fill-light-100 hover:fill-primary-500 " />
+                    <Icon iconName="Close" iconStyle="fill-light-100 hover:fill-primary-500" />
                   </button>
                 </div>
               </Dialog.Close>

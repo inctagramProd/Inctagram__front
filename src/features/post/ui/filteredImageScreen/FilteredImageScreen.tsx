@@ -36,23 +36,23 @@ export const FilteredImageScreen = ({ images }: Props) => {
   )
 
   const filtersArray = useMemo(() => {
-    return filtersScreen.map((filter, i) => {
+    return filtersScreen.map((filter) => {
       const activeFilter = filter.value === images[activeIndex].filter
       return (
         <div
           className={`${
             activeFilter && 'text-primary-500 underline underline-offset-4'
-          } text-center cursor-pointer h-[108px] mb-4`}
-          key={filter.name + i}
+          } text-center cursor-pointer h-[138px] mb-1`}
+          key={filter.name}
           onClick={() => handleChangeFilter(filter.value)}
         >
           <Image
+            src={images[activeIndex].imageURL}
             alt={filter.name}
             style={{ filter: filter.value }}
-            className={`${filter.value} object-cover h-[100px] mb-1.5`}
-            height={100}
-            width={100}
-            src={images[activeIndex].imageURL}
+            width={108}
+            height={108}
+            className={`${filter.value} object-cover h-[108px] mb-1.5`}
           />
           <Typography variant="regular_16">{filter.name}</Typography>
         </div>
@@ -72,13 +72,13 @@ export const FilteredImageScreen = ({ images }: Props) => {
                 alt={img.filter}
                 width={1}
                 height={1}
-                className={`${img.filter} object-cover w-full h-[506px]`}
+                className={`${img.filter} object-contain h-[508px]`}
               />
             )
           })}
         </SlickSlider>
       </div>
-      <div className="flex flex-wrap justify-center items-center gap-6 w-1/2 h-full p-6">
+      <div className="flex flex-wrap justify-center items-center gap-6 w-1/2 h-full p-6 relative">
         {filtersArray}
       </div>
     </div>

@@ -16,7 +16,7 @@ export const CroppedImageScreen = ({ images, setCurrentWindow }: Props) => {
         return (
           <div key={index} className="w-[492px] h-[500px]">
             <CropperImage image={image} />
-            <div className="absolute bottom-0 left-0 flex items-center w-full">
+            <div className="absolute bottom-2 left-0 flex items-center w-full">
               <div className="flex gap-x-6 ml-3">
                 <AspectRatioImage imageURL={image.imageURL} aspectRatio={image.aspect} />
                 <ZoomImage imageURL={image.imageURL} zoom={image.zoom} />

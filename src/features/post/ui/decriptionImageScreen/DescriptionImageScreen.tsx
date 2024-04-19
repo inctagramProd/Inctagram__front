@@ -6,6 +6,7 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useCreatePostMutation } from '@/src/features/post/service/createPostApi'
 import { getModifiedImage } from '@/src/shared/helpers/canvasUtils'
 import { SlickSlider } from '@/src/shared/ui/Slider/Slider'
+import {useToast} from "@/src/app/hooks/useToast";
 
 const MAX_NUMBER_OF_CHARACTERS = 500
 
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props) => {
-  const [createPost, { isLoading, isSuccess }] = useCreatePostMutation()
+  const [createPost, { isLoading, isSuccess, isError }] = useCreatePostMutation()
   const [textPostDescription, setTextPostDescription] = useState<string>('')
   const { locale } = useTranslate()
 
@@ -42,6 +43,9 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
       if(isSuccess){
         closeModal()
       }
+      if(isError){
+        useToast({text: 'some error occurred', error: true})
+      }
     })
   }
 
@@ -51,18 +55,18 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
         <SlickSlider isShowNavigation={imagesWithFilters.length !== 1}>
           {imagesWithFilters.map((img, i) => (
             <Image
-              key={img.imageURL + i}
+              key={img.imageURL}
               src={img.imageURL}
               alt={img.imageURL}
               width={100}
               height={100}
-              className="object-cover w-full h-[506px]"
+              className="object-contain w-full h-[506px]"
             />
           ))}
         </SlickSlider>
       </div>
       <div className="w-1/2 p-6 flex flex-col">
-        <div className="">
+        <div>
           <Typography variant="regular_14" className="text-light-900">
             {locale.profile.addNewPost.addDescription}
           </Typography>

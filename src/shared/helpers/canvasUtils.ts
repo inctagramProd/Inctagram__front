@@ -2,15 +2,14 @@ import {CroppedArea} from "@/src/entities/post/model/types/postSliceTypes";
 
 const filtersStyle = {
   'image_filter--clarendon': 'saturate(2)',
-  'image_filter--gingham': 'contrast(160%)',
+  'image_filter--gingham': 'contrast(150%)',
   'image_filter--lark': 'grayscale(100%)',
   'image_filter--moon': 'contrast(110%) brightness(110%) saturate(130%)',
   'image_filter--normal': 'none',
   'image_filter--oldSchool': 'opacity(70%)',
-  'image_filter--shabby': 'sepia(80%)',
-  'image_filter--silentHill': 'hue-rotate(150deg)',
-  'image_filter--xRay': 'invert(80%)',
-  'image_filter--1977': 'contrast(1.1) brightness(1.1) saturate(1.1)'
+  'image_filter--shabby': 'sepia(100%)',
+  'image_filter--silentHill': 'hue-rotate(180deg)',
+  'image_filter--xRay': 'invert(100%)',
 }
 
 export type FilterImage = keyof typeof filtersStyle

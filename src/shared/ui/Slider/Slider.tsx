@@ -35,13 +35,15 @@ const SliderArrows = ({ direction, onClick }: SamplePrevArrow) => {
         right: direction === 'right' ? '10px' : undefined,
         zIndex: '10',
       }}
+      // TODO styles refactor
+      className='w-[36px] h-[36px] rounded bg-dark-500 opacity-50 text-center align-middle flex justify-center
+      items-center cursor-pointer absolute top[50%] z-10'
       onClick={onClick}
     >
       <SliderArrowIcon direction={direction} />
     </div>
   )
 }
-//TODO: 'refactor SliderArrows'
 const settings = {
   swipe: false,
   infinite: true,
@@ -54,18 +56,21 @@ const settings = {
   slidesToScroll: 1,
   nextArrow: <SliderArrows direction="left" />,
   prevArrow: <SliderArrows direction="right" />,
-  dotsClass: 'slick-dots slick-thumb',
+  dotsClass: `${'absolute w-full bottom-0 flex item-center justify-center gap-2 h-4'}`,
   appendDots: (dots: any) => (
-    <div style={{ position: 'absolute', bottom: '0' }}>
-      <ul style={{ margin: '0px' }}> {dots} </ul>
-    </div>
+      <ul>{dots}</ul>
   ),
-  customPaging: (i: any) => <div className="w-2 h-2 rounded-full bg-light-100"></div>,
+  customPaging: (i: any) => <span className="block w-2 h-2 rounded-full bg-light-100 cursor-pointer [slick-active]:bg-primary-500"></span>,
 }
 
 export const SlickSlider = ({ children, isShowNavigation, afterChangeCallback }: Props) => {
   return (
-    <Slider afterChange={afterChangeCallback} arrows={isShowNavigation} dots={isShowNavigation} {...settings}>
+    <Slider
+      afterChange={afterChangeCallback}
+      arrows={isShowNavigation}
+      dots={isShowNavigation}
+      {...settings}
+    >
       {children}
     </Slider>
   )
