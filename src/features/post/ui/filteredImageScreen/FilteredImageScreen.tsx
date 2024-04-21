@@ -36,13 +36,12 @@ export const FilteredImageScreen = ({ images }: Props) => {
   )
 
   const filtersArray = useMemo(() => {
-    return filtersScreen.map((filter) => {
+    return filtersScreen.map(filter => {
       const activeFilter = filter.value === images[activeIndex].filter
       return (
         <div
-          className={`${
-            activeFilter && 'text-primary-500 underline underline-offset-4'
-          } text-center cursor-pointer h-[138px] mb-1`}
+          className={`${activeFilter && 'text-primary-500'} 
+          text-center cursor-pointer h-[138px] mb-1 hover:text-primary-500`}
           key={filter.name}
           onClick={() => handleChangeFilter(filter.value)}
         >
@@ -54,7 +53,11 @@ export const FilteredImageScreen = ({ images }: Props) => {
             height={108}
             className={`${filter.value} object-cover h-[108px] mb-1.5`}
           />
-          <Typography variant="regular_16">{filter.name}</Typography>
+          <Typography
+            variant="regular_16"
+          >
+            {filter.name}
+          </Typography>
         </div>
       )
     })

@@ -58,11 +58,23 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
   return (
     <div
       ref={addRef}
-      onClick={() => {
-        setIsOpenAddImage(prevState => !prevState)
-      }}
       className="w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75 "
     >
+      <div
+        onClick={() => {
+          setIsOpenAddImage(prevState => !prevState)
+        }}
+      >
+        <Icon
+          iconName="imgOutlineIcon"
+          width={24}
+          height={24}
+          iconStyle={`${
+            isOpenAddImage && 'fill-primary-500'
+          } fill-light-100 hover:fill-primary-500 cursor-pointer`}
+        />
+      </div>
+
       {isOpenAddImage && (
         <div className="absolute right-3 bottom-14">
           <input
@@ -74,7 +86,7 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
           />
           <div className="overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700 py-3 pl-3 pr-14 flex gap-3.5 max-w-[430px] w-full rounded-sm bg-dark-500 bg-opacity-75">
             {images.map((img, index) => (
-              <div key={index} className="relative">
+              <div key={img.imageURL + index} className="relative">
                 <span
                   className="absolute top-[2px] right-[2px] p-[3px] rounded-sm bg-dark-300 bg-opacity-75 cursor-pointer"
                   onClick={() => {
@@ -108,13 +120,6 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
           </div>
         </div>
       )}
-
-      <Icon
-        iconName="imgOutlineIcon"
-        width={24}
-        height={24}
-        iconStyle="fill-light-100 hover:fill-primary-500 cursor-pointer"
-      />
     </div>
   )
 }

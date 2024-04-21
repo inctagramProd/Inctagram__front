@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 import { useToast } from '@/src/app/hooks/useToast'
 import { LocaleType } from '@/public/locales/en'
 
-const MAX_FILE_SIZE = 1024 // 1MB
+const MAX_FILE_SIZE = 512 // 0.5MB
 
 export const uploadFile = async (
   event: ChangeEvent<HTMLInputElement>,
@@ -11,7 +11,7 @@ export const uploadFile = async (
   try {
     if (event.target.files?.length) {
       const file = event.target.files[0]
-      const fileSizeKilobytes = file.size / 1024
+      const fileSizeKilobytes = file.size / 512
 
       if (!(file.type === 'image/png' || file.type === 'image/jpeg')) {
         useToast({ text: locale.profile.addNewPost.imageError.format, error: true })

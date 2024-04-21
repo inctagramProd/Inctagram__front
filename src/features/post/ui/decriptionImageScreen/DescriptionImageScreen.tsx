@@ -6,7 +6,7 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useCreatePostMutation } from '@/src/features/post/service/createPostApi'
 import { getModifiedImage } from '@/src/shared/helpers/canvasUtils'
 import { SlickSlider } from '@/src/shared/ui/Slider/Slider'
-import {useToast} from "@/src/app/hooks/useToast";
+import { useToast } from '@/src/app/hooks/useToast'
 
 const MAX_NUMBER_OF_CHARACTERS = 500
 
@@ -17,8 +17,12 @@ type Props = {
 
 export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props) => {
   const [createPost, { isLoading, isSuccess, isError }] = useCreatePostMutation()
-  const [textPostDescription, setTextPostDescription] = useState<string>('')
+  const [postDescription, setPostDescription] = useState<string>('')
   const { locale } = useTranslate()
+
+  const textErrorMessage =
+    postDescription.length > MAX_NUMBER_OF_CHARACTERS ? locale.profile.descriptionError.error : ''
+  const isMaxNumberOfCharacters = postDescription.length > MAX_NUMBER_OF_CHARACTERS
 
   const handleLoadImages = (imagesArray: ImageURL[]) => {
     const formData = new FormData()
@@ -32,21 +36,23 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
       res.forEach(el => {
         formData.append('files', el as Blob)
       })
+      formData.append('description', postDescription)
       return formData
     })
   }
 
   const createPostHandler = () => {
     handleLoadImages(imagesWithFilters).then(res => {
-      console.log({ files: res, description: textPostDescription })
-      createPost({ files: res, description: textPostDescription })
-      if(isSuccess){
-        closeModal()
-      }
-      if(isError){
-        useToast({text: 'some error occurred', error: true})
-      }
+      createPost(res)
     })
+  }
+
+  if (isSuccess) {
+    closeModal()
+    useToast({ text: locale.profile.addNewPost.successCreate, error: true })
+  }
+  if (isError) {
+    useToast({ text: 'An error has occurred', error: true })
   }
 
   return (
@@ -71,31 +77,23 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
             {locale.profile.addNewPost.addDescription}
           </Typography>
           <TextArea
-            errorMessage={`${
-              textPostDescription.length > MAX_NUMBER_OF_CHARACTERS
-                ? locale.profile.descriptionError.error
-                : ''
-            }`}
+            errorMessage={textErrorMessage}
             className="h-[120px] resize-none overflow-y-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700"
-            value={textPostDescription}
+            value={postDescription}
             onChange={e => {
-              setTextPostDescription(e.target.value)
+              setPostDescription(e.target.value)
             }}
           />
           <Typography
             variant="small"
-            className={`${
-              textPostDescription.length > MAX_NUMBER_OF_CHARACTERS
-                ? 'text-danger-500'
-                : 'text-light-900'
-            } text-end`}
+            className={`${isMaxNumberOfCharacters ? 'text-danger-500' : 'text-light-900'} text-end`}
           >
-            {textPostDescription.length}/{MAX_NUMBER_OF_CHARACTERS}
+            {postDescription.length}/{MAX_NUMBER_OF_CHARACTERS}
           </Typography>
         </div>
         <div className="flex-1 flex items-end justify-end">
           <Button
-            disable={textPostDescription.length > MAX_NUMBER_OF_CHARACTERS}
+            disable={isMaxNumberOfCharacters}
             variant="regular_14"
             style="primary"
             label={locale.profile.addNewPost.publication}

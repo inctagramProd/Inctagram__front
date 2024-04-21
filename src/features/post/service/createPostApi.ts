@@ -1,27 +1,21 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import {CreatePostResponse, CreatePostArgs} from "@/src/features/post/types/creatPostTypes";
+import { CreatePostResponse } from '@/src/features/post/types/creatPostTypes'
 
 export const createPost = baseApi.injectEndpoints({
   endpoints: build => ({
-    getPosts: build.query<any[], number>({
-      query: arg => ({
-        method: 'GET',
-        url: `user-posts/${arg}`,
-      }),
-      providesTags: ['Posts'],
-    }),
-    createPost: build.mutation<CreatePostResponse, CreatePostArgs>({
+    createPost: build.mutation<CreatePostResponse, FormData>({
       query: body => ({
         method: 'POST',
         url: 'user-posts',
         body,
       }),
+      // TODO: refactor invalidatesTags
       invalidatesTags: ['Posts'],
     }),
   }),
   overrideExisting: false,
 })
 
-export const { useCreatePostMutation, useGetPostsQuery } = createPost
+export const { useCreatePostMutation } = createPost
 
 

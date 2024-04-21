@@ -45,7 +45,7 @@ export const AspectRatioImage = ({ imageURL, aspectRatio }: Props) => {
           iconName="cropIcon"
           height={26}
           width={26}
-          iconStyle="fill-light-100 hover:fill-primary-500"
+          iconStyle={`${isOpenAspect && 'fill-primary-500'} fill-light-100 hover:fill-primary-500`}
         />
       </div>
       {isOpenAspect && (

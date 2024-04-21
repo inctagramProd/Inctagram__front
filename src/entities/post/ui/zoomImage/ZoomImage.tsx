@@ -1,7 +1,7 @@
 import React, { ChangeEvent, MutableRefObject, useEffect, useRef, useState } from 'react'
 import { Icon } from '@/src/shared/ui'
-import {useAppDispatch} from "@/src/app/store/store";
-import {updateImage} from "@/src/entities/post/model/slice/postSlice";
+import { useAppDispatch } from '@/src/app/store/store'
+import { updateImage } from '@/src/entities/post/model/slice/postSlice'
 
 type Props = {
   imageURL: string
@@ -13,7 +13,7 @@ export const ZoomImage = ({ zoom, imageURL }: Props) => {
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
 
   const dispatch = useAppDispatch()
-  
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (addRef.current && !e.composedPath().includes(addRef.current)) {
@@ -26,7 +26,7 @@ export const ZoomImage = ({ zoom, imageURL }: Props) => {
 
   const onZoomChange = (event: ChangeEvent<HTMLInputElement>) => {
     const scale = parseFloat(event.target.value)
-    dispatch(updateImage({imageURL, zoom: scale}))
+    dispatch(updateImage({ imageURL, zoom: scale }))
   }
 
   return (
@@ -35,17 +35,22 @@ export const ZoomImage = ({ zoom, imageURL }: Props) => {
       className="relative w-9 h-9 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75"
     >
       <div
-        className='cursor-pointer'
+        className="cursor-pointer"
         onClick={() => {
           setIsOpenZoom(prev => !prev)
         }}
       >
-        <Icon iconName='zoomIcon' width={26} height={26} iconStyle='fill-light-100 hover:fill-primary-500'/>
+        <Icon
+          iconName="zoomIcon"
+          width={26}
+          height={26}
+          iconStyle={`${isOpenZoom && 'fill-primary-500'} fill-light-100 hover:fill-primary-500`}
+        />
       </div>
       {isOpenZoom && (
         <div className="absolute w-[124px] h-9 -top-10 left-0 flex items-center justify-center rounded-sm bg-dark-500 bg-opacity-75">
           <input
-            className="w-[100px] h-3 cursor-pointer"
+            className="w-[100px] h-[2px] cursor-pointer"
             type="range"
             value={zoom}
             min={1}

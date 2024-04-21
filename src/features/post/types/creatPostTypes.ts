@@ -11,8 +11,3 @@ type PostImage = {
     imageId: number;
     imageUrl: string;
 }
-
-export type CreatePostArgs = {
-    files: FormData
-    description: string
-}
