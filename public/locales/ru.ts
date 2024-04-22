@@ -210,6 +210,12 @@ export const ru = {
                 aboutMeError: 'Максимальное количество знаков 200',
             },
         },
+        postViews:{publish:'Опубликовать',
+        noComments:'Комментарии отсутствуют',
+        else:'Показать еще',
+        hide:'Скрыть',
+    viewAllComments:'Показать все комментарии',
+addComment:'Добавить комментарий',like:' "Нравится"'},
         addNewPost: {
             showResult: 'Показать результат',
             cropping: 'Редактирование',

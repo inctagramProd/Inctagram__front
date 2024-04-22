@@ -79,7 +79,9 @@ export const DatePickerInput = ({ errorMsg, hasError, isRange, label, onChange }
         icon={
           <Icons.Calendar
             height={24}
-            iconStyle={`${hasError ? 'fill-red-500' : 'fill-light-500'}  absolute right-2.5 top-1.5 z-10`}
+            iconStyle={`${
+              hasError ? 'fill-red-500' : 'fill-light-500'
+            }  absolute right-2.5 top-1.5 z-10`}
             theme={'light'}
             width={24}
           />
@@ -96,3 +98,4 @@ export const DatePickerInput = ({ errorMsg, hasError, isRange, label, onChange }
 }
 
 export default DatePickerInput
+/*  */
