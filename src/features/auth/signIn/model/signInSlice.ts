@@ -16,6 +16,7 @@ export const signInSlice = createSlice({
     setName: (state, action: PayloadAction<{ username: string }>) => {
       state.accessToken = action.payload.username
     },
+    // TODO: обратить внимание на setName
     clearToken: state => {
       state.accessToken = null
     },

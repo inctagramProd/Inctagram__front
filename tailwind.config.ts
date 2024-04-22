@@ -10,10 +10,6 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-            },
             fontFamily: {
                 sans: ['var(--font-inter)'],
             },
@@ -68,6 +64,7 @@ const config: Config = {
     plugins: [
         require('tailwindcss'),
         require('autoprefixer'),
+        require('tailwind-scrollbar'),
         // Add other Tailwind CSS plugins if needed
     ],
 }
