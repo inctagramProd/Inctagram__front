@@ -18,6 +18,7 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'link_regular'
     | 'link_small'
     | 'error'
+    | 'not_active'
   className?: string
 } & ComponentPropsWithoutRef<T>
 
@@ -56,6 +57,8 @@ export const Typography = <T extends ElementType = 'p'>(
         return 'text-primary-500 text-xs font-semibold leading-loose underline cursor-pointer'
       case 'error':
         return 'text-danger-500'
+      case 'not_active':
+        return 'text-light-900 text-base font-normal leading-normal'
       default:
         return ''
     }
