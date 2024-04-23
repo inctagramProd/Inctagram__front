@@ -1,7 +1,7 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 import { CreatePostResponse } from '@/src/features/post/types/creatPostTypes'
 
-export const createPost = baseApi.injectEndpoints({
+export const postApi = baseApi.injectEndpoints({
   endpoints: build => ({
     createPost: build.mutation<CreatePostResponse, FormData>({
       query: body => ({
@@ -12,7 +12,7 @@ export const createPost = baseApi.injectEndpoints({
       // TODO: refactor invalidatesTags
       invalidatesTags: ['Posts'],
     }),
-    deletePost: build.mutation<void, { postId: number }>({
+    deletePost: build.mutation<void, number>({
       query: postId => ({
         method: 'POST',
         url: `user-posts/${postId}`,
@@ -23,4 +23,4 @@ export const createPost = baseApi.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useCreatePostMutation } = createPost
+export const { useCreatePostMutation, useDeletePostMutation } = postApi
