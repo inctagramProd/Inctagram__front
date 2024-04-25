@@ -1,15 +1,14 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { setToken, setName } from '@/src/features/auth/signIn/model/signInSlice'
+import { setToken, setUserAuthData } from '@/src/features/auth/signIn/model/signInSlice'
 import {
-  AccessToken,
-  ThirdPartyAuth,
+  SignInSchema,
   ApiAuth,
   SingInParams,
 } from '@/src/features/auth/signIn/service/types/signInTypes'
 
 export const authByEmail = baseApi.injectEndpoints({
   endpoints: builder => ({
-    signIn: builder.mutation<AccessToken, SingInParams>({
+    signIn: builder.mutation<SignInSchema, SingInParams>({
       query: data => ({
         method: 'POST',
         url: 'auth/login',
@@ -19,6 +18,7 @@ export const authByEmail = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
           if (data.accessToken) {
+            dispatch(setUserAuthData({userId: data.userId, username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
@@ -26,7 +26,7 @@ export const authByEmail = baseApi.injectEndpoints({
         }
       },
     }),
-    gitAuth: builder.mutation<ThirdPartyAuth, ApiAuth>({
+    gitAuth: builder.mutation<SignInSchema, ApiAuth>({
       query: (data: object) => ({
         url: 'auth/github-auth',
         method: 'POST',
@@ -38,7 +38,7 @@ export const authByEmail = baseApi.injectEndpoints({
           if (data.accessToken) {
             localStorage.setItem('Git Data', JSON.stringify(data))
             localStorage.removeItem('Google Data')
-            dispatch(setName({ username: data.username }))
+            dispatch(setUserAuthData({userId: data.userId, username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
@@ -47,7 +47,7 @@ export const authByEmail = baseApi.injectEndpoints({
         }
       },
     }),
-    googleAuth: builder.mutation<ThirdPartyAuth, ApiAuth>({
+    googleAuth: builder.mutation<SignInSchema, ApiAuth>({
       query: (data: object) => ({
         url: 'auth/google-auth',
         method: 'POST',
@@ -59,7 +59,7 @@ export const authByEmail = baseApi.injectEndpoints({
           if (data.accessToken) {
             localStorage.setItem('Google Data', JSON.stringify(data))
             localStorage.removeItem('Git Data')
-            dispatch(setName({ username: data.username }))
+            dispatch(setUserAuthData({userId: data.userId, username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
