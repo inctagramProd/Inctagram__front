@@ -1,9 +1,9 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { CreatePostResponse } from '@/src/features/post/types/creatPostTypes'
+import { CreatePostSchema } from '@/src/features/post/types/creatPostTypes'
 
 export const createPost = baseApi.injectEndpoints({
   endpoints: build => ({
-    createPost: build.mutation<CreatePostResponse, FormData>({
+    createPost: build.mutation<CreatePostSchema, FormData>({
       query: body => ({
         method: 'POST',
         url: 'user-posts',

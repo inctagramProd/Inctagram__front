@@ -1,6 +1,6 @@
 export type CurrentWindow = 'description' | 'crop' | 'filter' | 'upload'
 
-export type CreatePostResponse = {
+export type CreatePostSchema = {
     postId: number;
     postDescription: string;
     createdAt: string;
