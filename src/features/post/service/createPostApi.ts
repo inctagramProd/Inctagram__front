@@ -1,5 +1,5 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { CreatePostSchema } from '@/src/features/post/types/creatPostTypes'
+import { CreatePostSchema, GetPostResponse, EditPostArgs } from '@/src/features/post/types/creatPostTypes'
 
 export const createPost = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -12,10 +12,25 @@ export const createPost = baseApi.injectEndpoints({
       // TODO: refactor invalidatesTags
       invalidatesTags: ['Posts'],
     }),
+    getPost: build.query<GetPostResponse, number>({
+      query: id => ({
+        method: 'GET',
+        url: `user-posts/${id}`,
+      }),
+      providesTags: ['Posts'],
+    }),
+    editPost: build.mutation<CreatePostSchema, EditPostArgs>({
+      query: body => ({
+        method: 'PATCH',
+        url: 'user-posts',
+        body,
+      }),
+      invalidatesTags: ['Posts'],
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useCreatePostMutation } = createPost
+export const { useCreatePostMutation, useGetPostQuery, useEditPostMutation } = createPost
 
 
