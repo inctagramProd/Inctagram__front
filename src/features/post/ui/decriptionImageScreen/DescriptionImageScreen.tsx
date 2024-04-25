@@ -49,7 +49,7 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
 
   if (isSuccess) {
     closeModal()
-    useToast({ text: locale.profile.addNewPost.successCreate, error: true })
+    useToast({ text: locale.profile.addNewPost.successCreate})
   }
   if (isError) {
     useToast({ text: 'An error has occurred', error: true })
