@@ -1,7 +1,7 @@
 import { Button, Card, Icon, Typography } from '@/src/shared/ui'
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { UseDeletePost } from './useDeletePost'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type Props = {
   deletePost: () => void
@@ -9,8 +9,10 @@ type Props = {
   open: boolean
 }
 
-const DeletePost = ({ deletePost, onClose, open }: Props) => {
+export const DeletePost = ({ deletePost, onClose, open }: Props) => {
   const portalDelete = document.getElementById('portal')
+
+  const { locale } = useTranslate()
 
   if (!portalDelete) return null
 
@@ -40,22 +42,32 @@ const DeletePost = ({ deletePost, onClose, open }: Props) => {
       >
         <div className="flex justify-between items-center px-[24px] pb-[11px] border-b-[1px] border-[rgb(76,76,76)] mb-[30px]">
           <Typography as="h1" variant="h1">
-            Delete Post
+            {locale.profile.deletePost.delete}
           </Typography>
           <button className="w-[24px] h-[24px] flex items-center justify-center">
             <Icon iconName="Close" />
           </button>
         </div>
         <Typography as="p" variant="regular_16" className="mb-[30px] px-[24px]">
-          Are you sure you want to delete this post?
+          {locale.profile.deletePost.areYouSure}
         </Typography>
         <div className="flex gap-x-[24px] px-[24px] justify-end">
-          <Button onClick={deletePost} className="w-[96px]" label="Yes" style="outline" />
-          <Button onClick={onClose} className="w-[96px]" label="No" style="primary" />
+          <Button
+            onClick={deletePost}
+            className="w-[96px]"
+            label={locale.profile.deletePost.yes}
+            style="outline"
+          />
+          <Button
+            onClick={onClose}
+            className="w-[96px]"
+            label={locale.profile.deletePost.no}
+            style="primary"
+          />
         </div>
       </Card>
     </div>,
     portalDelete
   )
 }
-export default DeletePost
+

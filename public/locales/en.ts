@@ -258,6 +258,8 @@ addComment:'Add a new comment',like:' "Like"'},
         deletePost: {
             delete: 'Delete Post',
             areYouSure: 'Are you sure you want to delete this post?',
+            yes: 'Yes',
+            no: 'No',
         },
     },
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDeletePostMutation } from '../../service/PostApi'
+import { useDeletePostMutation } from '../../features/post/service/PostApi'
 
 /**
  * Хук для удаления поста.
@@ -10,7 +10,7 @@ import { useDeletePostMutation } from '../../service/PostApi'
  * @property {function} onDeletePost - Функция для удаления поста.
  * @property {function} onClose - Функция для закрытия модалки удаления поста.
  */
-export const UseDeletePost = () => {
+export const useDeletePost = () => {
   const [triger, { data }] = useDeletePostMutation()
 
   const [open, setOpen] = useState(false)
