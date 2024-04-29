@@ -2,7 +2,7 @@ import {ru} from './ru'
 
 export const en: LocaleType = {
     locale: {
-        english: 'Английский',
+        english: 'English',
         russian: 'Русский',
     },
     auth: {

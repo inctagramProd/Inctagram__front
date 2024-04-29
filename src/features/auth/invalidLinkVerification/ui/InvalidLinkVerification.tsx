@@ -1,4 +1,4 @@
-import { useResendLinkMutation } from '@/src/features/auth/invalidLinkVerification/service/invalidLinkVerification'
+import { useResendLinkMutation } from '@/src/features/auth/invalidLinkVerification/service/invalidLinkVerificationApi'
 import { useState } from 'react'
 import { LinkHasExpired } from '../../LinkHasExpired'
 

@@ -1,10 +1,10 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 
-export const invalidLinkVerification = baseApi.injectEndpoints({
+export const invalidLinkVerificationApi = baseApi.injectEndpoints({
   endpoints: build => ({
     resendLink: build.mutation<string, { userEmail: string }>({
       query: data => ({
-        method: 'POST',
+        method: 'PATCH',
         url: 'auth/resend-register-email',
         body: data,
       }),
@@ -12,4 +12,4 @@ export const invalidLinkVerification = baseApi.injectEndpoints({
   }),
   overrideExisting: false,
 })
-export const { useResendLinkMutation } = invalidLinkVerification
+export const { useResendLinkMutation } = invalidLinkVerificationApi

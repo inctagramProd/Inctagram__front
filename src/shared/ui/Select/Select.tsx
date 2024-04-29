@@ -13,6 +13,7 @@ type Props = {
   variant?: 'Default' | 'Pagination'
   options: SelectOptionType[]
   onChange?: (selectedValue: SelectOptionType) => any
+  className?: string
 }
 
 export const Select = ({
@@ -22,6 +23,7 @@ export const Select = ({
   variant = 'Default',
   disabled = false,
   onChange,
+  className,
   ...props
 }: Props) => {
   const defaultOption: SelectOptionType | undefined = defaultValue
@@ -77,7 +79,9 @@ export const Select = ({
 
   return (
     <div
-      className={`max-w-sm relative disabled:opacity-10 ${disabled ? 'cursor-not-allowed' : ''}`}
+      className={`max-w-sm relative disabled:opacity-10 ${className} ${
+        disabled ? 'cursor-not-allowed' : ''
+      }`}
       {...props}
     >
       <span className={`text-light-900 block text-sm`}>
@@ -112,7 +116,7 @@ export const Select = ({
       </div>
 
       <ul
-        className={`transition-all origin-top ease-in-out max-h-72 overflow-y-auto absolute w-full border bg-dark-500 rounded-b-sm -mt-px opacity-0 z-[-1] transform-gpu scale-y-0 ${
+        className={`transition-all z-50 origin-top ease-in-out max-h-72 overflow-y-auto absolute w-full border bg-dark-500 rounded-b-sm -mt-px opacity-0 z-[-1] transform-gpu scale-y-0 ${
           isVisibleDropdown ? 'opacity-100 z-10 transform-gpu scale-y-100' : ''
         } ${variant === 'Pagination' ? 'bg-dark-500 border-dark-300' : ''}`}
       >

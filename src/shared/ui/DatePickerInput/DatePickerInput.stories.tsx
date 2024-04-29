@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { UIDatePicker } from './DatePicker'
+import { DatePickerInput } from './DatePickerInput'
 
 const meta = {
-  title: 'Components/DatePicker',
-  component: UIDatePicker,
-  tags: ['autodocs'],
+  component: DatePickerInput,
   parameters: {
     onChange: () => console.log('done'),
   },
-} satisfies Meta<typeof UIDatePicker>
+  tags: ['autodocs'],
+  title: 'Components/DatePickerInput',
+} satisfies Meta<typeof DatePickerInput>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -24,14 +24,14 @@ export const Range: Story = {
 }
 export const DefaultError: Story = {
   args: {
-    hasError: true,
     errorMsg: 'wrong date',
+    hasError: true,
   },
 }
 export const RangeError: Story = {
   args: {
-    isRange: true,
-    hasError: true,
     errorMsg: 'User shoul bee at least 13 y.o.',
+    hasError: true,
+    isRange: true,
   },
 }
