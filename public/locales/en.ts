@@ -21,6 +21,7 @@ export const en: LocaleType = {
         dontHaveAccount: 'Don’t have an account?',
         haveAccount: 'Do you have an account?',
         instructions: 'Enter your email address and we will send you further instructions',
+        getLoggedToProceed: 'Please get logged in to proceed',
         email: 'Email',
         userName: 'Username',
         emailSent: 'Email sent',
