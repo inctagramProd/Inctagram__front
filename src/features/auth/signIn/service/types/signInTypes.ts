@@ -7,15 +7,7 @@ export type ApiAuth = {
 }
 
 export type SignInSchema = {
+  userId: number | null
+  username: string | null
   accessToken: string | null
-}
-
-export type AccessToken = {
-  accessToken: string
-  userId: number
-  username: string
-}
-export type ThirdPartyAuth = {
-  username: string
-  accessToken: string
 }

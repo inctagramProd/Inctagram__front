@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { SignInSchema } from '@/src/features/auth/signIn/service/types/signInTypes'
 
 const initialState: SignInSchema = {
+  userId: null,
+  username: null,
   accessToken: null,
 }
 
@@ -13,8 +15,12 @@ export const signInSlice = createSlice({
     setToken: (state, action: PayloadAction<{ accessToken: string }>) => {
       state.accessToken = action.payload.accessToken
     },
-    setName: (state, action: PayloadAction<{ username: string }>) => {
-      state.accessToken = action.payload.username
+    setUserAuthData: (
+      state,
+      action: PayloadAction<{ userId: number | null; username: string | null }>
+    ) => {
+      state.userId = action.payload.userId
+      state.username = action.payload.username
     },
     // TODO: обратить внимание на setName
     clearToken: state => {
@@ -23,5 +29,5 @@ export const signInSlice = createSlice({
   },
 })
 
-export const { setToken, clearToken, setName } = signInSlice.actions
+export const { setToken, clearToken, setUserAuthData } = signInSlice.actions
 export const signInReducer = signInSlice.reducer

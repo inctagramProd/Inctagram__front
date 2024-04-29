@@ -13,7 +13,7 @@ export const signInSchema = (locale: LocaleType) => {
       .min(6, locale.auth.authErrors.password.min)
       .max(20, locale.auth.authErrors.password.max)
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~])[^\u0400-\u04FF]+$/,
         locale.auth.authErrors.password.regex
       )
       .required(locale.auth.authErrors.password.nonEmpty),

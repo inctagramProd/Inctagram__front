@@ -37,7 +37,7 @@ export const Sidebar = (props: Props) => {
           <LinkItem
             iconName={'Person'}
             label={locale.profile.myProfile}
-            link={'/profile'}
+            link={'/my-profile'}
             style={'default'}
           />
           <LinkItem
