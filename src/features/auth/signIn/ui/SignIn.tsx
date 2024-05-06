@@ -1,11 +1,13 @@
-import { FormikHelpers } from 'formik'
-import { useSignInMutation, useGitAuthMutation, useGoogleAuthMutation } from '../service/signInApi'
 import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { SignInForm } from './signInForm/SignInForm'
-import { SingInParams } from '../service/types/signInTypes'
+
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LoaderSpin } from '@/src/shared/ui'
+import { FormikHelpers } from 'formik'
+import { useRouter } from 'next/router'
+
+import { useGitAuthMutation, useGoogleAuthMutation, useSignInMutation } from '../service/signInApi'
+import { SingInParams } from '../service/types/signInTypes'
+import { SignInForm } from './signInForm/SignInForm'
 
 export const SignIn = () => {
   const { locale } = useTranslate()
@@ -13,18 +15,19 @@ export const SignIn = () => {
   const [loginUser, { isSuccess }] = useSignInMutation()
   const [
     gitUser,
-    { data: gitData, isSuccess: gitIsSuccess, isLoading: gitLoading, isError: gitError },
+    { data: gitData, isError: gitError, isLoading: gitLoading, isSuccess: gitIsSuccess },
   ] = useGitAuthMutation()
   const [
     googleUser,
     {
       data: googleData,
-      isSuccess: googleIsSuccess,
-      isLoading: googleLoading,
       isError: googleError,
+      isLoading: googleLoading,
+      isSuccess: googleIsSuccess,
     },
   ] = useGoogleAuthMutation()
   const queryCode = router.query as { code: string }
+
   useEffect(() => {
     console.log(queryCode)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
@@ -44,25 +47,28 @@ export const SignIn = () => {
       })
       .catch(e => {
         const error = e as { data: { message: [string]; statusCode: number } }
-        if (error.data.statusCode === 400 || 401) {
-          actions.setFieldError('password', locale.auth.authErrors.incorrectEmailOrPassword)
-        }
+
+        // if (error.data.statusCode === 400 || 401) {
+        //   actions.setFieldError('password', locale.auth.authErrors.incorrectEmailOrPassword)
+        // }
       })
       .finally(() => {
         actions.setSubmitting(false)
       })
   }
+
   if (gitLoading || googleLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className={'min-h-screen flex items-center justify-center'}>
         <LoaderSpin />
       </div>
     )
   } else if (gitError || googleError) {
     return <div>{localStorage.apiError}</div>
   }
+
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-60px)]">
+    <div className={'flex items-center justify-center h-[calc(100vh-60px)]'}>
       <SignInForm onSubmit={onSubmitHandler} />
     </div>
   )

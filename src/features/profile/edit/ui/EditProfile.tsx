@@ -1,6 +1,10 @@
 import { RefObject, useRef, useState } from 'react'
 
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from '@/src/features/profile/edit/service/editProfileApi'
 import { profileEditSchema } from '@/src/features/profile/edit/service/schema/profileEditSchema'
 import { ProfileEditParams } from '@/src/features/profile/edit/service/types/profileEditTypes'
 import {
@@ -23,6 +27,37 @@ type Props = {
 export const EditProfile = ({ onSubmit }: Props) => {
   const [selectedImage, setSelectedImage] = useState<null | string>(null)
   const uploadRef: RefObject<HTMLInputElement> = useRef(null)
+
+  const { data, isFetching } = useGetProfileQuery()
+  const [updateProfile, { isError, isLoading, isSuccess }] = useUpdateProfileMutation()
+
+  const handleSubmit = async () => {
+    try {
+      const payload = {
+        aboutMe: 'some info',
+        city: 'London',
+        country: 'German',
+        dateOfBirth: '11.04.2000',
+        fileId: 1,
+        firstName: 'test firstname',
+        lastName: 'test lastname',
+        username: 'test username',
+      }
+
+      await updateProfile(payload).unwrap()
+    } catch (error) {
+      const err = error as { data: { message: string } }
+    }
+  }
+
+  //
+  // console.log(updateProfile)
+  //
+  // console.log('data', data, isFetching)
+
+  // if (!data) {
+  //   return null
+  // }
 
   const handleImageUpload = (e: { target: any }): void => {
     const file = e.target.files[0]
@@ -63,6 +98,7 @@ export const EditProfile = ({ onSubmit }: Props) => {
 
   return (
     <div className={'pt-6 pl-6'}>
+      <button onClick={handleSubmit}>hello world</button>
       <Tabs
         options={[
           { key: 'general_information', label: 'General information' },
@@ -186,7 +222,7 @@ export const EditProfile = ({ onSubmit }: Props) => {
                 <div className={'flex items-end flex-col'}>
                   <div className={'w-full h-px bg-dark-300 mt-4 mb-4'}></div>
                   <div>
-                    <Button label={'Save Changes'} style={'primary'} />
+                    <Button label={'Save Changes'} onClick={handleSubmit} style={'primary'} />
                   </div>
                 </div>
               </Form>
