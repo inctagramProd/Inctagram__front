@@ -56,7 +56,7 @@ export const Button = ({
         bg-primary-500 text-light-100 rounded-[2px] border-[1px] border-transparent cursor-pointer 
         active:bg-primary-700 active:text-light-500  
         hover:bg-primary-100 hover:text-light-100
-        focus:bg-primary-500 focus:border-2 focus:border-primary-700
+        focus:bg-primary-500 focus:border-1 focus:border-primary-700
         disabled:bg-primary-900 disabled:text-light-900`
       break
     case 'secondary':
@@ -71,7 +71,7 @@ export const Button = ({
       nameOfClass = `
       bg-none text-primary-500  cursor-pointer border-[1px] border-transparent 
       active:text-primary-700 hover:text-primary-100
-      focus:border-[2px] focus:border-primary-700 focus:text-primary-500 focus:rounded-[2px]
+      focus:border-[1px] focus:border-primary-700 focus:text-primary-500 focus:rounded-[2px]
       disabled:text-primary-900`
       break
     case 'outline':
@@ -79,7 +79,7 @@ export const Button = ({
         bg-none text-primary-500 rounded-[2px] border-[1px] border-primary-500 cursor-pointer 
         active:text-primary-700 active:border-primary-700
         hover:text-primary-100 hover:border-primary-100
-        focus:border-[2px] focus:border-primary-700 focus:text-primary-700
+        focus:border-[1px] focus:border-primary-700 focus:text-primary-700
         disabled:bg-primary-900 disabled:text-primary-900`
       break
     case 'default':
@@ -87,7 +87,7 @@ export const Button = ({
             gap-y-[10px]
             bg-none text-light-100  cursor-pointer border-[1px] border-transparent 
             active:text-primary-700 hover:text-primary-100
-            focus:text-primary-700 focus:border-[2px] focus:rounded-[2px] focus:border-primary-700 
+            focus:text-primary-700 focus:border-[1px] focus:rounded-[2px] focus:border-primary-700 
             disabled:text-dark-100
         `
       break
