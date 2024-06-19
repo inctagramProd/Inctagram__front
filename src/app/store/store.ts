@@ -20,3 +20,6 @@ setupListeners(store.dispatch)
 store.subscribe(() => {
   saveState(store.getState())
 })
+
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
