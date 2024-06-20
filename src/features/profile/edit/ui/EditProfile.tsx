@@ -1,8 +1,8 @@
-import { RefObject, useRef, useState } from 'react'
+import { ChangeEvent, RefObject, useRef, useState } from 'react'
 
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import {
-  useGetProfileQuery,
+  UpdateProfileData,
   useUpdateProfileMutation,
 } from '@/src/features/profile/edit/service/editProfileApi'
 import { profileEditSchema } from '@/src/features/profile/edit/service/schema/profileEditSchema'
@@ -19,58 +19,72 @@ import {
 } from '@/src/shared/ui'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { useToast } from '@/src/app/hooks/useToast'
 
 type Props = {
   onSubmit?: (values: ProfileEditParams, actions: FormikHelpers<ProfileEditParams>) => void
 }
 
 export const EditProfile = ({ onSubmit }: Props) => {
+  const { locale } = useTranslate()
   const [selectedImage, setSelectedImage] = useState<null | string>(null)
+  const [username, setUsername] = useState<string>('')
   const uploadRef: RefObject<HTMLInputElement> = useRef(null)
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
 
-  const { data, isFetching } = useGetProfileQuery()
+  const [profileData, setProfileData] = useState<UpdateProfileData>({
+    profileImage: null,
+    username: '',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: null,
+    country: '',
+    city: '',
+    aboutMe: '',
+  })
+
   const [updateProfile, { isError, isLoading, isSuccess }] = useUpdateProfileMutation()
 
-  const handleSubmit = async () => {
-    try {
-      const payload = {
-        aboutMe: 'some info',
-        city: 'London',
-        country: 'German',
-        dateOfBirth: '11.04.2000',
-        fileId: 1,
-        firstName: 'test firstname',
-        lastName: 'test lastname',
-        username: 'test username',
-      }
+  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const date = new Date(event.target.value)
+    setProfileData(prevData => ({ ...prevData, dateOfBirth: date }))
+  }
 
-      await updateProfile(payload).unwrap()
+  const handleSubmit = async () => {
+    const formData = new FormData()
+    if (profileData.profileImage) {
+      formData.append('profileImage', profileData.profileImage)
+    }
+    formData.append('username', profileData.username)
+    formData.append('firstName', profileData.firstName)
+    formData.append('lastName', profileData.lastName)
+    if (dateOfBirth) {
+      formData.append('dateOfBirth', dateOfBirth.toISOString()) // Преобразование даты в ISO формат
+    }
+    formData.append('country', profileData.country)
+    formData.append('city', profileData.city)
+    formData.append('aboutMe', profileData.aboutMe)
+
+    try {
+      await updateProfile(formData).unwrap()
+      useToast(locale.profile.profileSetting.changesSaved)
     } catch (error) {
+      useToast(JSON.stringify(error), true)
       const err = error as { data: { message: string } }
     }
   }
 
-  //
-  // console.log(updateProfile)
-  //
-  // console.log('data', data, isFetching)
-
-  // if (!data) {
-  //   return null
-  // }
-
-  const handleImageUpload = (e: { target: any }): void => {
-    const file = e.target.files[0]
-    const reader = new FileReader()
-
-    reader.onloadend = () => {
-      if (typeof reader.result === 'string') {
-        setSelectedImage(reader.result)
-      }
-    }
-
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0]
     if (file) {
+      setProfileData(prev => ({ ...prev, profileImage: file }))
+      const reader = new FileReader()
       reader.readAsDataURL(file)
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setSelectedImage(reader.result)
+        }
+      }
     }
   }
 
@@ -79,8 +93,6 @@ export const EditProfile = ({ onSubmit }: Props) => {
       uploadRef.current.click()
     }
   }
-
-  const { locale } = useTranslate()
 
   const onSubmitHandler = (
     values: ProfileEditParams,
@@ -222,7 +234,12 @@ export const EditProfile = ({ onSubmit }: Props) => {
                 <div className={'flex items-end flex-col'}>
                   <div className={'w-full h-px bg-dark-300 mt-4 mb-4'}></div>
                   <div>
-                    <Button label={'Save Changes'} onClick={handleSubmit} style={'primary'} />
+                    <Button
+                      label={'Save Changes'}
+                      onClick={handleSubmit}
+                      style={'primary'}
+                      disable={isLoading}
+                    />
                   </div>
                 </div>
               </Form>
