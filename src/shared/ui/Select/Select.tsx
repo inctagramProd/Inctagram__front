@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Typography, Icon } from '@/src/shared/ui'
+import React, { useEffect, useRef, useState } from 'react'
+import { Icon, Typography } from '@/src/shared/ui'
+import { FieldProps } from 'formik'
 
 export type SelectOptionType = {
   title: string | number
@@ -12,9 +13,9 @@ type Props = {
   defaultValue?: string | number
   variant?: 'Default' | 'Pagination'
   options: SelectOptionType[]
-  onChange?: (selectedValue: SelectOptionType) => any
+  onChange?: (selectedValue: SelectOptionType) => void
   className?: string
-}
+} & FieldProps
 
 export const Select = ({
   title,
@@ -24,6 +25,8 @@ export const Select = ({
   disabled = false,
   onChange,
   className,
+  field,
+  form,
   ...props
 }: Props) => {
   const defaultOption: SelectOptionType | undefined = defaultValue
@@ -46,11 +49,12 @@ export const Select = ({
     }
   }, [])
 
-  const handleClickOutside = (e: { target: any }): void => {
-    if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-      setIsVisibleDropdown(false)
+  const handleClickOutside = (e: Event): void => {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      setIsVisibleDropdown(false);
     }
-  }
+  };
+
 
   const setDropdownActiveOption = (): void => {
     if (isVisibleDropdown) {
@@ -75,6 +79,8 @@ export const Select = ({
     if (onChange) {
       onChange(activeOptionFields)
     }
+    form && form.setFieldValue(field.name, value)
+    setIsVisibleDropdown(false)
   }
 
   return (
@@ -82,13 +88,15 @@ export const Select = ({
       className={`max-w-sm relative disabled:opacity-10 ${className} ${
         disabled ? 'cursor-not-allowed' : ''
       }`}
-      {...props}
+      ref={wrapperRef}
     >
       <span className={`text-light-900 block text-sm`}>
         <Typography children={title} variant={'regular_14'} />
       </span>
       <div
-        ref={wrapperRef}
+        {...props}
+        {...field}
+        id={field?.name}
         onClick={setDropdownActiveOption}
         className={`border-light-900 flex items-center justify-between gap-2 select-none w-full cursor-pointer text-light-100 border px-2 py-1.5 rounded-sm hover:text-light-900 ${
           disabled ? 'pointer-events-none border-dark-100' : ''
@@ -116,7 +124,7 @@ export const Select = ({
       </div>
 
       <ul
-        className={`transition-all z-50 origin-top ease-in-out max-h-72 overflow-y-auto absolute w-full border bg-dark-500 rounded-b-sm -mt-px opacity-0 z-[-1] transform-gpu scale-y-0 ${
+        className={`transition-all origin-top ease-in-out max-h-72 overflow-y-auto absolute w-full border bg-dark-500 rounded-b-sm -mt-px opacity-0 z-[-1] transform-gpu scale-y-0 ${
           isVisibleDropdown ? 'opacity-100 z-10 transform-gpu scale-y-100' : ''
         } ${variant === 'Pagination' ? 'bg-dark-500 border-dark-300' : ''}`}
       >

@@ -8,13 +8,13 @@ type Props = {
   type: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = ({ error, label, required, type, ...inputProps }: Props) => {
+export const Input = ({ error, label, required, type, ...restProps }: Props) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const inputType = type === 'password' ? (isPasswordShown ? 'text' : 'password') : type
 
   const togglePasswordVisibility = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    if (!inputProps.disabled) {
+    if (!restProps.disabled) {
       setIsPasswordShown(!isPasswordShown)
     }
   }
@@ -40,7 +40,7 @@ export const Input = ({ error, label, required, type, ...inputProps }: Props) =>
         )}
         <input
           onKeyDown={e => checkKeyDown(e)}
-          {...inputProps}
+          {...restProps}
           className={`border rounded-sm py-1.5 w-full
           text-light-100 placeholder-light-900
           bg-transparent

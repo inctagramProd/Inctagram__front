@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useField, useFormikContext } from 'formik'
 import DatePicker from 'react-datepicker'
 
 import { Typography } from '@/src/shared/ui'
@@ -15,6 +16,15 @@ type Props = {
   isRange?: boolean
   label?: string
   onChange?: (value: string) => void
+}
+
+type DatePickerProps = {
+  errorMsg?: string
+  hasError?: boolean
+  isRange?: boolean
+  label?: string
+  onChange?: (value: string) => void
+  name: string
 }
 
 const CustomInput = ({
@@ -40,9 +50,20 @@ const CustomInput = ({
   )
 }
 
-export const DatePickerInput = ({ errorMsg, hasError, isRange, label, onChange }: Props) => {
+export const DatePickerInput = ({
+  errorMsg,
+  hasError,
+  isRange,
+  label,
+  onChange,
+  name,
+}: DatePickerProps) => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const [startDate, endDate] = dateRange
+  const { setFieldValue } = useFormikContext()
+  const [field, meta] = useField(name)
+
+  const  dateFormat = ['dd.MM.yyyy', 'dd-MM-yyyy', 'dd/MM/yyyy']
 
   const formatDate = (date: Date | null): string => (date ? format(date, 'dd/MM/yyyy') : '')
 
@@ -50,17 +71,19 @@ export const DatePickerInput = ({ errorMsg, hasError, isRange, label, onChange }
     const newDateRange: [Date | null, Date | null] = Array.isArray(update)
       ? update
       : [update, update]
-
     setDateRange(newDateRange)
-    if (onChange) {
-      onChange(newDateRange.map(formatDate).join(' - '))
-    }
+    setFieldValue(name, startDate)
+
+    // if (onChange) {
+    //   onChange(newDateRange.map(formatDate).join(' - '))
+    // }
   }
 
   return (
     <div className={'flex flex-col gap-0 relative'}>
       {label && <label className={'mb-1 text-light-900 text-sm'}>{label}</label>}
       <DatePicker
+        {...field}
         calendarStartDay={1}
         customInput={
           <CustomInput
@@ -74,7 +97,7 @@ export const DatePickerInput = ({ errorMsg, hasError, isRange, label, onChange }
             }
           />
         }
-        dateFormat={'dd/MM/yyyy'}
+        dateFormat={dateFormat}
         endDate={endDate}
         icon={
           <Icons.Calendar

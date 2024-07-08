@@ -47,8 +47,6 @@ export const baseQueryWithReauth: BaseQueryFn<
         // try to get a new token
         if (refreshResult.data) {
           const newAccessToken = refreshResult.data as string
-
-          console.log(newAccessToken)
           api.dispatch(setToken({ accessToken: newAccessToken }))
           result = await baseQuery(args, api, extraOptions)
         } else {

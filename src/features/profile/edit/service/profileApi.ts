@@ -1,14 +1,14 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 
-export const editProfile = baseApi.injectEndpoints({
+export const profile = baseApi.injectEndpoints({
   endpoints: build => ({
-    getProfile: build.query<any, void>({
+    getProfile: build.query<ProfileData, void>({
       query: data => ({
         body: data,
         url: 'user-profile/me',
       }),
     }),
-    updateProfile: build.mutation<ProfileData, FormData>({
+    updateProfile: build.mutation<any, any>({
       query: data => ({
         body: data,
         method: 'PATCH',
@@ -19,7 +19,7 @@ export const editProfile = baseApi.injectEndpoints({
   overrideExisting: false,
 })
 
-export const { useGetProfileQuery, useUpdateProfileMutation } = editProfile
+export const { useGetProfileQuery, useUpdateProfileMutation } = profile
 
 // type
 
@@ -28,7 +28,7 @@ export type UpdateProfileData = {
   username: string
   firstName: string
   lastName: string
-  dateOfBirth: Date | null
+  dateOfBirth: string | null
   country: string
   city: string
   aboutMe: string

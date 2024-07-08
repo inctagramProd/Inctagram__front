@@ -64,7 +64,6 @@ export const SignInForm = ({ onSubmit }: Props) => {
               </div>
               <div className="[&>button]:w-full">
                 <Button
-                  iconName=""
                   type="submit"
                   style="primary"
                   label={locale.auth.signIn}
