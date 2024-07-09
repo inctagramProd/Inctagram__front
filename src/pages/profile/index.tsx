@@ -8,17 +8,7 @@ const ProfilePage = () => {
   return (
     <>
         <MainProfileContent/>
-        <Typography variant="h1" className="text-center mt-12">
-            My Profile
-            <br />
-            <Link
-                href={{
-                    pathname: '/profile/settings',
-                }}
-            >
-                settings
-            </Link>
-        </Typography>
+
     </>
   )
 }

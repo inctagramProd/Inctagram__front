@@ -5,11 +5,12 @@ type Props = {}
 
 function MainProfileContent({}: Props) {
   const { data: getProfile } = useGetProfileQuery()
-  return (
-    <div>
-      <ProfileInfo userName={getProfile?.username} aboutMe={getProfile?.aboutMe}/>
-    </div>
-  )
+  if (getProfile) // TODO исправить
+    return (
+      <div>
+        <ProfileInfo userData={getProfile} />
+      </div>
+    )
 }
 
 export default MainProfileContent
