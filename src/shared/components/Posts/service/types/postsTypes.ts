@@ -16,6 +16,6 @@ export type PostsProps = {
     comments: any
     name: string
     img: imgType[]
-    postDescreption: string | null
+    postDescription: string | null
     likes: likeType[]
 }
