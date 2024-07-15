@@ -1,21 +1,32 @@
 import React, { ChangeEvent, RefObject, useRef, useState } from 'react'
 import { Button, Icon } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import {useUpdateProfileMutation} from "@/src/features/profile/edit/api/profileApi";
 
-type Props = {}
-export const ProfilePhoto = ({}: Props) => {
+type Props = {
+  imageUpload: (image: File) => void
+}
+export const ProfilePhoto = ({ imageUpload }: Props) => {
   const [selectedImage, setSelectedImage] = useState<null | string>(null)
   const uploadRef: RefObject<HTMLInputElement> = useRef(null)
   const { locale } = useTranslate()
+  const [updateProfile] = useUpdateProfileMutation()
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0]
     if (file) {
+      const formData = new FormData
+      formData.append('profileImage', file)
+      formData.append('aboutMe', 'about me')
+      imageUpload(file)
+      // updateProfile(formData).unwrap()
       const reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
           setSelectedImage(reader.result)
+          // imageUpload(reader.result.split(',')[1])
+          // imageUpload(reader.result)
         }
       }
     }

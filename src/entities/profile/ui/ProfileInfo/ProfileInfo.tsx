@@ -1,17 +1,17 @@
 import React from 'react'
 import { Icon, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { ProfileData } from '@/src/features/profile/edit/service/profileApi'
 import Link from 'next/link'
+import {Nullable} from "@vitest/utils";
 
 type Props = {
-  userData: ProfileData
+  profileImageURL?: Nullable<string>
+  username?: string
+  aboutMe?: string
 }
-
-export const ProfileInfo = ({ userData }: Props) => {
-  const { username, aboutMe, profileImageURL } = userData
-
+export const ProfileInfo = ({profileImageURL, username, aboutMe}: Props) => {
   const { locale } = useTranslate()
+
   return (
     <div className="flex gap-x-9 pt-9 pl-6">
       <div>

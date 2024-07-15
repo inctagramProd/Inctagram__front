@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
-import { profileEditSchema } from '@/src/features/profile/edit/service/schema/profileEditSchema'
-import { ProfileEditParams } from '@/src/features/profile/edit/service/types/profileEditTypes'
+import { profileEditSchema } from '@/src/features/profile/edit/model/schema/profileEditSchema'
+import { ProfileEditParams } from '@/src/features/profile/edit/model/types/profileEditTypes'
 import { Button, DatePickerInput, Input, Select, TextArea, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 
@@ -29,16 +29,7 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
         onSubmit={onSubmitHandler}
         validationSchema={profileEditSchema(locale)}
       >
-        {({
-          dirty,
-          errors,
-          isSubmitting,
-          isValid,
-          touched,
-          handleChange,
-          handleBlur,
-          values,
-        }: FormikProps<ProfileEditParams>) => (
+        {({ dirty, errors, isSubmitting, isValid, touched }: FormikProps<ProfileEditParams>) => (
           <Form>
             <div className="flex-1 flex flex-col gap-4">
               <Field

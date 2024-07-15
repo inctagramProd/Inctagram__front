@@ -16,6 +16,7 @@ type Props = {
   onChange?: (selectedValue: SelectOptionType) => void
   className?: string
 } & FieldProps
+// TODO исправить типы FieldProps
 
 export const Select = ({
   title,
