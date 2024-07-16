@@ -44,7 +44,8 @@ const EditProfilePage = () => {
 
   return (
     <>
-      <Tabs defaultActiveKey={activeTab} options={tabs} onChange={handleChangeTabValue}></Tabs>
+      <Tabs defaultActiveKey={activeTab} options={tabs} onChange={handleChangeTabValue}/>
+      <Tabs.name></Tabs.name>
       <GeneralInformation />
     </>
   )

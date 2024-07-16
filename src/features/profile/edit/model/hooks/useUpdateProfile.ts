@@ -18,6 +18,7 @@ export const useUpdateProfile = () => {
     formData.append('lastName', profileData.lastName)
     if (profileData.dateOfBirth) {
       formData.append('dateOfBirth', '') // toISOString()
+      // TODO заполнить value. В данный момент падает ошибка на беке
     }
     formData.append('country', profileData.country)
     formData.append('city', profileData.city)
