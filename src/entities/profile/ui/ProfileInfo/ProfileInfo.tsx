@@ -2,14 +2,13 @@ import React from 'react'
 import { Icon, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import Link from 'next/link'
-import {Nullable} from "@vitest/utils";
 
 type Props = {
-  profileImageURL?: Nullable<string>
+  profileImageURL?: string
   username?: string
   aboutMe?: string
 }
-export const ProfileInfo = ({profileImageURL, username, aboutMe}: Props) => {
+export const ProfileInfo = ({ profileImageURL, username, aboutMe }: Props) => {
   const { locale } = useTranslate()
 
   return (
@@ -35,7 +34,11 @@ export const ProfileInfo = ({profileImageURL, username, aboutMe}: Props) => {
         <div className="flex items-center mb-5">
           <Typography variant="bold_16">{username}</Typography>
           <Link
-            className="ml-auto"
+            className="ml-auto px-6 py-[6px] bg-dark-300 text-light-100 rounded-[2px] cursor-pointer border-[1px] border-transparent
+              active:bg-[#212121] active:text-light-100
+              hover:bg-dark-100 hover:text-light-100
+              focus:bg-dark-300 focus:border-[1px] focus:border-primary-300
+              disabled:bg-dark-500 disabled:text-light-900`"
             href={{
               pathname: '/profile/settings',
             }}

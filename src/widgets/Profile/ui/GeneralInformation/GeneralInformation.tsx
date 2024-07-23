@@ -8,8 +8,8 @@ export const GeneralInformation = () => {
   const { handleUpdateProfile } = useUpdateProfile()
   const { handleImageUpload } = useImageUpload()
   return (
-    <div className="pt-6 pl-6">
-      <div className="flex gap-12 flex-row mt-6">
+    <div className="mt-6">
+      <div className="flex gap-12 flex-row">
         <div className="w-full max-w-[196px]">
           <ProfilePhoto imageUpload={handleImageUpload} />
         </div>

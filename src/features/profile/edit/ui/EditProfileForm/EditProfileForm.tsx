@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import { profileEditSchema } from '@/src/features/profile/edit/model/schema/profileEditSchema'
 import { ProfileEditParams } from '@/src/features/profile/edit/model/types/profileEditTypes'
@@ -9,17 +9,50 @@ type Props = {
   onSubmitHandler: (values: ProfileEditParams, actions: FormikHelpers<ProfileEditParams>) => void
 }
 
+interface CityOptions {
+  [key: string]: {
+    title: string | number
+    value: string | number
+  }[]
+}
+
 export const EditProfileForm = ({ onSubmitHandler }: Props) => {
   const { locale } = useTranslate()
 
   const initialValues: ProfileEditParams = {
-    firstName: '',
+    firstName: 'name from store',
     lastName: '',
     username: '',
     country: '',
     city: '',
     aboutMe: '',
     dateOfBirth: '',
+  }
+
+  const [country, setCountry] = useState<string>('')
+  const [city, setCity] = useState<string>('')
+
+  const cityOptions: CityOptions = {
+    belarus: [{ title: 'Minsk', value: 'minsk' }, { title: 'Brest', value: 'brest' }],
+    russia: [
+      { title: 'Moscow', value: 'moscow' },
+      {
+        title: 'St.Petersburg',
+        value: 'petersburg',
+      },
+      { title: 'Novosibirsk', value: 'novosibirsk' },
+    ],
+    france: [{ title: 'Paris', value: 'paris' }, { title: 'Leon', value: 'leon' }],
+    null: [{ title: 'Choose city', value: 0 }],
+  }
+
+  const handleCountryChange = (selectedValue: { title: string; value: string | number }) => {
+    setCountry(selectedValue.value as string)
+    setCity('')
+  }
+
+  const handleCityChange = (selectedValue: { title: string; value: string | number }) => {
+    setCity(selectedValue.value as string)
   }
 
   return (
@@ -67,12 +100,14 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
                     className="max-w-none z-10"
                     name="country"
                     id="country"
-                    component={Select}
                     error={touched.country && errors.country}
+                    component={Select}
+                    onChange={handleCountryChange}
                     options={[
-                      { title: 'Belarus', value: 'Belarus' },
-                      { title: 'Russia', value: 'Russia' },
-                      { title: 'France', value: 'France' },
+                      { title: 'Choose country', value: 0 },
+                      { title: 'Belarus', value: 'belarus' },
+                      { title: 'Russia', value: 'russia' },
+                      { title: 'France', value: 'france' },
                     ]}
                   ></Field>
                 </div>
@@ -84,15 +119,13 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
                   />
                   <Field
                     className="max-w-none w-full z-10"
-                    component={Select}
                     name="city"
                     id="city"
                     error={touched.city && errors.city}
-                    options={[
-                      { title: 'Minsk', value: 'Minsk' },
-                      { title: 'Moscow', value: 'Moscow' },
-                      { title: 'Paris', value: 'Paris' },
-                    ]}
+                    component={Select}
+                    onChange={handleCityChange}
+                    options={country ? cityOptions[country] : []}
+                    disabled={!country}
                   ></Field>
                 </div>
               </div>
@@ -123,4 +156,3 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
     </div>
   )
 }
-

@@ -16,7 +16,6 @@ type Props = {
   onChange?: (selectedValue: SelectOptionType) => void
   className?: string
 } & FieldProps
-// TODO исправить типы FieldProps
 
 export const Select = ({
   title,
@@ -34,7 +33,7 @@ export const Select = ({
     ? options.find((option: SelectOptionType) => option.value === defaultValue)
     : options[0]
 
-  const [activeOption, setActiveOption] = useState({
+  const [activeOption, setActiveOption] = useState<SelectOptionType>({
     title: defaultOption?.title || '',
     value: defaultOption?.value || '',
   })
@@ -42,7 +41,7 @@ export const Select = ({
   const [isVisibleDropdown, setIsVisibleDropdown] = useState(false)
 
   // Close dropdown if click outside
-  const wrapperRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     document.addEventListener('click', handleClickOutside, false)
     return (): void => {
@@ -52,16 +51,12 @@ export const Select = ({
 
   const handleClickOutside = (e: Event): void => {
     if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-      setIsVisibleDropdown(false);
+      setIsVisibleDropdown(false)
     }
-  };
-
+  }
 
   const setDropdownActiveOption = (): void => {
-    if (isVisibleDropdown) {
-      return setIsVisibleDropdown(false)
-    }
-    return setIsVisibleDropdown(true)
+    setIsVisibleDropdown(!isVisibleDropdown)
   }
 
   const handleSetActiveOption = (e: React.SyntheticEvent<EventTarget>): void => {
@@ -73,14 +68,12 @@ export const Select = ({
     }
 
     const activeOptionFields: SelectOptionType = { title, value }
-    if (activeOptionFields) {
-      setActiveOption(activeOptionFields)
-    }
+    setActiveOption(activeOptionFields)
 
     if (onChange) {
       onChange(activeOptionFields)
     }
-    form && form.setFieldValue(field.name, value)
+    form.setFieldValue(field.name, value)
     setIsVisibleDropdown(false)
   }
 
