@@ -1,16 +1,18 @@
-import { Icon } from '@/src/shared/ui'
 import { SetStateAction } from 'react'
+import { Icon } from '@/src/shared/ui'
+
 type imgType = {
   imageId: number
   imageUrl: string
 }
 type Props = {
-  img: imgType[],
+  img: imgType[]
   setImgItem: (value: SetStateAction<number>) => void
   imgItem: number
   direction: 'left' | 'right'
 }
-const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
+
+export const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
   const slider = () => {
     direction === 'right'
       ? imgItem === img.length - 1
@@ -20,6 +22,7 @@ const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
       ? setImgItem(0)
       : setImgItem(imgItem - 1)
   }
+
   return (
     <div
       className={`bg-dark-300/80 hover:bg-dark-100 cursor-pointer absolute top-1/2 ${
@@ -34,4 +37,3 @@ const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
     </div>
   )
 }
-export default SliderArrow

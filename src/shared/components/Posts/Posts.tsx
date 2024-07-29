@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import SliderArrow from './service/ui/sliderArrow/sliderArrow'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { Icon, TextArea, Typography } from '../../ui'
-import { Button } from '@/src/shared/ui'
-import { PostsProps } from '@/src/shared/components/Posts/service/types/postsTypes'
+import { Button, Icon, TextArea, Typography } from '@/src/shared/ui'
+import { PostsProps } from './service/types/postsTypes'
+import { SliderArrow } from './service/ui/sliderArrow/sliderArrow'
 
 const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
@@ -14,6 +13,7 @@ const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   const pageText = locale.profile.postViews
 
   useEffect(() => {}, [imgItem, visibleDescription])
+
   const openDescription = () => {
     console.log(`openDescription ${visibleDescription}`)
     setVisibleDescription(!visibleDescription)
@@ -24,7 +24,9 @@ const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   const openComments = () => {
     setCommentOpen(!commentOpen)
   }
+
   const Circle = []
+
   for (let i = 1; i <= img.length; i++) {
     Circle.push(i)
   }
@@ -39,6 +41,7 @@ const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
       />
     )
   })
+
   return (
     <div className="flex flex-col">
       <div className="flex justify-between w-full h-[30px] mb-[10px] items-center">
