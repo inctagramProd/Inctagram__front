@@ -1,10 +1,7 @@
-import { Typography, Icon } from '@/src/shared/ui'
 import Link from 'next/link'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-
-type Props = {
-  variant: 'policy' | 'terms'
-}
+import { Typography, Icon } from '@/src/shared/ui'
+import { PolicySwitcherProps as Props } from '../model/types'
 
 export const PolicySwitcher = ({ variant }: Props) => {
   const { locale } = useTranslate()
