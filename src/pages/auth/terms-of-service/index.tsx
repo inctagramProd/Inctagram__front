@@ -1,4 +1,4 @@
-import { PolicySwitcher } from '@/src/shared/components/PolicySwitcher/PolicySwitcher'
+import { PolicySwitcher } from '@/src/entities/PolicySwitcher/PolicySwitcher'
 import { getLayout } from '@/src/widgets/Layout/Layout'
 import { HeadMeta } from '@/src/widgets/HeadMeta/HeadMeta'
 

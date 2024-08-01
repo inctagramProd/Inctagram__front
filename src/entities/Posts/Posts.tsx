@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Button, Icon, TextArea, Typography } from '@/src/shared/ui'
-import { PostsProps } from './service/types/postsTypes'
-import { SliderArrow } from './service/ui/sliderArrow/sliderArrow'
+import { PostsProps } from '@/src/entities/Posts/service/model/models'
+import { SliderArrow } from '@/src/entities/Posts/service/ui/SliderArrow/SliderArrow'
 
 const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
