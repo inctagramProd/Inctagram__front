@@ -1,4 +1,4 @@
-import { useResendPasswordRecoveryLinkMutation } from './service/invalidEmailLink'
+import { useResendPasswordRecoveryLinkMutation } from './service/invalidEmailLinkApi'
 import { useState } from 'react'
 import { LinkHasExpired } from '../LinkHasExpired/LinkHasExpired'
 

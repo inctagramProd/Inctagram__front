@@ -11,8 +11,9 @@ const GoogleAuth = ({ name }: Props) => {
     localStorage.removeItem('Git')
     window.location.assign(api.googlePath)
   }
+
   return (
-    <div onClick={LoginWithApi}>
+    <div className={`cursor-pointer`} onClick={LoginWithApi}>
       <Icon iconName={`${name}Logo`} />
     </div>
   )

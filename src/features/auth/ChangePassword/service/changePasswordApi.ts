@@ -4,7 +4,7 @@ export const createNewPassword = baseApi.injectEndpoints({
   endpoints: build => ({
     sendNewPassword: build.mutation({
       query: data => ({
-        method: 'POST',
+        method: 'PATCH',
         url: 'auth/password-recovery',
         body: data,
       }),

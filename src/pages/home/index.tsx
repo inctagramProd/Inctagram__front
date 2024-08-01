@@ -1,6 +1,7 @@
 import Posts from '@/src/shared/components/Posts/Posts'
 import { useViewPostsQuery } from '@/src/shared/components/Posts/service/api/viewPost.api'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
+import { withAuth } from '@/src/features/private_routes/withAuth'
 import { useEffect, useState } from 'react'
 
 const HomePage = () => {
@@ -162,4 +163,4 @@ const HomePage = () => {
   )
 }
 HomePage.getLayout = getLayoutWithSidebar
-export default HomePage
+export default withAuth(HomePage)
