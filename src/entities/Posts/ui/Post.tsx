@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Button, Icon, TextArea, Typography } from '@/src/shared/ui'
-import { PostsProps } from '@/src/entities/Posts/service/model/models'
-import { SliderArrow } from '@/src/entities/Posts/service/ui/SliderArrow/SliderArrow'
+import { SliderArrow } from './SliderArrow'
+import { PostsProps } from '../model/types'
 
-const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
+const Post = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState<boolean>(false)
   const [textArea, setTextArea] = useState<boolean>(false)
@@ -185,4 +185,4 @@ const Posts = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   )
 }
 
-export default Posts
+export default Post

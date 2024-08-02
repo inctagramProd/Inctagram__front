@@ -1,5 +1,5 @@
-import Posts from '@/src/entities/Posts/Posts'
-import { useViewPostsQuery } from '@/src/entities/Posts/service/api/viewPost.api'
+import Post from '@/src/entities/Posts/ui/Post'
+import { useViewPostsQuery } from '@/src/entities/Posts/api/viewPost.api'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 import { withAuth } from '@/src/features/private_routes/withAuth'
 import { useEffect, useState } from 'react'
@@ -132,7 +132,7 @@ const HomePage = () => {
       <div className="flex flex-col w-[46%] h-auto mt-[50px] mb-[50px] gap-20">
         {post.map((el: any, id: any) => {
           return (
-            <Posts
+            <Post
               name={'Alex'}
               img={el.postImages}
               postDescription={el.postDescription}
