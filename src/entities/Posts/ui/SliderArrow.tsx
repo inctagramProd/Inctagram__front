@@ -25,12 +25,14 @@ export const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
 
   return (
     <div
-      className={`bg-dark-300/80 hover:bg-dark-100 cursor-pointer absolute top-1/2 ${
-        direction === 'left' ? 'left-[10px]' : 'right-[10px]'
+      className={`bg-dark-300/30 hover:bg-dark-100/50 cursor-pointer absolute top-[45%] w-[44px] aspect-square ${
+        direction === 'left' ? 'left-[15px]' : 'right-[15px]'
       }`}
       onClick={slider}
     >
       <Icon
+        width={44}
+        height={44}
         iconName={direction === 'left' ? 'ArrowIosBack' : 'ArrowIosForward'}
         iconStyle="fill-light-100 transition duration-300 ease-in-out hover:fill-primary-100"
       />
