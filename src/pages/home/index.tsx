@@ -1,13 +1,13 @@
-import Post from '@/src/entities/Posts/ui/Post'
-import { useViewPostsQuery } from '@/src/entities/Posts/api/viewPost.api'
-import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
-import { withAuth } from '@/src/features/private_routes/withAuth'
 import { useEffect, useState } from 'react'
+import { useViewPostsQuery, Post } from '@/src/entities/Posts'
+import { withAuth } from '@/src/features/private_routes/withAuth'
+import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 
 const HomePage = () => {
   const [page, setPage] = useState<number>(1)
   const { data, isLoading, isError, isFetching } = useViewPostsQuery(page)
   const posts = data ? data : []
+
   useEffect(() => {
     const onScroll = () => {
       const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight
@@ -23,117 +23,180 @@ const HomePage = () => {
       document.removeEventListener('scroll', onScroll)
     }
   }, [page, isFetching])
-  const post = [
+
+  const postsMock = [
     {
       comments: [
         {
-          name: 'Aex',
-          comment: ' Comment N1',
+          name: 'Bear1998[RUS]',
+          comment: ' GOOOOOOOOOAAAAAL!!!',
           data: '12/03/2024',
-          avatar: 'https://www.pngall.com/wp-content/uploads/12/Male-Face-PNG-File.png',
+          avatar: '/mock-pics/goal-mini.png',
         },
         {
-          name: 'Aex',
-          comment: ' Comment N2',
+          name: 'Miura',
+          comment: ' Afftar pishi ischo',
           data: '12/03/2024',
-          avatar: 'https://imgpng.ru/d/face_PNG5658.png',
+          avatar: '/mock-pics/6.jpg',
         },
         {
-          name: 'Aex',
-          comment: ' Comment N3',
+          name: 'Neco arc',
+          comment: ' Dori-dori :3',
           data: '12/03/2024',
-          avatar: 'https://imgpng.ru/d/face_PNG5658.png',
+          avatar: '/mock-pics/arc.jpeg',
         },
       ],
       likes: [
         {
           name: 'Valera',
           like: true,
-          avatar: 'https://www.pngall.com/wp-content/uploads/12/Male-Face-PNG-File.png',
+          avatar: '/mock-pics/1.png',
         },
         {
           name: 'Alex',
           like: true,
-          avatar: 'https://imgpng.ru/d/face_PNG5658.png',
+          avatar: '/mock-pics/2.jpg',
         },
         {
-          name: 'Luka',
+          name: 'Shlomo',
           like: true,
-          avatar: 'https://c3.klipartz.com/pngpicture/992/674/sticker-png-kanye-west.png',
+          avatar: '/mock-pics/4.jpg',
         },
         {
           name: 'David',
           like: true,
-          avatar: 'https://www.pngall.com/wp-content/uploads/12/Male-Face-PNG-File.png',
+          avatar: '/mock-pics/6.jpg',
         },
       ],
-      postDescription: 'It is first post',
+      postDescription: 'Commodi consequatur in laudantium minima natus possimus rem. Lorem ipsum.',
       postImages: [
         {
-          imageUrl:
-            'https://img.goodfon.com/original/360x640/b/5d/sport-snoubord-sneg-spusk-gory-pryzhok-nebo-snoubording-1.jpg',
+          imageUrl: '/mock-pics/1.png',
         },
         {
-          imageUrl: 'https://abali.ru/wp-content/uploads/2013/12/uporotij_lis.png',
+          imageUrl: '/mock-pics/2.jpg',
+        },
+        {
+          imageUrl: '/mock-pics/4.jpg',
+        },
+        {
+          imageUrl: '/mock-pics/6.jpg',
         },
       ],
       name: 'Alex',
     },
     {
       comments: [],
-      likes: [],
+      likes: [
+        {
+          name: 'Valera',
+          like: true,
+          avatar: '/mock-pics/1.png',
+        },
+        {
+          name: 'Alex',
+          like: true,
+          avatar: '/mock-pics/2.jpg',
+        },
+        {
+          name: 'Shlomo',
+          like: true,
+          avatar: '/mock-pics/4.jpg',
+        },
+        {
+          name: 'David',
+          like: true,
+          avatar: '/mock-pics/6.jpg',
+        },
+        {
+          name: 'nagibator2001',
+          like: true,
+          avatar: '/mock-pics/3.jpg',
+        },
+        {
+          name: 'Kira282',
+          like: true,
+          avatar: '/mock-pics/5.jpg',
+        },
+      ],
       postDescription: 'It is second post',
       postImages: [
         {
-          imageUrl: 'https://abali.ru/wp-content/uploads/2013/12/uporotij_lis.png',
+          imageUrl: '/mock-pics/6.jpg',
         },
         {
-          imageUrl:
-            'https://img.goodfon.com/original/360x640/b/5d/sport-snoubord-sneg-spusk-gory-pryzhok-nebo-snoubording-1.jpg',
+          imageUrl: '/mock-pics/7.jpg',
         },
       ],
-      name: 'Valera',
+      name: 'Alex',
     },
     {
       comments: [],
-      likes: [],
+      likes: [
+        {
+          name: 'Kek7',
+          like: true,
+          avatar: '/mock-pics/1.jpg',
+        },
+        {
+          name: 'Otaku',
+          like: true,
+          avatar: '/mock-pics/itachi.jpg',
+        },
+        {
+          name: 'Mikha',
+          like: true,
+          avatar: '/mock-pics/goal-mini.png',
+        },
+        {
+          name: 'Otaku',
+          like: true,
+          avatar: '/mock-pics/sam.jpg',
+        },
+      ],
       postDescription: null,
       postImages: [
         {
-          imageUrl:
-            'https://img.goodfon.com/original/360x640/b/5d/sport-snoubord-sneg-spusk-gory-pryzhok-nebo-snoubording-1.jpg',
+          imageUrl: '/mock-pics/5.jpg',
         },
         {
-          imageUrl:
-            'https://img.goodfon.com/original/360x640/b/5d/sport-snoubord-sneg-spusk-gory-pryzhok-nebo-snoubording-1.jpg',
+          imageUrl: '/mock-pics/3.jpg',
         },
       ],
       name: 'Sveta',
     },
     {
       comments: [],
-      likes: [],
-      postDescription:
-        'It is fouth post.saddddd ddd ddddd dddddddd ddddd ddd ddd ddddddd dddd dddddd ddddddddd dddddd dsssssss ssssssss sss ddd ddddddd  ssssss ddd ddddddd   ddd ddddd dddddddd ddddd ddd ddd ddddddd dddd dddddd ddddddddd dddddd dsssssss ssssssss sss ddd ddddddd  ssssss ddd ddddddd  ddd ddddddd  sss sssss ddd ddddddd  ssssss sss ddd ddddddd s sssss sssss sssss sssss ss  ddd ddddddd sssss sssssssss',
-      postImages: [
+      likes: [
         {
-          imageUrl:
-            'https://img.goodfon.com/original/360x640/b/5d/sport-snoubord-sneg-spusk-gory-pryzhok-nebo-snoubording-1.jpg',
+          name: 'Chud',
+          like: true,
+          avatar: '/mock-pics/griffith.jpg',
         },
         {
-          imageUrl: 'https://abali.ru/wp-content/uploads/2013/12/uporotij_lis.png',
+          name: 'Otaku',
+          like: true,
+          avatar: '/mock-pics/itachi.jpg',
         },
       ],
-      name: 'Lexa',
+      postDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium aspernatur aut, blanditiis consequatur deleniti dolores eos fugiat harum illum iusto magnam nesciunt non officiis perspiciatis possimus tempora tempore temporibus. Commodi consequatur in laudantium minima natus possimus rem. Accusamus alias, cupiditate deserunt error est id illo iusto maxime molestiae officia quos repellendus tempora temporibus?',
+      postImages: [
+        {
+          imageUrl: '/mock-pics/goal.png',
+        },
+      ],
+      name: 'Sasha007',
     },
   ]
+
   return (
     <div className="flex items-start justify-center w-full min-h-screen h-auto gap-[20px]">
       <div className="flex flex-col w-[46%] h-auto mt-[50px] mb-[50px] gap-20">
-        {post.map((el: any, id: any) => {
+        {postsMock.map((el: any, id: any) => {
           return (
             <Post
-              name={'Alex'}
+              name={el.name}
               img={el.postImages}
               postDescription={el.postDescription}
               likes={el.likes}
@@ -162,5 +225,6 @@ const HomePage = () => {
     </div>
   )
 }
+
 HomePage.getLayout = getLayoutWithSidebar
 export default withAuth(HomePage)
