@@ -15,6 +15,12 @@ type Comment = {
   data: string
 }
 
+export type CircleBlocksProps = {
+  imagesLen: number
+  imgNumber: number
+  setImgNumber: (imgNumber: number) => void
+}
+
 export type PostProps = {
   comments: any
   name: string
