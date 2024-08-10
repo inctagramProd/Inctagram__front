@@ -6,7 +6,7 @@ import { PostProps } from '../model/types'
 // import { Input } from '@/src/shared/ui'
 // import Input from './Input'
 
-export const Post = ({ name, img, postDescription, likes, comments }: PostProps) => {
+export const Post = ({ name, images, postDescription, likes, comments, avatarUrl }: PostProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState<boolean>(false)
   const [textArea, setTextArea] = useState<boolean>(false)
@@ -29,7 +29,7 @@ export const Post = ({ name, img, postDescription, likes, comments }: PostProps)
 
   const Circle = []
 
-  for (let i = 1; i <= img.length; i++) {
+  for (let i = 1; i <= images.length; i++) {
     Circle.push(i)
   }
 
@@ -51,7 +51,7 @@ export const Post = ({ name, img, postDescription, likes, comments }: PostProps)
           <div className="flex gap-2 items-center justify-center">
             <img
               className="cursor-pointer rounded-full bg-dark-100 w-7 h-7"
-              src={img[imgItem].imageUrl}
+              src={avatarUrl}
               alt="avatar"
               onClick={() => {
                 console.log(`> Link "go to profile"`)
@@ -91,7 +91,7 @@ export const Post = ({ name, img, postDescription, likes, comments }: PostProps)
           <div className={'relative h-[400px] flex '}>
             <SliderArrow img={img} setImgItem={setImgItem} imgItem={imgItem} direction={'left'} />
             <img
-              src={img[imgItem].imageUrl}
+              src={images[imgItem].imageUrl}
               alt={'img'}
               className="object-contain w-full h-full bg-dark-100/25"
             />

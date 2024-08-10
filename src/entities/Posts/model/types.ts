@@ -12,10 +12,11 @@ type Comment = {
   comment: string
   data: string
 }
-export type PostsProps = {
+export type PostProps = {
   comments: any
   name: string
-  img: Img[]
+  images: Img[]
   postDescription: string | null
   likes: Like[]
+  avatarUrl: string
 }

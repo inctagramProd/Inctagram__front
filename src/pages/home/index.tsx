@@ -84,6 +84,7 @@ const HomePage = () => {
         },
       ],
       name: 'Alex',
+      avatarUrl: '/mock-pics/dante.jpg',
     },
     {
       comments: [],
@@ -122,13 +123,14 @@ const HomePage = () => {
       postDescription: 'It is second post',
       postImages: [
         {
-          imageUrl: '/mock-pics/6.jpg',
+          imageUrl: '/mock-pics/search-yourself-in-az.png',
         },
         {
-          imageUrl: '/mock-pics/7.jpg',
+          imageUrl: '/mock-pics/shrek.jpg',
         },
       ],
       name: 'Alex',
+      avatarUrl: '/mock-pics/dante.jpg',
     },
     {
       comments: [],
@@ -164,6 +166,7 @@ const HomePage = () => {
         },
       ],
       name: 'Sveta',
+      avatarUrl: '/mock-pics/runa.jpg',
     },
     {
       comments: [],
@@ -187,6 +190,7 @@ const HomePage = () => {
         },
       ],
       name: 'Sasha007',
+      avatarUrl: '/mock-pics/shrek.jpg',
     },
   ]
 
@@ -196,12 +200,13 @@ const HomePage = () => {
         {postsMock.map((el: any, id: any) => {
           return (
             <Post
+              key={id}
               name={el.name}
-              img={el.postImages}
+              images={el.postImages}
               postDescription={el.postDescription}
               likes={el.likes}
               comments={el.comments}
-              key={id}
+              avatarUrl={el.avatarUrl}
             />
           )
         })}
