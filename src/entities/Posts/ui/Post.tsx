@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Button, Icon, TextArea, Typography } from '@/src/shared/ui'
 import { SliderArrow } from './SliderArrow'
-import { PostsProps } from '../model/types'
+import { PostProps } from '../model/types'
+// import { Input } from '@/src/shared/ui'
+// import Input from './Input'
 
-const Post = ({ name, img, postDescription, likes, comments }: PostsProps) => {
+export const Post = ({ name, img, postDescription, likes, comments }: PostProps) => {
   const [imgItem, setImgItem] = useState<number>(0)
   const [visibleDescription, setVisibleDescription] = useState<boolean>(false)
   const [textArea, setTextArea] = useState<boolean>(false)
@@ -34,8 +36,8 @@ const Post = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   const CircleBlock = Circle.map((e, i, arr) => {
     return (
       <div
-        className={`rounded-full transition duration-600 ease-in-out bg-${
-          +arr.indexOf(e) === +imgItem ? `dark-100` : `light-100`
+        className={`rounded-full transition duration-600 ease-in-out ${
+          +arr.indexOf(e) === +imgItem ? `bg-primary-300` : `bg-light-100`
         } w-[10px] h-[10px]`}
         key={i}
       />
@@ -45,11 +47,39 @@ const Post = ({ name, img, postDescription, likes, comments }: PostsProps) => {
   return (
     <div className="flex flex-col">
       <div className="flex justify-between w-full h-[30px] mb-[10px] items-center">
-        <div className="flex gap-1 items-center justify-center">
-          <div className="rounded-full bg-dark-100 w-[30px] h-[30px]" />
-          <Typography variant="bold_16">{name}</Typography>
+        <div className="flex items-center justify-center gap-2">
+          <div className="flex gap-2 items-center justify-center">
+            <img
+              className="cursor-pointer rounded-full bg-dark-100 w-7 h-7"
+              src={img[imgItem].imageUrl}
+              alt="avatar"
+              onClick={() => {
+                console.log(`> Link "go to profile"`)
+              }}
+            />
+            <Typography
+              className="cursor-pointer"
+              variant="bold_16"
+              onClick={() => {
+                console.log(`> Link "go to profile"`)
+              }}
+            >
+              {name}
+            </Typography>
+          </div>
+          <div className="rounded-full w-1 h-1 bg-white" />
+          <div className={'flex items-center'}>
+            <Typography variant="small" className="text-light-900 leading-3">
+              22 minutes ago
+            </Typography>
+          </div>
         </div>
-        <div className="cursor-pointer " onClick={() => alert('123')}>
+        <div
+          className="cursor-pointer "
+          onClick={() => {
+            console.log(`> Open modal "post actions"`)
+          }}
+        >
           <Icon
             iconName="MoreHorizontal"
             iconStyle="fill-light-100 transition duration-700 ease-in-out hover:fill-primary-100"
@@ -178,11 +208,8 @@ const Post = ({ name, img, postDescription, likes, comments }: PostsProps) => {
             </span>{' '}
             <Button label={pageText.publish} style={'text'} />
           </div>
-          {textArea ? <TextArea /> : null}
         </div>
       </div>
     </div>
   )
 }
-
-export default Post
