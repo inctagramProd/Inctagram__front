@@ -1,3 +1,5 @@
+import { SetStateAction } from 'react'
+
 type Img = {
   imageId: number
   imageUrl: string
@@ -12,11 +14,18 @@ type Comment = {
   comment: string
   data: string
 }
+
 export type PostProps = {
   comments: any
   name: string
-  images: Img[]
   postDescription: string | null
+  images: Img[]
   likes: Like[]
   avatarUrl: string
+}
+export type SliderArrowProps = {
+  imgItem: number
+  direction: 'left' | 'right'
+  images: Img[]
+  setImgItem: (value: SetStateAction<number>) => void
 }

@@ -1,22 +1,11 @@
-import { SetStateAction } from 'react'
 import { Icon } from '@/src/shared/ui'
+import { SliderArrowProps } from '../model/types'
 
-type imgType = {
-  imageId: number
-  imageUrl: string
-}
-type Props = {
-  img: imgType[]
-  setImgItem: (value: SetStateAction<number>) => void
-  imgItem: number
-  direction: 'left' | 'right'
-}
-
-export const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
+export const SliderArrow = ({ images, setImgItem, imgItem, direction }: SliderArrowProps) => {
   const slider = () => {
     direction === 'right'
-      ? imgItem === img.length - 1
-        ? img.length - 1
+      ? imgItem === images.length - 1
+        ? images.length - 1
         : setImgItem(imgItem + 1)
       : imgItem === 0
       ? setImgItem(0)
@@ -27,6 +16,11 @@ export const SliderArrow = ({ img, setImgItem, imgItem, direction }: Props) => {
     <div
       className={`bg-dark-300/30 hover:bg-dark-100/50 cursor-pointer absolute top-[45%] w-[44px] aspect-square ${
         direction === 'left' ? 'left-[15px]' : 'right-[15px]'
+      } ${
+        (direction === 'left' && imgItem === 0) ||
+        (direction === 'right' && imgItem === images.length - 1)
+          ? 'hidden'
+          : ''
       }`}
       onClick={slider}
     >
