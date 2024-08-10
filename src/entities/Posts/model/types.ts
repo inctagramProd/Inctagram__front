@@ -35,3 +35,7 @@ export type SliderArrowProps = {
   images: Img[]
   setImgItem: (value: SetStateAction<number>) => void
 }
+export type PostIconButtonProps = {
+  iconName: string
+  logMessage: string
+}
