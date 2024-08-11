@@ -190,7 +190,7 @@ const HomePage = () => {
         },
       ],
       name: 'Sasha007',
-      avatarUrl: '/mock-pics/shrek.jpg',
+      avatarUrl: null,
     },
   ]
 
@@ -200,13 +200,13 @@ const HomePage = () => {
         {postsMock.map((el: any, id: any) => {
           return (
             <Post
-              key={id}
               name={el.name}
               images={el.postImages}
               postDescription={el.postDescription}
               likes={el.likes}
               comments={el.comments}
               avatarUrl={el.avatarUrl}
+              key={id}
             />
           )
         })}

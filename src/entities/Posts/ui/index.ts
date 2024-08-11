@@ -1,2 +1,5 @@
+export * from './AvatarImageLink'
 export * from './CircleBlock'
 export * from './DescriptionBlock'
+export * from './PostIconButton'
+export * from './SliderArrow'
