@@ -41,5 +41,6 @@ export type PostIconButtonProps = {
 }
 export type AvatarImageLinkProps = {
   avatarUrl?: string
+  className?: string
   onClickImage?: () => void
 }
