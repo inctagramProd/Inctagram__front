@@ -14,6 +14,7 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'medium_14'
     | 'bold_14'
     | 'small'
+    | 'small_bold'
     | 'small_semi-bold'
     | 'link_regular'
     | 'link_small'
@@ -48,6 +49,8 @@ export const Typography = <T extends ElementType = 'p'>(
         return 'text-sm font-bold leading-normal'
       case 'small':
         return 'text-xs font-normal leading-loose'
+      case 'small_bold':
+        return 'text-sm font-bold leading-normal'
       case 'small_semi-bold':
         return 'text-xs font-semibold leading-loose'
       case 'link_regular':
