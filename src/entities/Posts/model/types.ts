@@ -39,3 +39,7 @@ export type PostIconButtonProps = {
   iconName: string
   logMessage: string
 }
+export type AvatarImageLinkProps = {
+  avatarUrl?: string
+  onClickImage?: () => void
+}
