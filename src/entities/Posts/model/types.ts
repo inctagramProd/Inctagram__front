@@ -9,10 +9,11 @@ type Like = {
   like: boolean
   avatar: string
 }
-type Comment = {
+export type Comment = {
   name: string
   comment: string
-  data: string
+  date: string
+  avatar: string
 }
 
 export type CircleBlocksProps = {
@@ -22,12 +23,12 @@ export type CircleBlocksProps = {
 }
 
 export type PostProps = {
-  comments: any
   name: string
+  avatarUrl: string
   postDescription: string | null
   images: Img[]
   likes: Like[]
-  avatarUrl: string
+  comments: Comment[]
 }
 export type SliderArrowProps = {
   imgItem: number
@@ -40,7 +41,8 @@ export type PostIconButtonProps = {
   logMessage: string
 }
 export type AvatarImageLinkProps = {
-  avatarUrl?: string
+  size?: 'small' | 'regular'
+  src?: string
   className?: string
   onClickImage?: () => void
 }
