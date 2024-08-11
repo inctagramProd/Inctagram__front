@@ -38,7 +38,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
           <div className="flex gap-2 items-center justify-center">
             <AvatarImageLink avatarUrl={avatarUrl} />
             <Typography
-              className="cursor-pointer"
+              className="ml-1 cursor-pointer"
               variant="bold_16"
               onClick={() => {
                 console.log(`> Link "go to profile"`)
@@ -87,7 +87,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
       </div>
 
       <div className="post__lower">
-        <div className="post__lower__buttons-panel w-full h-[30px] flex mt-[7px] mb-[15px] items-center justify-between">
+        <div className="post__lower__buttons-panel w-full h-[30px] flex mt-[7px] mb-2 items-center justify-between">
           <div className="flex gap-4">
             <PostIconButton iconName={'Heart'} logMessage={`> Like post`} />
             <PostIconButton iconName={'MessageCircle'} logMessage={`> Focus on comment field`} />
@@ -103,9 +103,9 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
           {postDescription ? (
             <div className={`flex flex-col w-full min-h-15 overflow-hidden gap-2`}>
               <div className={`flex gap-2`}>
-                <AvatarImageLink avatarUrl={avatarUrl} />
-                <div className="text-justify">
-                  <Typography variant="bold_16" className={'inline'}>
+                <AvatarImageLink avatarUrl={avatarUrl} className="block mt-1" />
+                <div className="text-justify text-s">
+                  <Typography variant="small_bold" className="inline text-s">
                     {name}
                   </Typography>
                   <Typography className="inline">{' ' + postDescription}</Typography>
@@ -146,7 +146,6 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
             <span className="inline-block font-bold pl-[5px]">{pageText.like}</span>
           </div>
         ) : null}
-
         <div className="post__lower__comments-panel w-full m-h-[30px] h-auto">
           <div
             className="post__lower__comments-panel__spoiler font-bold cursor-pointer"

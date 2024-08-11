@@ -68,7 +68,8 @@ const HomePage = () => {
           avatar: '/mock-pics/6.jpg',
         },
       ],
-      postDescription: 'Commodi consequatur in laudantium minima natus possimus rem. Lorem ipsum.',
+      postDescription:
+        'Commodi consequatur in laudantium minima natus possimus rem. Lorem ipsum. Commodi consequatur in laudantium minima natus possimus rem. Lorem ipsum. Commodi consequatur in laudantium minima natus possimus rem. Lorem ipsum.',
       postImages: [
         {
           imageUrl: '/mock-pics/1.png',
