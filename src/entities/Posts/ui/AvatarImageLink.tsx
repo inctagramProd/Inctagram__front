@@ -2,7 +2,8 @@ import { isNotEmpty } from '@/src/shared'
 import { AvatarImageLinkProps } from '../model/types'
 
 export const AvatarImageLink = ({
-  avatarUrl = '',
+  size = 'regular',
+  src = '',
   onClickImage = () => {
     console.log(`> Link "go to profile"`)
   },
@@ -10,8 +11,10 @@ export const AvatarImageLink = ({
 }: AvatarImageLinkProps) => {
   return (
     <img
-      className={`cursor-pointer rounded-full bg-dark-100 w-9 h-9 ${className}`}
-      src={isNotEmpty(avatarUrl) ? avatarUrl : '/mock-pics/no-data.png'}
+      className={`cursor-pointer rounded-full bg-dark-100 ${
+        size === 'regular' ? 'w-9 h-9' : 'w-6 h-6'
+      } ${className}`}
+      src={isNotEmpty(src) ? src : '/mock-pics/no-data.png'}
       alt="avatar"
       onClick={onClickImage}
     />
