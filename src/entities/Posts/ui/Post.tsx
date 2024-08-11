@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Button, Typography } from '@/src/shared/ui'
-import { SliderArrow, PostIconButton, AvatarImageLink } from './'
+import { AvatarImageLink, PostIconButton, SliderArrow } from './'
 import { truncateDescription, useCircleBlocks } from '../lib'
-import { PostProps } from '../model/types'
+import { Comment, PostProps } from '../model/types'
 // import { Input } from '@/src/shared/ui'
 // import Input from './Input'
 
@@ -33,10 +33,10 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
 
   return (
     <div className="flex flex-col">
-      <div className="post__header flex justify-between w-full h-[30px] mb-[10px] items-center">
+      <div className="post__header flex justify-between items-center w-full h-[30px] mb-4">
         <div className="flex items-center justify-center gap-2">
           <div className="flex gap-2 items-center justify-center">
-            <AvatarImageLink avatarUrl={avatarUrl} />
+            <AvatarImageLink src={avatarUrl} />
             <Typography
               className="ml-1 cursor-pointer"
               variant="bold_16"
@@ -103,7 +103,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
           {postDescription ? (
             <div className={`flex flex-col w-full min-h-15 overflow-hidden gap-2`}>
               <div className={`flex gap-2`}>
-                <AvatarImageLink avatarUrl={avatarUrl} className="block mt-1" />
+                <AvatarImageLink src={avatarUrl} className="block mt-1" />
                 <div className="text-justify text-s">
                   <Typography variant="small_bold" className="inline text-s">
                     {name}
@@ -126,51 +126,57 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
         </div>
 
         {likes?.length > 0 ? (
-          <div className="post__lower__likes-panel flex flex-row w-full h-[40px] items-center">
+          <div className="post__lower__likes-panel flex flex-row w-full h-[40px] items-center mt-2">
             <div className="flex">
               {likes
                 .slice(-3)
                 .reverse()
                 .map((im, idx) => (
-                  <img
-                    key={idx}
+                  <AvatarImageLink
+                    size="small"
                     src={im.avatar}
-                    alt={`Avatar ${idx}`}
-                    className={`w-5 h-5 object-cover rounded-full ${
+                    className={`object-cover rounded-full ${
                       idx === 0 ? `ml-[0] z-20` : idx === 1 ? 'ml-[-1vh] z-10' : 'ml-[-1vh] z-0'
                     }`}
-                    onClick={() => {
-                      console.log(`likes ${im.name}`)
-                    }}
                   />
                 ))}
             </div>
-            <div className={'ml-[14px]'}> {`   ${likes?.length}`} </div>
-            <span className="inline-block font-bold pl-[5px]">{pageText.like}</span>
+            <Typography variant="medium_14" className={'inline-block pl-3'}>
+              {likes.length}
+              <span className="font-bold">{pageText.like}</span>
+            </Typography>
           </div>
         ) : null}
-        <div className="post__lower__comments-panel w-full m-h-[30px] h-auto">
+
+        <div className="post__lower__comments-panel w-full m-h-[30px] h-auto mt-4">
           <div
-            className="post__lower__comments-panel__spoiler font-bold cursor-pointer"
+            className="post__lower__comments-panel__spoiler cursor-pointer"
             onClick={openComments}
           >
-            {' '}
-            {comments?.length > 0
-              ? `${pageText.viewAllComments} (${comments?.length}) `
-              : pageText.noComments}
+            <Typography
+              variant="bold_14"
+              className="text-light-900 hover:text-dark-100 transition duration-500 ease-in-out"
+            >
+              {comments?.length > 0
+                ? `${pageText.viewAllComments} (${comments?.length}) `
+                : pageText.noComments}
+            </Typography>
           </div>
-          <div className="transition duration-600 ease-in-out">
+          {/*transition styles do not work - fix it!!*/}
+          <div className="transition duration-600 ease-in-out my-3">
             {commentOpen
-              ? comments.map((el: any, i: any) => {
+              ? comments.map((el: Comment, i: number) => {
                   return (
-                    <div key={i} className="flex gap-1">
-                      <div className="flex justify-start align-center h-100 w-auto ">
-                        <img src={el.avatar} className={`h-5 w-5`} alt="avatar" />
-                      </div>
-                      <div>
-                        <div>
-                          <span className="inline-block font-bold">{el.name}</span>
-                          {`${el.comment}`}
+                    <div key={i} className="flex gap-2 mb-1">
+                      <AvatarImageLink size="small" src={el.avatar} />
+                      <div className="inline">
+                        <div className="text-justify text-s">
+                          <Typography variant="small_bold" className="inline">
+                            {el.name}
+                          </Typography>
+                          <Typography variant="small" className="inline ml-1">
+                            {el.comment}
+                          </Typography>
                         </div>
                         <Typography
                           variant="small"
@@ -178,7 +184,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
                             'text-dark-100 cursor-pointer italic hover:text-dark-300 transition duration-300 ease-in-out'
                           }
                         >
-                          {el.data}
+                          {el.date}
                         </Typography>
                       </div>
                     </div>
@@ -186,7 +192,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
                 })
               : null}
           </div>
-          {/*border-b-2 border-gray*/}
+          ///
           <div className={'flex flex-col'}>
             <div className="flex justify-between transition duration-700 ease-in-out">
               <span className="text-dark-100 cursor-pointer" onClick={openTextArea}>
@@ -197,6 +203,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
             {/*<Input />*/}
             {/*{textArea ? <TextArea /> : null}*/}
           </div>
+          ///
         </div>
       </div>
     </div>
