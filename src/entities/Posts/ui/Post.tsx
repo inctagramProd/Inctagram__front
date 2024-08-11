@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { Button, Typography } from '@/src/shared/ui'
 import { SliderArrow, PostIconButton, AvatarImageLink } from './'
+import { truncateDescription, useCircleBlocks } from '../lib'
 import { PostProps } from '../model/types'
-import { useCircleBlocks } from '../lib/useCircleBlocks'
 // import { Input } from '@/src/shared/ui'
 // import Input from './Input'
 
 export const Post = ({ name, images, postDescription, likes, comments, avatarUrl }: PostProps) => {
   const [imgNumber, setImgNumber] = useState<number>(0)
-  const [visibleDescription, setVisibleDescription] = useState<boolean>(false)
+  const [showDescription, setShowDescription] = useState<boolean>(false)
   const [textArea, setTextArea] = useState<boolean>(false)
   const [commentOpen, setCommentOpen] = useState<boolean>(false)
 
@@ -18,11 +18,11 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
 
   const pageText = locale.profile.postViews
 
-  useEffect(() => {}, [imgNumber, visibleDescription])
+  useEffect(() => {}, [imgNumber, showDescription])
 
   const openDescription = () => {
-    console.log(`openDescription ${visibleDescription}`)
-    setVisibleDescription(!visibleDescription)
+    console.log(`> open description ${showDescription}`)
+    setShowDescription(!showDescription)
   }
   const openTextArea = () => {
     setTextArea(!textArea)
@@ -108,16 +108,19 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
                   <Typography variant="small_bold" className="inline text-s">
                     {name}
                   </Typography>
-                  <Typography className="inline">{' ' + postDescription}</Typography>
+                  <Typography variant="small" className="inline ml-2">
+                    {showDescription ? postDescription : truncateDescription(postDescription)}
+                  </Typography>
+                  {postDescription && postDescription.length >= 97 ? (
+                    <Typography
+                      className={'text-dark-100 cursor-pointer italic inline ml-2'}
+                      onClick={openDescription}
+                    >
+                      {showDescription ? pageText.hide : pageText.else}
+                    </Typography>
+                  ) : null}
                 </div>
               </div>
-            </div>
-          ) : null}
-          {postDescription && postDescription.length >= 30 ? (
-            <div>
-              <span className={'text-dark-100 cursor-pointer italic'} onClick={openDescription}>
-                {visibleDescription ? pageText.else : pageText.hide}
-              </span>
             </div>
           ) : null}
         </div>
