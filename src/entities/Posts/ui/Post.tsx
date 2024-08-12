@@ -113,7 +113,9 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
                   </Typography>
                   {postDescription && postDescription.length >= 97 ? (
                     <Typography
-                      className={'text-dark-100 cursor-pointer italic inline ml-2'}
+                      className={
+                        'text-dark-100 hover:text-light-900  cursor-pointer italic inline ml-2'
+                      }
                       onClick={openDescription}
                     >
                       {showDescription ? pageText.hide : pageText.else}
@@ -155,7 +157,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
           >
             <Typography
               variant="bold_14"
-              className="text-light-900 hover:text-dark-100 transition duration-500 ease-in-out"
+              className="text-dark-100 hover:text-light-900 transition duration-500 ease-in-out"
             >
               {comments?.length > 0
                 ? `${pageText.viewAllComments} (${comments?.length}) `
@@ -181,7 +183,7 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
                         <Typography
                           variant="small"
                           className={
-                            'text-dark-100 cursor-pointer italic hover:text-dark-300 transition duration-300 ease-in-out'
+                            'text-dark-100 hover:text-light-900 cursor-pointer italic transition duration-300 ease-in-out'
                           }
                         >
                           {el.date}
