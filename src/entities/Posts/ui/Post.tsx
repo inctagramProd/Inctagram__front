@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { Button, Typography } from '@/src/shared/ui'
-import { AvatarImageLink, PostIconButton, SliderArrow } from './'
-import { truncateDescription, useCircleBlocks } from '../lib'
+import { TextArea, Typography } from '@/src/shared/ui'
+import { AvatarImageLink, CircleBlocks, PostIconButton, SliderArrow } from './'
+import { truncateDescription } from '../lib'
 import { Comment, PostProps } from '../model/types'
 // import { Input } from '@/src/shared/ui'
 // import Input from './Input'
@@ -13,7 +13,6 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
   const [textArea, setTextArea] = useState<boolean>(false)
   const [commentOpen, setCommentOpen] = useState<boolean>(false)
 
-  const [CircleBlocks] = useCircleBlocks({ imagesLen: images.length, imgNumber, setImgNumber })
   const { locale } = useTranslate()
 
   const pageText = locale.profile.postViews
@@ -79,7 +78,11 @@ export const Post = ({ name, images, postDescription, likes, comments, avatarUrl
             />
             <div className="absolute bottom-[10px] w-full flex justify-center">
               <div className="w-auto bg-dark-100/50 flex flex-column justify-center gap-3 p-2">
-                {CircleBlocks}
+                <CircleBlocks
+                  imagesLen={images.length}
+                  imgNumber={imgNumber}
+                  setImgNumber={setImgNumber}
+                />
               </div>
             </div>
           </div>
