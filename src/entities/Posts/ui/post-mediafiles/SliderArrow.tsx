@@ -1,5 +1,13 @@
 import { Icon } from '@/src/shared/ui'
-import { SliderArrowProps } from '../model/types'
+import { SetStateAction } from 'react'
+import { Img } from '@/src/entities/Posts/model/types'
+
+type SliderArrowProps = {
+  imgItem: number
+  direction: 'left' | 'right'
+  images: Img[]
+  setImgItem: (value: SetStateAction<number>) => void
+}
 
 export const SliderArrow = ({ images, setImgItem, imgItem, direction }: SliderArrowProps) => {
   const slider = () => {

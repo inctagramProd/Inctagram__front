@@ -1,4 +1,8 @@
-import { CircleBlocksProps } from '../model/types'
+type CircleBlocksProps = {
+  imagesLen: number
+  imgNumber: number
+  setImgNumber: (imgNumber: number) => void
+}
 
 export const CircleBlocks = ({ imagesLen, imgNumber, setImgNumber }: CircleBlocksProps) => {
   return (
