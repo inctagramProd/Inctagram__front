@@ -1,5 +1,9 @@
-export * from './AvatarImageLink'
-export * from './CircleBlocks'
-export * from './DescriptionBlock'
-export * from './PostIconButton'
-export * from './SliderArrow'
+export { PostHeader } from './post-header/PostHeader'
+export { PostMediafiles } from './post-mediafiles/PostMediafiles'
+export { PostLower } from './post-lower/PostLower'
+
+export { AvatarImageLink } from './AvatarImageLink'
+export { PostIconButton } from './PostIconButton'
+
+export { truncateDescription } from '../lib'
+export * from '../model/types'

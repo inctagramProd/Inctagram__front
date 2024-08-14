@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Img } from '@/src/entities/Posts/model/types'
 import { CircleBlocks, SliderArrow } from './'
+import type { Img } from '../'
 
 type PostMediafilesProps = {
   images: Img[]
