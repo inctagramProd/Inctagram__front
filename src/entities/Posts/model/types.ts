@@ -13,3 +13,12 @@ export type Comment = {
   date: string
   avatar: string
 }
+export type PageText = {
+  publish: string
+  noComments: string
+  else: string
+  hide: string
+  viewAllComments: string
+  addComment: string
+  like: string
+}
