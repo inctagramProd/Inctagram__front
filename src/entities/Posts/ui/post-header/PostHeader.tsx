@@ -1,5 +1,5 @@
-import { AvatarImageLink, PostIconButton } from '@/src/entities/Posts/ui'
 import { Typography } from '@/src/shared/ui'
+import { AvatarImageLink, PostIconButton } from '../'
 
 type PostHeaderProps = {
   authorName: string

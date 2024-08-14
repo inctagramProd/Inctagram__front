@@ -1,5 +1,9 @@
 import { Icon } from '@/src/shared/ui'
-import { PostIconButtonProps } from '../model/types'
+
+type PostIconButtonProps = {
+  iconName: string
+  logMessage: string
+}
 
 export const PostIconButton = ({ iconName, logMessage }: PostIconButtonProps) => {
   return (

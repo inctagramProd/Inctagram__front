@@ -1,5 +1,11 @@
 import { isNotEmpty } from '@/src/shared'
-import { AvatarImageLinkProps } from '../model/types'
+
+type AvatarImageLinkProps = {
+  size?: 'small' | 'regular'
+  src?: string
+  className?: string
+  onClickImage?: () => void
+}
 
 export const AvatarImageLink = ({
   size = 'regular',

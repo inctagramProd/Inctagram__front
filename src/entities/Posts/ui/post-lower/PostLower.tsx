@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { TextArea } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { ButtonsPanel, CommentsPanel, DescriptionPanel, LikesPanel } from './'
-import { Comment, Like, PageText } from '../'
+import type { Comment, Like, PageText } from '../'
 
 type PostLowerProps = {
   authorName: string
