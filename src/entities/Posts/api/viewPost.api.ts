@@ -1,28 +1,23 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { api } from '@/src/shared/api/ThirdPartyApi'
 
+const getAccessToken = (): string => {
+  const tokenData = JSON.parse(
+    localStorage.getItem('Google Data') ||
+      localStorage.getItem('Git Data') ||
+      localStorage.getItem('accessToken') ||
+      ''
+  )
+
+  return tokenData?.accessToken || ''
+}
+
 export const viewPostsApi = createApi({
   reducerPath: 'posts',
   baseQuery: fetchBaseQuery({
     baseUrl: api.serverURL,
-    prepareHeaders: (headers, { getState }) => {
-      const google = localStorage.getItem('Google Data')
-      const git = localStorage.getItem('Git Data')
-      const signIn = localStorage.getItem('accessToken')
-      let access
-      if (google) {
-        access = JSON.parse(google).accessToken
-      } else if (git) {
-        access = JSON.parse(git).accessToken
-      } else if (signIn) {
-        access = JSON.parse(signIn).signIn.accessToken
-      }
-      headers.set(
-        'Authorization',
-        `Bearer ${
-          access /* 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMDYwMTQ0NiwiZXhwIjoxNzEwNjAyMzQ2fQ.R1j3GT60lbOeqQIPuw8AxJcHmZm1-2oyHvUNEi7QqG8' */
-        }`
-      )
+    prepareHeaders: headers => {
+      headers.set('Authorization', `Bearer ${getAccessToken()}`)
     },
   }),
   endpoints: builder => ({
