@@ -1,6 +1,6 @@
 import { Icon } from '@/src/shared/ui'
 import { SetStateAction } from 'react'
-import { Img } from '@/src/entities/Posts/model/types'
+import { Img } from '@/src/entities/Post/model/types'
 
 type SliderArrowProps = {
   imgItem: number

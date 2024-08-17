@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { api, getAccessToken } from '@/src/shared'
 
-export const viewPostsApi = createApi({
-  reducerPath: 'posts',
+export const viewPostApi = createApi({
+  reducerPath: 'post',
   baseQuery: fetchBaseQuery({
     baseUrl: api.serverURL,
     prepareHeaders: headers => {
@@ -18,4 +18,4 @@ export const viewPostsApi = createApi({
   }),
 })
 
-export const { useViewPostsQuery } = viewPostsApi
+export const { useViewPostsQuery } = viewPostApi

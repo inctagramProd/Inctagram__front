@@ -31,7 +31,12 @@ export const PostLower = ({
       />
       <LikesPanel likes={likes} pageText={pageText} />
       <CommentsPanel comments={comments} pageText={pageText} />
-      <AddCommentPanel pageText={pageText} addComment={() => {}} />
+      <AddCommentPanel
+        pageText={pageText}
+        addComment={() => {
+          console.log('> add comment')
+        }}
+      />
     </div>
   )
 }

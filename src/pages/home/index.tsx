@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useViewPostsQuery, Post } from '@/src/entities/Posts'
+import { useViewPostsQuery, Post } from '@/src/entities/Post'
 import { withAuth } from '@/src/features/private_routes/withAuth'
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 

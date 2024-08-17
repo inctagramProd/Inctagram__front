@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import type { PageText } from '@/src/entities/Posts/model/types'
+import type { PageText } from '@/src/entities/Post/model/types'
 
 type Props = {
   errorMessage?: string
