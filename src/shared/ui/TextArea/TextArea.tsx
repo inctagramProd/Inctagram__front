@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react'
+import TextareaAutosize from 'react-textarea-autosize'
 import type { PageText } from '@/src/entities/Posts/model/types'
 
 type Props = {
@@ -26,32 +27,29 @@ export const TextArea = ({
 
   const handleInputChange = () => {
     setHasContent(textareaRef.current?.value.trim() !== '')
-
-    if (textareaRef.current !== null) {
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'
-    }
   }
 
   return (
     <>
       {type === 'comment' ? (
         <div className="relative">
-          <textarea
-            id="com"
-            ref={textareaRef}
-            className={`w-full outline-none placeholder-light-900 rounded-sm py-1.5 px-3 h-auto bg-dark-700 border-light-900 focus:border-b focus:outline-none focus:border-primary-300 transition-colors peer border-b overflow-hidden resize-none ${className}`}
-            {...restProps}
-            rows={1}
-            onInput={handleInputChange}
-          />
-          <label
-            htmlFor="com"
-            className={`absolute left-0 top-1 text-light-900 text-s cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-primary-300 transition-all ${
-              hasContent ? 'text-xs -top-4 text-primary-300' : ''
-            } ${className}`}
-          >
-            {pageText.addComment}
-          </label>
+          <>
+            <TextareaAutosize
+              id="com"
+              ref={textareaRef}
+              className={`w-full outline-none placeholder-light-900 rounded-sm py-1.5 px-3 h-auto bg-dark-700 border-light-900 focus:border-b focus:outline-none focus:border-primary-300 transition-colors peer border-b overflow-hidden resize-none ${className}`}
+              rows={1}
+              onInput={handleInputChange}
+            />
+            <label
+              htmlFor="com"
+              className={`absolute left-0 top-1 text-light-900 text-s cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-primary-300 transition-all ${
+                hasContent ? 'text-xs -top-4 text-primary-300' : ''
+              } ${className}`}
+            >
+              {pageText.addComment}
+            </label>
+          </>
         </div>
       ) : (
         <>
