@@ -31,3 +31,8 @@ export const Disabled: Story = {
   },
 }
 
+export const Comment: Story = {
+  args: {
+    type: 'comment',
+  },
+}
