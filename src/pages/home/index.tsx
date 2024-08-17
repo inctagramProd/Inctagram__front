@@ -29,20 +29,20 @@ const HomePage = () => {
       comments: [
         {
           name: 'Bear1998[RUS]',
-          comment: ' GOOOOOOOOOAAAAAL!!!',
-          data: '12/03/2024',
+          comment: 'GOOOOOOOOOAAAAAL!!!',
+          date: '12/03/2024',
           avatar: '/mock-pics/goal-mini.png',
         },
         {
           name: 'Miura',
           comment: ' Afftar pishi ischo',
-          data: '12/03/2024',
+          date: '12/03/2024',
           avatar: '/mock-pics/6.jpg',
         },
         {
           name: 'Neco arc',
-          comment: ' Dori-dori :3',
-          data: '12/03/2024',
+          comment: 'Dori-dori :3',
+          date: '12/03/2024',
           avatar: '/mock-pics/arc.jpeg',
         },
       ],
@@ -84,7 +84,7 @@ const HomePage = () => {
           imageUrl: '/mock-pics/6.jpg',
         },
       ],
-      name: 'Alex',
+      authorName: 'Alex',
       avatarUrl: '/mock-pics/dante.jpg',
     },
     {
@@ -130,7 +130,7 @@ const HomePage = () => {
           imageUrl: '/mock-pics/shrek.jpg',
         },
       ],
-      name: 'Alex',
+      authorName: 'Alex',
       avatarUrl: '/mock-pics/dante.jpg',
     },
     {
@@ -166,7 +166,7 @@ const HomePage = () => {
           imageUrl: '/mock-pics/3.jpg',
         },
       ],
-      name: 'Sveta',
+      authorName: 'Sveta',
       avatarUrl: '/mock-pics/runa.jpg',
     },
     {
@@ -190,7 +190,7 @@ const HomePage = () => {
           imageUrl: '/mock-pics/goal.png',
         },
       ],
-      name: 'Sasha007',
+      authorName: 'Sasha007',
       avatarUrl: null,
     },
   ]
@@ -201,7 +201,7 @@ const HomePage = () => {
         {postsMock.map((el: any, id: any) => {
           return (
             <Post
-              name={el.name}
+              authorName={el.authorName}
               images={el.postImages}
               postDescription={el.postDescription}
               likes={el.likes}
