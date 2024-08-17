@@ -5,7 +5,7 @@ import type { PageText } from '@/src/entities/Posts/model/types'
 type Props = {
   errorMessage?: string
   type?: 'default' | 'comment'
-  pageText: PageText
+  pageText?: PageText
   className?: string
 } & ComponentPropsWithoutRef<'textarea'>
 
@@ -33,23 +33,21 @@ export const TextArea = ({
     <>
       {type === 'comment' ? (
         <div className="relative">
-          <>
-            <TextareaAutosize
-              id="com"
-              ref={textareaRef}
-              className={`w-full outline-none placeholder-light-900 rounded-sm py-1.5 px-3 h-auto bg-dark-700 border-light-900 focus:border-b focus:outline-none focus:border-primary-300 transition-colors peer border-b overflow-hidden resize-none ${className}`}
-              rows={1}
-              onInput={handleInputChange}
-            />
-            <label
-              htmlFor="com"
-              className={`absolute left-0 top-1 text-light-900 text-s cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-primary-300 transition-all ${
-                hasContent ? 'text-xs -top-4 text-primary-300' : ''
-              } ${className}`}
-            >
-              {pageText.addComment}
-            </label>
-          </>
+          <TextareaAutosize
+            id="com"
+            ref={textareaRef}
+            className={`w-full outline-none placeholder-light-900 rounded-sm py-1.5 px-3 h-auto bg-dark-700 border-light-900 focus:border-b focus:outline-none focus:border-primary-300 transition-colors peer border-b overflow-hidden resize-none ${className}`}
+            rows={1}
+            onInput={handleInputChange}
+          />
+          <label
+            htmlFor="com"
+            className={`absolute left-0 top-1 text-light-900 text-s cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-primary-300 transition-all ${
+              hasContent ? 'text-xs -top-4 text-primary-300' : ''
+            } ${className}`}
+          >
+            {pageText?.addComment}
+          </label>
         </div>
       ) : (
         <>

@@ -1,3 +1,4 @@
+export { AddCommentPanel } from './AddCommentPanel'
 export { ButtonsPanel } from './ButtonsPanel'
 export { CommentsPanel } from './CommentsPanel'
 export { DescriptionPanel } from './DescriptionPanel'
