@@ -3,12 +3,12 @@ import { Typography } from '@/src/shared/ui'
 import type { Comment, PageText } from '../'
 import { AvatarImageLink } from '../'
 
-type CommentsPanelProps = {
+type Props = {
   comments: Comment[]
   pageText: PageText
 }
 
-export const CommentsPanel = ({ comments, pageText }: CommentsPanelProps) => {
+export const CommentsPanel = ({ comments, pageText }: Props) => {
   const [commentOpen, setCommentOpen] = useState<boolean>(false)
 
   const openComments = () => {

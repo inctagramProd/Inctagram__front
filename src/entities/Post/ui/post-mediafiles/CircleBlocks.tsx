@@ -1,10 +1,10 @@
-type CircleBlocksProps = {
+type Props = {
   imagesLen: number
   imgNumber: number
   setImgNumber: (imgNumber: number) => void
 }
 
-export const CircleBlocks = ({ imagesLen, imgNumber, setImgNumber }: CircleBlocksProps) => {
+export const CircleBlocks = ({ imagesLen, imgNumber, setImgNumber }: Props) => {
   return (
     <>
       {[...Array(imagesLen)].map((_, i) => (

@@ -1,6 +1,6 @@
 import { isNotEmpty } from '@/src/shared'
 
-type AvatarImageLinkProps = {
+type Props = {
   size?: 'small' | 'regular'
   src?: string
   className?: string
@@ -14,7 +14,7 @@ export const AvatarImageLink = ({
     console.log(`> Link "go to profile"`)
   },
   className,
-}: AvatarImageLinkProps) => {
+}: Props) => {
   return (
     <img
       className={`cursor-pointer rounded-full bg-dark-100 ${

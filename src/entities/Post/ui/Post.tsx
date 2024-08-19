@@ -1,7 +1,7 @@
-import { PostHeader, PostLower, PostMediafiles } from './'
 import type { Comment, Img, Like } from './'
+import { PostHeader, PostLower, PostMediafiles } from './'
 
-type PostProps = {
+type Props = {
   authorName: string
   avatarUrl: string
   postDescription: string | null
@@ -17,7 +17,7 @@ export const Post = ({
   likes,
   comments,
   avatarUrl,
-}: PostProps) => {
+}: Props) => {
   return (
     <div className="flex flex-col">
       <PostHeader authorName={authorName} avatarUrl={avatarUrl} />

@@ -2,12 +2,12 @@ import { Typography } from '@/src/shared/ui'
 import type { Like, PageText } from '../'
 import { AvatarImageLink } from '../'
 
-type LikesPanelProps = {
+type Props = {
   likes: Like[]
   pageText: PageText
 }
 
-export const LikesPanel = ({ likes, pageText }: LikesPanelProps) => {
+export const LikesPanel = ({ likes, pageText }: Props) => {
   return (
     <>
       {likes?.length > 0 ? (

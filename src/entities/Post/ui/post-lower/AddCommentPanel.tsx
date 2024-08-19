@@ -1,14 +1,12 @@
-import { Button, TextArea, Typography } from '@/src/shared/ui'
-import type { Like, PageText } from '../'
-import { AvatarImageLink } from '../'
-import TextareaAutosize from 'react-textarea-autosize'
+import { Button, TextArea } from '@/src/shared/ui'
+import type { PageText } from '../'
 
-type AddCommentPanelProps = {
+type Props = {
   pageText: PageText
   addComment: VoidFunction
 }
 
-export const AddCommentPanel = ({ pageText, addComment }: AddCommentPanelProps) => {
+export const AddCommentPanel = ({ pageText, addComment }: Props) => {
   const addCommentHandler = () => {
     addComment()
   }

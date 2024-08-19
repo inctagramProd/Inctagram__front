@@ -2,7 +2,7 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { AddCommentPanel, ButtonsPanel, CommentsPanel, DescriptionPanel, LikesPanel } from './'
 import type { Comment, Like, PageText } from '../'
 
-type PostLowerProps = {
+type Props = {
   authorName: string
   avatarUrl: string
   postDescription: string | null
@@ -10,13 +10,7 @@ type PostLowerProps = {
   comments: Comment[]
 }
 
-export const PostLower = ({
-  authorName,
-  avatarUrl,
-  postDescription,
-  likes,
-  comments,
-}: PostLowerProps) => {
+export const PostLower = ({ authorName, avatarUrl, postDescription, likes, comments }: Props) => {
   const { locale } = useTranslate()
   const pageText: PageText = locale.profile.postViews
 

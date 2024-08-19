@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CircleBlocks, SliderArrow } from './'
 import type { Img } from '../'
 
-type PostMediafilesProps = {
+type Props = {
   images: Img[]
 }
 
-export const PostMediafiles = ({ images }: PostMediafilesProps) => {
+export const PostMediafiles = ({ images }: Props) => {
   const [imgNumber, setImgNumber] = useState<number>(0)
 
-  useEffect(() => {}, [imgNumber])
-
   return (
-    <div className="post__mediafiles w-full h-auto">
+    <div className="w-full h-auto">
       <div className="d-flex align-center justify-center">
         <div className={'relative max-w-[504px] flex aspect-square'}>
           <SliderArrow

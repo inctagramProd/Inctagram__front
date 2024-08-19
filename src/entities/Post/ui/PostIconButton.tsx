@@ -1,11 +1,11 @@
 import { Icon } from '@/src/shared/ui'
 
-type PostIconButtonProps = {
+type Props = {
   iconName: string
   logMessage: string
 }
 
-export const PostIconButton = ({ iconName, logMessage }: PostIconButtonProps) => {
+export const PostIconButton = ({ iconName, logMessage }: Props) => {
   return (
     <div
       className="cursor-pointer"

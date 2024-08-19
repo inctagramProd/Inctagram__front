@@ -1,24 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Typography } from '@/src/shared/ui'
 import type { PageText } from '../'
 import { AvatarImageLink, truncateDescription } from '../'
 
-type DescriptionPanelProps = {
+type Props = {
   authorName: string
   avatarUrl: string
   pageText: PageText
   postDescription: string | null
 }
 
-export const DescriptionPanel = ({
-  authorName,
-  avatarUrl,
-  pageText,
-  postDescription,
-}: DescriptionPanelProps) => {
+export const DescriptionPanel = ({ authorName, avatarUrl, pageText, postDescription }: Props) => {
   const [showDescription, setShowDescription] = useState<boolean>(false)
-
-  useEffect(() => {}, [showDescription])
 
   const openDescription = () => {
     console.log(`> open description ${showDescription}`)

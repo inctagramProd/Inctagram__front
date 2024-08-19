@@ -1,12 +1,12 @@
 import { Typography } from '@/src/shared/ui'
 import { AvatarImageLink, PostIconButton } from '../'
 
-type PostHeaderProps = {
+type Props = {
   authorName: string
   avatarUrl: string
 }
 
-export const PostHeader = ({ authorName, avatarUrl }: PostHeaderProps) => {
+export const PostHeader = ({ authorName, avatarUrl }: Props) => {
   return (
     <div className="post__header flex justify-between items-center w-full h-[30px] mb-4">
       <div className="flex items-center justify-center gap-2">
