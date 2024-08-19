@@ -38,5 +38,5 @@ next-env.d.ts
 # IntelliJ IDEA
 .idea/
 
-# Visual Studio Code
+# Visual Studio Code .vscode/
 .vscode/

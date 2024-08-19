@@ -1,0 +1,24 @@
+export type Img = {
+  imageId: number
+  imageUrl: string
+}
+export type Like = {
+  name: string
+  like: boolean
+  avatar: string
+}
+export type Comment = {
+  name: string
+  comment: string
+  date: string
+  avatar: string
+}
+export type PageText = {
+  publish: string
+  noComments: string
+  else: string
+  hide: string
+  viewAllComments: string
+  addComment: string
+  like: string
+}
