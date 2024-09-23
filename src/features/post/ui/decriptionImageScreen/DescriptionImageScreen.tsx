@@ -34,7 +34,7 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
     )
     return Promise.all(imagesFiles).then(res => {
       res.forEach(el => {
-        formData.append('files', el as Blob)
+        formData.append('images', el as Blob)
       })
       formData.append('description', postDescription)
       return formData
@@ -49,7 +49,7 @@ export const DescriptionImageScreen = ({ imagesWithFilters, closeModal }: Props)
 
   if (isSuccess) {
     closeModal()
-    useToast({ text: locale.profile.addNewPost.successCreate})
+    useToast({ text: locale.profile.addNewPost.successCreate })
   }
   if (isError) {
     useToast({ text: 'An error has occurred', error: true })
