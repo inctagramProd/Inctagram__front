@@ -8,7 +8,7 @@ export type ProfileEditParams = {
   dateOfBirth: string
 }
 
-export type ProfileDataResponse = {
+export type ProfileData = {
   username: string
   firstName: string
   lastName: string
@@ -16,7 +16,7 @@ export type ProfileDataResponse = {
   country: string
   city: string
   aboutMe: string
-  userId: number
+  userId: number | null
   createdAt: string
   updatedAt: string
   deletedAt: string

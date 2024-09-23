@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Typography, Icon, Button, Select, SelectOptionType } from '@/src/shared/ui'
+import { Button, Icon, Select, SelectOptionType, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type Props = {

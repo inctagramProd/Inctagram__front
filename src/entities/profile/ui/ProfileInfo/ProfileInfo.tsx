@@ -2,31 +2,34 @@ import React from 'react'
 import { Icon, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import Link from 'next/link'
+import Image from 'next/image'
+import { getGoogleDriveImageUrl } from '@/src/shared/lib/utils/getGoogleDriveImageUrl'
 
 type Props = {
   profileImageURL?: string
   username?: string
   aboutMe?: string
 }
+
 export const ProfileInfo = ({ profileImageURL, username, aboutMe }: Props) => {
   const { locale } = useTranslate()
+
+  const imageUrl = getGoogleDriveImageUrl(profileImageURL)
 
   return (
     <div className="flex gap-x-9 pt-9 pl-6">
       <div>
-        <div
-          className={
-            'w-[196px] h-[196px] bg-dark-500 rounded-full flex justify-center items-center'
-          }
-        >
-          {profileImageURL ? (
-            <img
-              alt="Profile"
+        <div className="bg-dark-500 rounded-full flex justify-center items-center">
+          {imageUrl ? (
+            <Image
+              width={196}
+              height={196}
+              alt="profile photo"
               className="rounded-full w-full h-full object-cover"
-              src={profileImageURL}
+              src={imageUrl}
             />
           ) : (
-            <Icon height={48} iconName="Picture" width={48} />
+            <Icon width={48} height={48} iconName="Picture" />
           )}
         </div>
       </div>
@@ -48,19 +51,19 @@ export const ProfileInfo = ({ profileImageURL, username, aboutMe }: Props) => {
         </div>
         <div>
           <ul className="flex gap-x-14 mb-6">
-            <li className="">
+            <li>
               <Typography variant="bold_14" className="block">
                 2 140
               </Typography>{' '}
               <Typography variant="regular_14">{locale.profile.subscriptions}</Typography>
             </li>
-            <li className="">
+            <li>
               <Typography variant="bold_14" className="block">
                 2 234
               </Typography>{' '}
               <Typography variant="regular_14">{locale.profile.subscribers}</Typography>
             </li>
-            <li className="">
+            <li>
               <Typography variant="bold_14" className="block">
                 2 434
               </Typography>{' '}

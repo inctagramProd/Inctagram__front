@@ -71,12 +71,8 @@ export const DatePickerInput = ({
     const newDateRange: [Date | null, Date | null] = Array.isArray(update)
       ? update
       : [update, update]
-    setDateRange(newDateRange) //toISOString()
+    setDateRange(newDateRange)
     setFieldValue(name, startDate)
-
-    // if (onChange) {
-    //   onChange(newDateRange.map(formatDate).join(' - '))
-    // }
   }
 
   return (

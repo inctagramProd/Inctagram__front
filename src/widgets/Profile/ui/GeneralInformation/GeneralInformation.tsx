@@ -1,6 +1,6 @@
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 import { EditProfileForm } from '@/src/features/profile/edit/ui/EditProfileForm/EditProfileForm'
-import { ProfilePhoto } from '@/src/features/profile/edit/ui/ProfilePhoto/ProfilePhoto'
+import { EditProfilePhoto } from '@/src/features/profile/edit/ui/ProfilePhoto/EditProfilePhoto'
 import { useUpdateProfile } from '@/src/features/profile/edit/model/hooks/useUpdateProfile'
 import { useImageUpload } from '@/src/features/profile/edit/model/hooks/useImageUpload'
 
@@ -11,7 +11,7 @@ export const GeneralInformation = () => {
     <div className="mt-6">
       <div className="flex gap-12 flex-row">
         <div className="w-full max-w-[196px]">
-          <ProfilePhoto imageUpload={handleImageUpload} />
+          <EditProfilePhoto imageUpload={handleImageUpload} />
         </div>
         <div className="w-full">
           <EditProfileForm onSubmitHandler={handleUpdateProfile} />

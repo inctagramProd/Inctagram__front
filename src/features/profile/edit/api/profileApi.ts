@@ -1,16 +1,26 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { ProfileDataResponse } from '@/src/features/profile/edit/model/types/profileEditTypes'
+import { setProfileData } from '@/src/features/profile/edit/model/profileSlice'
+import { ProfileData } from '@/src/features/profile/edit/model/types/profileEditTypes'
 
 export const profile = baseApi.injectEndpoints({
   endpoints: build => ({
-    getProfile: build.query<ProfileDataResponse, void>({
+    getProfile: build.query<ProfileData, void>({
       query: data => ({
         body: data,
         url: 'user-profile/me',
       }),
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          console.log(data)
+          dispatch(setProfileData(data))
+        } catch (e) {
+          console.error('some error occurred: ', e)
+        }
+      },
       providesTags: ['userProfile'],
     }),
-    updateProfile: build.mutation<ProfileDataResponse, FormData>({
+    updateProfile: build.mutation<ProfileData, FormData>({
       query: data => ({
         body: data,
         method: 'PATCH',
@@ -21,5 +31,4 @@ export const profile = baseApi.injectEndpoints({
   }),
   overrideExisting: false,
 })
-
 export const { useGetProfileQuery, useUpdateProfileMutation } = profile

@@ -1,14 +1,20 @@
 import React, { ChangeEvent, RefObject, useRef, useState } from 'react'
 import { Button, Icon } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import Image from 'next/image'
+import { useAppSelector } from '@/src/app/hooks/useAppSelectorAndDispatch'
+import { getGoogleDriveImageUrl } from '@/src/shared/lib/utils/getGoogleDriveImageUrl'
 
 type Props = {
   imageUpload: (image: File) => void
 }
-export const ProfilePhoto = ({ imageUpload }: Props) => {
+export const EditProfilePhoto = ({ imageUpload }: Props) => {
   const [selectedImage, setSelectedImage] = useState<null | string>(null)
   const uploadRef: RefObject<HTMLInputElement> = useRef(null)
   const { locale } = useTranslate()
+
+  const profilePhoto = useAppSelector(state => state.profile?.profileImageURL)
+  const imageUrl = getGoogleDriveImageUrl(profilePhoto)
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0]
@@ -35,11 +41,13 @@ export const ProfilePhoto = ({ imageUpload }: Props) => {
       <div
         className={'w-[196px] h-[196px] bg-dark-500 rounded-full flex justify-center items-center'}
       >
-        {selectedImage ? (
-          <img
+        {imageUrl ? (
+          <Image
+            width={196}
+            height={196}
             alt="Profile"
             className="rounded-full w-full h-full object-cover"
-            src={selectedImage}
+            src={imageUrl}
           />
         ) : (
           <Icon height={48} iconName="Picture" width={48} />

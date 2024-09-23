@@ -4,6 +4,7 @@ import { profileEditSchema } from '@/src/features/profile/edit/model/schema/prof
 import { ProfileEditParams } from '@/src/features/profile/edit/model/types/profileEditTypes'
 import { Button, DatePickerInput, Input, Select, TextArea, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import { useGetProfileQuery } from '@/src/features/profile/edit/api/profileApi'
 
 type Props = {
   onSubmitHandler: (values: ProfileEditParams, actions: FormikHelpers<ProfileEditParams>) => void
@@ -18,31 +19,35 @@ interface CityOptions {
 
 export const EditProfileForm = ({ onSubmitHandler }: Props) => {
   const { locale } = useTranslate()
+  const { data: profileData, isLoading, isSuccess } = useGetProfileQuery()
 
-  const initialValues: ProfileEditParams = {
-    firstName: 'name from store',
-    lastName: '',
-    username: '',
+  const initialValues = {
+    firstName: profileData?.firstName || '',
+    lastName: profileData?.lastName || '',
+    username: profileData?.username || '',
+    dateOfBirth: '',
     country: '',
     city: '',
     aboutMe: '',
-    dateOfBirth: '',
   }
 
   const [country, setCountry] = useState<string>('')
   const [city, setCity] = useState<string>('')
 
   const cityOptions: CityOptions = {
-    belarus: [{ title: 'Minsk', value: 'minsk' }, { title: 'Brest', value: 'brest' }],
+    belarus: [
+      { title: 'Minsk', value: 'minsk' },
+      { title: 'Brest', value: 'brest' },
+    ],
     russia: [
       { title: 'Moscow', value: 'moscow' },
-      {
-        title: 'St.Petersburg',
-        value: 'petersburg',
-      },
+      { title: 'St.Petersburg', value: 'petersburg' },
       { title: 'Novosibirsk', value: 'novosibirsk' },
     ],
-    france: [{ title: 'Paris', value: 'paris' }, { title: 'Leon', value: 'leon' }],
+    france: [
+      { title: 'Paris', value: 'paris' },
+      { title: 'Leon', value: 'leon' },
+    ],
     null: [{ title: 'Choose city', value: 0 }],
   }
 
@@ -61,6 +66,7 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
         initialValues={initialValues}
         onSubmit={onSubmitHandler}
         validationSchema={profileEditSchema(locale)}
+        enableReinitialize
       >
         {({ dirty, errors, isSubmitting, isValid, touched }: FormikProps<ProfileEditParams>) => (
           <Form>
