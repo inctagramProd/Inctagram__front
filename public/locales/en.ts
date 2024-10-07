@@ -231,7 +231,7 @@ export const en: LocaleType = {
             close: 'Close',
             successCreate: 'Post published successfully',
             imageError: {
-                size: 'Image size must be less than 0.5 MB',
+                size: 'Image size must be less than 5 MB',
                 format: ' The format of the uploaded image must be PNG or JPEG',
                 file: 'Error processing file',
                 upload: 'You are trying to add too many images to this post. Please limit the number of images to 10 per post'
