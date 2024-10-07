@@ -229,6 +229,13 @@ export const en: LocaleType = {
             discard: 'Discard',
             saveDraft: 'Safe draft',
             close: 'Close',
+            successCreate: 'Post published successfully',
+            imageError: {
+                size: 'Image size must be less than 5 MB',
+                format: ' The format of the uploaded image must be PNG or JPEG',
+                file: 'Error processing file',
+                upload: 'You are trying to add too many images to this post. Please limit the number of images to 10 per post'
+            }
         },
         descriptionError: {
             error: 'Max number of characters 500',
