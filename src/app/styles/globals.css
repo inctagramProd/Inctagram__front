@@ -4,6 +4,8 @@
 
 body {
     @apply text-light-100 bg-dark-700;
+
+    font-family: Inter, sans-serif;
 }
 
 /* Removing input background colour for autocomplete */
@@ -14,4 +16,48 @@ input:-webkit-autofill:focus {
 
 input[data-autocompleted] {
     background-color: transparent !important;
+}
+
+/* Filter styles */
+@layer components {
+    .image_filter--clarendon{
+        @apply saturate-200
+    }
+
+    .image_filter--gingham{
+        @apply contrast-150
+    }
+
+    .image_filter--lark{
+        @apply grayscale
+    }
+
+    .image_filter--moon{
+        @apply contrast-[110%] brightness-110 saturate-[130%]
+    }
+
+    .image_filter--normal{
+        @apply filter-none
+    }
+
+    .image_filter--oldSchool{
+        @apply opacity-70
+    }
+
+    .image_filter--shabby{
+        @apply sepia
+    }
+
+    .image_filter--silentHill{
+        @apply hue-rotate-180
+    }
+
+    .image_filter--xRay{
+        @apply invert
+    }
+}
+
+/* Slick-slider dots active style */
+.slick-active>span{
+    @apply bg-primary-700
 }

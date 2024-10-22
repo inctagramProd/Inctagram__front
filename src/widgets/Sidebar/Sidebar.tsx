@@ -2,6 +2,7 @@ import { LinkItem } from './LinkedItem'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LogOut } from '@/src/features/auth/logOut'
 import { StoreProvider } from '@/src/app/providers'
+import { CreatePost } from '@/src/features/post/ui/createPost'
 
 type Props = { className?: string; theme?: 'dark' | 'light' }
 
@@ -32,12 +33,7 @@ export const Sidebar = (props: Props) => {
             link={'/home'}
             style={'default'}
           />
-          <LinkItem
-            iconName={'PlusSquare'}
-            label={locale.profile.createPost}
-            link={'/create'}
-            style={'default'}
-          />
+          <CreatePost />
           <LinkItem
             iconName={'Person'}
             label={locale.profile.myProfile}
