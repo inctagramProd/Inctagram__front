@@ -63,7 +63,7 @@ export const DatePickerInput = ({
   const { setFieldValue } = useFormikContext()
   const [field, meta] = useField(name)
 
-  const  dateFormat = ['dd.MM.yyyy', 'dd-MM-yyyy', 'dd/MM/yyyy']
+  const dateFormat = ['dd.MM.yyyy', 'dd-MM-yyyy', 'dd/MM/yyyy']
 
   const formatDate = (date: Date | null): string => (date ? format(date, 'dd/MM/yyyy') : '')
 
@@ -72,7 +72,7 @@ export const DatePickerInput = ({
       ? update
       : [update, update]
     setDateRange(newDateRange)
-    setFieldValue(name, startDate)
+    void setFieldValue(name, startDate)
   }
 
   return (

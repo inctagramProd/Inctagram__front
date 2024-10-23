@@ -18,7 +18,7 @@ export const profile = baseApi.injectEndpoints({
           console.error('some error occurred: ', e)
         }
       },
-      providesTags: ['userProfile'],
+      providesTags: ['UserProfile'],
     }),
     updateProfile: build.mutation<ProfileData, FormData>({
       query: data => ({
@@ -26,7 +26,7 @@ export const profile = baseApi.injectEndpoints({
         method: 'PATCH',
         url: 'user-profile',
       }),
-      invalidatesTags: ['userProfile'],
+      invalidatesTags: ['UserProfile'],
     }),
   }),
   overrideExisting: false,

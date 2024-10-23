@@ -13,13 +13,10 @@ export const useUpdateProfile = () => {
   ) => {
     const formData = new FormData()
 
-    console.log('date of birth', profileData.dateOfBirth)
-
     formData.append('username', profileData.username)
     formData.append('firstName', profileData.firstName)
     formData.append('lastName', profileData.lastName)
-    // formData.append('dateOfBirth', profileData.dateOfBirth) // toISOString()
-    // TODO заполнить value. В данный момент падает ошибка на беке
+    formData.append('dateOfBirth', new Date(profileData.dateOfBirth).toISOString())
     formData.append('country', profileData.country)
     formData.append('city', profileData.city)
     formData.append('aboutMe', profileData.aboutMe)
