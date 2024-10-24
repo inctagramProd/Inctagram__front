@@ -256,6 +256,22 @@ export const en: LocaleType = {
             areYouSure: 'Are you sure you want to delete this post?',
         },
     },
+    dates: {
+        month: {
+            April: 'April',
+            August: 'August',
+            December: 'December',
+            February: 'February',
+            January: 'January',
+            July: 'July',
+            June: 'June',
+            March: 'March',
+            May: 'May',
+            November: 'November',
+            October: 'October',
+            September: 'September',
+        },
+    },
 }
 
 export type LocaleType = typeof ru

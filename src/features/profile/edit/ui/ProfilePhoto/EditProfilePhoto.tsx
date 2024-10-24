@@ -20,13 +20,13 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
     const file = e.target.files?.[0]
     if (file) {
       imageUpload(file)
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          setSelectedImage(reader.result)
-        }
-      }
+      // const reader = new FileReader()
+      // reader.readAsDataURL(file)
+      // reader.onloadend = () => {
+      //   if (typeof reader.result === 'string') {
+      //     setSelectedImage(reader.result)
+      //   }
+      // }
     }
   }
 

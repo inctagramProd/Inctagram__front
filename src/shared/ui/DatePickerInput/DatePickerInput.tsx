@@ -3,7 +3,7 @@ import { useField, useFormikContext } from 'formik'
 import DatePicker from 'react-datepicker'
 
 import { Typography } from '@/src/shared/ui'
-import { format } from 'date-fns'
+import { format, getMonth, getYear } from 'date-fns'
 
 import './style.css'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -32,7 +32,10 @@ const CustomInput = ({
   isRange,
   onClick,
   value,
-}: Props & { onClick: () => void; value: string }) => {
+}: Props & {
+  onClick: () => void
+  value: string
+}) => {
   const baseClassname =
     'border rounded-sm py-1.5 w-full text-light-100 placeholder-light-900 bg-transparent hover:border-light-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:placeholder-dark-100 disabled:text-dark-100 border-dark-100'
   const errorClassname = hasError ? 'text-danger-300 border border-danger-500' : ''
@@ -74,6 +77,28 @@ export const DatePickerInput = ({
     setDateRange(newDateRange)
     void setFieldValue(name, startDate)
   }
+  const range = (start: number, end: number, step: number = 1) => {
+    let arr = []
+    for (let i = start; i < end; i += step) {
+      arr.push(i)
+    }
+    return arr
+  }
+  const years = range(1990, getYear(new Date()) + 1, 1)
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
 
   return (
     <div className={'flex flex-col gap-0 relative'}>
@@ -93,6 +118,49 @@ export const DatePickerInput = ({
             }
           />
         }
+        renderCustomHeader={({
+          date,
+          changeYear,
+          changeMonth,
+          decreaseMonth,
+          increaseMonth,
+          prevMonthButtonDisabled,
+          nextMonthButtonDisabled,
+        }) => (
+          <div
+            style={{
+              margin: 10,
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+              {'<'}
+            </button>
+            <select value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
+              {years.map(option => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={months[getMonth(date)]}
+              onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
+            >
+              {months.map(option => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+              {'>'}
+            </button>
+          </div>
+        )}
         dateFormat={dateFormat}
         endDate={endDate}
         icon={

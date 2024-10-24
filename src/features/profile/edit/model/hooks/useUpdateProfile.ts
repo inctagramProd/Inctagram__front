@@ -12,7 +12,8 @@ export const useUpdateProfile = () => {
     actions: FormikHelpers<ProfileEditParams>
   ) => {
     const formData = new FormData()
-
+    console.log(profileData.dateOfBirth)
+    return
     formData.append('username', profileData.username)
     formData.append('firstName', profileData.firstName)
     formData.append('lastName', profileData.lastName)
@@ -27,7 +28,13 @@ export const useUpdateProfile = () => {
       // actions.resetForm()
     } catch (error) {
       const errMessage =
-        (error as { data?: { message?: string } })?.data?.message ?? 'Unknown error'
+        (
+          error as {
+            data?: {
+              message?: string
+            }
+          }
+        )?.data?.message ?? 'Unknown error'
       useToast(errMessage, true)
     }
   }
