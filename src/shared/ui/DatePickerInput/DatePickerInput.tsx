@@ -82,7 +82,11 @@ export const DatePickerInput = ({ error, hasError, isRange, label, onChange, nam
         <>
           <Typography variant={'error'}>
             {error}{' '}
-            <Link href={'/auth/privacy-policy'} className="underline underline-offset-4 text-sm">
+            <Link
+              className="underline underline-offset-4 text-sm"
+              href={{ pathname: '/auth/privacy-policy', query: { sender: 'profile' } }}
+              target="_blank"
+            >
               {locale.auth.privacyAndTermsPages.titleOfPrivacyPolicy}
             </Link>
           </Typography>

@@ -48,6 +48,7 @@ export const CustomHeader = (props: CustomHeaderProps) => {
     <div className="flex justify-between px-1 cursor-pointer">
       <div className="" onClick={decreaseMonth}>
         <Icons.ArrowIosBack width={16} height={16} />
+        <Icon iconName="ArrowBack" />
         назад
       </div>
       <div>
