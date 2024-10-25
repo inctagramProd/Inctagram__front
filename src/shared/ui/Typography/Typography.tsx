@@ -56,7 +56,7 @@ export const Typography = <T extends ElementType = 'p'>(
       case 'link_small':
         return 'text-primary-500 text-xs font-semibold leading-loose underline cursor-pointer'
       case 'error':
-        return 'text-danger-500'
+        return 'text-danger-500 text-sm font-normal leading-normal'
       case 'not_active':
         return 'text-light-900 text-base font-normal leading-normal'
       default:
