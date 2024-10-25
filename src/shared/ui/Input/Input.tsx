@@ -1,5 +1,6 @@
-import { ComponentPropsWithoutRef, FormEvent, useState, KeyboardEvent } from 'react'
+import { ComponentPropsWithoutRef, FormEvent, KeyboardEvent, useState } from 'react'
 import { Icon } from '../Icon/Icon'
+import { Typography } from '@/src/shared/ui'
 
 type Props = {
   error?: boolean | string
@@ -60,7 +61,7 @@ export const Input = ({ error, label, required, type, ...restProps }: Props) => 
           </button>
         )}
       </div>
-      {error && <span className={'text-sm font-normal text-red-500 leading-normal'}>{error}</span>}
+      {error && <Typography variant="error">{error}</Typography>}
     </div>
   )
 }

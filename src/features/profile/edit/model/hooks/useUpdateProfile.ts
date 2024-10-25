@@ -12,8 +12,8 @@ export const useUpdateProfile = () => {
     actions: FormikHelpers<ProfileEditParams>
   ) => {
     const formData = new FormData()
-    console.log(profileData.dateOfBirth)
-    return
+    console.log(profileData)
+
     formData.append('username', profileData.username)
     formData.append('firstName', profileData.firstName)
     formData.append('lastName', profileData.lastName)

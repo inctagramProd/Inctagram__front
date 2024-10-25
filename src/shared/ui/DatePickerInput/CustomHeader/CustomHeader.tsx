@@ -1,10 +1,9 @@
 import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import { getMonth, getYear } from 'date-fns'
-import { Button } from '@/src/shared/ui/Button/Button'
-// import s from './CustomHeader.module.scss'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LocaleType } from '@/public/locales/en'
-import React from 'react'
+import { Icon } from '@/src/shared/ui'
+import * as Icons from '../../../assets/icons/icons'
 
 const rangeYears = (start: number, end: number): any[] => {
   return Array.from({ length: end - start }, (_, i) => {
@@ -46,30 +45,38 @@ export const CustomHeader = (props: CustomHeaderProps) => {
   const monthOptions = rangeMonth(locale.dates)
 
   return (
-    <div className={''}>
-      <select
-        // classNames={{ trigger: clsx(s.select, s.month), viewport: s.viewport }}
-        onChange={month => changeMonth(Number(month))}
-        // options={monthOptions}
-        defaultValue={getMonth(date).toString()}
-      >
-        {monthOptions.map(t => (
-          <option>{t.name}</option>
-        ))}
-      </select>
-      <select
-        // classNames={{ trigger: clsx(s.select, s.year), viewport: s.viewport }}
-        onChange={year => changeYear(Number(year))}
-        // options={yearsOptions}
-        defaultValue={getYear(date).toString()}
-      >
-        {yearsOptions.map(t => (
-          <option>{t.name}</option>
-        ))}
-      </select>
-      <div className={''}>
-        <Button label="right" className={''} onClick={decreaseMonth} type="button" style="text" />
-        <Button label="left" className={''} onClick={increaseMonth} type="button" style="text" />
+    <div className="flex justify-between px-1 cursor-pointer">
+      <div className="" onClick={decreaseMonth}>
+        <Icons.ArrowIosBack width={16} height={16} />
+        назад
+      </div>
+      <div>
+        <select
+          className="bg-dark-500"
+          value={getMonth(date).toString()}
+          onChange={({ target: { value: month } }) => changeMonth(Number(month))}
+        >
+          {monthOptions.map((option, index) => (
+            <option key={index} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+        <select
+          className="bg-dark-500"
+          value={getYear(date).toString()}
+          onChange={({ target: { value: year } }) => changeYear(Number(year))}
+        >
+          {yearsOptions.map((option, index) => (
+            <option key={index} value={option.value}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="cursor-pointer" onClick={increaseMonth}>
+        <Icon iconName="ArrowIosBack" />
+        вперед
       </div>
     </div>
   )

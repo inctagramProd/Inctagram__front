@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
+import { Field, Form, Formik, FormikHelpers, FormikProps, ErrorMessage } from 'formik'
 import { profileEditSchema } from '@/src/features/profile/edit/model/schema/profileEditSchema'
 import { ProfileEditParams } from '@/src/features/profile/edit/model/types/profileEditTypes'
-import { Button, DatePickerInput, Input, Select, TextArea, Typography } from '@/src/shared/ui'
+import { Button, DatePickerInput, Icon, Input, Select, TextArea, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useGetProfileQuery } from '@/src/features/profile/edit/api/profileApi'
 
@@ -21,14 +21,14 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
   const { locale } = useTranslate()
   const { data: profileData, isLoading, isSuccess } = useGetProfileQuery()
 
-  const initialValues = {
+  const initialValues: ProfileEditParams = {
     firstName: profileData?.firstName || '',
     lastName: profileData?.lastName || '',
     username: profileData?.username || '',
-    dateOfBirth: '',
+    dateOfBirth: profileData?.dateOfBirth || '',
     country: '',
     city: '',
-    aboutMe: '',
+    aboutMe: profileData?.aboutMe || '',
   }
 
   const [country, setCountry] = useState<string>('')
@@ -83,6 +83,7 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
                 label={locale.profile.profileSetting.firstName}
                 name="firstName"
               />
+
               <Field
                 as={Input}
                 error={touched.lastName && errors.lastName}
@@ -91,7 +92,7 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
               />
               <Field
                 as={DatePickerInput}
-                error={touched.dateOfBirth && errors.dateOfBirth}
+                error={errors.dateOfBirth}
                 label={locale.profile.profileSetting.dateOfBirthday}
                 name="dateOfBirth"
               />

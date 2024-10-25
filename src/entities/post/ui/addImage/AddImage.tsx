@@ -38,7 +38,7 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
         setImageHandler(url)
       }
       if (images.length === 10) {
-        useToast({ text: locale.profile.addNewPost.imageError.upload, error: true })
+        useToast(locale.profile.addNewPost.imageError.upload, true)
       }
     })
   }

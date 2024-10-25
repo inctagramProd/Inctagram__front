@@ -1,25 +1,19 @@
 import React, { useState } from 'react'
 import { useField, useFormikContext } from 'formik'
 import DatePicker from 'react-datepicker'
-
 import { Typography } from '@/src/shared/ui'
-import { format, getMonth, getYear } from 'date-fns'
-
+import { format } from 'date-fns'
+import { CustomInput } from '@/src/shared/ui/DatePickerInput/CustomInput/CustomInput'
 import './style.css'
-import 'react-datepicker/dist/react-datepicker.css'
 
+import 'react-datepicker/dist/react-datepicker.css'
 import * as Icons from '../../assets/icons/icons'
+import { CustomHeader } from '@/src/shared/ui/DatePickerInput/CustomHeader/CustomHeader'
+import Link from 'next/link'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type Props = {
-  errorMsg?: string
-  hasError?: boolean
-  isRange?: boolean
-  label?: string
-  onChange?: (value: string) => void
-}
-
-type DatePickerProps = {
-  errorMsg?: string
+  error?: string
   hasError?: boolean
   isRange?: boolean
   label?: string
@@ -27,40 +21,8 @@ type DatePickerProps = {
   name: string
 }
 
-const CustomInput = ({
-  hasError,
-  isRange,
-  onClick,
-  value,
-}: Props & {
-  onClick: () => void
-  value: string
-}) => {
-  const baseClassname =
-    'border rounded-sm py-1.5 w-full text-light-100 placeholder-light-900 bg-transparent hover:border-light-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:placeholder-dark-100 disabled:text-dark-100 border-dark-100'
-  const errorClassname = hasError ? 'text-danger-300 border border-danger-500' : ''
-  const rangeClassname = isRange ? 'w-full' : ''
-
-  return (
-    <>
-      <input
-        className={`${baseClassname} ${errorClassname} ${rangeClassname}`}
-        onClick={onClick}
-        readOnly
-        value={value}
-      />
-    </>
-  )
-}
-
-export const DatePickerInput = ({
-  errorMsg,
-  hasError,
-  isRange,
-  label,
-  onChange,
-  name,
-}: DatePickerProps) => {
+export const DatePickerInput = ({ error, hasError, isRange, label, onChange, name }: Props) => {
+  const { locale } = useTranslate()
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const [startDate, endDate] = dateRange
   const { setFieldValue } = useFormikContext()
@@ -75,30 +37,9 @@ export const DatePickerInput = ({
       ? update
       : [update, update]
     setDateRange(newDateRange)
+    const [startDate, endDate] = newDateRange
     void setFieldValue(name, startDate)
   }
-  const range = (start: number, end: number, step: number = 1) => {
-    let arr = []
-    for (let i = start; i < end; i += step) {
-      arr.push(i)
-    }
-    return arr
-  }
-  const years = range(1990, getYear(new Date()) + 1, 1)
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
 
   return (
     <div className={'flex flex-col gap-0 relative'}>
@@ -118,49 +59,7 @@ export const DatePickerInput = ({
             }
           />
         }
-        renderCustomHeader={({
-          date,
-          changeYear,
-          changeMonth,
-          decreaseMonth,
-          increaseMonth,
-          prevMonthButtonDisabled,
-          nextMonthButtonDisabled,
-        }) => (
-          <div
-            style={{
-              margin: 10,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-              {'<'}
-            </button>
-            <select value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
-              {years.map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-
-            <select
-              value={months[getMonth(date)]}
-              onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
-            >
-              {months.map(option => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-
-            <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-              {'>'}
-            </button>
-          </div>
-        )}
+        renderCustomHeader={params => <CustomHeader {...params} />}
         dateFormat={dateFormat}
         endDate={endDate}
         icon={
@@ -179,9 +78,16 @@ export const DatePickerInput = ({
         showIcon
         startDate={startDate}
       />
-      {errorMsg && <Typography variant={'error'}>{errorMsg}</Typography>}
+      {error && (
+        <>
+          <Typography variant={'error'}>
+            {error}{' '}
+            <Link href={'/auth/privacy-policy'} className="underline underline-offset-4 text-sm">
+              {locale.auth.privacyAndTermsPages.titleOfPrivacyPolicy}
+            </Link>
+          </Typography>
+        </>
+      )}
     </div>
   )
 }
-
-export default DatePickerInput
