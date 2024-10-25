@@ -9,8 +9,8 @@ export const GeneralInformation = () => {
   const { handleImageUpload } = useImageUpload()
   return (
     <div className="mt-6">
-      <div className="flex gap-12 flex-row">
-        <div className="w-full max-w-[196px]">
+      <div className="flex gap-12 flex-row max-lg:flex-col">
+        <div className="lg:max-w-[210px] w-full">
           <EditProfilePhoto imageUpload={handleImageUpload} />
         </div>
         <div className="w-full">

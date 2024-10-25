@@ -20,7 +20,7 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
     const file = e.target.files?.[0]
     if (file) {
       imageUpload(file)
-      // const reader = new FileReader()
+      // const reader = new FileReader() // TODO: удалить неиспользуемый код
       // reader.readAsDataURL(file)
       // reader.onloadend = () => {
       //   if (typeof reader.result === 'string') {
@@ -39,7 +39,9 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
   return (
     <div>
       <div
-        className={'w-[196px] h-[196px] bg-dark-500 rounded-full flex justify-center items-center'}
+        className={
+          'w-[196px] h-[196px] bg-dark-500 rounded-full flex justify-center items-center m-auto'
+        }
       >
         {imageUrl ? (
           <Image
@@ -53,15 +55,15 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
           <Icon height={48} iconName="Picture" width={48} />
         )}
       </div>
-      <div className="mt-6 upload">
+      <div className="mt-6">
         <label>
           <div className='className="[&>button]:w-full"'>
             <Button
               label={locale.profile.profileSetting.addAProfilePhoto}
               onClick={handleOpenFileUploadWindow}
-              style={'outline'}
+              style="outline"
               className="w-full"
-            ></Button>
+            />
           </div>
           <input
             accept={'image/jpeg, image/png'}

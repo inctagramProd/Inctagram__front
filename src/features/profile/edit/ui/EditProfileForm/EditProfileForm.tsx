@@ -145,14 +145,14 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
                 <Field as={TextArea} name={'aboutMe'} error={touched.aboutMe && errors.aboutMe} />
               </div>
               <div className={'flex items-end flex-col'}>
-                <div className={'w-full h-px bg-dark-300 mt-4 mb-4'}></div>
-                <div className="[&>button]:w-full">
+                <div className={'w-full h-px bg-dark-300 mt-4 mb-4'} />
+                <div className="[&>button]">
                   <Button
                     type="submit"
                     style="primary"
                     label={locale.profile.profileSetting.save}
                     disable={!(isValid && dirty) || isSubmitting}
-                    className="w-full"
+                    className="w-full text-center"
                   />
                 </div>
               </div>
