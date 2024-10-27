@@ -28,7 +28,11 @@ export const Input = ({ error, label, required, type, ...restProps }: Props) => 
   return (
     <div className={'flex flex-col'}>
       <div className={'flex flex-row gap-1'}>
-        {label && <label className={'mb-1 text-light-900 text-sm'}>{label}</label>}
+        {label && (
+          <label htmlFor={label} className={'mb-1 text-light-900 text-sm'}>
+            {label}
+          </label>
+        )}
         {required ? requiredItem : ''}
       </div>
 
@@ -40,6 +44,7 @@ export const Input = ({ error, label, required, type, ...restProps }: Props) => 
           />
         )}
         <input
+          id={label}
           onKeyDown={e => checkKeyDown(e)}
           {...restProps}
           className={`border rounded-sm py-1.5 w-full

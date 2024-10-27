@@ -12,7 +12,7 @@ export const withAuth = (Component: any) => {
     const accessToken = useAppSelector((state: AppRootState) => state.signIn?.accessToken)
     const { locale } = useTranslate()
     useEffect(() => {
-      if (accessToken && typeof window !== 'undefined') {
+      if (!accessToken && typeof window !== 'undefined') {
         void router.push('/auth/sign-in')
         useToast(`${locale.auth.getLoggedToProceed}`, true)
       }

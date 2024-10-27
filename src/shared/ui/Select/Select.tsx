@@ -73,7 +73,7 @@ export const Select = ({
     if (onChange) {
       onChange(activeOptionFields)
     }
-    form.setFieldValue(field.name, value)
+    form?.setFieldValue(field.name, value)
     setIsVisibleDropdown(false)
   }
 
