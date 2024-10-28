@@ -29,13 +29,12 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
   }))
 
   // Список городов, если выбрана страна
-  const cityOptions: Option[] =
-    selectedCountry && City.getCitiesOfCountry(selectedCountry.value)
-      ? City.getCitiesOfCountry(selectedCountry.value).map((city: ICity) => ({
-          value: city.name,
-          label: city.name,
-        }))
-      : []
+  const cityOptions: Option[] = selectedCountry
+    ? City.getCitiesOfCountry(selectedCountry.value)?.map((city: ICity) => ({
+        value: city.name,
+        label: city.name,
+      })) || []
+    : []
 
   // Обработка выбора страны
   const handleCountryChange = (country: SingleValue<Option>) => {
@@ -49,7 +48,6 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
     setSelectedCity(city)
     cityField.onChange({ target: { name: cityField.name, value: city?.value } })
   }
-
   return (
     <div className={'flex gap-x-6 w-full max-sm:flex-col max-sm:gap-y-4'}>
       <div className={'w-full '}>
@@ -59,14 +57,18 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
         <Select
           unstyled
           inputId="country"
-          className={`border border-dark-100 rounded-sm px-2 w-full text-light-100 placeholder-light-900 bg-transparent
-            hover:border-light-900 
-            focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500
-            disabled:placeholder-dark-100 disabled:text-dark-100`}
           options={countryOptions}
           value={selectedCountry}
           onChange={handleCountryChange}
           placeholder={locale.profile.profileSetting.country}
+          classNames={{
+            control: ({ isFocused }) =>
+              `border border-dark-100 rounded-sm px-2 hover:border-light-900 ${
+                isFocused && 'ring-2 ring-primary-500'
+              }`,
+            option: ({ isFocused, isSelected }) =>
+              `bg-dark-500 px-2 ${isFocused && 'bg-primary-500'}`,
+          }}
         />
       </div>
       <div className={'w-full'}>
@@ -76,25 +78,17 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
         <Select
           unstyled
           inputId="city"
-          className={`border border-dark-100 rounded-sm px-2 w-full text-light-100 placeholder-light-900 bg-transparent
-            hover:border-light-900 
-            focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500
-            disabled:placeholder-dark-100 disabled:text-dark-100`}
           options={cityOptions}
           value={selectedCity}
           onChange={handleCityChange}
           placeholder={locale.profile.profileSetting.city}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'transparent',
-              color: 'white',
-            }),
-            option: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'black',
-              color: 'whitesmoke',
-            }),
+          classNames={{
+            control: ({ isFocused }) =>
+              `border border-dark-100 rounded-sm px-2 hover:border-light-900 ${
+                isFocused && 'ring-2 ring-primary-500'
+              }`,
+            option: ({ isFocused, isSelected }) =>
+              `bg-dark-500 px-2 ${isFocused && 'bg-primary-500'}`,
           }}
         />
       </div>

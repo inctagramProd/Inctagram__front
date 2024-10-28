@@ -35,7 +35,7 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
       >
         {({ dirty, errors, isSubmitting, isValid, touched }: FormikProps<ProfileEditParams>) => (
           <Form>
-            <div className="flex-1 flex flex-col gap-4">
+            <div className="flex-1 flex flex-col gap-y-4 px-1">
               <Field
                 as={Input}
                 error={touched.username && errors.username}

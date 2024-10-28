@@ -71,5 +71,6 @@ const EditProfilePage = () => {
 }
 
 EditProfilePage.getLayout = getLayoutWithSidebar
+export default EditProfilePage
 
-export default withAuth(EditProfilePage)
+// export default withAuth(EditProfilePage)
