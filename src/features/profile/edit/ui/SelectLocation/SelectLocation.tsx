@@ -3,7 +3,6 @@ import Select, { SingleValue } from 'react-select'
 import { City, Country, ICity, ICountry } from 'country-state-city'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useField } from 'formik'
-import classNames from 'classnames'
 
 interface Option {
   label: string
@@ -58,24 +57,16 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
           {locale.profile.profileSetting.selectYourCountry}
         </label>
         <Select
+          unstyled
           inputId="country"
-          // className={'text-dark-300'}
+          className={`border border-dark-100 rounded-sm px-2 w-full text-light-100 placeholder-light-900 bg-transparent
+            hover:border-light-900 
+            focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500
+            disabled:placeholder-dark-100 disabled:text-dark-100`}
           options={countryOptions}
           value={selectedCountry}
           onChange={handleCountryChange}
           placeholder={locale.profile.profileSetting.country}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'transparent',
-              color: 'red',
-            }),
-            option: (baseStyles, state) => ({
-              ...baseStyles,
-              backgroundColor: 'black',
-              color: 'white',
-            }),
-          }}
         />
       </div>
       <div className={'w-full'}>
@@ -83,8 +74,12 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
           {locale.profile.profileSetting.selectYourCity}
         </label>
         <Select
+          unstyled
           inputId="city"
-          // className={'text-dark-300'}
+          className={`border border-dark-100 rounded-sm px-2 w-full text-light-100 placeholder-light-900 bg-transparent
+            hover:border-light-900 
+            focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-primary-500
+            disabled:placeholder-dark-100 disabled:text-dark-100`}
           options={cityOptions}
           value={selectedCity}
           onChange={handleCityChange}
@@ -93,7 +88,7 @@ export const LocationSelector = ({ name, ...restProps }: Props) => {
             control: (baseStyles, state) => ({
               ...baseStyles,
               backgroundColor: 'transparent',
-              color: 'red',
+              color: 'white',
             }),
             option: (baseStyles, state) => ({
               ...baseStyles,
