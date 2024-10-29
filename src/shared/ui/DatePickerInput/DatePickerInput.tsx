@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { useField, useFormikContext } from 'formik'
 import DatePicker from 'react-datepicker'
-import { Input, Typography } from '@/src/shared/ui'
+import { Typography } from '@/src/shared/ui'
 import { format } from 'date-fns'
 import { CustomInput } from '@/src/shared/ui/DatePickerInput/CustomInput/CustomInput'
-// import './style.css'
-
-import 'react-datepicker/dist/react-datepicker.css'
+import './DateInput.css'
 import * as Icons from '../../assets/icons/icons'
 import { CustomHeader } from '@/src/shared/ui/DatePickerInput/CustomHeader/CustomHeader'
 import Link from 'next/link'
@@ -45,12 +43,7 @@ export const DatePickerInput = ({ error, isRange, label, name }: Props) => {
       <DatePicker
         {...field}
         calendarStartDay={1}
-        customInput={
-          <CustomInput
-            error={error}
-            value={formatDate(startDate)}
-          />
-        }
+        customInput={<CustomInput error={error} value={formatDate(startDate)} />}
         renderCustomHeader={params => <CustomHeader {...params} />}
         dateFormat={dateFormat}
         endDate={endDate}
@@ -69,7 +62,7 @@ export const DatePickerInput = ({ error, isRange, label, name }: Props) => {
         selected={startDate}
         selectsRange={isRange}
         startDate={startDate}
-        className='border-2'
+        className="border-2"
       />
       {error && (
         <>

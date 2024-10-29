@@ -2,7 +2,6 @@ import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import { getMonth, getYear } from 'date-fns'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LocaleType } from '@/public/locales/en'
-import { Icon, Select } from '@/src/shared/ui'
 import * as Icons from '../../../assets/icons/icons'
 
 const rangeYears = (start: number, end: number): any[] => {
@@ -46,15 +45,9 @@ export const CustomHeader = (props: CustomHeaderProps) => {
 
   return (
     <div className="flex justify-between px-1 cursor-pointer">
-      <div className=" h-8 border bg-white" onClick={decreaseMonth}>
-        {/* <Icons.Bell width={16} height={16} />
-        <Icon iconName="ArrowBack" /> */}
-        <Icons.ArrowBack width={20} height={20} />
-       back
-      </div>
       <div>
         <select
-          className="bg-dark-500"
+          className="bg-dark-500 overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700"
           value={getMonth(date).toString()}
           onChange={({ target: { value: month } }) => changeMonth(Number(month))}
         >
@@ -65,20 +58,30 @@ export const CustomHeader = (props: CustomHeaderProps) => {
           ))}
         </select>
         <select
-          className="bg-dark-500"
+          className="bg-dark-500 overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700"
           value={getYear(date).toString()}
           onChange={({ target: { value: year } }) => changeYear(Number(year))}
         >
           {yearsOptions.map((option, index) => (
-            <option key={index} value={option.value}>
+            <option className={'border-none '} key={index} value={option.value}>
               {option.name}
             </option>
           ))}
         </select>
       </div>
-      <div className="cursor-pointer bg-white" onClick={increaseMonth}>
-        <Icons.ArrowForward width={20} height={20} />
-        вперед
+      <div className={'flex gap-x-1'}>
+        <div
+          className="w[36px] h[36px] bg-dark-100 border rounded-full cursor-pointer hover:bg-primary-500"
+          onClick={decreaseMonth}
+        >
+          <Icons.ArrowIosBack width={20} height={20} iconStyle={'fill-white'} />
+        </div>
+        <div
+          className="cursor-pointer bg-dark-100 rounded-full hover:bg-primary-500"
+          onClick={increaseMonth}
+        >
+          <Icons.ArrowIosForward width={20} height={20} iconStyle={'fill-white'} />
+        </div>
       </div>
     </div>
   )
