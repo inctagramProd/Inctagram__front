@@ -70,7 +70,7 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
                 />
                 <Field as={TextArea} name={'aboutMe'} error={touched.aboutMe && errors.aboutMe} />
               </div>
-              <div className="">
+              <div>
                 <div className="w-full h-px bg-dark-300 mt-4 mb-6" />
                 <div className="[&>button]:w-[159px] max-lg:[&>button]:w-full flex">
                   <Button

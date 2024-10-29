@@ -2,7 +2,7 @@ import { type ReactDatePickerCustomHeaderProps } from 'react-datepicker'
 import { getMonth, getYear } from 'date-fns'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LocaleType } from '@/public/locales/en'
-import { Icon } from '@/src/shared/ui'
+import { Icon, Select } from '@/src/shared/ui'
 import * as Icons from '../../../assets/icons/icons'
 
 const rangeYears = (start: number, end: number): any[] => {
@@ -46,10 +46,11 @@ export const CustomHeader = (props: CustomHeaderProps) => {
 
   return (
     <div className="flex justify-between px-1 cursor-pointer">
-      <div className="" onClick={decreaseMonth}>
-        <Icons.ArrowIosBack width={16} height={16} />
-        <Icon iconName="ArrowBack" />
-        назад
+      <div className=" h-8 border bg-white" onClick={decreaseMonth}>
+        {/* <Icons.Bell width={16} height={16} />
+        <Icon iconName="ArrowBack" /> */}
+        <Icons.ArrowBack width={20} height={20} />
+       back
       </div>
       <div>
         <select
@@ -75,8 +76,8 @@ export const CustomHeader = (props: CustomHeaderProps) => {
           ))}
         </select>
       </div>
-      <div className="cursor-pointer" onClick={increaseMonth}>
-        <Icon iconName="ArrowIosBack" />
+      <div className="cursor-pointer bg-white" onClick={increaseMonth}>
+        <Icons.ArrowForward width={20} height={20} />
         вперед
       </div>
     </div>

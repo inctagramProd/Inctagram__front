@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useField, useFormikContext } from 'formik'
 import DatePicker from 'react-datepicker'
-import { Typography } from '@/src/shared/ui'
+import { Input, Typography } from '@/src/shared/ui'
 import { format } from 'date-fns'
 import { CustomInput } from '@/src/shared/ui/DatePickerInput/CustomInput/CustomInput'
-import './style.css'
+// import './style.css'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import * as Icons from '../../assets/icons/icons'
@@ -14,14 +14,12 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 type Props = {
   error?: string
-  hasError?: boolean
   isRange?: boolean
   label?: string
-  onChange?: (value: string) => void
   name: string
 }
 
-export const DatePickerInput = ({ error, hasError, isRange, label, onChange, name }: Props) => {
+export const DatePickerInput = ({ error, isRange, label, name }: Props) => {
   const { locale } = useTranslate()
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const [startDate, endDate] = dateRange
@@ -49,34 +47,29 @@ export const DatePickerInput = ({ error, hasError, isRange, label, onChange, nam
         calendarStartDay={1}
         customInput={
           <CustomInput
-            hasError={hasError}
-            isRange={isRange}
-            onClick={() => {}}
-            value={
-              isRange
-                ? `${formatDate(startDate)} - ${formatDate(endDate)}`
-                : `${formatDate(startDate)}`
-            }
+            error={error}
+            value={formatDate(startDate)}
           />
         }
         renderCustomHeader={params => <CustomHeader {...params} />}
         dateFormat={dateFormat}
         endDate={endDate}
+        showIcon
         icon={
           <Icons.Calendar
             height={24}
             iconStyle={`${
-              hasError ? 'fill-red-500' : 'fill-light-500'
+              error ? 'fill-red-500' : 'fill-light-500'
             }  absolute right-2.5 top-1.5 z-10`}
             theme={'light'}
             width={24}
           />
         }
         onChange={handleDateChange}
-        selected={isRange ? null : startDate}
+        selected={startDate}
         selectsRange={isRange}
-        showIcon
         startDate={startDate}
+        className='border-2'
       />
       {error && (
         <>
