@@ -4,7 +4,7 @@
     color: #000;
 }
 
-.react-datepicker-popper svg {
+.react-datepicker-popper > svg {
     display: none;
 }
 

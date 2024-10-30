@@ -4,11 +4,14 @@ import DatePicker from 'react-datepicker'
 import { Typography } from '@/src/shared/ui'
 import { format } from 'date-fns'
 import { CustomInput } from '@/src/shared/ui/DatePickerInput/CustomInput/CustomInput'
-import './DateInput.css'
+import 'react-datepicker/dist/react-datepicker.css'
+import './DatePicker.css'
 import * as Icons from '../../assets/icons/icons'
 import { CustomHeader } from '@/src/shared/ui/DatePickerInput/CustomHeader/CustomHeader'
 import Link from 'next/link'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import { enUS, ru } from 'date-fns/locale'
+import { useRouter } from 'next/router'
 
 type Props = {
   error?: string
@@ -19,10 +22,12 @@ type Props = {
 
 export const DatePickerInput = ({ error, isRange, label, name }: Props) => {
   const { locale } = useTranslate()
+  const { locale: currentLocale } = useRouter()
+
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null])
   const [startDate, endDate] = dateRange
   const { setFieldValue } = useFormikContext()
-  const [field, meta] = useField(name)
+  const [field] = useField(name)
 
   const dateFormat = ['dd.MM.yyyy', 'dd-MM-yyyy', 'dd/MM/yyyy']
 
@@ -43,10 +48,17 @@ export const DatePickerInput = ({ error, isRange, label, name }: Props) => {
       <DatePicker
         {...field}
         calendarStartDay={1}
-        customInput={<CustomInput error={error} value={formatDate(startDate)} />}
-        renderCustomHeader={params => <CustomHeader {...params} />}
         dateFormat={dateFormat}
+        startDate={startDate}
+        selected={startDate}
+        selectsRange={isRange}
         endDate={endDate}
+        onChange={handleDateChange}
+        renderCustomHeader={params => <CustomHeader {...params} />}
+        customInput={<CustomInput error={error} value={formatDate(startDate)} />}
+        locale={currentLocale === 'ru' ? ru : enUS}
+        className={'border border-danger-500'}
+        calendarClassName="bg-dark-900 text-red-500"
         showIcon
         icon={
           <Icons.Calendar
@@ -58,11 +70,6 @@ export const DatePickerInput = ({ error, isRange, label, name }: Props) => {
             width={24}
           />
         }
-        onChange={handleDateChange}
-        selected={startDate}
-        selectsRange={isRange}
-        startDate={startDate}
-        className="border-2"
       />
       {error && (
         <>

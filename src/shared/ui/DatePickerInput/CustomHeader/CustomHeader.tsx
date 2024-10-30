@@ -44,10 +44,12 @@ export const CustomHeader = (props: CustomHeaderProps) => {
   const monthOptions = rangeMonth(locale.dates)
 
   return (
-    <div className="flex justify-between px-1 cursor-pointer">
+    <div className="flex items-center mx-2">
       <div>
         <select
-          className="bg-dark-500 overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700"
+          className={
+            'px-1 appearance-none bg-dark-500 font-bold outline-none overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700'
+          }
           value={getMonth(date).toString()}
           onChange={({ target: { value: month } }) => changeMonth(Number(month))}
         >
@@ -58,26 +60,28 @@ export const CustomHeader = (props: CustomHeaderProps) => {
           ))}
         </select>
         <select
-          className="bg-dark-500 overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700"
+          className={
+            'px-1 appearance-none bg-dark-500 font-bold outline-none overflow-x-auto scrollbar-thin scrollbar-track-dark-300 scrollbar-thumb-primary-700'
+          }
           value={getYear(date).toString()}
           onChange={({ target: { value: year } }) => changeYear(Number(year))}
         >
           {yearsOptions.map((option, index) => (
-            <option className={'border-none '} key={index} value={option.value}>
+            <option className={'border-none rounded[0px] p-2'} key={index} value={option.value}>
               {option.name}
             </option>
           ))}
         </select>
       </div>
-      <div className={'flex gap-x-1'}>
+      <div className={'flex gap-x-1 ml-auto'}>
         <div
-          className="w[36px] h[36px] bg-dark-100 border rounded-full cursor-pointer hover:bg-primary-500"
+          className={'w[36px] h[36px] bg-dark-100 rounded-full cursor-pointer hover:bg-primary-500'}
           onClick={decreaseMonth}
         >
           <Icons.ArrowIosBack width={20} height={20} iconStyle={'fill-white'} />
         </div>
         <div
-          className="cursor-pointer bg-dark-100 rounded-full hover:bg-primary-500"
+          className={'cursor-pointer bg-dark-100 rounded-full hover:bg-primary-500'}
           onClick={increaseMonth}
         >
           <Icons.ArrowIosForward width={20} height={20} iconStyle={'fill-white'} />
