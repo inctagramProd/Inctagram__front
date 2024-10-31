@@ -1,5 +1,5 @@
 import React, { ChangeEvent, RefObject, useRef, useState } from 'react'
-import { Button, Icon } from '@/src/shared/ui'
+import { Button, Icon, Modal } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import Image from 'next/image'
 import { useAppSelector } from '@/src/app/hooks/useAppSelectorAndDispatch'
@@ -10,6 +10,7 @@ type Props = {
 }
 export const EditProfilePhoto = ({ imageUpload }: Props) => {
   const [selectedImage, setSelectedImage] = useState<null | string>(null)
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const uploadRef: RefObject<HTMLInputElement> = useRef(null)
   const { locale } = useTranslate()
 
@@ -20,17 +21,18 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
     const file = e.target.files?.[0]
     if (file) {
       imageUpload(file)
-      // const reader = new FileReader() // TODO: удалить неиспользуемый код
-      // reader.readAsDataURL(file)
-      // reader.onloadend = () => {
-      //   if (typeof reader.result === 'string') {
-      //     setSelectedImage(reader.result)
-      //   }
-      // }
+      const reader = new FileReader() // TODO: удалить неиспользуемый код
+      reader.readAsDataURL(file)
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setSelectedImage(reader.result)
+        }
+      }
     }
   }
 
   const handleOpenFileUploadWindow = () => {
+    setIsOpenModal(true)
     if (uploadRef.current) {
       uploadRef.current.click()
     }
@@ -75,6 +77,11 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
           />
         </label>
       </div>
+      <Modal
+        isOpen={isOpenModal}
+        title={locale.profile.profileSetting.addAProfilePhoto}
+        children={<Button style={'primary'} label={locale.profile.selectFromComputer} />}
+      />
     </div>
   )
 }

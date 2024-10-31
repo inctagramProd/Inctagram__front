@@ -75,13 +75,13 @@ export const CustomHeader = (props: CustomHeaderProps) => {
       </div>
       <div className={'flex gap-x-1 ml-auto'}>
         <div
-          className={'w[36px] h[36px] bg-dark-100 rounded-full cursor-pointer hover:bg-primary-500'}
+          className={'bg-dark-100 rounded-full cursor-pointer hover:bg-primary-500'}
           onClick={decreaseMonth}
         >
           <Icons.ArrowIosBack width={20} height={20} iconStyle={'fill-white'} />
         </div>
         <div
-          className={'cursor-pointer bg-dark-100 rounded-full hover:bg-primary-500'}
+          className={'bg-dark-100 rounded-full cursor-pointer hover:bg-primary-500'}
           onClick={increaseMonth}
         >
           <Icons.ArrowIosForward width={20} height={20} iconStyle={'fill-white'} />

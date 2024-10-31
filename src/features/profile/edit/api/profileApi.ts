@@ -12,7 +12,6 @@ export const profile = baseApi.injectEndpoints({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
-          console.log(data)
           dispatch(setProfileData(data))
         } catch (e) {
           console.error('some error occurred: ', e)
