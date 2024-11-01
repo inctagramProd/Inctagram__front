@@ -19,6 +19,16 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
   const addRef = useRef() as MutableRefObject<HTMLDivElement>
   const { locale } = useTranslate()
 
+  useEffect(() => {
+    const clickOutsideHandler = (e: MouseEvent) => {
+      if (addRef.current && !e.composedPath().includes(addRef.current)) {
+        setIsOpenAddImage(false)
+      }
+    }
+    document.body.addEventListener('click', clickOutsideHandler)
+    return () => document.body.removeEventListener('click', clickOutsideHandler)
+  }, [])
+
   const dispatch = useAppDispatch()
 
   const setImageHandler = (imageURL: string) => {
@@ -45,15 +55,6 @@ export const AddImage = ({ images, setCurrentWindow }: Props) => {
   const pickHandler = () => {
     inputRef.current?.click()
   }
-  useEffect(() => {
-    const clickOutsideHandler = (e: MouseEvent) => {
-      if (addRef.current && !e.composedPath().includes(addRef.current)) {
-        setIsOpenAddImage(false)
-      }
-    }
-    document.body.addEventListener('click', clickOutsideHandler)
-    return () => document.body.removeEventListener('click', clickOutsideHandler)
-  }, [])
 
   return (
     <div

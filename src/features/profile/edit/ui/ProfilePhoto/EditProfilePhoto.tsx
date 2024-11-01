@@ -4,38 +4,51 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import Image from 'next/image'
 import { useAppSelector } from '@/src/app/hooks/useAppSelectorAndDispatch'
 import { getGoogleDriveImageUrl } from '@/src/shared/lib/utils/getGoogleDriveImageUrl'
+import { uploadFile } from '@/src/shared/helpers/uploadFile'
 
 type Props = {
   imageUpload: (image: File) => void
 }
 export const EditProfilePhoto = ({ imageUpload }: Props) => {
-  const [selectedImage, setSelectedImage] = useState<null | string>(null)
-  const [isOpenModal, setIsOpenModal] = useState(false)
-  const uploadRef: RefObject<HTMLInputElement> = useRef(null)
   const { locale } = useTranslate()
-
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [selectedImageUrl, setSelectedImageUrl] = useState<null | string>(null)
+  const [file, setFile] = useState<null | File>(null)
+  const uploadRef: RefObject<HTMLInputElement> = useRef(null)
   const profilePhoto = useAppSelector(state => state.profile?.profileImageURL)
   const imageUrl = getGoogleDriveImageUrl(profilePhoto)
 
-  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>): void => {
-    const file = e.target.files?.[0]
+  const imageUploadHandler = () => {
     if (file) {
       imageUpload(file)
-      const reader = new FileReader() // TODO: удалить неиспользуемый код
-      reader.readAsDataURL(file)
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          setSelectedImage(reader.result)
-        }
-      }
+      onClearHandler()
     }
   }
 
-  const handleOpenFileUploadWindow = () => {
-    setIsOpenModal(true)
+  const selectImageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setFile(file)
+      await uploadFile(event, locale).then(imageUrl => {
+        if (imageUrl) {
+          setSelectedImageUrl(imageUrl?.url)
+        }
+      })
+    }
+  }
+
+  const handlerPick = () => {
     if (uploadRef.current) {
       uploadRef.current.click()
     }
+  }
+  const onClearHandler = () => {
+    setIsOpenModal(false)
+    setSelectedImageUrl(null)
+    setFile(null)
+  }
+  const OpenModalHandler = () => {
+    setIsOpenModal(true)
   }
 
   return (
@@ -57,31 +70,53 @@ export const EditProfilePhoto = ({ imageUpload }: Props) => {
           <Icon height={48} iconName="Picture" width={48} />
         )}
       </div>
-      <div className="mt-6">
-        <label>
-          <div className='className="[&>button]:w-full"'>
-            <Button
-              label={locale.profile.profileSetting.addAProfilePhoto}
-              onClick={handleOpenFileUploadWindow}
-              style="outline"
-              className="w-full"
-            />
-          </div>
-          <input
-            accept={'image/jpeg, image/png'}
-            className={'hidden'}
-            id={'upload-button'}
-            onChange={handleImageUpload}
-            ref={uploadRef}
-            type={'file'}
-          />
-        </label>
+      <div className={'[&>button]:w-full mt-6'}>
+        <Button
+          label={locale.profile.profileSetting.addAProfilePhoto}
+          onClick={OpenModalHandler}
+          style="outline"
+          className="w-full"
+        />
       </div>
       <Modal
         isOpen={isOpenModal}
         title={locale.profile.profileSetting.addAProfilePhoto}
-        children={<Button style={'primary'} label={locale.profile.selectFromComputer} />}
-      />
+        className={'max-w-[492px] w-full h-[564px]'}
+        onCancel={onClearHandler}
+      >
+        <div>
+          <input
+            ref={uploadRef}
+            onChange={selectImageHandler}
+            type="file"
+            accept="image*/,.png,.jpeg,.jpg"
+            className="hidden"
+          />
+          <div className="flex justify-center items-center flex-col mt-[72px]">
+            {!selectedImageUrl ? (
+              <>
+                <div className="bg-dark-500 w-[222px] h-[228px] flex items-center justify-center mb-[60px]">
+                  {imageUrl ? (
+                    <Image src={imageUrl} width={222} height={228} alt="photo profile" />
+                  ) : (
+                    <Icon iconName="imgOutlineIcon" height={48} width={48} />
+                  )}
+                </div>
+                <Button
+                  onClick={handlerPick}
+                  style="primary"
+                  label={locale.profile.selectFromComputer}
+                />
+              </>
+            ) : (
+              <div className={''}>
+                <Image src={selectedImageUrl} width={422} height={228} alt="photo profile" />
+                <Button onClick={imageUploadHandler} style="primary" label={locale.profile.save} />
+              </div>
+            )}
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
