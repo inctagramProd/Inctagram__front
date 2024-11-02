@@ -20,6 +20,6 @@ export type ProfileData = {
   createdAt: string
   updatedAt: string
   deletedAt: string
-  profileImageURL: string
+  profileImageURL: string | undefined
   canModify: boolean
 }

@@ -1,6 +1,7 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 import { setProfileData } from '@/src/features/profile/edit/model/profileSlice'
 import { ProfileData } from '@/src/features/profile/edit/model/types/profileEditTypes'
+import { getGoogleDriveImageUrl } from '@/src/shared/lib/utils/getGoogleDriveImageUrl'
 
 export const profile = baseApi.injectEndpoints({
   endpoints: build => ({
@@ -12,7 +13,12 @@ export const profile = baseApi.injectEndpoints({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
-          dispatch(setProfileData(data))
+          dispatch(
+            setProfileData({
+              ...data,
+              profileImageURL: getGoogleDriveImageUrl(data.profileImageURL),
+            })
+          )
         } catch (e) {
           console.error('some error occurred: ', e)
         }

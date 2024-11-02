@@ -5,7 +5,8 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 export const useUpdateProfile = () => {
   const { locale } = useTranslate()
-  const [updateProfile] = useUpdateProfileMutation()
+  const [updateProfile, { isLoading: isUpdateProfileLoading, isSuccess: isUpdateProfileSuccess }] =
+    useUpdateProfileMutation()
   const handleUpdateProfile = async (profileData: ProfileEditParams) => {
     const formData = new FormData()
 
@@ -35,5 +36,5 @@ export const useUpdateProfile = () => {
       useToast(errMessage, true)
     }
   }
-  return { handleUpdateProfile }
+  return { handleUpdateProfile, isUpdateProfileLoading, isUpdateProfileSuccess }
 }

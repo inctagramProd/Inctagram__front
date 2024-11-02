@@ -4,13 +4,12 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 export const useImageUpload = () => {
   const { locale } = useTranslate()
-  const [updateProfile] = useUpdateProfileMutation()
+  const [updateProfile, { isLoading: isUpdateImgLoading, isSuccess: isUpdateImgSuccess }] =
+    useUpdateProfileMutation()
 
-  const handleImageUpload = async (profileImage: File) => {
-    const formData = new FormData()
-    formData.append('profileImage', profileImage)
+  const handleImageUpload = async (profileImage: FormData) => {
     try {
-      await updateProfile(formData).unwrap()
+      await updateProfile(profileImage).unwrap()
       useToast(locale.profile.profileSetting.changesSaved)
     } catch (error) {
       const errMessage =
@@ -18,5 +17,5 @@ export const useImageUpload = () => {
       useToast(errMessage, true)
     }
   }
-  return { handleImageUpload }
+  return { handleImageUpload, isUpdateImgLoading, isUpdateImgSuccess }
 }
