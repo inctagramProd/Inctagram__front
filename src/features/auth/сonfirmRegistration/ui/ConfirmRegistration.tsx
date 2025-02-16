@@ -1,22 +1,23 @@
-import {useEffect, useState} from 'react'
-import {useRouter} from 'next/router'
-import {useEmailConfirmedMutation} from '@/src/features/auth/сonfirmRegistration/service/confirmRegistrationApi'
-import {InvalidLinkVerification} from '@/src/features/auth/invalidLinkVerification'
-import {EmailVerification} from '@/src/features/auth/emailVerification'
-import {LoaderSpin} from "@/src/shared/ui/Loader/Loader";
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEmailConfirmedMutation } from '@/src/features/auth/сonfirmRegistration/service/confirmRegistrationApi'
+import { InvalidLinkVerification } from '@/src/features/auth/invalidLinkVerification'
+import { EmailVerification } from '@/src/features/auth/emailVerification'
+import { LoaderSpin } from '@/src/shared/ui/Loader/Loader'
 
 export const ConfirmRegistration = () => {
   const router = useRouter()
   const queryCode = router.query as { code: string }
   const [userEmail, setUserEmail] = useState<string>('')
   const [regConfirm, { data, isLoading, isSuccess }] = useEmailConfirmedMutation()
+
   useEffect(() => {
     if (queryCode.code) {
-      regConfirm(queryCode)
+      regConfirm({ confirmationCode: queryCode.code })
         .unwrap()
         .catch(e => {
           console.log(e)
-          const error = e as { data: { userEmail: string; message: string }; status: number }
+          const error = e as { data: { userEmail: string; message: string }; status: number } // TODO: исправить тип объекта
           if (error.status === 410) {
             setUserEmail(error.data.userEmail)
           }

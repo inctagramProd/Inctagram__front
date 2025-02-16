@@ -63,7 +63,7 @@ export const CreatePost = () => {
         setCurrentWindow('filter')
       })
       .catch(error => {
-        useToast({ text: `An error has occurred: ${error}`, error: true })
+        useToast(`An error has occurred: ${error}`, true)
       })
   }
 
@@ -83,7 +83,7 @@ export const CreatePost = () => {
         setCurrentWindow('description')
       })
       .catch(error => {
-        useToast({ text: `An error has occurred: ${error}`, error: true })
+        useToast(`An error has occurred: ${error}`, true)
       })
   }
 
@@ -154,7 +154,9 @@ export const CreatePost = () => {
       <div>
         {isBaseModalOpen && (
           <CreatePostModal
-            className={`${isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'}  w-full h-[564px] overflow-hidden`}
+            className={`${
+              isBigSizeScreen ? 'max-w-[972px]' : 'max-w-[492px]'
+            }  w-full h-[564px] overflow-hidden`}
             title={titles[currentWindow]}
             onNextClick={clickNextHandler}
             onBackClick={clickBackHandler}

@@ -1,5 +1,6 @@
-import { ComponentPropsWithoutRef, FormEvent, useState, KeyboardEvent } from 'react'
+import { ComponentPropsWithoutRef, FormEvent, KeyboardEvent, useState } from 'react'
 import { Icon } from '../Icon/Icon'
+import { Typography } from '@/src/shared/ui'
 
 type Props = {
   error?: boolean | string
@@ -8,13 +9,13 @@ type Props = {
   type: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
-export const Input = ({ error, label, required, type, ...inputProps }: Props) => {
+export const Input = ({ error, label, required, type, ...restProps }: Props) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const inputType = type === 'password' ? (isPasswordShown ? 'text' : 'password') : type
 
   const togglePasswordVisibility = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    if (!inputProps.disabled) {
+    if (!restProps.disabled) {
       setIsPasswordShown(!isPasswordShown)
     }
   }
@@ -27,7 +28,11 @@ export const Input = ({ error, label, required, type, ...inputProps }: Props) =>
   return (
     <div className={'flex flex-col'}>
       <div className={'flex flex-row gap-1'}>
-        {label && <label className={'mb-1 text-light-900 text-sm'}>{label}</label>}
+        {label && (
+          <label htmlFor={label} className={'mb-1 text-light-900 text-sm'}>
+            {label}
+          </label>
+        )}
         {required ? requiredItem : ''}
       </div>
 
@@ -39,8 +44,9 @@ export const Input = ({ error, label, required, type, ...inputProps }: Props) =>
           />
         )}
         <input
+          id={label}
           onKeyDown={e => checkKeyDown(e)}
-          {...inputProps}
+          {...restProps}
           className={`border rounded-sm py-1.5 w-full
           text-light-100 placeholder-light-900
           bg-transparent
@@ -60,7 +66,7 @@ export const Input = ({ error, label, required, type, ...inputProps }: Props) =>
           </button>
         )}
       </div>
-      {error && <span className={'text-sm font-normal text-red-500 leading-normal'}>{error}</span>}
+      {error && <Typography variant="error">{error}</Typography>}
     </div>
   )
 }

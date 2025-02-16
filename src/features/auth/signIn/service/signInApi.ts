@@ -18,11 +18,11 @@ export const authByEmail = baseApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled
           if (data.accessToken) {
-            dispatch(setUserAuthData({userId: data.userId, username: data.username }))
+            dispatch(setUserAuthData({ userId: data.userId, username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
-          console.error(e)
+          console.error('some error occurred: ', e)
         }
       },
     }),
@@ -38,7 +38,7 @@ export const authByEmail = baseApi.injectEndpoints({
           if (data.accessToken) {
             localStorage.setItem('Git Data', JSON.stringify(data))
             localStorage.removeItem('Google Data')
-            dispatch(setUserAuthData({userId: data.userId, username: data.username }))
+            dispatch(setUserAuthData({ userId: data.userId, username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {
@@ -59,7 +59,7 @@ export const authByEmail = baseApi.injectEndpoints({
           if (data.accessToken) {
             localStorage.setItem('Google Data', JSON.stringify(data))
             localStorage.removeItem('Git Data')
-            dispatch(setUserAuthData({userId: data.userId, username: data.username }))
+            dispatch(setUserAuthData({ userId: data.userId, username: data.username }))
             dispatch(setToken({ accessToken: data.accessToken }))
           }
         } catch (e) {

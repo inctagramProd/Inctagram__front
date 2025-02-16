@@ -1,11 +1,11 @@
 export type SignUpParams = {
-  username: string
+  userName: string
   email: string
   password: string
 }
 
 export type SignUpFormValues = {
-  username: string
+  userName: string
   email: string
   password: string
   confirmPassword: string

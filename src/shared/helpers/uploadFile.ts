@@ -16,13 +16,13 @@ export const uploadFile = async (
 
       // Проверка на тип файла (только png и jpeg)
       if (!(file.type === 'image/png' || file.type === 'image/jpeg')) {
-        useToast({ text: locale.profile.addNewPost.imageError.format, error: true })
+        useToast(locale.profile.addNewPost.imageError.format, true)
         return undefined
       }
 
       // Проверка на размер файла (не более 5MB)
       if (fileSizeKilobytes > MAX_FILE_SIZE_KB) {
-        useToast({ text: locale.profile.addNewPost.imageError.size, error: true })
+        useToast(locale.profile.addNewPost.imageError.size, true)
         return undefined
       }
 
@@ -31,7 +31,7 @@ export const uploadFile = async (
       return { url }
     }
   } catch (error) {
-    useToast({ text: locale.profile.addNewPost.imageError.file, error: true })
+    useToast(locale.profile.addNewPost.imageError.file, true)
     return undefined
   }
 }

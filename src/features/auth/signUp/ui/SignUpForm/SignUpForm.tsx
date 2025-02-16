@@ -19,11 +19,11 @@ export const SignUpForm = ({ onSubmit }: Props) => {
   const { locale } = useTranslate()
 
   const onSubmitHandler = (values: SignUpFormValues, actions: FormikHelpers<SignUpFormValues>) => {
-    const { username, email, password } = values
-    onSubmit({ username, email, password }, actions)
+    const { userName, email, password } = values
+    onSubmit({ userName, email, password }, actions)
   }
   const initialValues: SignUpFormValues = {
-    username: '',
+    userName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -49,11 +49,11 @@ export const SignUpForm = ({ onSubmit }: Props) => {
             <Form>
               <div className="flex flex-col gap-y-6 mb-6">
                 <Field
-                  name="username"
+                  name="userName"
                   type="text"
                   as={Input}
                   label={locale.auth.userName}
-                  error={touched.username && errors.username}
+                  error={touched.userName && errors.userName}
                 />
                 <Field
                   name="email"
@@ -89,7 +89,6 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                         <Link
                           href="/auth/terms-of-service"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
-                          target="_blank"
                           rel="noopener noreferrer"
                         >
                           {locale.auth.termsOfService}
@@ -99,7 +98,6 @@ export const SignUpForm = ({ onSubmit }: Props) => {
                         <Link
                           href="/auth/privacy-policy"
                           className="text-primary-300 hover:underline underline-offset-[3px]"
-                          target="_blank"
                           rel="noopener noreferrer"
                         >
                           {locale.auth.policy}

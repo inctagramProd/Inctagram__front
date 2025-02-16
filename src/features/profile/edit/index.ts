@@ -1,1 +1,1 @@
-export { EditProfile } from './ui/EditProfile'
+export { GeneralInformation } from '../../../widgets/Profile/ui/GeneralInformation/GeneralInformation'

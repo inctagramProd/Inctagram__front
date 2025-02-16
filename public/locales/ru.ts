@@ -251,4 +251,20 @@ export const ru = {
             areYouSure: 'Вы действительно хотите удалить пост?',
         },
     },
+    dates: {
+        month: {
+            April: 'Апрель',
+            August: 'Август',
+            December: 'Декабрь',
+            February: 'Февраль',
+            January: 'Январь',
+            July: 'Июль',
+            June: 'Июнь',
+            March: 'Март',
+            May: 'Май',
+            November: 'Ноябрь',
+            October: 'Октябрь',
+            September: 'Сентябрь',
+        },
+    },
 }
