@@ -5,7 +5,7 @@ export const invalidLinkVerificationApi = baseApi.injectEndpoints({
     resendLink: build.mutation<string, { userEmail: string }>({
       query: data => ({
         method: 'PATCH',
-        url: 'auth/resend-register-email',
+        url: 'auth/registration-email-resending',
         body: data,
       }),
     }),

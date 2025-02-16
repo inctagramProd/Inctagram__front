@@ -6,7 +6,7 @@ export const signUp = baseApi.injectEndpoints({
     signUp: build.mutation<void, SignUpParams>({
       query: data => ({
         method: 'POST',
-        url: 'auth/register',
+        url: 'auth/registration',
         body: data,
       }),
     }),

@@ -12,7 +12,7 @@ export const LogOut = baseApi.injectEndpoints({
         }
       },
       query: () => ({
-        method: 'DELETE',
+        method: 'POST',
         url: 'auth/logout',
       }),
     }),

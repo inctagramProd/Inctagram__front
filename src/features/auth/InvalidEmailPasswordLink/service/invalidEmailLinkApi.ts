@@ -5,7 +5,7 @@ export const invalidEmailLinkApi = baseApi.injectEndpoints({
     resendPasswordRecoveryLink: build.mutation<any, { userEmail: string }>({
       query: data => ({
         method: 'POST',
-        url: 'auth/password-recovery-code-check',
+        url: 'auth/password-recovery',
         body: data,
       }),
     }),

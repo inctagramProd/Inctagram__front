@@ -3,7 +3,7 @@ import { LocaleType } from '@/public/locales/en'
 
 export const signUpSchema = (locale: LocaleType) => {
   return Yup.object().shape({
-    username: Yup.string()
+    userName: Yup.string()
       .min(6, locale.auth.authErrors.usernameField.min)
       .max(30, locale.auth.authErrors.usernameField.max)
       .matches(/^[A-Za-z0-9-_]+$/, locale.auth.authErrors.usernameField.regex)

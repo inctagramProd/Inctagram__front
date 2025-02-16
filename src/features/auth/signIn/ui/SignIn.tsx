@@ -8,11 +8,13 @@ import { useRouter } from 'next/router'
 import { useGitAuthMutation, useGoogleAuthMutation, useSignInMutation } from '../service/signInApi'
 import { SingInParams } from '../service/types/signInTypes'
 import { SignInForm } from './signInForm/SignInForm'
+import { useToast } from '@/src/app/hooks/useToast'
 
 export const SignIn = () => {
   const { locale } = useTranslate()
   const router = useRouter()
   const [loginUser, { isSuccess }] = useSignInMutation()
+
   const [
     gitUser,
     { data: gitData, isError: gitError, isLoading: gitLoading, isSuccess: gitIsSuccess },
@@ -38,6 +40,7 @@ export const SignIn = () => {
         : googleUser({ code: queryCode.code.replace('/', '%2F') }).unwrap()
     }
   }, [isSuccess, gitIsSuccess, googleIsSuccess, queryCode])
+
   const onSubmitHandler = async (values: SingInParams, actions: FormikHelpers<SingInParams>) => {
     actions.setStatus('')
     await loginUser(values)
@@ -46,11 +49,11 @@ export const SignIn = () => {
         actions.resetForm()
       })
       .catch(e => {
-        const error = e as { data: { message: [string]; statusCode: number } }
-
-        // if (error.data.statusCode === 400 || 401) {
-        //   actions.setFieldError('password', locale.auth.authErrors.incorrectEmailOrPassword)
-        // }
+        const error = e
+        if (error.data.statusCode === 400) {
+          actions.setFieldError('password', locale.auth.authErrors.incorrectEmailOrPassword)
+          useToast(locale.auth.authErrors.incorrectEmailOrPassword, true)
+        }
       })
       .finally(() => {
         actions.setSubmitting(false)

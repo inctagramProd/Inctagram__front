@@ -6,7 +6,7 @@ export const createPost = baseApi.injectEndpoints({
     createPost: build.mutation<CreatePostSchema, FormData>({
       query: body => ({
         method: 'POST',
-        url: 'user-posts',
+        url: 'posts/image',
         body,
       }),
       // TODO: refactor invalidatesTags
