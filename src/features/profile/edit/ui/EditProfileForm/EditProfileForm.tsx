@@ -18,12 +18,14 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
   const initialValues: ProfileEditParams = {
     firstName: profileData?.firstName || '',
     lastName: profileData?.lastName || '',
-    username: profileData?.username || '',
+    userName: profileData?.userName || '',
     dateOfBirth: profileData?.dateOfBirth || '',
     country: '',
     city: '',
     aboutMe: profileData?.aboutMe || '',
   }
+
+  console.log(profileData, ' profileData profileData profileData ')
 
   return (
     <div>
@@ -38,9 +40,9 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
             <div className="flex-1 flex flex-col gap-y-4 px-1">
               <Field
                 as={Input}
-                error={touched.username && errors.username}
+                error={touched.userName && errors.userName}
                 label={locale.auth.userName}
-                name="username"
+                name="userName"
               />
               <Field
                 as={Input}

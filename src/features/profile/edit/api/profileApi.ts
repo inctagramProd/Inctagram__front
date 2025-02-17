@@ -8,7 +8,7 @@ export const profile = baseApi.injectEndpoints({
     getProfile: build.query<ProfileData, void>({
       query: data => ({
         body: data,
-        url: 'user-profile/me',
+        url: 'users/profile',
       }),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
@@ -28,12 +28,21 @@ export const profile = baseApi.injectEndpoints({
     updateProfile: build.mutation<ProfileData, FormData>({
       query: data => ({
         body: data,
-        method: 'PATCH',
-        url: 'user-profile',
+        method: 'PUT',
+        url: 'users/profile',
+      }),
+      invalidatesTags: ['UserProfile'],
+    }),
+    updatePhotoProfile: build.mutation<ProfileData, FormData>({
+      query: data => ({
+        body: data,
+        method: 'POST',
+        url: 'users/profile/avatar',
       }),
       invalidatesTags: ['UserProfile'],
     }),
   }),
   overrideExisting: false,
 })
-export const { useGetProfileQuery, useUpdateProfileMutation } = profile
+export const { useGetProfileQuery, useUpdateProfileMutation, useUpdatePhotoProfileMutation } =
+  profile

@@ -1,11 +1,11 @@
 import { useToast } from '@/src/app/hooks/useToast'
-import { useUpdateProfileMutation } from '@/src/features/profile/edit/api/profileApi'
+import { useUpdatePhotoProfileMutation } from '@/src/features/profile/edit/api/profileApi'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 
 export const useImageUpload = () => {
   const { locale } = useTranslate()
   const [updateProfile, { isLoading: isUpdateImgLoading, isSuccess: isUpdateImgSuccess }] =
-    useUpdateProfileMutation()
+    useUpdatePhotoProfileMutation()
 
   const handleImageUpload = async (profileImage: FormData) => {
     try {

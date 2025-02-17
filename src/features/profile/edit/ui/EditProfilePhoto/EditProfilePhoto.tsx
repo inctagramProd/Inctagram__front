@@ -27,10 +27,11 @@ export const EditProfilePhoto = ({ imageUpload, isUpdateImgSuccess }: Props) => 
     if (cropArea && selectedImageUrl) {
       getModifiedImage({
         imageSrc: selectedImageUrl,
-        fileName: 'profileImage',
         crop: cropArea,
         mode: 'formData',
-      }).then(res => imageUpload(res as FormData))
+      })
+        .then(res => imageUpload(res as FormData))
+        .then(() => setIsOpenModal(false))
     }
   }
 
