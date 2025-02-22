@@ -2,7 +2,7 @@ import { baseApi } from '@/src/shared/api/baseApi'
 import { setProfileData } from '@/src/features/profile/edit/model/profileSlice'
 import {
   ProfileData,
-  ProfileDataAvatars,
+  ProfileDataAvatar,
   ProfileDataResponse,
   ProfileDataUpdate,
 } from '@/src/features/profile/edit/model/types/profileEditTypes'
@@ -36,7 +36,7 @@ export const profile = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['UserProfile'],
     }),
-    updatePhotoProfile: build.mutation<ProfileDataAvatars, FormData>({
+    updatePhotoProfile: build.mutation<ProfileDataAvatar, FormData>({
       query: data => ({
         body: data,
         method: 'POST',

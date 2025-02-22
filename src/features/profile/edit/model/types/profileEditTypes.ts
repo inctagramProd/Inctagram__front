@@ -15,17 +15,17 @@ export type ProfileData = {
 }
 
 export type ProfileDataResponse = {
-  id: number | null
+  id: number
   userName: string
-  firstName: string | null
-  lastName: string | null
-  city: string | null
-  country: string | null
-  region: string | null
-  dateOfBirth: string | null
-  aboutMe: string | null
+  firstName: string
+  lastName: string
+  city: string
+  country: string
+  region: string
+  dateOfBirth: string
+  aboutMe: string
   createdAt: string
-  avatars: ProfileDataAvatars
+  avatars: ProfileDataAvatar[]
 }
 
 export type ProfileDataUpdate = {
@@ -39,12 +39,10 @@ export type ProfileDataUpdate = {
   aboutMe: string
 }
 
-export type ProfileDataAvatars = [
-  {
-    url: string
-    width: number
-    height: number
-    fileSize: number
-    createdAt: string
-  }
-]
+export type ProfileDataAvatar = {
+  url: string
+  width: number
+  height: number
+  fileSize: number
+  createdAt: string
+}

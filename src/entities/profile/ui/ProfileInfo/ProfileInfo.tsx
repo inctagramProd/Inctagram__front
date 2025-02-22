@@ -3,7 +3,6 @@ import { Icon, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getGoogleDriveImageUrl } from '@/src/shared/utils/getGoogleDriveImageUrl'
 
 type Props = {
   profileImageURL?: string
@@ -14,19 +13,18 @@ type Props = {
 export const ProfileInfo = ({ profileImageURL, username, aboutMe }: Props) => {
   const { locale } = useTranslate()
 
-  const imageUrl = getGoogleDriveImageUrl(profileImageURL)
-
   return (
     <div className="flex gap-x-9 pt-9 pl-6">
       <div>
         <div className="bg-dark-500 rounded-full flex justify-center items-center">
-          {imageUrl ? (
+          {profileImageURL ? (
             <Image
               width={196}
               height={196}
               alt="profile photo"
               className="rounded-full w-full h-full object-cover"
-              src={imageUrl}
+              src={profileImageURL}
+              priority
             />
           ) : (
             <Icon width={48} height={48} iconName="Picture" />
@@ -71,9 +69,7 @@ export const ProfileInfo = ({ profileImageURL, username, aboutMe }: Props) => {
             </li>
           </ul>
         </div>
-        <div>
-          <Typography variant="regular_16">{aboutMe}</Typography>
-        </div>
+        <div>{aboutMe && <Typography variant="regular_16">{aboutMe}</Typography>}</div>
       </div>
     </div>
   )
