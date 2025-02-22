@@ -1,31 +1,30 @@
 import React from 'react'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
 import { profileEditSchema } from '@/src/features/profile/edit/model/schema/profileEditSchema'
-import { ProfileEditParams } from '@/src/features/profile/edit/model/types/profileEditTypes'
+import { ProfileDataUpdate } from '@/src/features/profile/edit/model/types/profileEditTypes'
 import { Button, DatePickerInput, Input, TextArea, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useGetProfileQuery } from '@/src/features/profile/edit/api/profileApi'
 import { LocationSelector } from '@/src/features/profile/edit/ui/SelectLocation/SelectLocation'
+import { formatDateFromISO } from '@/src/shared/helpers/formatDateFromISO'
 
 type Props = {
-  onSubmitHandler: (values: ProfileEditParams, actions: FormikHelpers<ProfileEditParams>) => void
+  onSubmitHandler: (values: ProfileDataUpdate, actions: FormikHelpers<ProfileDataUpdate>) => void
 }
 
 export const EditProfileForm = ({ onSubmitHandler }: Props) => {
   const { locale } = useTranslate()
   const { data: profileData, isLoading, isSuccess } = useGetProfileQuery()
 
-  const initialValues: ProfileEditParams = {
+  const initialValues: ProfileDataUpdate = {
     firstName: profileData?.firstName || '',
     lastName: profileData?.lastName || '',
     userName: profileData?.userName || '',
-    dateOfBirth: profileData?.dateOfBirth || '',
+    dateOfBirth: formatDateFromISO(profileData?.dateOfBirth) || '',
     country: '',
     city: '',
     aboutMe: profileData?.aboutMe || '',
   }
-
-  console.log(profileData, ' profileData profileData profileData ')
 
   return (
     <div>
@@ -35,13 +34,13 @@ export const EditProfileForm = ({ onSubmitHandler }: Props) => {
         validationSchema={profileEditSchema(locale)}
         enableReinitialize
       >
-        {({ dirty, errors, isSubmitting, isValid, touched }: FormikProps<ProfileEditParams>) => (
+        {({ dirty, errors, isSubmitting, isValid, touched }: FormikProps<ProfileDataUpdate>) => (
           <Form>
             <div className="flex-1 flex flex-col gap-y-4 px-1">
               <Field
                 as={Input}
                 error={touched.userName && errors.userName}
-                label={locale.auth.userName}
+                label={locale.profile.profileSetting.userName}
                 name="userName"
               />
               <Field
