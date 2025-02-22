@@ -45,7 +45,14 @@ export const SelectPhoto = ({ profileImageURL, setSelectedImageUrl }: Props) => 
         }
       >
         {profileImageURL ? (
-          <Image src={profileImageURL} width={222} height={228} alt="photo profile" />
+          <Image
+            src={profileImageURL}
+            width={222}
+            height={228}
+            alt="photo profile"
+            className="w-full h-full object-cover"
+            priority
+          />
         ) : (
           <Icon iconName="imgOutlineIcon" height={48} width={48} />
         )}

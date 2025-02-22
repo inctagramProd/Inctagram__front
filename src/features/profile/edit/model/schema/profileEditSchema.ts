@@ -6,7 +6,7 @@ minDateOfBirth.setFullYear(minDateOfBirth.getFullYear() - 13)
 
 export const profileEditSchema = (locale: LocaleType) => {
   return Yup.object().shape({
-    username: Yup.string()
+    userName: Yup.string()
       .required(locale.profile.profileSetting.profileSettingsErrors.usernameField.nonEmpty)
       .matches(
         /^[A-Za-z0-9!#$%*+-?^_]{6,30}$/,

@@ -24,6 +24,7 @@ export const ProfilePhoto = ({ profileImageURL, onClickHandler }: Props) => {
             alt="Profile"
             className="rounded-full w-full h-full object-cover"
             src={profileImageURL}
+            priority
           />
         ) : (
           <Icon height={48} iconName="Picture" width={48} />

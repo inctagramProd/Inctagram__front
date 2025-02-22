@@ -1,9 +1,13 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { CreatePostSchema } from '@/src/features/post/types/creatPostTypes'
+import {
+  CreatePostRequest,
+  CreatePostResponse,
+  UploadImageResponse,
+} from '@/src/features/post/types/creatPostTypes'
 
 export const createPost = baseApi.injectEndpoints({
   endpoints: build => ({
-    createPost: build.mutation<CreatePostSchema, FormData>({
+    upLoadImagesPost: build.mutation<UploadImageResponse, FormData>({
       query: body => ({
         method: 'POST',
         url: 'posts/image',
@@ -12,10 +16,15 @@ export const createPost = baseApi.injectEndpoints({
       // TODO: refactor invalidatesTags
       invalidatesTags: ['Posts'],
     }),
+    createDescriptionPost: build.mutation<CreatePostResponse, CreatePostRequest>({
+      query: body => ({
+        method: 'POST',
+        url: 'posts',
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 })
 
-export const { useCreatePostMutation } = createPost
-
-
+export const { useUpLoadImagesPostMutation, useCreateDescriptionPostMutation } = createPost

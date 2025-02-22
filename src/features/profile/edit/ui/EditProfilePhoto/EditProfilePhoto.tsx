@@ -15,8 +15,7 @@ type Props = {
 export const EditProfilePhoto = ({ imageUpload, isUpdateImgSuccess }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [selectedImageUrl, setSelectedImageUrl] = useState<null | string>(null)
-  const profileImageURL = useAppSelector(state => state.profile?.profileImageURL)
-
+  const profileImageURL = useAppSelector(state => state.profile?.avatars[0]?.url)
   const { locale } = useTranslate()
 
   const openModalHandler = () => {
@@ -27,10 +26,11 @@ export const EditProfilePhoto = ({ imageUpload, isUpdateImgSuccess }: Props) => 
     if (cropArea && selectedImageUrl) {
       getModifiedImage({
         imageSrc: selectedImageUrl,
-        fileName: 'profileImage',
         crop: cropArea,
         mode: 'formData',
-      }).then(res => imageUpload(res as FormData))
+      })
+        .then(res => imageUpload(res as FormData))
+        .then(() => setIsOpenModal(false))
     }
   }
 

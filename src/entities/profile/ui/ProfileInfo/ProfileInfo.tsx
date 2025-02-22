@@ -3,7 +3,7 @@ import { Icon, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getGoogleDriveImageUrl } from '@/src/shared/lib/utils/getGoogleDriveImageUrl'
+import { getGoogleDriveImageUrl } from '@/src/shared/utils/getGoogleDriveImageUrl'
 
 type Props = {
   profileImageURL?: string
