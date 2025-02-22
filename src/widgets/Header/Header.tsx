@@ -54,6 +54,7 @@ export const Header = (props: Props) => {
   const handleLink = (selectedValue: SelectOptionType) => {
     push(String(selectedValue?.value))
   }
+
   return (
     <div
       className={`border-b-[1px] h-[60px] bg-dark-700 border-dark-300 flex flex-row justify-center items-center ${className}`}
@@ -92,7 +93,7 @@ export const Header = (props: Props) => {
             <Select
               defaultValue={currentLocale}
               options={localeOptions}
-              onChange={changeLangHandler}
+              onChange={changeLangHandler}            
             />
           </div>
           <div className={`sm:hidden flex items-center`}>

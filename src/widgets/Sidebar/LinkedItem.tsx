@@ -9,8 +9,6 @@ type Props = {
   style: 'primary' | 'secondary' | 'outline' | 'text' | 'default'
   IconStyle?: string
   fillType?: 'fill' | 'outline'
-  mouseEnter?: () => void
-  mouseLeave?: () => void
   handleActive?: () => void
   handleFocus?: () => void
   isActive?: boolean
@@ -32,11 +30,11 @@ export const LinkItem = (props: Props) => {
         <Button
           size={'medium'}
           label={label}
-          style={style}
+          style={style }
           iconName={iconName}
-          iconStyle={`fill-light-100 group-hover:fill-primary-100 focus:fill-primary-100 group-disable:fill-dark-100`}
+          iconStyle={`${props.isActive ? 'fill-blue-500' : 'fill-light-100'} group-hover:fill-primary-100 focus:fill-primary-100 group-disable:fill-dark-100`}
           variant="medium_14"
-          className="flex justify-content h-[100%] py-0 px-0 group-active:text-sm group-active:font-bold group-active:leading-normal" /* group-focus:text-light-100 */
+          className={`${props.isActive ? 'text-primary-500' : 'text-light-100'} hover:text-primary-100 flex justify-content h-[100%] py-0 px-0 group-active:text-sm group-active:font-bold group-active:leading-normal`} /* group-focus:text-light-100 */
           disable={false}
           handleFocus={handleFocus}
         />
