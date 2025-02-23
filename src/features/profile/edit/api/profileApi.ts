@@ -1,14 +1,18 @@
 import { baseApi } from '@/src/shared/api/baseApi'
 import { setProfileData } from '@/src/features/profile/edit/model/profileSlice'
-import { ProfileData } from '@/src/features/profile/edit/model/types/profileEditTypes'
-import { getGoogleDriveImageUrl } from '@/src/shared/lib/utils/getGoogleDriveImageUrl'
+import {
+  ProfileData,
+  ProfileDataAvatar,
+  ProfileDataResponse,
+  ProfileDataUpdate,
+} from '@/src/features/profile/edit/model/types/profileEditTypes'
 
 export const profile = baseApi.injectEndpoints({
   endpoints: build => ({
-    getProfile: build.query<ProfileData, void>({
+    getProfile: build.query<ProfileDataResponse, void>({
       query: data => ({
         body: data,
-        url: 'user-profile/me',
+        url: 'users/profile',
       }),
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
@@ -16,7 +20,6 @@ export const profile = baseApi.injectEndpoints({
           dispatch(
             setProfileData({
               ...data,
-              profileImageURL: getGoogleDriveImageUrl(data.profileImageURL),
             })
           )
         } catch (e) {
@@ -25,15 +28,35 @@ export const profile = baseApi.injectEndpoints({
       },
       providesTags: ['UserProfile'],
     }),
-    updateProfile: build.mutation<ProfileData, FormData>({
+    updateProfile: build.mutation<ProfileData, ProfileDataUpdate>({
       query: data => ({
         body: data,
-        method: 'PATCH',
-        url: 'user-profile',
+        method: 'PUT',
+        url: 'users/profile',
+      }),
+      invalidatesTags: ['UserProfile'],
+    }),
+    updatePhotoProfile: build.mutation<ProfileDataAvatar, FormData>({
+      query: data => ({
+        body: data,
+        method: 'POST',
+        url: 'users/profile/avatar',
+      }),
+      invalidatesTags: ['UserProfile'],
+    }),
+    deletePhotoProfile: build.mutation({
+      query: () => ({
+        method: 'DELETE',
+        url: 'users/profile/avatar',
       }),
       invalidatesTags: ['UserProfile'],
     }),
   }),
   overrideExisting: false,
 })
-export const { useGetProfileQuery, useUpdateProfileMutation } = profile
+export const {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useUpdatePhotoProfileMutation,
+  useDeletePhotoProfileMutation,
+} = profile

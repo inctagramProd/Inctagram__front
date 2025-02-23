@@ -1,4 +1,4 @@
-import {CroppedArea} from "@/src/entities/post/model/types/postSliceTypes";
+import { CroppedArea } from '@/src/shared/types'
 
 const filtersStyle = {
   'image_filter--clarendon': 'saturate(2)',
@@ -27,7 +27,7 @@ export const getModifiedImage = ({
   fileName = 'file',
   filter,
   imageSrc,
-  mode = 'formData'
+  mode = 'formData',
 }: Params): Promise<Blob | FormData | string> => {
   return new Promise((resolve, reject) => {
     const image = new Image()

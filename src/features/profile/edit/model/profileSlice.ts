@@ -1,27 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ProfileData } from '@/src/features/profile/edit/model/types/profileEditTypes'
+import { ProfileDataResponse } from '@/src/features/profile/edit/model/types/profileEditTypes'
 
-const initialState: ProfileData = {
-  username: '',
-  firstName: '',
-  lastName: '',
-  dateOfBirth: '',
-  country: '',
-  city: '',
-  aboutMe: '',
-  userId: null,
+const initialState: ProfileDataResponse = {
+  id: null,
+  userName: '',
+  firstName: null,
+  lastName: null,
+  city: null,
+  country: null,
+  region: null,
+  dateOfBirth: null,
+  aboutMe: null,
   createdAt: '',
-  updatedAt: '',
-  deletedAt: '',
-  profileImageURL: '',
-  canModify: false,
+  avatars: [
+    {
+      url: '',
+      width: 0,
+      height: 0,
+      fileSize: 0,
+      createdAt: '',
+    },
+  ],
 }
 
 export const profileSlice = createSlice({
   name: 'Profile',
   initialState,
   reducers: {
-    setProfileData: (state, action: PayloadAction<ProfileData>) => {
+    setProfileData: (state, action: PayloadAction<ProfileDataResponse>) => {
       return { ...state, ...action.payload }
     },
   },

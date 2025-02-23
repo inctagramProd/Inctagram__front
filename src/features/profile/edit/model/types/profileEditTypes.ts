@@ -1,15 +1,5 @@
-export type ProfileEditParams = {
-  username: string
-  firstName: string
-  lastName: string
-  country: string
-  city: string
-  aboutMe: string
-  dateOfBirth: string
-}
-
 export type ProfileData = {
-  username: string
+  userName: string
   firstName: string
   lastName: string
   dateOfBirth: string
@@ -22,4 +12,37 @@ export type ProfileData = {
   deletedAt: string
   profileImageURL: string | undefined
   canModify: boolean
+}
+
+export type ProfileDataResponse = {
+  id: number
+  userName: string
+  firstName: string
+  lastName: string
+  city: string
+  country: string
+  region: string
+  dateOfBirth: string
+  aboutMe: string
+  createdAt: string
+  avatars: ProfileDataAvatar[]
+}
+
+export type ProfileDataUpdate = {
+  userName: string
+  firstName: string
+  lastName: string
+  city: string
+  country: string
+  region?: string
+  dateOfBirth: string
+  aboutMe: string
+}
+
+export type ProfileDataAvatar = {
+  url: string
+  width: number
+  height: number
+  fileSize: number
+  createdAt: string
 }
