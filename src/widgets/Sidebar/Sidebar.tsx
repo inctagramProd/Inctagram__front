@@ -38,7 +38,14 @@ export const Sidebar = (props: Props) => {
             style={'default'}
             isActive={currentPath === '/home'}
           />
-          <CreatePost />
+          {/* CreatePost Link */}
+          <LinkItem
+            iconName={'PlusSquare'}
+            label={locale.profile.createPost}
+            link={''}
+            style={'default'}
+            isCreatePost={true}
+          />
           <LinkItem
             iconName={'Person'}
             label={locale.profile.myProfile}
