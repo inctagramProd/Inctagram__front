@@ -27,6 +27,7 @@ export const CreatePostModal = ({
   onShowRightButton,
 }: Props) => {
   const { locale } = useTranslate()
+
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>

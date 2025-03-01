@@ -15,7 +15,7 @@ type Props = {
   options: SelectOptionType[]
   onChange?: (selectedValue: SelectOptionType) => void
   className?: string
-} & FieldProps
+} & Partial<FieldProps>
 
 export const Select = ({
   title,
@@ -73,7 +73,9 @@ export const Select = ({
     if (onChange) {
       onChange(activeOptionFields)
     }
-    form?.setFieldValue(field.name, value)
+    if(field){
+      form?.setFieldValue(field.name, value)
+    }
     setIsVisibleDropdown(false)
   }
 

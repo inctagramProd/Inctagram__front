@@ -3,11 +3,15 @@ import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { LogOut } from '@/src/features/auth/logOut'
 import { StoreProvider } from '@/src/app/providers'
 import { CreatePost } from '@/src/features/post/ui/createPost'
+import { useRouter } from 'next/router'
 
 type Props = { className?: string; theme?: 'dark' | 'light' }
 
 export const Sidebar = (props: Props) => {
   const { locale } = useTranslate()
+  const router = useRouter() // Отримуємо поточний маршрут
+  const currentPath = router.pathname // Поточний шлях
+
   const {
     className = `fixed bottom-0 left-0 sm:h-screen 
   sm:top-[60px]  sm:left-0 sm:w-[220px] 
@@ -32,25 +36,36 @@ export const Sidebar = (props: Props) => {
             label={locale.profile.home}
             link={'/home'}
             style={'default'}
+            isActive={currentPath === '/home'}
           />
-          <CreatePost />
+          {/* CreatePost Link */}
+          <LinkItem
+            iconName={'PlusSquare'}
+            label={locale.profile.createPost}
+            link={''}
+            style={'default'}
+            isCreatePost={true}
+          />
           <LinkItem
             iconName={'Person'}
             label={locale.profile.myProfile}
             link={'/profile'}
             style={'default'}
+            isActive={currentPath === '/profile'}
           />
           <LinkItem
             iconName={'MessageCircle'}
             label={locale.profile.messenger}
             link={'/message'}
             style={'default'}
+            isActive={currentPath === '/message'}
           />
           <LinkItem
             iconName={'Search'}
             label={locale.profile.search}
             link={'/search'}
             style={'default'}
+            isActive={currentPath === '/search'}
           />
         </div>
         <div className={bodyBlock}>
@@ -60,12 +75,14 @@ export const Sidebar = (props: Props) => {
               label={locale.profile.statistics}
               link={'/statistics'}
               style={'default'}
+              isActive={currentPath === '/statistics'}
             />
             <LinkItem
               iconName={'Bookmark'}
               label={locale.profile.favorites}
               link={'/favorites'}
               style={'default'}
+              isActive={currentPath === '/favorites'}
             />
           </div>
         </div>

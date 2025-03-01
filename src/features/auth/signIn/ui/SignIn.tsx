@@ -31,7 +31,7 @@ export const SignIn = () => {
   const queryCode = router.query as { code: string }
 
   useEffect(() => {
-    console.log(queryCode)
+    // console.log(queryCode)
     if (isSuccess || gitIsSuccess || googleIsSuccess) {
       router.push('/home')
     } else if (queryCode.code) {
