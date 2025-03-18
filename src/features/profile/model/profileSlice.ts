@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ProfileDataResponse } from '@/src/features/profile/edit/model/types/profileEditTypes'
+import { ProfileDataResponse } from '@/src/features/profile/model/types/profileTypes'
 
 const initialState: ProfileDataResponse = {
   id: null,
   userName: '',
-  firstName: null,
-  lastName: null,
-  city: null,
-  country: null,
-  region: null,
-  dateOfBirth: null,
-  aboutMe: null,
+  firstName: '',
+  lastName: '',
+  city: '',
+  country: '',
+  region: '',
+  dateOfBirth: '',
+  aboutMe: '',
   createdAt: '',
   avatars: [
     {

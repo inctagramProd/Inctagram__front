@@ -5,6 +5,7 @@ import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import { StoreProvider } from '../app/providers'
 import { Toaster } from 'react-hot-toast'
+import NextTopLoader from 'nextjs-toploader'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,9 +26,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <main className={`${inter.variable} font-sans`}>
       <StoreProvider>
+        <NextTopLoader color={'#397DF6'} />
         <Component {...pageProps} />
+        <Toaster />
       </StoreProvider>
-      <Toaster />
     </main>
   )
 }

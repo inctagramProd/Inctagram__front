@@ -146,6 +146,7 @@ export const en: LocaleType = {
         createPost: 'Create',
         myProfile: 'My Profile',
         logout: 'Log Out',
+        registeredUsers: 'Registered users: ',
         confirmLogout(email: string) {
             return `Are you really want to log out of your account ${email}?`
         },

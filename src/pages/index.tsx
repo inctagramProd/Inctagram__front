@@ -1,11 +1,19 @@
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { getLayout } from '@/src/widgets/Layout/Layout'
+import { useGetTotalUsersCountQuery } from '@/src/features/profile/api/publicProfileApi'
+import { useTranslate } from '@/src/app/hooks/useTranslate'
+import { CounterRegisteredUsers } from '@/src/entities/user/CounterRegisteredUsers/CounterRegisteredUsers'
 
-export default function Home() {
-  const router = useRouter()
+const Public = () => {
+  const { locale } = useTranslate()
+  const { data } = useGetTotalUsersCountQuery()
 
-  useEffect(() => {
-    router.push('/auth/sign-in')
-  }, [])
-
+  return (
+    <div className={'w-full'}>
+      <CounterRegisteredUsers totalCount={data?.totalCount} locale={locale} />
+    </div>
+  )
 }
+
+Public.getLayout = getLayout
+
+export default Public

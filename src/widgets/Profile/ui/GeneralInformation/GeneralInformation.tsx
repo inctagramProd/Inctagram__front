@@ -1,8 +1,8 @@
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
-import { EditProfileForm } from '@/src/features/profile/edit/ui/EditProfileForm/EditProfileForm'
-import { EditProfilePhoto } from '@/src/features/profile/edit/ui/EditProfilePhoto/EditProfilePhoto'
-import { useUpdateProfile } from '@/src/features/profile/edit/model/hooks/useUpdateProfile'
-import { useImageUpload } from '@/src/features/profile/edit/model/hooks/useImageUpload'
+import { EditProfileForm } from '@/src/features/profile/ui/EditProfileForm/EditProfileForm'
+import { EditProfilePhoto } from '@/src/features/profile/ui/EditProfilePhoto/EditProfilePhoto'
+import { useUpdateProfile } from '@/src/features/profile/model/hooks/useUpdateProfile'
+import { useImageUpload } from '@/src/features/profile/model/hooks/useImageUpload'
 
 export const GeneralInformation = () => {
   const { handleUpdateProfile } = useUpdateProfile()

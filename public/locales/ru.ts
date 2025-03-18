@@ -139,6 +139,7 @@ export const ru = {
         createPost: 'Создать пост',
         myProfile: 'Мой профиль',
         logout: 'Выйти',
+        registeredUsers: 'Зарегистрированные пользователи: ',
         confirmLogout(email: string) {
             return `Вы действительно хотите выйти из своей учетной записи ${email}?`
         },

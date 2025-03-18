@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Modal } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 import { useAppSelector } from '@/src/app/hooks/useAppSelectorAndDispatch'
-import { CroppedPhoto } from '@/src/features/profile/edit/ui/CroppedPhoto/CroppedPhoto'
+import { CroppedPhoto } from '@/src/features/profile/ui/CroppedPhoto/CroppedPhoto'
 import { getModifiedImage } from '@/src/shared/helpers/canvasUtils'
-import { SelectPhoto } from '@/src/features/profile/edit/ui/SelectPhoto/SelectPhoto'
-import { ProfilePhoto } from '@/src/features/profile/edit/ui/ProfilePhoto/ProfilePhoto'
+import { SelectPhoto } from '@/src/features/profile/ui/SelectPhoto/SelectPhoto'
+import { ProfilePhoto } from '@/src/features/profile/ui/ProfilePhoto/ProfilePhoto'
 import { CroppedArea } from '@/src/shared/types'
 
 type Props = {

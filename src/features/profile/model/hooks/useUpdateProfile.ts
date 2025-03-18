@@ -1,5 +1,5 @@
-import { ProfileDataUpdate } from '@/src/features/profile/edit/model/types/profileEditTypes'
-import { useUpdateProfileMutation } from '@/src/features/profile/edit/api/profileApi'
+import { ProfileDataUpdate } from '@/src/features/profile/model/types/profileTypes'
+import { useUpdateProfileMutation } from '@/src/features/profile/api/profileApi'
 import { useToast } from '@/src/app/hooks/useToast'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
 

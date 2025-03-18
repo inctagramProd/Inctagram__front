@@ -1,9 +1,9 @@
 import { Icon, Typography } from '@/src/shared/ui'
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { AspectRatio } from '@/src/entities/post/ui/aspectRatioImage/service/types/aspectRatioType'
 import { useAppDispatch } from '@/src/app/store/store'
 import { updateImage } from '@/src/entities/post/model/slice/postSlice'
+import {AspectRatio} from "@/src/entities/post/ui/AspectRatioImage/service/types/aspectRatioType";
 
 type Props = {
   imageURL: string

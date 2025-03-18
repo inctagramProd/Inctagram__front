@@ -6,7 +6,7 @@ import { loadState, saveState } from '@/src/shared/lib/localstorage'
 import { postsReducer } from '@/src/entities/post/model/slice/postSlice'
 import { AppDispatch, AppRootState } from '@/src/app/store/types'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import {profileReducer} from "@/src/features/profile/edit/model/profileSlice";
+import {profileReducer} from "@/src/features/profile/model/profileSlice";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,

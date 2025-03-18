@@ -15,7 +15,7 @@ export type ProfileData = {
 }
 
 export type ProfileDataResponse = {
-  id: number
+  id: number | null
   userName: string
   firstName: string
   lastName: string
@@ -45,4 +45,7 @@ export type ProfileDataAvatar = {
   height: number
   fileSize: number
   createdAt: string
+}
+export type GetTotalUsersResponse = {
+  totalCount: number
 }

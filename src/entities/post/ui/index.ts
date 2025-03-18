@@ -1,6 +1,6 @@
-import { AspectRatioImage } from './aspectRatioImage'
-import { ZoomImage } from './zoomImage'
-import { AddImage } from './addImage'
-import { CropperImage } from './cropperImage'
+import { AspectRatioImage } from './AspectRatioImage'
+import { ZoomImage } from './ZoomImage'
+import { AddImage } from './AddImage'
+import { CropperImage } from './CropperImage'
 
 export { AddImage, AspectRatioImage, ZoomImage, CropperImage }

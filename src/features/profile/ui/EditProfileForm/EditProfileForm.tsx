@@ -1,11 +1,11 @@
 import React from 'react'
 import { Field, Form, Formik, FormikHelpers, FormikProps } from 'formik'
-import { profileEditSchema } from '@/src/features/profile/edit/model/schema/profileEditSchema'
-import { ProfileDataUpdate } from '@/src/features/profile/edit/model/types/profileEditTypes'
+import { profileEditSchema } from '@/src/features/profile/model/schema/profileEditSchema'
+import { ProfileDataUpdate } from '@/src/features/profile/model/types/profileTypes'
 import { Button, DatePickerInput, Input, TextArea, Typography } from '@/src/shared/ui'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
-import { useGetProfileQuery } from '@/src/features/profile/edit/api/profileApi'
-import { LocationSelector } from '@/src/features/profile/edit/ui/SelectLocation/SelectLocation'
+import { useGetProfileQuery } from '@/src/features/profile/api/profileApi'
+import { LocationSelector } from '@/src/features/profile/ui/SelectLocation/SelectLocation'
 import { formatDateFromISO } from '@/src/shared/helpers/formatDateFromISO'
 
 type Props = {

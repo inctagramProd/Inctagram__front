@@ -1,4 +1,4 @@
-import { GeneralInformation } from '@/src/features/profile/edit'
+import {GeneralInformation} from "@/src/widgets/Profile";
 import { getLayoutWithSidebar } from '@/src/widgets/Layout/LayoutWithSidebar'
 import { withAuth } from '@/src/features/private_routes/withAuth'
 import { useEffect, useMemo, useState } from 'react'

@@ -1,6 +1,6 @@
 import { useToast } from '@/src/app/hooks/useToast'
-import { useUpdatePhotoProfileMutation } from '@/src/features/profile/edit/api/profileApi'
 import { useTranslate } from '@/src/app/hooks/useTranslate'
+import {useUpdatePhotoProfileMutation} from "@/src/features/profile/api/profileApi";
 
 export const useImageUpload = () => {
   const { locale } = useTranslate()

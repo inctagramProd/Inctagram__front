@@ -1,5 +1,5 @@
 import { ProfileInfo } from '@/src/entities/profile'
-import { useGetProfileQuery } from '@/src/features/profile/edit/api/profileApi'
+import { useGetProfileQuery } from '@/src/features/profile/api/profileApi'
 
 export const MainProfileContent = () => {
   const { data: userProfile } = useGetProfileQuery()

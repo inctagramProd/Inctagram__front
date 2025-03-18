@@ -16,7 +16,7 @@ import { DescriptionImageScreen } from '../decriptionImageScreen'
 import { CreatePostModal } from '@/src/shared/ui/CreatePostModal'
 import { UpLoaderImageScreen } from '../upLoaderImageScreen'
 import { CurrentWindow } from '@/src/features/post/types/creatPostTypes'
-import { ConfirmDialog } from '@/src/entities/post/ui/confirmDialog'
+import { ConfirmDialog } from '../../../../entities/post/ui/ConfirmDialog'
 
 interface Props {
   isBaseModalOpen: boolean

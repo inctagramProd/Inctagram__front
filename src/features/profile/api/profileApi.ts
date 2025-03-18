@@ -1,11 +1,11 @@
 import { baseApi } from '@/src/shared/api/baseApi'
-import { setProfileData } from '@/src/features/profile/edit/model/profileSlice'
 import {
   ProfileData,
   ProfileDataAvatar,
   ProfileDataResponse,
-  ProfileDataUpdate,
-} from '@/src/features/profile/edit/model/types/profileEditTypes'
+  ProfileDataUpdate
+} from "@/src/features/profile/model/types/profileTypes";
+import {setProfileData} from "@/src/features/profile/model/profileSlice";
 
 export const profile = baseApi.injectEndpoints({
   endpoints: build => ({

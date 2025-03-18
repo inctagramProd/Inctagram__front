@@ -1,8 +1,9 @@
 import React from 'react'
 import Cropper, { Point } from 'react-easy-crop'
 import { updateImage } from '@/src/entities/post/model/slice/postSlice'
-import { CroppedArea, ImageObj } from '@/src/entities/post/model/types/postSliceTypes'
+import { ImageObj } from '@/src/entities/post/model/types/postSliceTypes'
 import { useAppDispatch } from '@/src/app/store/store'
+import {CroppedArea} from "@/src/shared/types";
 
 type Props = {
   image: ImageObj
