@@ -4,6 +4,7 @@ export const ru = {
     locale: {
         english: 'English',
         russian: 'Русский',
+        language: 'ru',
     },
     auth: {
         backToSignUp: 'Вернуться на страницу регистрации',
@@ -215,6 +216,7 @@ export const ru = {
             },
         },
         addNewPost: {
+            timeCreatePost: 'только что',
             showResult: 'Показать результат',
             cropping: 'Редактирование',
             filters: 'Фильтры',

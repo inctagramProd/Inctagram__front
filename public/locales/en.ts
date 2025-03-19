@@ -4,6 +4,7 @@ export const en: LocaleType = {
     locale: {
         english: 'English',
         russian: 'Русский',
+        language: 'en'
     },
     auth: {
         backToSignUp: 'Back to Sign Up',
@@ -220,6 +221,7 @@ export const en: LocaleType = {
             },
         },
         addNewPost: {
+            timeCreatePost: 'just now',
             showResult: 'Show Result',
             cropping: 'Cropping',
             filters: 'Filters',

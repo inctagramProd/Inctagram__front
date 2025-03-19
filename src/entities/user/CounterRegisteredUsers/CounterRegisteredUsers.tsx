@@ -14,7 +14,7 @@ export const CounterRegisteredUsers = ({ totalCount, locale }: Props) => {
   return (
     <div
       className={
-        'w-[972px] h-[72px] py-3 px-6 bg-dark-500 border rounded border-dark-300 m-auto mt-6 flex justify-between items-center'
+        'max-w-[972px] w-full h-[72px] py-3 px-6 bg-dark-500 border rounded border-dark-300 m-auto mt-6 flex justify-between items-center'
       }
     >
       <Typography variant="h2">{locale.profile.registeredUsers}</Typography>
