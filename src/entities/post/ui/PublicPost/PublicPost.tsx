@@ -11,7 +11,7 @@ type Props = {
 export const PublicPost = ({ post }: Props) => {
   const [expanded, setExpanded] = useState(false)
   const toggleExpand = () => setExpanded(!expanded)
-  console.log(post)
+  // console.log(post)
 
   return (
     <div className={'max-w-[234px] w-full'}>

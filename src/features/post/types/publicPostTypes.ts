@@ -5,7 +5,7 @@ export type GetPostsArgs = {
   sortDirection?: 'asc' | 'desc'
 }
 
-export type ResponsePublicPostsType = {
+export type GetPublicPostsResponse = {
   totalCount: number
   pageSize: number
   totalUsers: number
